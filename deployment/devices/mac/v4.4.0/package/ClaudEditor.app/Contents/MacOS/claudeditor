@@ -1,0 +1,57 @@
+#!/bin/bash
+# ClaudEditor 4.4.0 Mac启动脚本
+# PowerAutomation AICore + ag-ui协议
+
+# 获取应用路径
+APP_DIR="$(cd "$(dirname "$0")/.." && pwd)"
+RESOURCES_DIR="$APP_DIR/Resources"
+
+# 设置环境变量
+export CLAUDEDITOR_VERSION="4.4.0"
+export CLAUDEDITOR_BUILD="20250709-0858"
+export CLAUDEDITOR_HOME="$RESOURCES_DIR"
+export PYTHONPATH="$RESOURCES_DIR/core:$PYTHONPATH"
+
+# 检查Python环境
+if ! command -v python3 &> /dev/null; then
+    osascript -e 'display alert "Python 3 Required" message "ClaudEditor requires Python 3.8 or later. Please install Python from python.org" buttons {"OK"} default button "OK"'
+    exit 1
+fi
+
+# 检查依赖
+REQUIREMENTS_FILE="$RESOURCES_DIR/requirements.txt"
+if [ -f "$REQUIREMENTS_FILE" ]; then
+    python3 -m pip install -r "$REQUIREMENTS_FILE" --user --quiet
+fi
+
+# 启动ClaudEditor
+cd "$RESOURCES_DIR"
+
+# 检查是否有UI构建版本
+if [ -d "$RESOURCES_DIR/claudeditor-ui/dist" ]; then
+    # 启动生产版本
+    python3 -m http.server 8080 --directory "$RESOURCES_DIR/claudeditor-ui/dist" &
+    SERVER_PID=$!
+    sleep 2
+    open "http://localhost:8080"
+elif [ -d "$RESOURCES_DIR/claudeditor-ui" ]; then
+    # 启动开发版本
+    cd "$RESOURCES_DIR/claudeditor-ui"
+    if command -v npm &> /dev/null; then
+        npm run dev --host &
+        SERVER_PID=$!
+        sleep 3
+        open "http://localhost:5173"
+    else
+        osascript -e 'display alert "Node.js Required" message "Development mode requires Node.js. Please install from nodejs.org or use the built version." buttons {"OK"} default button "OK"'
+        exit 1
+    fi
+else
+    osascript -e 'display alert "UI Not Found" message "ClaudEditor UI components not found. Please reinstall the application." buttons {"OK"} default button "OK"'
+    exit 1
+fi
+
+# 等待用户关闭
+echo "ClaudEditor 4.4.0 is running..."
+echo "Press Ctrl+C to stop"
+wait $SERVER_PID

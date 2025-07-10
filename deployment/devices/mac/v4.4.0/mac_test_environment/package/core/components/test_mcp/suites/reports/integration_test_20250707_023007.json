@@ -1,0 +1,85 @@
+{
+  "start_time": "2025-07-07 02:30:06.558189",
+  "end_time": "2025-07-07 02:30:07.121349",
+  "tests": [
+    {
+      "name": "核心组件初始化",
+      "status": "passed",
+      "duration": 0.1473090648651123,
+      "details": {
+        "success": true,
+        "components_loaded": [
+          "config",
+          "event_bus",
+          "parallel_executor",
+          "exceptions",
+          "logging"
+        ]
+      }
+    },
+    {
+      "name": "智慧路由MCP",
+      "status": "failed",
+      "duration": 0.010690689086914062,
+      "details": {
+        "success": false,
+        "error": "No module named 'PowerAutomation.mcp_coordinator.communication_hub'"
+      }
+    },
+    {
+      "name": "MCP协调器",
+      "status": "passed",
+      "duration": 0.0009140968322753906,
+      "details": {
+        "success": true,
+        "registration_result": false,
+        "coordinator_initialized": true
+      }
+    },
+    {
+      "name": "智能体系统",
+      "status": "failed",
+      "duration": 0.00029850006103515625,
+      "details": {
+        "success": false,
+        "error": "No module named 'PowerAutomation.mcp_coordinator.communication_hub'"
+      }
+    },
+    {
+      "name": "命令系统",
+      "status": "failed",
+      "duration": 0.00026035308837890625,
+      "details": {
+        "success": false,
+        "error": "No module named 'PowerAutomation.mcp_coordinator.communication_hub'"
+      }
+    },
+    {
+      "name": "并行处理",
+      "status": "passed",
+      "duration": 0.10066819190979004,
+      "details": {
+        "success": true,
+        "tasks_completed": 5,
+        "duration": 0.10062789916992188,
+        "parallel_efficiency": true
+      }
+    },
+    {
+      "name": "端到端工作流",
+      "status": "passed",
+      "duration": 0.3018481731414795,
+      "details": {
+        "success": true,
+        "workflow_steps": 6,
+        "completed_steps": 6,
+        "workflow_complete": true
+      }
+    }
+  ],
+  "summary": {
+    "total": 7,
+    "passed": 4,
+    "failed": 3
+  }
+}

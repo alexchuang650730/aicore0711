@@ -1,0 +1,387 @@
+{
+  "test_scenarios": [
+    {
+      "scenario_id": "login_workflow",
+      "name": "用户登录工作流测试",
+      "description": "测试完整的用户登录流程，包括表单填写、验证和跳转",
+      "priority": "P0",
+      "category": "authentication",
+      "estimated_duration": 30,
+      "pages": ["login_page.html", "dashboard.html"],
+      "steps": [
+        {
+          "step_id": 1,
+          "action": "navigate",
+          "target": "login_page.html",
+          "description": "打开登录页面"
+        },
+        {
+          "step_id": 2,
+          "action": "wait",
+          "target": "[data-testid='username-input']",
+          "timeout": 5000,
+          "description": "等待页面加载完成"
+        },
+        {
+          "step_id": 3,
+          "action": "input",
+          "target": "[data-testid='username-input']",
+          "value": "admin",
+          "description": "输入用户名"
+        },
+        {
+          "step_id": 4,
+          "action": "input",
+          "target": "[data-testid='password-input']",
+          "value": "password",
+          "description": "输入密码"
+        },
+        {
+          "step_id": 5,
+          "action": "click",
+          "target": "[data-testid='login-button']",
+          "description": "点击登录按钮"
+        },
+        {
+          "step_id": 6,
+          "action": "wait",
+          "target": ".message.success",
+          "timeout": 3000,
+          "description": "等待登录成功消息"
+        },
+        {
+          "step_id": 7,
+          "action": "verify",
+          "target": ".message.success",
+          "expected": "登录成功",
+          "description": "验证登录成功消息"
+        },
+        {
+          "step_id": 8,
+          "action": "wait",
+          "target": "dashboard.html",
+          "timeout": 5000,
+          "description": "等待跳转到仪表板"
+        }
+      ],
+      "expected_results": [
+        "用户名和密码输入框正常显示",
+        "登录按钮可点击",
+        "登录成功后显示成功消息",
+        "自动跳转到仪表板页面"
+      ],
+      "test_data": {
+        "valid_credentials": {
+          "username": "admin",
+          "password": "password"
+        },
+        "invalid_credentials": {
+          "username": "wrong",
+          "password": "wrong"
+        }
+      }
+    },
+    {
+      "scenario_id": "dashboard_navigation",
+      "name": "仪表板导航测试",
+      "description": "测试仪表板页面的各种操作和导航功能",
+      "priority": "P0",
+      "category": "navigation",
+      "estimated_duration": 45,
+      "pages": ["dashboard.html"],
+      "steps": [
+        {
+          "step_id": 1,
+          "action": "navigate",
+          "target": "dashboard.html",
+          "description": "直接打开仪表板页面"
+        },
+        {
+          "step_id": 2,
+          "action": "wait",
+          "target": "[data-testid='total-tests']",
+          "timeout": 5000,
+          "description": "等待统计数据加载"
+        },
+        {
+          "step_id": 3,
+          "action": "verify",
+          "target": "[data-testid='total-tests']",
+          "expected": "12",
+          "description": "验证总测试用例数"
+        },
+        {
+          "step_id": 4,
+          "action": "verify",
+          "target": "[data-testid='test-suites']",
+          "expected": "8",
+          "description": "验证测试套件数"
+        },
+        {
+          "step_id": 5,
+          "action": "click",
+          "target": "[data-testid='run-all-tests']",
+          "description": "点击运行所有测试按钮"
+        },
+        {
+          "step_id": 6,
+          "action": "wait",
+          "target": "alert",
+          "timeout": 2000,
+          "description": "等待确认对话框"
+        },
+        {
+          "step_id": 7,
+          "action": "accept_alert",
+          "description": "确认运行测试"
+        },
+        {
+          "step_id": 8,
+          "action": "click",
+          "target": "[data-testid='run-p0-tests']",
+          "description": "点击运行P0测试按钮"
+        },
+        {
+          "step_id": 9,
+          "action": "accept_alert",
+          "description": "确认运行P0测试"
+        },
+        {
+          "step_id": 10,
+          "action": "click",
+          "target": "[data-testid='record-new-test']",
+          "description": "点击录制新测试按钮"
+        },
+        {
+          "step_id": 11,
+          "action": "accept_alert",
+          "description": "确认录制测试"
+        }
+      ],
+      "expected_results": [
+        "统计数据正确显示",
+        "所有操作按钮可正常点击",
+        "点击按钮后显示相应的确认信息",
+        "页面响应流畅无卡顿"
+      ]
+    },
+    {
+      "scenario_id": "responsive_ui_test",
+      "name": "响应式UI测试",
+      "description": "测试页面在不同设备尺寸下的响应式表现",
+      "priority": "P1",
+      "category": "responsive",
+      "estimated_duration": 60,
+      "pages": ["login_page.html", "dashboard.html"],
+      "viewports": [
+        {"name": "Desktop", "width": 1920, "height": 1080},
+        {"name": "Tablet", "width": 768, "height": 1024},
+        {"name": "Mobile", "width": 375, "height": 667}
+      ],
+      "steps": [
+        {
+          "step_id": 1,
+          "action": "set_viewport",
+          "width": 1920,
+          "height": 1080,
+          "description": "设置桌面端视口"
+        },
+        {
+          "step_id": 2,
+          "action": "navigate",
+          "target": "login_page.html",
+          "description": "打开登录页面"
+        },
+        {
+          "step_id": 3,
+          "action": "screenshot",
+          "filename": "login_desktop.png",
+          "description": "截取桌面端登录页面"
+        },
+        {
+          "step_id": 4,
+          "action": "set_viewport",
+          "width": 768,
+          "height": 1024,
+          "description": "设置平板端视口"
+        },
+        {
+          "step_id": 5,
+          "action": "screenshot",
+          "filename": "login_tablet.png",
+          "description": "截取平板端登录页面"
+        },
+        {
+          "step_id": 6,
+          "action": "set_viewport",
+          "width": 375,
+          "height": 667,
+          "description": "设置移动端视口"
+        },
+        {
+          "step_id": 7,
+          "action": "screenshot",
+          "filename": "login_mobile.png",
+          "description": "截取移动端登录页面"
+        },
+        {
+          "step_id": 8,
+          "action": "navigate",
+          "target": "dashboard.html",
+          "description": "打开仪表板页面"
+        },
+        {
+          "step_id": 9,
+          "action": "screenshot",
+          "filename": "dashboard_mobile.png",
+          "description": "截取移动端仪表板页面"
+        }
+      ],
+      "expected_results": [
+        "页面在不同尺寸下布局正常",
+        "文字和按钮大小适配",
+        "导航和操作功能正常",
+        "无横向滚动条出现"
+      ]
+    },
+    {
+      "scenario_id": "error_handling_test",
+      "name": "错误处理测试",
+      "description": "测试系统的错误处理和用户反馈机制",
+      "priority": "P1",
+      "category": "error_handling",
+      "estimated_duration": 25,
+      "pages": ["login_page.html"],
+      "steps": [
+        {
+          "step_id": 1,
+          "action": "navigate",
+          "target": "login_page.html",
+          "description": "打开登录页面"
+        },
+        {
+          "step_id": 2,
+          "action": "input",
+          "target": "[data-testid='username-input']",
+          "value": "wrong_user",
+          "description": "输入错误用户名"
+        },
+        {
+          "step_id": 3,
+          "action": "input",
+          "target": "[data-testid='password-input']",
+          "value": "wrong_pass",
+          "description": "输入错误密码"
+        },
+        {
+          "step_id": 4,
+          "action": "click",
+          "target": "[data-testid='login-button']",
+          "description": "点击登录按钮"
+        },
+        {
+          "step_id": 5,
+          "action": "wait",
+          "target": ".message.error",
+          "timeout": 3000,
+          "description": "等待错误消息显示"
+        },
+        {
+          "step_id": 6,
+          "action": "verify",
+          "target": ".message.error",
+          "expected": "用户名或密码错误",
+          "description": "验证错误消息内容"
+        },
+        {
+          "step_id": 7,
+          "action": "screenshot",
+          "filename": "login_error.png",
+          "description": "截取错误状态页面"
+        }
+      ],
+      "expected_results": [
+        "错误消息正确显示",
+        "错误消息样式正确",
+        "登录按钮状态正确恢复",
+        "用户可以重新尝试登录"
+      ]
+    },
+    {
+      "scenario_id": "performance_test",
+      "name": "页面性能测试",
+      "description": "测试页面加载性能和响应时间",
+      "priority": "P2",
+      "category": "performance",
+      "estimated_duration": 40,
+      "pages": ["login_page.html", "dashboard.html"],
+      "steps": [
+        {
+          "step_id": 1,
+          "action": "performance_start",
+          "description": "开始性能监控"
+        },
+        {
+          "step_id": 2,
+          "action": "navigate",
+          "target": "login_page.html",
+          "description": "导航到登录页面"
+        },
+        {
+          "step_id": 3,
+          "action": "performance_measure",
+          "metric": "page_load_time",
+          "description": "测量页面加载时间"
+        },
+        {
+          "step_id": 4,
+          "action": "navigate",
+          "target": "dashboard.html",
+          "description": "导航到仪表板页面"
+        },
+        {
+          "step_id": 5,
+          "action": "performance_measure",
+          "metric": "page_load_time",
+          "description": "测量仪表板加载时间"
+        },
+        {
+          "step_id": 6,
+          "action": "performance_end",
+          "description": "结束性能监控"
+        }
+      ],
+      "expected_results": [
+        "页面加载时间 < 2秒",
+        "首次内容绘制 < 1秒",
+        "交互时间 < 3秒",
+        "累积布局偏移 < 0.1"
+      ],
+      "performance_thresholds": {
+        "page_load_time": 2000,
+        "first_contentful_paint": 1000,
+        "time_to_interactive": 3000,
+        "cumulative_layout_shift": 0.1
+      }
+    }
+  ],
+  "global_settings": {
+    "default_timeout": 10000,
+    "screenshot_on_failure": true,
+    "video_recording": true,
+    "performance_monitoring": true,
+    "retry_failed_steps": 2,
+    "parallel_execution": false
+  },
+  "browser_settings": {
+    "headless": false,
+    "window_size": {
+      "width": 1920,
+      "height": 1080
+    },
+    "user_agent": "PowerAutomation-TestBot/1.0",
+    "disable_images": false,
+    "disable_javascript": false
+  }
+}
+

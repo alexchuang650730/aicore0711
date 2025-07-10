@@ -1,0 +1,150 @@
+{
+  "session_id": "8a42c96e-dc09-4646-a50c-b2060d32e944",
+  "start_time": "2025-07-08T23:47:33.555869",
+  "end_time": "2025-07-08T23:47:39.036653",
+  "total_tests": 8,
+  "passed_tests": 8,
+  "failed_tests": 0,
+  "skipped_tests": 0,
+  "error_tests": 0,
+  "system_metrics": {
+    "memory_rss_mb": 42.41796875,
+    "memory_vms_mb": 51.02734375,
+    "cpu_percent": 0.0,
+    "timestamp": "2025-07-08T23:47:39.036732"
+  },
+  "environment": {
+    "test_type": "UI测试套件: basic_ui_operations",
+    "suite_name": "basic_ui_operations"
+  },
+  "test_results": [
+    {
+      "test_id": "ui_test_001",
+      "test_name": "基础点击操作测试",
+      "status": "passed",
+      "start_time": "2025-07-08T23:47:33.555890",
+      "end_time": "2025-07-08T23:47:33.656430",
+      "duration": 0.10054,
+      "error_message": null,
+      "output": "TestResult(test_id='ui_test_001', test_name='基础点击操作测试', status=<TestStatus.PASSED: 'passed'>, start_time=1752032853.556015, end_time=1752032853.65631, duration=0.1002950668334961, error_message=None, stack_trace=None, output='点击操作成功: 成功点击元素 #login-button', metrics={}, artifacts=[])",
+      "metrics": {
+        "memory_rss_mb": 42.41796875,
+        "memory_vms_mb": 51.02734375,
+        "cpu_percent": 0.0,
+        "timestamp": "2025-07-08T23:47:33.656665"
+      }
+    },
+    {
+      "test_id": "ui_test_002",
+      "test_name": "文本输入操作测试",
+      "status": "passed",
+      "start_time": "2025-07-08T23:47:33.656697",
+      "end_time": "2025-07-08T23:47:33.757330",
+      "duration": 0.100633,
+      "error_message": null,
+      "output": "TestResult(test_id='ui_test_002', test_name='文本输入操作测试', status=<TestStatus.PASSED: 'passed'>, start_time=1752032853.6568007, end_time=1752032853.7571924, duration=0.10039210319519043, error_message=None, stack_trace=None, output='输入操作成功: 成功在 #username-field 中输入: testuser@example.com', metrics={}, artifacts=[])",
+      "metrics": {
+        "memory_rss_mb": 42.41796875,
+        "memory_vms_mb": 51.02734375,
+        "cpu_percent": 0.0,
+        "timestamp": "2025-07-08T23:47:33.757583"
+      }
+    },
+    {
+      "test_id": "ui_test_003",
+      "test_name": "页面滚动操作测试",
+      "status": "passed",
+      "start_time": "2025-07-08T23:47:33.757606",
+      "end_time": "2025-07-08T23:47:33.858185",
+      "duration": 0.100579,
+      "error_message": null,
+      "output": "TestResult(test_id='ui_test_003', test_name='页面滚动操作测试', status=<TestStatus.PASSED: 'passed'>, start_time=1752032853.757689, end_time=1752032853.8580675, duration=0.10037899017333984, error_message=None, stack_trace=None, output='滚动操作成功: 成功滚动页面: down:500', metrics={}, artifacts=[])",
+      "metrics": {
+        "memory_rss_mb": 42.41796875,
+        "memory_vms_mb": 51.02734375,
+        "cpu_percent": 0.0,
+        "timestamp": "2025-07-08T23:47:33.858469"
+      }
+    },
+    {
+      "test_id": "ui_test_004",
+      "test_name": "鼠标悬停操作测试",
+      "status": "passed",
+      "start_time": "2025-07-08T23:47:33.858496",
+      "end_time": "2025-07-08T23:47:33.959082",
+      "duration": 0.100586,
+      "error_message": null,
+      "output": "TestResult(test_id='ui_test_004', test_name='鼠标悬停操作测试', status=<TestStatus.PASSED: 'passed'>, start_time=1752032853.8585947, end_time=1752032853.9589672, duration=0.1003732681274414, error_message=None, stack_trace=None, output='悬停操作成功: 成功悬停在元素 .dropdown-menu', metrics={}, artifacts=[])",
+      "metrics": {
+        "memory_rss_mb": 42.41796875,
+        "memory_vms_mb": 51.02734375,
+        "cpu_percent": 0.0,
+        "timestamp": "2025-07-08T23:47:33.959347"
+      }
+    },
+    {
+      "test_id": "ui_test_005",
+      "test_name": "等待操作测试",
+      "status": "passed",
+      "start_time": "2025-07-08T23:47:33.959371",
+      "end_time": "2025-07-08T23:47:34.059977",
+      "duration": 0.100606,
+      "error_message": null,
+      "output": "TestResult(test_id='ui_test_005', test_name='等待操作测试', status=<TestStatus.PASSED: 'passed'>, start_time=1752032853.9594588, end_time=1752032854.059871, duration=0.10041260719299316, error_message=None, stack_trace=None, output='等待操作成功: 成功等待元素 #loading-spinner disappear', metrics={}, artifacts=[])",
+      "metrics": {
+        "memory_rss_mb": 42.41796875,
+        "memory_vms_mb": 51.02734375,
+        "cpu_percent": 9.9,
+        "timestamp": "2025-07-08T23:47:34.060234"
+      }
+    },
+    {
+      "test_id": "ui_workflow_001",
+      "test_name": "用户登录工作流测试",
+      "status": "passed",
+      "start_time": "2025-07-08T23:47:34.060257",
+      "end_time": "2025-07-08T23:47:35.163988",
+      "duration": 1.103731,
+      "error_message": null,
+      "output": "TestResult(test_id='ui_workflow_001', test_name='用户登录工作流测试', status=<TestStatus.PASSED: 'passed'>, start_time=1752032854.0603733, end_time=1752032855.1638575, duration=1.1034846305847168, error_message=None, stack_trace=None, output='登录工作流执行成功: 工作流 用户登录流程 执行成功', metrics={}, artifacts=[])",
+      "metrics": {
+        "memory_rss_mb": 42.41796875,
+        "memory_vms_mb": 51.02734375,
+        "cpu_percent": 0.0,
+        "timestamp": "2025-07-08T23:47:35.164321"
+      }
+    },
+    {
+      "test_id": "responsive_test_001",
+      "test_name": "导航栏响应式测试",
+      "status": "passed",
+      "start_time": "2025-07-08T23:47:35.164350",
+      "end_time": "2025-07-08T23:47:36.924830",
+      "duration": 1.76048,
+      "error_message": null,
+      "output": "TestResult(test_id='responsive_test_001', test_name='导航栏响应式测试', status=<TestStatus.PASSED: 'passed'>, start_time=1752032855.1644669, end_time=1752032856.9247, duration=1.7602336406707764, error_message=None, stack_trace=None, output='导航栏在所有 7 个视口下都正常响应', metrics={'success_rate': 1.0, 'tested_viewports': 7}, artifacts=[])",
+      "metrics": {
+        "memory_rss_mb": 42.41796875,
+        "memory_vms_mb": 51.02734375,
+        "cpu_percent": 0.0,
+        "timestamp": "2025-07-08T23:47:36.925072"
+      }
+    },
+    {
+      "test_id": "responsive_test_002",
+      "test_name": "内容布局响应式测试",
+      "status": "passed",
+      "start_time": "2025-07-08T23:47:36.925095",
+      "end_time": "2025-07-08T23:47:39.036387",
+      "duration": 2.111292,
+      "error_message": null,
+      "output": "TestResult(test_id='responsive_test_002', test_name='内容布局响应式测试', status=<TestStatus.PASSED: 'passed'>, start_time=1752032856.9251664, end_time=1752032859.0362444, duration=2.1110787391662598, error_message=None, stack_trace=None, output='内容布局在所有 7 个视口下都正确适配', metrics={'success_rate': 1.0, 'tested_viewports': 7}, artifacts=[])",
+      "metrics": {
+        "memory_rss_mb": 42.41796875,
+        "memory_vms_mb": 51.02734375,
+        "cpu_percent": 0.5,
+        "timestamp": "2025-07-08T23:47:39.036616"
+      }
+    }
+  ]
+}

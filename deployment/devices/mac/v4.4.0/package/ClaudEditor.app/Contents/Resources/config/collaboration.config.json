@@ -1,0 +1,12 @@
+{
+  "enabled": true,
+  "max_agents": 10,
+  "collaboration_types": [
+    "peer_to_peer",
+    "hierarchical",
+    "swarm",
+    "pipeline"
+  ],
+  "message_timeout": 30,
+  "knowledge_sharing": true
+}

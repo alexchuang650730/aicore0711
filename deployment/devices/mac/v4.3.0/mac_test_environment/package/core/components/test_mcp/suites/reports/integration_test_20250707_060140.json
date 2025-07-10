@@ -1,0 +1,85 @@
+{
+  "start_time": "2025-07-07 06:01:39.584137",
+  "end_time": "2025-07-07 06:01:40.164407",
+  "tests": [
+    {
+      "name": "核心组件初始化",
+      "status": "passed",
+      "duration": 0.1456301212310791,
+      "details": {
+        "success": true,
+        "components_loaded": [
+          "config",
+          "event_bus",
+          "parallel_executor",
+          "exceptions",
+          "logging"
+        ]
+      }
+    },
+    {
+      "name": "智慧路由MCP",
+      "status": "failed",
+      "duration": 0.029639482498168945,
+      "details": {
+        "success": false,
+        "error": "No module named 'PowerAutomation.agent_squad.coordination.task_distributor'"
+      }
+    },
+    {
+      "name": "MCP协调器",
+      "status": "passed",
+      "duration": 0.0008640289306640625,
+      "details": {
+        "success": true,
+        "registration_result": false,
+        "coordinator_initialized": true
+      }
+    },
+    {
+      "name": "智能体系统",
+      "status": "failed",
+      "duration": 0.0004050731658935547,
+      "details": {
+        "success": false,
+        "error": "No module named 'PowerAutomation.agent_squad.coordination.task_distributor'"
+      }
+    },
+    {
+      "name": "命令系统",
+      "status": "failed",
+      "duration": 0.0003554821014404297,
+      "details": {
+        "success": false,
+        "error": "No module named 'PowerAutomation.agent_squad.coordination.task_distributor'"
+      }
+    },
+    {
+      "name": "并行处理",
+      "status": "passed",
+      "duration": 0.10058879852294922,
+      "details": {
+        "success": true,
+        "tasks_completed": 5,
+        "duration": 0.10055255889892578,
+        "parallel_efficiency": true
+      }
+    },
+    {
+      "name": "端到端工作流",
+      "status": "passed",
+      "duration": 0.30155515670776367,
+      "details": {
+        "success": true,
+        "workflow_steps": 6,
+        "completed_steps": 6,
+        "workflow_complete": true
+      }
+    }
+  ],
+  "summary": {
+    "total": 7,
+    "passed": 4,
+    "failed": 3
+  }
+}

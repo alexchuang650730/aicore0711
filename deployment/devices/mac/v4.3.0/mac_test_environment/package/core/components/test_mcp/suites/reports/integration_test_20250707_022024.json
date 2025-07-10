@@ -1,0 +1,85 @@
+{
+  "start_time": "2025-07-07 02:20:23.524933",
+  "end_time": "2025-07-07 02:20:24.088580",
+  "tests": [
+    {
+      "name": "核心组件初始化",
+      "status": "passed",
+      "duration": 0.14839553833007812,
+      "details": {
+        "success": true,
+        "components_loaded": [
+          "config",
+          "event_bus",
+          "parallel_executor",
+          "exceptions",
+          "logging"
+        ]
+      }
+    },
+    {
+      "name": "智慧路由MCP",
+      "status": "failed",
+      "duration": 0.010666847229003906,
+      "details": {
+        "success": false,
+        "error": "No module named 'PowerAutomation.mcp_coordinator.mcp_registry'"
+      }
+    },
+    {
+      "name": "MCP协调器",
+      "status": "passed",
+      "duration": 0.0008561611175537109,
+      "details": {
+        "success": true,
+        "registration_result": false,
+        "coordinator_initialized": true
+      }
+    },
+    {
+      "name": "智能体系统",
+      "status": "failed",
+      "duration": 0.000274658203125,
+      "details": {
+        "success": false,
+        "error": "No module named 'PowerAutomation.mcp_coordinator.mcp_registry'"
+      }
+    },
+    {
+      "name": "命令系统",
+      "status": "failed",
+      "duration": 0.0002238750457763672,
+      "details": {
+        "success": false,
+        "error": "No module named 'PowerAutomation.mcp_coordinator.mcp_registry'"
+      }
+    },
+    {
+      "name": "并行处理",
+      "status": "passed",
+      "duration": 0.10074901580810547,
+      "details": {
+        "success": true,
+        "tasks_completed": 5,
+        "duration": 0.10069680213928223,
+        "parallel_efficiency": true
+      }
+    },
+    {
+      "name": "端到端工作流",
+      "status": "passed",
+      "duration": 0.3014185428619385,
+      "details": {
+        "success": true,
+        "workflow_steps": 6,
+        "completed_steps": 6,
+        "workflow_complete": true
+      }
+    }
+  ],
+  "summary": {
+    "total": 7,
+    "passed": 4,
+    "failed": 3
+  }
+}

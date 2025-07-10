@@ -1,0 +1,186 @@
+# ClaudEditor 4.1 配置文件
+# PowerAutomation v4.1 - Mac版本
+
+# 服务器配置
+server:
+  host: "127.0.0.1"
+  port: 8080
+  debug: false
+  auto_reload: true
+  cors_enabled: true
+
+# Claude API配置
+claude:
+  api_key: ""  # 请在此处填入您的Claude API密钥
+  model: "claude-3-sonnet-20240229"
+  max_tokens: 4000
+  temperature: 0.7
+  timeout: 30
+
+# AI生态系统配置
+ai_ecosystem:
+  memoryos:
+    enabled: true
+    memory_limit: 1000
+    context_window: 200000
+  
+  agent_zero:
+    enabled: true
+    max_agents: 5
+    collaboration_mode: true
+
+# 功能开关
+features:
+  # 录制即测试
+  record_as_test:
+    enabled: true
+    auto_save: true
+    video_recording: true
+    screenshot_on_action: true
+  
+  # Zen MCP工具生态
+  zen_mcp:
+    enabled: true
+    development_tools: true
+    collaboration_tools: true
+    productivity_tools: true
+    integration_tools: true
+    security_tools: true
+  
+  # 实时协作
+  realtime_collaboration:
+    enabled: true
+    max_participants: 10
+    conflict_resolution: "ai_assisted"
+    merge_strategy: "intelligent"
+  
+  # 企业功能
+  enterprise:
+    enabled: true
+    audit_logging: true
+    permission_management: true
+    security_scanning: true
+
+# 数据库配置
+database:
+  type: "sqlite"
+  path: "data/claudeditor.db"
+  backup_enabled: true
+  backup_interval: 3600  # 1小时
+
+# 缓存配置
+cache:
+  type: "memory"
+  max_size: 1000
+  ttl: 3600
+
+# 日志配置
+logging:
+  level: "INFO"
+  file: "logs/claudeditor.log"
+  max_size: "10MB"
+  backup_count: 5
+  format: "%(asctime)s - %(name)s - %(levelname)s - %(message)s"
+
+# 安全配置
+security:
+  secret_key: "your-secret-key-here"  # 请更改为随机密钥
+  session_timeout: 3600
+  max_login_attempts: 5
+  password_min_length: 8
+
+# 性能配置
+performance:
+  worker_processes: 4
+  max_connections: 1000
+  request_timeout: 30
+  keepalive_timeout: 5
+
+# UI配置
+ui:
+  theme: "dark"
+  language: "zh-CN"
+  auto_save_interval: 30
+  code_editor:
+    font_size: 14
+    tab_size: 4
+    word_wrap: true
+    line_numbers: true
+    syntax_highlighting: true
+
+# 插件配置
+plugins:
+  enabled: true
+  auto_load: true
+  marketplace_url: "https://marketplace.powerautomation.com"
+  update_check_interval: 86400  # 24小时
+
+# 开发者配置
+developer:
+  debug_mode: false
+  profiling_enabled: false
+  hot_reload: true
+  api_docs_enabled: true
+
+# Mac专用配置
+mac:
+  # 系统集成
+  system_integration:
+    dock_icon: true
+    menu_bar: true
+    notifications: true
+    spotlight_indexing: true
+  
+  # 快捷键
+  shortcuts:
+    toggle_recording: "Cmd+Shift+R"
+    quick_test: "Cmd+T"
+    open_ai_chat: "Cmd+Shift+A"
+    save_session: "Cmd+S"
+  
+  # 文件关联
+  file_associations:
+    - ".pa"    # PowerAutomation项目文件
+    - ".test"  # 测试文件
+    - ".flow"  # 工作流文件
+
+# 网络配置
+network:
+  proxy:
+    enabled: false
+    http_proxy: ""
+    https_proxy: ""
+  
+  ssl:
+    enabled: false
+    cert_file: ""
+    key_file: ""
+
+# 备份配置
+backup:
+  enabled: true
+  interval: 3600  # 1小时
+  max_backups: 24
+  compression: true
+  cloud_sync:
+    enabled: false
+    provider: ""
+    credentials: ""
+
+# 监控配置
+monitoring:
+  enabled: true
+  metrics_collection: true
+  performance_tracking: true
+  error_reporting: true
+  analytics:
+    enabled: false
+    tracking_id: ""
+
+# 更新配置
+updates:
+  auto_check: true
+  check_interval: 86400  # 24小时
+  auto_download: false
+  beta_channel: false
+

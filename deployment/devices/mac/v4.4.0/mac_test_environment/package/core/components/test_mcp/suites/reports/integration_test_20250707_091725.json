@@ -1,0 +1,106 @@
+{
+  "start_time": "2025-07-07 09:17:06.620068",
+  "end_time": "2025-07-07 09:17:25.236011",
+  "tests": [
+    {
+      "name": "核心组件初始化",
+      "status": "passed",
+      "duration": 0.1515669822692871,
+      "details": {
+        "success": true,
+        "components_loaded": [
+          "config",
+          "event_bus",
+          "parallel_executor",
+          "exceptions",
+          "logging"
+        ]
+      }
+    },
+    {
+      "name": "智慧路由MCP",
+      "status": "passed",
+      "duration": 0.03269147872924805,
+      "details": {
+        "success": true,
+        "route_result": "RouteResult(target_agent='security_agent', target_mcp='agent_squad', confidence=0.49590000000000006, reasoning='智能路由选择: 匹配度0.55, 负载因子0.50', estimated_time=31, alternative_routes=[{'agent': 'developer_agent', 'mcp': 'agent_squad', 'score': 0.85, 'load': 0.5, 'capabilities': ['code_generation', 'implementation', 'refactoring'], 'estimated_time': 35}, {'agent': 'deploy_agent', 'mcp': 'agent_squad', 'score': 0.5336000000000001, 'load': 0.4, 'capabilities': ['deployment', 'ci_cd', 'infrastructure'], 'estimated_time': 32}])",
+        "router_initialized": true
+      }
+    },
+    {
+      "name": "MCP协调器",
+      "status": "passed",
+      "duration": 0.0001270771026611328,
+      "details": {
+        "success": true,
+        "registration_result": false,
+        "coordinator_initialized": true
+      }
+    },
+    {
+      "name": "智能体系统",
+      "status": "passed",
+      "duration": 0.0014939308166503906,
+      "details": {
+        "success": true,
+        "init_result": false,
+        "task_result": {
+          "success": false,
+          "error": "不支持的任务类型: architecture_design"
+        },
+        "agent_type": "ArchitectAgent"
+      }
+    },
+    {
+      "name": "命令系统",
+      "status": "passed",
+      "duration": 18.02601671218872,
+      "details": {
+        "success": true,
+        "command_results": [
+          {
+            "command": "architect /test/project",
+            "success": false
+          },
+          {
+            "command": "develop web test_app",
+            "success": false
+          },
+          {
+            "command": "help",
+            "success": false
+          }
+        ],
+        "total_commands": 3,
+        "successful_commands": 0
+      }
+    },
+    {
+      "name": "并行处理",
+      "status": "passed",
+      "duration": 0.10096597671508789,
+      "details": {
+        "success": true,
+        "tasks_completed": 5,
+        "duration": 0.10089778900146484,
+        "parallel_efficiency": true
+      }
+    },
+    {
+      "name": "端到端工作流",
+      "status": "passed",
+      "duration": 0.301865816116333,
+      "details": {
+        "success": true,
+        "workflow_steps": 6,
+        "completed_steps": 6,
+        "workflow_complete": true
+      }
+    }
+  ],
+  "summary": {
+    "total": 7,
+    "passed": 7,
+    "failed": 0
+  }
+}

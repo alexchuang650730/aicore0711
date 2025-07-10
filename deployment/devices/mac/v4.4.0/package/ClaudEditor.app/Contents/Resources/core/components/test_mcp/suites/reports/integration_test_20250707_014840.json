@@ -1,0 +1,76 @@
+{
+  "start_time": "2025-07-07 01:48:39.734179",
+  "end_time": "2025-07-07 01:48:40.081529",
+  "tests": [
+    {
+      "name": "核心组件初始化",
+      "status": "failed",
+      "duration": 9.799003601074219e-05,
+      "details": {
+        "success": false,
+        "error": "No module named 'core'"
+      }
+    },
+    {
+      "name": "智慧路由MCP",
+      "status": "failed",
+      "duration": 0.03168511390686035,
+      "details": {
+        "success": false,
+        "error": "No module named 'pydantic._internal._signature'"
+      }
+    },
+    {
+      "name": "MCP协调器",
+      "status": "failed",
+      "duration": 0.005868673324584961,
+      "details": {
+        "success": false,
+        "error": "No module named 'pydantic._internal._signature'"
+      }
+    },
+    {
+      "name": "智能体系统",
+      "status": "failed",
+      "duration": 0.0006594657897949219,
+      "details": {
+        "success": false,
+        "error": "No module named 'PowerAutomation.agent_squad.coordination.agent_coordinator'"
+      }
+    },
+    {
+      "name": "命令系统",
+      "status": "failed",
+      "duration": 0.0051593780517578125,
+      "details": {
+        "success": false,
+        "error": "No module named 'pydantic._internal._signature'"
+      }
+    },
+    {
+      "name": "并行处理",
+      "status": "failed",
+      "duration": 0.0009086132049560547,
+      "details": {
+        "success": false,
+        "error": "No module named 'pydantic._internal._signature'"
+      }
+    },
+    {
+      "name": "端到端工作流",
+      "status": "passed",
+      "duration": 0.30188441276550293,
+      "details": {
+        "success": true,
+        "workflow_steps": 6,
+        "completed_steps": 6,
+        "workflow_complete": true
+      }
+    }
+  ],
+  "summary": {
+    "total": 7,
+    "passed": 1,
+    "failed": 6
+  }
+}

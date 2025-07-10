@@ -1,0 +1,173 @@
+# UI测试配置文件
+# PowerAutomation 4.0 UI Test Configuration
+
+# 测试环境配置
+test_environment:
+  base_url: "http://localhost:3000"
+  browser: "chrome"
+  headless: false
+  timeout: 30
+  implicit_wait: 10
+  page_load_timeout: 30
+
+# 浏览器配置
+browser_config:
+  window_size:
+    width: 1920
+    height: 1080
+  user_agent: "Mozilla/5.0 (Test Browser) PowerAutomation/4.0"
+  disable_extensions: true
+  disable_images: false
+  disable_javascript: false
+
+# 测试数据配置
+test_data:
+  users:
+    test_user:
+      username: "testuser@example.com"
+      password: "testpass123"
+      full_name: "Test User"
+      phone: "1234567890"
+    admin_user:
+      username: "admin@example.com"
+      password: "adminpass123"
+      full_name: "Admin User"
+      phone: "0987654321"
+
+# 测试套件配置
+test_suites:
+  basic_ui_operations:
+    enabled: true
+    priority: "P0"
+    timeout: 60
+    retry_count: 2
+    parallel: false
+    tests:
+      - "test_basic_click_operation"
+      - "test_text_input_operation"
+      - "test_scroll_operation"
+      - "test_hover_operation"
+      - "test_wait_operation"
+
+  complex_ui_workflows:
+    enabled: true
+    priority: "P1"
+    timeout: 120
+    retry_count: 1
+    parallel: false
+    tests:
+      - "test_user_login_workflow"
+      - "test_form_submission_workflow"
+      - "test_shopping_cart_workflow"
+
+  responsive_ui:
+    enabled: true
+    priority: "P1"
+    timeout: 180
+    retry_count: 1
+    parallel: true
+    max_workers: 3
+    tests:
+      - "test_navigation_responsiveness"
+      - "test_content_layout_responsiveness"
+      - "test_form_responsiveness"
+      - "test_media_responsiveness"
+
+# 截图和录制配置
+capture_config:
+  screenshots:
+    enabled: true
+    on_failure: true
+    on_success: false
+    format: "png"
+    quality: 90
+    directory: "test/reports/screenshots"
+
+  video_recording:
+    enabled: false
+    format: "mp4"
+    fps: 30
+    directory: "test/reports/videos"
+
+# 报告配置
+reporting:
+  formats: ["html", "json", "xml"]
+  output_directory: "test/reports"
+  include_screenshots: true
+  include_logs: true
+  include_metrics: true
+  
+  html_report:
+    template: "default"
+    include_charts: true
+    include_timeline: true
+  
+  json_report:
+    pretty_print: true
+    include_raw_data: true
+
+# 性能监控配置
+performance_monitoring:
+  enabled: true
+  metrics:
+    - "page_load_time"
+    - "element_load_time"
+    - "action_response_time"
+    - "memory_usage"
+    - "cpu_usage"
+  
+  thresholds:
+    page_load_time: 5.0  # 秒
+    element_load_time: 2.0  # 秒
+    action_response_time: 1.0  # 秒
+
+# 错误处理配置
+error_handling:
+  continue_on_failure: true
+  max_retries: 3
+  retry_delay: 2.0  # 秒
+  screenshot_on_error: true
+  log_level: "INFO"
+
+# Stagewise集成配置
+stagewise_integration:
+  enabled: true
+  auto_discovery: true
+  test_case_pattern: "test_*.py"
+  test_function_pattern: "test_*"
+  
+  # 测试用例注册
+  auto_register_tests: true
+  register_on_startup: true
+  
+  # 执行配置
+  execution_mode: "sequential"  # sequential, parallel, mixed
+  max_parallel_tests: 4
+  test_isolation: true
+  
+  # 结果收集
+  collect_metrics: true
+  collect_screenshots: true
+  collect_logs: true
+
+# 集成测试配置
+integration_config:
+  mcp_components:
+    - "stagewise_mcp"
+    - "ag_ui_mcp"
+    - "memoryos_mcp"
+    - "web_ui_mcp"
+  
+  test_dependencies:
+    - "core.components.stagewise_mcp.enhanced_testing_framework"
+    - "core.components.stagewise_mcp.test_runner"
+    - "core.components.ag_ui_mcp.ag_ui_component_generator"
+
+# 调试配置
+debug:
+  enabled: false
+  verbose_logging: false
+  save_page_source: false
+  save_network_logs: false
+  pause_on_failure: false
+

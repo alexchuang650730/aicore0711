@@ -1,0 +1,289 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ClaudEditor v4.1 - AI协作开发神器</title>
+    <link rel="stylesheet" href="/static/css/main.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/monaco-editor/0.44.0/min/vs/editor/editor.main.css" rel="stylesheet">
+</head>
+<body>
+    <div id="app">
+        <!-- 顶部导航栏 -->
+        <header class="header">
+            <div class="header-left">
+                <h1 class="logo">
+                    <i class="fas fa-brain"></i>
+                    ClaudEditor v4.1
+                </h1>
+                <span class="subtitle">AI协作开发神器</span>
+            </div>
+            <div class="header-right">
+                <div class="status-indicator" id="status-indicator">
+                    <i class="fas fa-circle"></i>
+                    <span>连接中...</span>
+                </div>
+                <button class="btn btn-primary" id="settings-btn">
+                    <i class="fas fa-cog"></i>
+                    设置
+                </button>
+            </div>
+        </header>
+
+        <!-- 主要内容区域 -->
+        <main class="main-content">
+            <!-- 侧边栏 -->
+            <aside class="sidebar">
+                <nav class="sidebar-nav">
+                    <div class="nav-section">
+                        <h3>核心功能</h3>
+                        <ul class="nav-list">
+                            <li class="nav-item active" data-tab="editor">
+                                <i class="fas fa-code"></i>
+                                <span>代码编辑器</span>
+                            </li>
+                            <li class="nav-item" data-tab="ai-chat">
+                                <i class="fas fa-robot"></i>
+                                <span>AI助手</span>
+                            </li>
+                            <li class="nav-item" data-tab="memory">
+                                <i class="fas fa-brain"></i>
+                                <span>记忆系统</span>
+                            </li>
+                            <li class="nav-item" data-tab="tools">
+                                <i class="fas fa-tools"></i>
+                                <span>工具管理</span>
+                            </li>
+                        </ul>
+                    </div>
+                    
+                    <div class="nav-section">
+                        <h3>高级功能</h3>
+                        <ul class="nav-list">
+                            <li class="nav-item" data-tab="stagewise">
+                                <i class="fas fa-magic"></i>
+                                <span>可视化编程</span>
+                            </li>
+                            <li class="nav-item" data-tab="collaboration">
+                                <i class="fas fa-users"></i>
+                                <span>协作开发</span>
+                            </li>
+                            <li class="nav-item" data-tab="analytics">
+                                <i class="fas fa-chart-line"></i>
+                                <span>性能分析</span>
+                            </li>
+                        </ul>
+                    </div>
+                </nav>
+            </aside>
+
+            <!-- 内容面板 -->
+            <div class="content-panels">
+                <!-- 代码编辑器面板 -->
+                <div class="panel active" id="editor-panel">
+                    <div class="panel-header">
+                        <h2>Monaco代码编辑器</h2>
+                        <div class="panel-actions">
+                            <select id="language-select">
+                                <option value="javascript">JavaScript</option>
+                                <option value="python">Python</option>
+                                <option value="typescript">TypeScript</option>
+                                <option value="html">HTML</option>
+                                <option value="css">CSS</option>
+                                <option value="json">JSON</option>
+                            </select>
+                            <button class="btn btn-sm" id="format-code">
+                                <i class="fas fa-magic"></i>
+                                格式化
+                            </button>
+                            <button class="btn btn-sm" id="save-file">
+                                <i class="fas fa-save"></i>
+                                保存
+                            </button>
+                        </div>
+                    </div>
+                    <div class="editor-container">
+                        <div id="monaco-editor"></div>
+                    </div>
+                </div>
+
+                <!-- AI助手面板 -->
+                <div class="panel" id="ai-chat-panel">
+                    <div class="panel-header">
+                        <h2>AI助手</h2>
+                        <div class="panel-actions">
+                            <select id="ai-model-select">
+                                <option value="claude">Claude 3.5 Sonnet</option>
+                                <option value="gemini">Gemini 1.5 Flash</option>
+                                <option value="gpt4">GPT-4</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="chat-container">
+                        <div class="chat-messages" id="chat-messages">
+                            <div class="message assistant">
+                                <div class="message-avatar">
+                                    <i class="fas fa-robot"></i>
+                                </div>
+                                <div class="message-content">
+                                    <p>你好！我是ClaudEditor的AI助手。我可以帮助你进行代码编写、调试、重构等任务。有什么我可以帮助你的吗？</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="chat-input-container">
+                            <div class="chat-input">
+                                <textarea id="chat-input" placeholder="输入你的问题或代码需求..."></textarea>
+                                <button class="btn btn-primary" id="send-message">
+                                    <i class="fas fa-paper-plane"></i>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 记忆系统面板 -->
+                <div class="panel" id="memory-panel">
+                    <div class="panel-header">
+                        <h2>MemoryOS记忆系统</h2>
+                        <div class="panel-actions">
+                            <button class="btn btn-sm" id="clear-memory">
+                                <i class="fas fa-trash"></i>
+                                清空记忆
+                            </button>
+                        </div>
+                    </div>
+                    <div class="memory-container">
+                        <div class="memory-search">
+                            <input type="text" id="memory-search-input" placeholder="搜索记忆...">
+                            <button class="btn btn-sm" id="search-memory">
+                                <i class="fas fa-search"></i>
+                            </button>
+                        </div>
+                        <div class="memory-stats">
+                            <div class="stat-item">
+                                <span class="stat-label">短期记忆</span>
+                                <span class="stat-value" id="short-term-count">0</span>
+                            </div>
+                            <div class="stat-item">
+                                <span class="stat-label">中期记忆</span>
+                                <span class="stat-value" id="medium-term-count">0</span>
+                            </div>
+                            <div class="stat-item">
+                                <span class="stat-label">长期记忆</span>
+                                <span class="stat-value" id="long-term-count">0</span>
+                            </div>
+                        </div>
+                        <div class="memory-list" id="memory-list">
+                            <!-- 记忆项目将在这里动态加载 -->
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 工具管理面板 -->
+                <div class="panel" id="tools-panel">
+                    <div class="panel-header">
+                        <h2>MCP工具管理</h2>
+                        <div class="panel-actions">
+                            <button class="btn btn-sm" id="refresh-tools">
+                                <i class="fas fa-sync"></i>
+                                刷新工具
+                            </button>
+                        </div>
+                    </div>
+                    <div class="tools-container">
+                        <div class="tools-stats">
+                            <div class="stat-item">
+                                <span class="stat-label">可用工具</span>
+                                <span class="stat-value" id="tools-count">0</span>
+                            </div>
+                            <div class="stat-item">
+                                <span class="stat-label">活跃工具</span>
+                                <span class="stat-value" id="active-tools-count">0</span>
+                            </div>
+                        </div>
+                        <div class="tools-categories">
+                            <div class="category-filter">
+                                <button class="filter-btn active" data-category="all">全部</button>
+                                <button class="filter-btn" data-category="development">开发</button>
+                                <button class="filter-btn" data-category="web_automation">Web自动化</button>
+                                <button class="filter-btn" data-category="data_science">数据科学</button>
+                            </div>
+                        </div>
+                        <div class="tools-list" id="tools-list">
+                            <!-- 工具列表将在这里动态加载 -->
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Stagewise可视化编程面板 -->
+                <div class="panel" id="stagewise-panel">
+                    <div class="panel-header">
+                        <h2>Stagewise可视化编程</h2>
+                        <div class="panel-actions">
+                            <button class="btn btn-sm" id="start-recording">
+                                <i class="fas fa-record-vinyl"></i>
+                                开始录制
+                            </button>
+                            <button class="btn btn-sm" id="stop-recording" disabled>
+                                <i class="fas fa-stop"></i>
+                                停止录制
+                            </button>
+                        </div>
+                    </div>
+                    <div class="stagewise-container">
+                        <div class="recording-status">
+                            <div class="status-indicator" id="recording-status">
+                                <i class="fas fa-circle"></i>
+                                <span>未录制</span>
+                            </div>
+                        </div>
+                        <div class="generated-code">
+                            <h3>生成的代码</h3>
+                            <pre id="generated-code-display"><code>// 在这里将显示根据你的操作生成的代码</code></pre>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 协作开发面板 -->
+                <div class="panel" id="collaboration-panel">
+                    <div class="panel-header">
+                        <h2>协作开发</h2>
+                    </div>
+                    <div class="collaboration-container">
+                        <p>协作功能正在开发中...</p>
+                    </div>
+                </div>
+
+                <!-- 性能分析面板 -->
+                <div class="panel" id="analytics-panel">
+                    <div class="panel-header">
+                        <h2>性能分析</h2>
+                    </div>
+                    <div class="analytics-container">
+                        <div class="performance-metrics">
+                            <div class="metric-card">
+                                <h3>系统状态</h3>
+                                <div class="metric-value" id="system-status">正常</div>
+                            </div>
+                            <div class="metric-card">
+                                <h3>响应时间</h3>
+                                <div class="metric-value" id="response-time">--ms</div>
+                            </div>
+                            <div class="metric-card">
+                                <h3>内存使用</h3>
+                                <div class="metric-value" id="memory-usage">--%</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <!-- 加载Monaco Editor -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/monaco-editor/0.44.0/min/vs/loader.js"></script>
+    <script src="/static/js/main.js"></script>
+</body>
+</html>
+

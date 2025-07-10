@@ -1,0 +1,78 @@
+{
+  "start_time": "2025-07-07 02:18:31.360987",
+  "end_time": "2025-07-07 02:18:31.920534",
+  "tests": [
+    {
+      "name": "核心组件初始化",
+      "status": "failed",
+      "duration": 0.14581751823425293,
+      "details": {
+        "success": false,
+        "error": "cannot import name 'Config' from 'core.config' (/home/ubuntu/powerautomation_4_0_aicore_structure/core/config.py)"
+      }
+    },
+    {
+      "name": "智慧路由MCP",
+      "status": "failed",
+      "duration": 0.006848335266113281,
+      "details": {
+        "success": false,
+        "error": "No module named 'PowerAutomation.smart_router_mcp.mcp_interface'"
+      }
+    },
+    {
+      "name": "MCP协调器",
+      "status": "failed",
+      "duration": 0.0002617835998535156,
+      "details": {
+        "success": false,
+        "error": "No module named 'PowerAutomation.smart_router_mcp.mcp_interface'"
+      }
+    },
+    {
+      "name": "智能体系统",
+      "status": "failed",
+      "duration": 0.00023794174194335938,
+      "details": {
+        "success": false,
+        "error": "No module named 'PowerAutomation.smart_router_mcp.mcp_interface'"
+      }
+    },
+    {
+      "name": "命令系统",
+      "status": "failed",
+      "duration": 0.00025844573974609375,
+      "details": {
+        "success": false,
+        "error": "No module named 'PowerAutomation.smart_router_mcp.mcp_interface'"
+      }
+    },
+    {
+      "name": "并行处理",
+      "status": "passed",
+      "duration": 0.10319924354553223,
+      "details": {
+        "success": true,
+        "tasks_completed": 5,
+        "duration": 0.10051631927490234,
+        "parallel_efficiency": true
+      }
+    },
+    {
+      "name": "端到端工作流",
+      "status": "passed",
+      "duration": 0.30173492431640625,
+      "details": {
+        "success": true,
+        "workflow_steps": 6,
+        "completed_steps": 6,
+        "workflow_complete": true
+      }
+    }
+  ],
+  "summary": {
+    "total": 7,
+    "passed": 2,
+    "failed": 5
+  }
+}

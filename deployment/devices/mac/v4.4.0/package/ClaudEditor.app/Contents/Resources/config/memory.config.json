@@ -1,0 +1,7 @@
+{
+  "enabled": true,
+  "storage_path": "~/Library/Application Support/ClaudEditor/memory",
+  "max_memories": 10000,
+  "cleanup_interval": 86400,
+  "importance_threshold": 0.3
+}

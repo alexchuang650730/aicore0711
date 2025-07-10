@@ -1,0 +1,85 @@
+{
+  "start_time": "2025-07-07 09:13:38.418888",
+  "end_time": "2025-07-07 09:13:39.012933",
+  "tests": [
+    {
+      "name": "核心组件初始化",
+      "status": "passed",
+      "duration": 0.15291857719421387,
+      "details": {
+        "success": true,
+        "components_loaded": [
+          "config",
+          "event_bus",
+          "parallel_executor",
+          "exceptions",
+          "logging"
+        ]
+      }
+    },
+    {
+      "name": "智慧路由MCP",
+      "status": "failed",
+      "duration": 0.029770374298095703,
+      "details": {
+        "success": false,
+        "error": "'dict' object has no attribute 'request_id'"
+      }
+    },
+    {
+      "name": "MCP协调器",
+      "status": "passed",
+      "duration": 0.00011944770812988281,
+      "details": {
+        "success": true,
+        "registration_result": false,
+        "coordinator_initialized": true
+      }
+    },
+    {
+      "name": "智能体系统",
+      "status": "failed",
+      "duration": 9.5367431640625e-06,
+      "details": {
+        "success": false,
+        "error": "Can't instantiate abstract class ArchitectAgent with abstract methods _execute_task_logic, _register_capabilities"
+      }
+    },
+    {
+      "name": "命令系统",
+      "status": "failed",
+      "duration": 0.00754857063293457,
+      "details": {
+        "success": false,
+        "error": "cannot import name 'CommandMasterMCPInterface' from 'PowerAutomation.command_master.mcp_interface' (/home/ubuntu/powerautomation_4_0_aicore_structure/PowerAutomation/command_master/mcp_interface.py)"
+      }
+    },
+    {
+      "name": "并行处理",
+      "status": "passed",
+      "duration": 0.10061478614807129,
+      "details": {
+        "success": true,
+        "tasks_completed": 5,
+        "duration": 0.10057687759399414,
+        "parallel_efficiency": true
+      }
+    },
+    {
+      "name": "端到端工作流",
+      "status": "passed",
+      "duration": 0.3019237518310547,
+      "details": {
+        "success": true,
+        "workflow_steps": 6,
+        "completed_steps": 6,
+        "workflow_complete": true
+      }
+    }
+  ],
+  "summary": {
+    "total": 7,
+    "passed": 4,
+    "failed": 3
+  }
+}

@@ -1,0 +1,44 @@
+{
+  "version": "4.3.0",
+  "platform": "macOS",
+  "claudeditor": {
+    "version": "4.3.0",
+    "app_name": "ClaudEditor 4.3",
+    "bundle_id": "com.powerautomation.claudeditor",
+    "window_title": "ClaudEditor 4.3 - The Ultimate Claude Code Editor"
+  },
+  "system_integration": {
+    "dock_icon": true,
+    "menu_bar": true,
+    "notifications": true,
+    "file_associations": [
+      ".py",
+      ".js",
+      ".ts",
+      ".jsx",
+      ".tsx",
+      ".md",
+      ".json"
+    ]
+  },
+  "shortcuts": {
+    "toggle_recording": "Cmd+Shift+R",
+    "quick_test": "Cmd+T",
+    "open_ai_chat": "Cmd+Shift+A",
+    "save_project": "Cmd+S",
+    "new_project": "Cmd+N",
+    "open_file": "Cmd+O"
+  },
+  "performance": {
+    "startup_timeout": 10,
+    "api_timeout": 5,
+    "max_memory_mb": 1024,
+    "max_cpu_percent": 80
+  },
+  "testing": {
+    "test_timeout": 30,
+    "screenshot_on_error": true,
+    "log_level": "INFO",
+    "test_data_dir": "./test_data"
+  }
+}

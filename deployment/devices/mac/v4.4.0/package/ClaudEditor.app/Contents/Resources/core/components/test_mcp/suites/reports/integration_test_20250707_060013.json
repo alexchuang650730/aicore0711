@@ -1,0 +1,85 @@
+{
+  "start_time": "2025-07-07 06:00:12.873606",
+  "end_time": "2025-07-07 06:00:13.447752",
+  "tests": [
+    {
+      "name": "核心组件初始化",
+      "status": "passed",
+      "duration": 0.149061918258667,
+      "details": {
+        "success": true,
+        "components_loaded": [
+          "config",
+          "event_bus",
+          "parallel_executor",
+          "exceptions",
+          "logging"
+        ]
+      }
+    },
+    {
+      "name": "智慧路由MCP",
+      "status": "failed",
+      "duration": 0.019425392150878906,
+      "details": {
+        "success": false,
+        "error": "cannot import name 'get_task_logger' from 'core.logging_config' (/home/ubuntu/powerautomation_4_0_aicore_structure/core/logging_config.py)"
+      }
+    },
+    {
+      "name": "MCP协调器",
+      "status": "passed",
+      "duration": 0.0008852481842041016,
+      "details": {
+        "success": true,
+        "registration_result": false,
+        "coordinator_initialized": true
+      }
+    },
+    {
+      "name": "智能体系统",
+      "status": "failed",
+      "duration": 0.000644683837890625,
+      "details": {
+        "success": false,
+        "error": "cannot import name 'get_task_logger' from 'core.logging_config' (/home/ubuntu/powerautomation_4_0_aicore_structure/core/logging_config.py)"
+      }
+    },
+    {
+      "name": "命令系统",
+      "status": "failed",
+      "duration": 0.0005505084991455078,
+      "details": {
+        "success": false,
+        "error": "cannot import name 'get_task_logger' from 'core.logging_config' (/home/ubuntu/powerautomation_4_0_aicore_structure/core/logging_config.py)"
+      }
+    },
+    {
+      "name": "并行处理",
+      "status": "passed",
+      "duration": 0.10060429573059082,
+      "details": {
+        "success": true,
+        "tasks_completed": 5,
+        "duration": 0.10056829452514648,
+        "parallel_efficiency": true
+      }
+    },
+    {
+      "name": "端到端工作流",
+      "status": "passed",
+      "duration": 0.3017997741699219,
+      "details": {
+        "success": true,
+        "workflow_steps": 6,
+        "completed_steps": 6,
+        "workflow_complete": true
+      }
+    }
+  ],
+  "summary": {
+    "total": 7,
+    "passed": 4,
+    "failed": 3
+  }
+}

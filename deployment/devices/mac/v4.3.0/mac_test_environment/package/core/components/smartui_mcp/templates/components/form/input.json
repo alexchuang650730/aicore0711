@@ -1,0 +1,470 @@
+{
+  "meta": {
+    "name": "input",
+    "version": "1.0.0",
+    "description": "基础输入框组件模板",
+    "category": "form",
+    "tags": ["input", "form", "text", "field"],
+    "author": "ClaudEditor Team",
+    "created": "2025-01-09",
+    "updated": "2025-01-09"
+  },
+  "schema": {
+    "type": "object",
+    "properties": {
+      "type": {
+        "type": "string",
+        "enum": ["text", "password", "email", "number", "tel", "url", "search"],
+        "default": "text",
+        "description": "输入框类型"
+      },
+      "placeholder": {
+        "type": "string",
+        "description": "占位符文本"
+      },
+      "value": {
+        "type": "string",
+        "description": "输入框值"
+      },
+      "label": {
+        "type": "string",
+        "description": "标签文本"
+      },
+      "size": {
+        "type": "string",
+        "enum": ["sm", "md", "lg"],
+        "default": "md",
+        "description": "输入框尺寸"
+      },
+      "variant": {
+        "type": "string",
+        "enum": ["default", "filled", "outlined"],
+        "default": "outlined",
+        "description": "输入框变体"
+      },
+      "disabled": {
+        "type": "boolean",
+        "default": false,
+        "description": "是否禁用"
+      },
+      "readonly": {
+        "type": "boolean",
+        "default": false,
+        "description": "是否只读"
+      },
+      "required": {
+        "type": "boolean",
+        "default": false,
+        "description": "是否必填"
+      },
+      "error": {
+        "type": "string",
+        "description": "错误信息"
+      },
+      "helper": {
+        "type": "string",
+        "description": "帮助文本"
+      },
+      "prefix": {
+        "type": "string",
+        "description": "前缀图标"
+      },
+      "suffix": {
+        "type": "string",
+        "description": "后缀图标"
+      },
+      "clearable": {
+        "type": "boolean",
+        "default": false,
+        "description": "是否可清空"
+      }
+    }
+  },
+  "template": {
+    "component_type": "div",
+    "props": {
+      "className": "input-field input-field-{{size}} input-field-{{variant}}{{#if error}} input-field-error{{/if}}{{#if disabled}} input-field-disabled{{/if}}"
+    },
+    "children": [
+      {
+        "condition": "{{label}}",
+        "component_type": "label",
+        "props": {
+          "className": "input-label{{#if required}} input-label-required{{/if}}",
+          "for": "{{id}}"
+        },
+        "children": [
+          "{{label}}",
+          {
+            "condition": "{{required}}",
+            "component_type": "span",
+            "props": {
+              "className": "input-required-mark"
+            },
+            "children": "*"
+          }
+        ]
+      },
+      {
+        "component_type": "div",
+        "props": {
+          "className": "input-wrapper"
+        },
+        "children": [
+          {
+            "condition": "{{prefix}}",
+            "component_type": "div",
+            "props": {
+              "className": "input-prefix"
+            },
+            "children": [
+              {
+                "component_type": "icon",
+                "props": {
+                  "name": "{{prefix}}",
+                  "size": "{{#if (eq size 'sm')}}14{{else if (eq size 'md')}}16{{else}}18{{/if}}"
+                }
+              }
+            ]
+          },
+          {
+            "component_type": "input",
+            "props": {
+              "id": "{{id}}",
+              "type": "{{type}}",
+              "className": "input-control",
+              "placeholder": "{{placeholder}}",
+              "value": "{{value}}",
+              "disabled": "{{disabled}}",
+              "readonly": "{{readonly}}",
+              "required": "{{required}}",
+              "aria-invalid": "{{#if error}}true{{else}}false{{/if}}",
+              "aria-describedby": "{{#if error}}{{id}}-error{{else if helper}}{{id}}-helper{{/if}}"
+            },
+            "events": {
+              "onChange": "{{onChange}}",
+              "onFocus": "{{onFocus}}",
+              "onBlur": "{{onBlur}}",
+              "onInput": "{{onInput}}"
+            }
+          },
+          {
+            "condition": "{{#and clearable value (not disabled) (not readonly)}}",
+            "component_type": "button",
+            "props": {
+              "type": "button",
+              "className": "input-clear",
+              "aria-label": "清空输入"
+            },
+            "events": {
+              "onClick": "{{onClear}}"
+            },
+            "children": [
+              {
+                "component_type": "icon",
+                "props": {
+                  "name": "x",
+                  "size": "14"
+                }
+              }
+            ]
+          },
+          {
+            "condition": "{{suffix}}",
+            "component_type": "div",
+            "props": {
+              "className": "input-suffix"
+            },
+            "children": [
+              {
+                "component_type": "icon",
+                "props": {
+                  "name": "{{suffix}}",
+                  "size": "{{#if (eq size 'sm')}}14{{else if (eq size 'md')}}16{{else}}18{{/if}}"
+                }
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "condition": "{{error}}",
+        "component_type": "div",
+        "props": {
+          "id": "{{id}}-error",
+          "className": "input-error",
+          "role": "alert"
+        },
+        "children": "{{error}}"
+      },
+      {
+        "condition": "{{#and helper (not error)}}",
+        "component_type": "div",
+        "props": {
+          "id": "{{id}}-helper",
+          "className": "input-helper"
+        },
+        "children": "{{helper}}"
+      }
+    ]
+  },
+  "styles": {
+    "base": {
+      ".input-field": {
+        "display": "flex",
+        "flex-direction": "column",
+        "gap": "var(--spacing-xs)"
+      },
+      ".input-label": {
+        "font-size": "var(--input-label-font-size)",
+        "font-weight": "var(--input-label-font-weight)",
+        "color": "var(--input-label-color)",
+        "margin-bottom": "var(--spacing-xs)"
+      },
+      ".input-label-required .input-required-mark": {
+        "color": "var(--color-danger)",
+        "margin-left": "var(--spacing-xs)"
+      },
+      ".input-wrapper": {
+        "position": "relative",
+        "display": "flex",
+        "align-items": "center",
+        "border": "var(--input-border-width) solid var(--input-border-color)",
+        "border-radius": "var(--input-border-radius)",
+        "background-color": "var(--input-bg)",
+        "transition": "all var(--animation-duration-normal) var(--animation-easing-ease)"
+      },
+      ".input-wrapper:hover": {
+        "border-color": "var(--input-border-color-hover)"
+      },
+      ".input-wrapper:focus-within": {
+        "border-color": "var(--input-border-color-focus)",
+        "box-shadow": "0 0 0 3px var(--input-focus-shadow)"
+      },
+      ".input-control": {
+        "flex": "1",
+        "padding": "var(--input-padding-y) var(--input-padding-x)",
+        "border": "none",
+        "outline": "none",
+        "background": "transparent",
+        "color": "var(--input-color)",
+        "font-size": "var(--input-font-size)",
+        "font-family": "var(--input-font-family)",
+        "line-height": "var(--input-line-height)"
+      },
+      ".input-control::placeholder": {
+        "color": "var(--input-placeholder-color)"
+      },
+      ".input-prefix, .input-suffix": {
+        "display": "flex",
+        "align-items": "center",
+        "padding": "0 var(--input-padding-x)",
+        "color": "var(--input-icon-color)"
+      },
+      ".input-clear": {
+        "display": "flex",
+        "align-items": "center",
+        "justify-content": "center",
+        "padding": "var(--spacing-xs)",
+        "margin-right": "var(--spacing-xs)",
+        "border": "none",
+        "border-radius": "var(--radius-sm)",
+        "background": "transparent",
+        "color": "var(--input-icon-color)",
+        "cursor": "pointer",
+        "transition": "all var(--animation-duration-fast) var(--animation-easing-ease)"
+      },
+      ".input-clear:hover": {
+        "background-color": "var(--color-surface-hover)",
+        "color": "var(--color-text)"
+      },
+      ".input-error": {
+        "font-size": "var(--input-helper-font-size)",
+        "color": "var(--color-danger)",
+        "margin-top": "var(--spacing-xs)"
+      },
+      ".input-helper": {
+        "font-size": "var(--input-helper-font-size)",
+        "color": "var(--input-helper-color)",
+        "margin-top": "var(--spacing-xs)"
+      }
+    },
+    "variants": {
+      "default": {
+        ".input-field-default .input-wrapper": {
+          "--input-bg": "var(--color-background)",
+          "--input-border-color": "var(--color-border)",
+          "--input-border-color-hover": "var(--color-border-hover)",
+          "--input-border-color-focus": "var(--color-primary)"
+        }
+      },
+      "filled": {
+        ".input-field-filled .input-wrapper": {
+          "--input-bg": "var(--color-surface)",
+          "--input-border-color": "transparent",
+          "--input-border-color-hover": "var(--color-border)",
+          "--input-border-color-focus": "var(--color-primary)"
+        }
+      },
+      "outlined": {
+        ".input-field-outlined .input-wrapper": {
+          "--input-bg": "transparent",
+          "--input-border-color": "var(--color-border)",
+          "--input-border-color-hover": "var(--color-border-hover)",
+          "--input-border-color-focus": "var(--color-primary)"
+        }
+      }
+    },
+    "sizes": {
+      "sm": {
+        ".input-field-sm": {
+          "--input-padding-x": "0.75rem",
+          "--input-padding-y": "0.375rem",
+          "--input-font-size": "0.875rem",
+          "--input-border-radius": "var(--radius-sm)",
+          "--input-label-font-size": "0.875rem",
+          "--input-helper-font-size": "0.75rem"
+        }
+      },
+      "md": {
+        ".input-field-md": {
+          "--input-padding-x": "1rem",
+          "--input-padding-y": "0.5rem",
+          "--input-font-size": "1rem",
+          "--input-border-radius": "var(--radius-md)",
+          "--input-label-font-size": "1rem",
+          "--input-helper-font-size": "0.875rem"
+        }
+      },
+      "lg": {
+        ".input-field-lg": {
+          "--input-padding-x": "1.25rem",
+          "--input-padding-y": "0.75rem",
+          "--input-font-size": "1.125rem",
+          "--input-border-radius": "var(--radius-md)",
+          "--input-label-font-size": "1.125rem",
+          "--input-helper-font-size": "1rem"
+        }
+      }
+    },
+    "states": {
+      "error": {
+        ".input-field-error .input-wrapper": {
+          "--input-border-color": "var(--color-danger)",
+          "--input-border-color-hover": "var(--color-danger)",
+          "--input-border-color-focus": "var(--color-danger)",
+          "--input-focus-shadow": "var(--color-danger-alpha-30)"
+        }
+      },
+      "disabled": {
+        ".input-field-disabled .input-wrapper": {
+          "opacity": "0.6",
+          "cursor": "not-allowed",
+          "pointer-events": "none"
+        }
+      }
+    }
+  },
+  "events": {
+    "onChange": {
+      "description": "输入值改变事件",
+      "parameters": {
+        "event": "ChangeEvent",
+        "value": "string"
+      }
+    },
+    "onInput": {
+      "description": "输入事件",
+      "parameters": {
+        "event": "InputEvent",
+        "value": "string"
+      }
+    },
+    "onFocus": {
+      "description": "获得焦点事件",
+      "parameters": {
+        "event": "FocusEvent"
+      }
+    },
+    "onBlur": {
+      "description": "失去焦点事件",
+      "parameters": {
+        "event": "FocusEvent"
+      }
+    },
+    "onClear": {
+      "description": "清空输入事件",
+      "parameters": {
+        "event": "MouseEvent"
+      }
+    }
+  },
+  "examples": [
+    {
+      "name": "基础输入框",
+      "description": "最简单的输入框",
+      "config": {
+        "placeholder": "请输入内容"
+      }
+    },
+    {
+      "name": "带标签输入框",
+      "description": "带有标签的输入框",
+      "config": {
+        "label": "用户名",
+        "placeholder": "请输入用户名",
+        "required": true
+      }
+    },
+    {
+      "name": "带图标输入框",
+      "description": "带有前缀和后缀图标的输入框",
+      "config": {
+        "label": "搜索",
+        "placeholder": "搜索内容...",
+        "prefix": "search",
+        "clearable": true
+      }
+    },
+    {
+      "name": "密码输入框",
+      "description": "密码类型的输入框",
+      "config": {
+        "type": "password",
+        "label": "密码",
+        "placeholder": "请输入密码",
+        "required": true,
+        "helper": "密码长度至少8位"
+      }
+    },
+    {
+      "name": "错误状态输入框",
+      "description": "显示错误状态的输入框",
+      "config": {
+        "label": "邮箱",
+        "placeholder": "请输入邮箱",
+        "value": "invalid-email",
+        "error": "请输入有效的邮箱地址"
+      }
+    }
+  ],
+  "dependencies": {
+    "components": ["icon"],
+    "themes": ["base", "input"],
+    "assets": []
+  },
+  "accessibility": {
+    "aria": {
+      "aria-invalid": "{{#if error}}true{{else}}false{{/if}}",
+      "aria-describedby": "{{#if error}}{{id}}-error{{else if helper}}{{id}}-helper{{/if}}"
+    },
+    "labels": {
+      "for": "{{id}}"
+    },
+    "focus": {
+      "focusable": true,
+      "tabindex": "{{#if disabled}}-1{{else}}0{{/if}}"
+    }
+  }
+}
+

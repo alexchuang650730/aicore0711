@@ -1,0 +1,83 @@
+{
+  "start_time": "2025-07-07 02:09:24.152301",
+  "end_time": "2025-07-07 02:09:24.707751",
+  "tests": [
+    {
+      "name": "核心组件初始化",
+      "status": "failed",
+      "duration": 0.13312268257141113,
+      "details": {
+        "success": false,
+        "error": "cannot import name 'PowerAutomationConfig' from 'core.config' (/home/ubuntu/powerautomation_4_0_aicore_structure/core/config.py)"
+      }
+    },
+    {
+      "name": "智慧路由MCP",
+      "status": "failed",
+      "duration": 0.0042018890380859375,
+      "details": {
+        "success": false,
+        "error": "No module named 'PowerAutomation.smart_router_mcp.semantic_analyzer'"
+      }
+    },
+    {
+      "name": "MCP协调器",
+      "status": "failed",
+      "duration": 0.0002579689025878906,
+      "details": {
+        "success": false,
+        "error": "No module named 'PowerAutomation.smart_router_mcp.semantic_analyzer'"
+      }
+    },
+    {
+      "name": "智能体系统",
+      "status": "failed",
+      "duration": 0.000232696533203125,
+      "details": {
+        "success": false,
+        "error": "No module named 'PowerAutomation.smart_router_mcp.semantic_analyzer'"
+      }
+    },
+    {
+      "name": "命令系统",
+      "status": "passed",
+      "duration": 0.00920724868774414,
+      "details": {
+        "success": true,
+        "commands_executed": 3,
+        "results": [
+          "CommandResult(command='architect', args=['/test/project'], success=False, result=None, error='未知命令: architect', execution_time=3.0994415283203125e-06, task_id=None)",
+          "CommandResult(command='develop', args=['web', 'test_app'], success=False, result=None, error='未知命令: develop', execution_time=2.1457672119140625e-06, task_id=None)",
+          "CommandResult(command='help', args=[], success=False, result=None, error='未知命令: help', execution_time=2.1457672119140625e-06, task_id=None)"
+        ]
+      }
+    },
+    {
+      "name": "并行处理",
+      "status": "passed",
+      "duration": 0.10563898086547852,
+      "details": {
+        "success": true,
+        "tasks_completed": 5,
+        "duration": 0.10054612159729004,
+        "parallel_efficiency": true
+      }
+    },
+    {
+      "name": "端到端工作流",
+      "status": "passed",
+      "duration": 0.3017115592956543,
+      "details": {
+        "success": true,
+        "workflow_steps": 6,
+        "completed_steps": 6,
+        "workflow_complete": true
+      }
+    }
+  ],
+  "summary": {
+    "total": 7,
+    "passed": 3,
+    "failed": 4
+  }
+}
