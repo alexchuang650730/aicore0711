@@ -1,0 +1,399 @@
+name: PowerAutomation Milestone Progress Monitoring
+description: Automated milestone tracking and progress monitoring system
+
+on:
+  schedule:
+    # 每6小時運行一次進度檢查
+    - cron: '0 */6 * * *'
+    # 每日上午9點生成完整報告
+    - cron: '0 9 * * *'
+  workflow_dispatch:
+    inputs:
+      force_notification:
+        description: 'Force send notifications even if status is healthy'
+        required: false
+        default: 'false'
+        type: boolean
+      update_task_progress:
+        description: 'Task ID and progress (format: task_id:progress)'
+        required: false
+        type: string
+
+env:
+  MONITORING_CONFIG: 'monitoring_config.yaml'
+  PYTHON_VERSION: '3.11'
+
+jobs:
+  milestone-monitoring:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    
+    steps:
+    - name: Checkout Repository
+      uses: actions/checkout@v4
+      with:
+        fetch-depth: 0
+        token: ${{ secrets.GITHUB_TOKEN }}
+    
+    - name: Set up Python
+      uses: actions/setup-python@v4
+      with:
+        python-version: ${{ env.PYTHON_VERSION }}
+        cache: 'pip'
+    
+    - name: Install Dependencies
+      run: |
+        python -m pip install --upgrade pip
+        pip install -r requirements.txt
+        
+        # 安裝監控系統依賴
+        pip install aiohttp PyGithub pyyaml gitpython
+    
+    - name: Create Monitoring Configuration
+      run: |
+        mkdir -p core/monitoring/config
+        cat > core/monitoring/config/monitoring_config.yaml << EOF
+        monitoring:
+          check_interval_hours: 6
+          report_interval_hours: 24
+          risk_threshold_days: 7
+          
+        github:
+          token: ${{ secrets.GITHUB_TOKEN }}
+          repo: ${{ github.repository }}
+          
+        notifications:
+          slack_webhook: ${{ secrets.SLACK_WEBHOOK }}
+          email_recipients: 
+            - ${{ secrets.NOTIFICATION_EMAIL }}
+            
+        milestones:
+          data_file: 'core/monitoring/data/milestones_data.json'
+          backup_dir: 'core/monitoring/backups'
+          
+        quality_gates:
+          min_test_coverage: 80
+          max_critical_issues: 0
+          max_high_priority_bugs: 3
+          required_reviewers: 2
+        EOF
+    
+    - name: Initialize Monitoring Data Directory
+      run: |
+        mkdir -p core/monitoring/data
+        mkdir -p core/monitoring/backups
+        mkdir -p core/monitoring/logs
+        mkdir -p core/monitoring/reports
+    
+    - name: Update Task Progress (if specified)
+      if: github.event.inputs.update_task_progress != ''
+      run: |
+        cd core/monitoring
+        python << EOF
+        import asyncio
+        import sys
+        from milestone_progress_monitor import MilestoneProgressMonitor
+        
+        async def update_progress():
+            monitor = MilestoneProgressMonitor('config/monitoring_config.yaml')
+            progress_input = "${{ github.event.inputs.update_task_progress }}"
+            
+            if ':' in progress_input:
+                task_id, progress = progress_input.split(':', 1)
+                try:
+                    progress_value = float(progress)
+                    # 假設更新Q3里程碑的任務
+                    await monitor.update_milestone_progress("milestone_4_8_0", task_id.strip(), progress_value)
+                    print(f"✅ 任務 {task_id.strip()} 進度已更新至 {progress_value}%")
+                except ValueError:
+                    print(f"❌ 無效的進度值: {progress}")
+                    sys.exit(1)
+            else:
+                print(f"❌ 無效的輸入格式，應為 task_id:progress")
+                sys.exit(1)
+        
+        asyncio.run(update_progress())
+        EOF
+    
+    - name: Run Milestone Progress Analysis
+      id: analysis
+      run: |
+        cd core/monitoring
+        python << EOF
+        import asyncio
+        import json
+        import os
+        from milestone_progress_monitor import MilestoneProgressMonitor
+        
+        async def run_analysis():
+            monitor = MilestoneProgressMonitor('config/monitoring_config.yaml')
+            
+            # 加載里程碑數據
+            milestones = monitor.load_milestones_data()
+            print(f"📊 加載了 {len(milestones)} 個里程碑")
+            
+            # 執行進度分析
+            analysis = await monitor.analyze_progress(milestones)
+            
+            # 生成報告
+            report = await monitor.generate_report(analysis)
+            
+            # 保存報告到artifacts
+            import datetime
+            timestamp = datetime.datetime.now().strftime('%Y%m%d_%H%M%S')
+            
+            with open(f'reports/milestone_report_{timestamp}.md', 'w', encoding='utf-8') as f:
+                f.write(report)
+            
+            # 輸出到GitHub Actions
+            with open(os.environ['GITHUB_OUTPUT'], 'a') as f:
+                f.write(f"overall_status={analysis['overall_status']}\n")
+                f.write(f"report_file=reports/milestone_report_{timestamp}.md\n")
+                f.write(f"high_risk_count={len(analysis['risk_assessment']['high_risk_milestones'])}\n")
+                f.write(f"recommendations_count={len(analysis['recommendations'])}\n")
+            
+            # 保存分析結果為JSON
+            with open(f'reports/analysis_{timestamp}.json', 'w', encoding='utf-8') as f:
+                json.dump(analysis, f, ensure_ascii=False, indent=2)
+            
+            print(f"✅ 分析完成，狀態: {analysis['overall_status']}")
+            print(f"📋 生成了 {len(analysis['recommendations'])} 條建議")
+            
+            # 發送通知
+            force_notification = "${{ github.event.inputs.force_notification }}" == "true"
+            if analysis['overall_status'] != 'healthy' or force_notification:
+                await monitor.send_notifications(analysis, report)
+                print("📧 已發送狀態通知")
+        
+        asyncio.run(run_analysis())
+        EOF
+    
+    - name: Quality Gate Check
+      id: quality_gate
+      run: |
+        cd core/monitoring
+        python << EOF
+        import json
+        import os
+        import subprocess
+        
+        # 運行測試和質量檢查
+        quality_results = {
+            'test_coverage': 0,
+            'critical_issues': 0,
+            'high_priority_bugs': 0,
+            'code_quality_score': 'A',
+            'security_vulnerabilities': 0
+        }
+        
+        # 示例：運行pytest獲取覆蓋率
+        try:
+            result = subprocess.run(['python', '-m', 'pytest', '--cov=.', '--cov-report=json'], 
+                                  capture_output=True, text=True, cwd='../..')
+            if result.returncode == 0:
+                # 解析覆蓋率報告
+                try:
+                    with open('../../coverage.json', 'r') as f:
+                        coverage_data = json.load(f)
+                        quality_results['test_coverage'] = coverage_data.get('totals', {}).get('percent_covered', 0)
+                except FileNotFoundError:
+                    pass
+        except Exception as e:
+            print(f"測試運行失敗: {e}")
+        
+        # 檢查質量門檻
+        min_coverage = 80
+        max_critical = 0
+        max_high_bugs = 3
+        
+        gate_passed = (
+            quality_results['test_coverage'] >= min_coverage and
+            quality_results['critical_issues'] <= max_critical and
+            quality_results['high_priority_bugs'] <= max_high_bugs
+        )
+        
+        with open(os.environ['GITHUB_OUTPUT'], 'a') as f:
+            f.write(f"quality_gate_passed={str(gate_passed).lower()}\n")
+            f.write(f"test_coverage={quality_results['test_coverage']}\n")
+            f.write(f"critical_issues={quality_results['critical_issues']}\n")
+        
+        print(f"🔍 質量門檻檢查: {'✅ 通過' if gate_passed else '❌ 未通過'}")
+        print(f"📊 測試覆蓋率: {quality_results['test_coverage']:.1f}%")
+        print(f"🐛 嚴重問題: {quality_results['critical_issues']}")
+        print(f"⚠️ 高優先級bug: {quality_results['high_priority_bugs']}")
+        EOF
+    
+    - name: Update Milestone Status Based on Quality Gate
+      if: steps.quality_gate.outputs.quality_gate_passed == 'false'
+      run: |
+        cd core/monitoring
+        python << EOF
+        import asyncio
+        from milestone_progress_monitor import MilestoneProgressMonitor
+        
+        async def update_risk_status():
+            monitor = MilestoneProgressMonitor('config/monitoring_config.yaml')
+            milestones = monitor.load_milestones_data()
+            
+            # 如果質量門檻未通過，提高風險等級
+            for milestone in milestones:
+                if milestone.status.value in ['in_progress']:
+                    milestone.risk_factors.append("質量門檻未通過")
+                    if "測試覆蓋率不足" not in milestone.risk_factors:
+                        milestone.risk_factors.append("測試覆蓋率不足")
+                    
+                    # 提升風險等級
+                    if milestone.risk_level.value == 'low':
+                        milestone.risk_level = monitor.RiskLevel.MEDIUM
+                    elif milestone.risk_level.value == 'medium':
+                        milestone.risk_level = monitor.RiskLevel.HIGH
+            
+            monitor.save_milestones_data(milestones)
+            print("⚠️ 已根據質量門檻結果更新風險狀態")
+        
+        asyncio.run(update_risk_status())
+        EOF
+    
+    - name: Create GitHub Issue for High Risk Milestones
+      if: steps.analysis.outputs.high_risk_count > 0
+      uses: actions/github-script@v7
+      with:
+        script: |
+          const fs = require('fs');
+          const highRiskCount = ${{ steps.analysis.outputs.high_risk_count }};
+          
+          if (highRiskCount > 0) {
+            const issueTitle = `🚨 高風險里程碑預警 - ${highRiskCount} 個里程碑需要關注`;
+            const issueBody = `
+          ## 🚨 里程碑風險預警
+          
+          **檢測時間**: ${new Date().toISOString().split('T')[0]}
+          **高風險里程碑數量**: ${highRiskCount}
+          
+          ### 📊 風險概要
+          - 整體狀態: ${{ steps.analysis.outputs.overall_status }}
+          - 建議數量: ${{ steps.analysis.outputs.recommendations_count }}
+          - 質量門檻: ${{ steps.quality_gate.outputs.quality_gate_passed == 'true' ? '✅ 通過' : '❌ 未通過' }}
+          
+          ### 📈 質量指標
+          - 測試覆蓋率: ${{ steps.quality_gate.outputs.test_coverage }}%
+          - 嚴重問題: ${{ steps.quality_gate.outputs.critical_issues }}
+          
+          ### 📋 後續行動
+          1. 查看詳細里程碑報告
+          2. 評估風險緩解措施
+          3. 調整資源分配
+          4. 重新評估時間線
+          
+          ### 📄 相關文件
+          - 詳細報告: ${{ steps.analysis.outputs.report_file }}
+          - 監控配置: core/monitoring/config/monitoring_config.yaml
+          
+          **自動生成 by PowerAutomation Monitoring System**
+          `;
+          
+            // 檢查是否已存在類似的issue
+            const existingIssues = await github.rest.issues.listForRepo({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              state: 'open',
+              labels: 'milestone-risk,automated'
+            });
+            
+            if (existingIssues.data.length === 0) {
+              await github.rest.issues.create({
+                owner: context.repo.owner,
+                repo: context.repo.repo,
+                title: issueTitle,
+                body: issueBody,
+                labels: ['milestone-risk', 'automated', 'priority-high']
+              });
+              
+              console.log('✅ 已創建高風險里程碑issue');
+            } else {
+              console.log('ℹ️ 已存在高風險里程碑issue，跳過創建');
+            }
+          }
+    
+    - name: Upload Monitoring Reports
+      uses: actions/upload-artifact@v4
+      with:
+        name: milestone-monitoring-reports-${{ github.run_number }}
+        path: |
+          core/monitoring/reports/
+          core/monitoring/logs/
+        retention-days: 30
+    
+    - name: Post Summary to Pull Request
+      if: github.event_name == 'pull_request'
+      uses: actions/github-script@v7
+      with:
+        script: |
+          const fs = require('fs');
+          
+          const summary = `
+          ## 📊 里程碑監控摘要
+          
+          | 指標 | 值 |
+          |------|-----|
+          | 整體狀態 | ${{ steps.analysis.outputs.overall_status }} |
+          | 高風險里程碑 | ${{ steps.analysis.outputs.high_risk_count }} |
+          | 改進建議 | ${{ steps.analysis.outputs.recommendations_count }} |
+          | 質量門檻 | ${{ steps.quality_gate.outputs.quality_gate_passed == 'true' ? '✅ 通過' : '❌ 未通過' }} |
+          | 測試覆蓋率 | ${{ steps.quality_gate.outputs.test_coverage }}% |
+          
+          詳細報告請查看 Actions Artifacts 中的監控報告。
+          `;
+          
+          await github.rest.issues.createComment({
+            owner: context.repo.owner,
+            repo: context.repo.repo,
+            issue_number: context.issue.number,
+            body: summary
+          });
+    
+    - name: Update Repository Status
+      run: |
+        # 創建狀態文件
+        mkdir -p .github/monitoring
+        cat > .github/monitoring/status.json << EOF
+        {
+          "last_check": "$(date -u +%Y-%m-%dT%H:%M:%SZ)",
+          "overall_status": "${{ steps.analysis.outputs.overall_status }}",
+          "quality_gate_passed": ${{ steps.quality_gate.outputs.quality_gate_passed }},
+          "test_coverage": ${{ steps.quality_gate.outputs.test_coverage }},
+          "high_risk_milestones": ${{ steps.analysis.outputs.high_risk_count }},
+          "workflow_run": "${{ github.run_number }}"
+        }
+        EOF
+    
+    - name: Commit Status Updates
+      if: steps.analysis.outputs.overall_status != 'healthy' || github.event.inputs.update_task_progress != ''
+      run: |
+        git config --local user.email "action@github.com"
+        git config --local user.name "GitHub Action"
+        
+        git add core/monitoring/data/
+        git add .github/monitoring/status.json
+        
+        if ! git diff --staged --quiet; then
+          git commit -m "🤖 自動更新里程碑監控狀態
+          
+          - 整體狀態: ${{ steps.analysis.outputs.overall_status }}
+          - 高風險里程碑: ${{ steps.analysis.outputs.high_risk_count }}
+          - 質量門檻: ${{ steps.quality_gate.outputs.quality_gate_passed == 'true' ? '通過' : '未通過' }}
+          - 工作流運行: #${{ github.run_number }}
+          
+          Generated by PowerAutomation Monitoring System"
+          
+          git push
+          echo "✅ 監控狀態已提交到倉庫"
+        else
+          echo "ℹ️ 無需提交變更"
+        fi
+    
+    outputs:
+      overall_status: ${{ steps.analysis.outputs.overall_status }}
+      quality_gate_passed: ${{ steps.quality_gate.outputs.quality_gate_passed }}
+      report_file: ${{ steps.analysis.outputs.report_file }}
+      high_risk_count: ${{ steps.analysis.outputs.high_risk_count }}

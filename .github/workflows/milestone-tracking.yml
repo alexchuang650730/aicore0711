@@ -1,0 +1,655 @@
+name: Milestone Tracking Automation
+
+on:
+  push:
+    branches:
+      - main
+      - develop
+  pull_request:
+    branches:
+      - main
+  schedule:
+    # 每日進度檢查 (UTC 01:00 = 台北時間 09:00)
+    - cron: '0 1 * * *'
+  workflow_dispatch:
+    inputs:
+      milestone_version:
+        description: '里程碑版本 (如: v4.6.0)'
+        required: false
+        default: 'current'
+      action_type:
+        description: '操作類型'
+        required: true
+        default: 'progress_check'
+        type: choice
+        options:
+          - progress_check
+          - milestone_update
+          - quality_gate_check
+          - release_prepare
+
+env:
+  MILESTONE_CONFIG_PATH: 'MILESTONE_MANAGEMENT.md'
+  ROADMAP_CONFIG_PATH: 'ROADMAP_2025.md'
+  PYTHON_VERSION: '3.11'
+
+jobs:
+  prepare:
+    name: 準備里程碑追蹤環境
+    runs-on: ubuntu-latest
+    outputs:
+      current_milestone: ${{ steps.milestone-info.outputs.current_milestone }}
+      milestone_progress: ${{ steps.milestone-info.outputs.progress }}
+      target_date: ${{ steps.milestone-info.outputs.target_date }}
+      risk_level: ${{ steps.milestone-info.outputs.risk_level }}
+    
+    steps:
+      - name: Checkout代碼
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      
+      - name: 設置Python環境
+        uses: actions/setup-python@v4
+        with:
+          python-version: ${{ env.PYTHON_VERSION }}
+      
+      - name: 安裝依賴
+        run: |
+          python -m pip install --upgrade pip
+          pip install pyyaml requests python-dateutil markdown
+
+      - name: 解析里程碑信息
+        id: milestone-info
+        run: |
+          python << 'EOF'
+          import os
+          import re
+          import json
+          from datetime import datetime, timedelta
+          
+          def parse_milestone_management():
+              """解析里程碑管理文檔"""
+              try:
+                  with open('MILESTONE_MANAGEMENT.md', 'r', encoding='utf-8') as f:
+                      content = f.read()
+                  
+                  # 提取當前里程碑信息
+                  current_version_match = re.search(r'下一里程碑.*?v(\d+\.\d+\.\d+)', content)
+                  current_milestone = current_version_match.group(1) if current_version_match else "4.6.0"
+                  
+                  # 提取進度
+                  progress_match = re.search(r'完成進度.*?(\d+)%.*?→.*?(\d+)%', content)
+                  current_progress = int(progress_match.group(2)) if progress_match else 0
+                  
+                  # 提取目標日期
+                  target_date_match = re.search(r'預計發布.*?(\d{4}-\d{2}-\d{2})', content)
+                  target_date = target_date_match.group(1) if target_date_match else "2025-09-30"
+                  
+                  # 計算風險等級
+                  target_dt = datetime.strptime(target_date, '%Y-%m-%d')
+                  now = datetime.now()
+                  days_remaining = (target_dt - now).days
+                  time_elapsed_ratio = max(0, 1 - days_remaining / 365)  # 假設一年周期
+                  
+                  if current_progress < time_elapsed_ratio * 80:
+                      risk_level = "high"
+                  elif current_progress < time_elapsed_ratio * 90:
+                      risk_level = "medium"
+                  else:
+                      risk_level = "low"
+                  
+                  return {
+                      'current_milestone': f"v{current_milestone}",
+                      'progress': current_progress,
+                      'target_date': target_date,
+                      'risk_level': risk_level,
+                      'days_remaining': days_remaining
+                  }
+              
+              except Exception as e:
+                  print(f"解析里程碑管理文檔失敗: {e}")
+                  return {
+                      'current_milestone': 'v4.6.0',
+                      'progress': 0,
+                      'target_date': '2025-09-30',
+                      'risk_level': 'medium',
+                      'days_remaining': 100
+                  }
+          
+          milestone_info = parse_milestone_management()
+          
+          # 設置GitHub Actions輸出
+          for key, value in milestone_info.items():
+              print(f"::set-output name={key}::{value}")
+              print(f"{key}: {value}")
+          
+          EOF
+
+  milestone_progress_check:
+    name: 里程碑進度檢查
+    runs-on: ubuntu-latest
+    needs: prepare
+    if: ${{ github.event.inputs.action_type == 'progress_check' || github.event.inputs.action_type == '' }}
+    
+    steps:
+      - name: Checkout代碼
+        uses: actions/checkout@v4
+      
+      - name: 設置Python環境
+        uses: actions/setup-python@v4
+        with:
+          python-version: ${{ env.PYTHON_VERSION }}
+      
+      - name: 安裝依賴
+        run: |
+          python -m pip install --upgrade pip
+          pip install requests python-dateutil pyyaml matplotlib seaborn
+
+      - name: 執行進度分析
+        id: progress-analysis
+        run: |
+          python << 'EOF'
+          import os
+          import re
+          import json
+          from datetime import datetime, timedelta
+          
+          class MilestoneProgressAnalyzer:
+              def __init__(self):
+                  self.current_milestone = "${{ needs.prepare.outputs.current_milestone }}"
+                  self.current_progress = int("${{ needs.prepare.outputs.milestone_progress }}")
+                  self.target_date = "${{ needs.prepare.outputs.target_date }}"
+                  self.risk_level = "${{ needs.prepare.outputs.risk_level }}"
+              
+              def analyze_task_progress(self):
+                  """分析具體任務進度"""
+                  try:
+                      with open('MILESTONE_MANAGEMENT.md', 'r', encoding='utf-8') as f:
+                          content = f.read()
+                      
+                      # 提取任務進度
+                      tasks = {
+                          'ai_integration': self.extract_task_progress(content, 'AI模型集成擴展'),
+                          'mobile_testing': self.extract_task_progress(content, '移動端測試支援'), 
+                          'enterprise_features': self.extract_task_progress(content, '企業級功能增強')
+                      }
+                      
+                      return tasks
+                  except Exception as e:
+                      print(f"分析任務進度失敗: {e}")
+                      return {}
+              
+              def extract_task_progress(self, content, task_name):
+                  """提取單個任務的進度"""
+                  # 查找任務相關的checkbox
+                  pattern = rf'{task_name}.*?(\[ \]|\[x\])'
+                  matches = re.findall(pattern, content, re.DOTALL)
+                  
+                  if not matches:
+                      return 0
+                  
+                  completed = sum(1 for match in matches if '[x]' in match)
+                  total = len(matches)
+                  
+                  return int((completed / total) * 100) if total > 0 else 0
+              
+              def generate_progress_report(self):
+                  """生成進度報告"""
+                  tasks = self.analyze_task_progress()
+                  
+                  report = {
+                      'milestone': self.current_milestone,
+                      'overall_progress': self.current_progress,
+                      'target_date': self.target_date,
+                      'risk_level': self.risk_level,
+                      'task_progress': tasks,
+                      'analysis_date': datetime.now().isoformat(),
+                      'recommendations': self.generate_recommendations(tasks)
+                  }
+                  
+                  return report
+              
+              def generate_recommendations(self, tasks):
+                  """生成改進建議"""
+                  recommendations = []
+                  
+                  for task, progress in tasks.items():
+                      if progress < 50:
+                          recommendations.append(f"任務 {task} 進度落後，建議加強資源投入")
+                      elif progress < 80:
+                          recommendations.append(f"任務 {task} 需要持續關注")
+                  
+                  if self.risk_level == 'high':
+                      recommendations.append("整體風險較高，建議重新評估里程碑目標")
+                  
+                  return recommendations
+          
+          analyzer = MilestoneProgressAnalyzer()
+          report = analyzer.generate_progress_report()
+          
+          # 保存報告
+          os.makedirs('reports', exist_ok=True)
+          with open('reports/milestone_progress_report.json', 'w', encoding='utf-8') as f:
+              json.dump(report, f, indent=2, ensure_ascii=False)
+          
+          print("Progress Report Generated:")
+          print(json.dumps(report, indent=2, ensure_ascii=False))
+          
+          # 設置輸出
+          print(f"::set-output name=risk_level::{report['risk_level']}")
+          print(f"::set-output name=overall_progress::{report['overall_progress']}")
+          
+          EOF
+
+      - name: 上傳進度報告
+        uses: actions/upload-artifact@v3
+        with:
+          name: milestone-progress-report
+          path: reports/milestone_progress_report.json
+
+  quality_gate_check:
+    name: 質量門禁檢查  
+    runs-on: ubuntu-latest
+    needs: [prepare, milestone_progress_check]
+    if: ${{ github.event.inputs.action_type == 'quality_gate_check' || github.event.inputs.action_type == '' }}
+    
+    steps:
+      - name: Checkout代碼
+        uses: actions/checkout@v4
+      
+      - name: 設置Python環境
+        uses: actions/setup-python@v4
+        with:
+          python-version: ${{ env.PYTHON_VERSION }}
+      
+      - name: 安裝測試依賴
+        run: |
+          python -m pip install --upgrade pip
+          pip install pytest pytest-cov pytest-xdist
+          if [ -f requirements.txt ]; then pip install -r requirements.txt; fi
+
+      - name: 運行質量門禁測試
+        id: quality-gate
+        run: |
+          python << 'EOF'
+          import subprocess
+          import json
+          import os
+          from datetime import datetime
+          
+          class QualityGateChecker:
+              def __init__(self):
+                  self.results = {
+                      'timestamp': datetime.now().isoformat(),
+                      'checks': {},
+                      'overall_status': 'unknown'
+                  }
+              
+              def check_code_quality(self):
+                  """檢查代碼質量"""
+                  try:
+                      # 檢查是否有Python代碼
+                      result = subprocess.run(['find', '.', '-name', '*.py', '-type', 'f'], 
+                                            capture_output=True, text=True)
+                      python_files = result.stdout.strip().split('\n') if result.stdout.strip() else []
+                      
+                      if not python_files:
+                          self.results['checks']['code_quality'] = {
+                              'status': 'skipped',
+                              'message': '沒有找到Python文件'
+                          }
+                          return
+                      
+                      # 運行基本語法檢查
+                      syntax_errors = []
+                      for file in python_files[:10]:  # 限制檢查文件數量
+                          if os.path.exists(file):
+                              result = subprocess.run(['python', '-m', 'py_compile', file], 
+                                                    capture_output=True, text=True)
+                              if result.returncode != 0:
+                                  syntax_errors.append(f"{file}: {result.stderr}")
+                      
+                      self.results['checks']['code_quality'] = {
+                          'status': 'passed' if not syntax_errors else 'failed',
+                          'python_files_count': len(python_files),
+                          'syntax_errors': syntax_errors
+                      }
+                  
+                  except Exception as e:
+                      self.results['checks']['code_quality'] = {
+                          'status': 'error',
+                          'error': str(e)
+                      }
+              
+              def check_documentation(self):
+                  """檢查文檔完整性"""
+                  try:
+                      required_docs = [
+                          'README.md',
+                          'MILESTONE_MANAGEMENT.md', 
+                          'ROADMAP_2025.md',
+                          'PROJECT_ARCHITECTURE.md'
+                      ]
+                      
+                      missing_docs = []
+                      for doc in required_docs:
+                          if not os.path.exists(doc):
+                              missing_docs.append(doc)
+                      
+                      self.results['checks']['documentation'] = {
+                          'status': 'passed' if not missing_docs else 'failed',
+                          'required_docs': required_docs,
+                          'missing_docs': missing_docs
+                      }
+                  
+                  except Exception as e:
+                      self.results['checks']['documentation'] = {
+                          'status': 'error',
+                          'error': str(e)
+                      }
+              
+              def check_milestone_consistency(self):
+                  """檢查里程碑一致性"""
+                  try:
+                      # 檢查里程碑管理和路線圖的一致性
+                      with open('MILESTONE_MANAGEMENT.md', 'r', encoding='utf-8') as f:
+                          milestone_content = f.read()
+                      
+                      with open('ROADMAP_2025.md', 'r', encoding='utf-8') as f:
+                          roadmap_content = f.read()
+                      
+                      # 簡單檢查版本號一致性
+                      milestone_versions = re.findall(r'v(\d+\.\d+\.\d+)', milestone_content)
+                      roadmap_versions = re.findall(r'v(\d+\.\d+\.\d+)', roadmap_content)
+                      
+                      common_versions = set(milestone_versions) & set(roadmap_versions)
+                      
+                      self.results['checks']['milestone_consistency'] = {
+                          'status': 'passed' if common_versions else 'warning',
+                          'milestone_versions': list(set(milestone_versions)),
+                          'roadmap_versions': list(set(roadmap_versions)),
+                          'common_versions': list(common_versions)
+                      }
+                  
+                  except Exception as e:
+                      self.results['checks']['milestone_consistency'] = {
+                          'status': 'error',
+                          'error': str(e)
+                      }
+              
+              def run_all_checks(self):
+                  """運行所有質量門禁檢查"""
+                  print("🔍 開始質量門禁檢查...")
+                  
+                  self.check_code_quality()
+                  self.check_documentation()  
+                  self.check_milestone_consistency()
+                  
+                  # 計算整體狀態
+                  failed_checks = [name for name, check in self.results['checks'].items() 
+                                 if check.get('status') == 'failed']
+                  error_checks = [name for name, check in self.results['checks'].items()
+                                if check.get('status') == 'error']
+                  
+                  if error_checks:
+                      self.results['overall_status'] = 'error'
+                  elif failed_checks:
+                      self.results['overall_status'] = 'failed'
+                  else:
+                      self.results['overall_status'] = 'passed'
+                  
+                  return self.results
+          
+          import re
+          
+          checker = QualityGateChecker()
+          results = checker.run_all_checks()
+          
+          # 保存結果
+          os.makedirs('reports', exist_ok=True)
+          with open('reports/quality_gate_report.json', 'w', encoding='utf-8') as f:
+              json.dump(results, f, indent=2, ensure_ascii=False)
+          
+          print("Quality Gate Results:")
+          print(json.dumps(results, indent=2, ensure_ascii=False))
+          
+          # 設置輸出
+          print(f"::set-output name=overall_status::{results['overall_status']}")
+          
+          EOF
+
+      - name: 上傳質量門禁報告
+        uses: actions/upload-artifact@v3
+        with:
+          name: quality-gate-report
+          path: reports/quality_gate_report.json
+
+  milestone_update:
+    name: 里程碑更新
+    runs-on: ubuntu-latest
+    needs: [prepare, milestone_progress_check, quality_gate_check]
+    if: ${{ github.event.inputs.action_type == 'milestone_update' && github.event_name == 'workflow_dispatch' }}
+    
+    steps:
+      - name: Checkout代碼
+        uses: actions/checkout@v4
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+      
+      - name: 設置Python環境
+        uses: actions/setup-python@v4
+        with:
+          python-version: ${{ env.PYTHON_VERSION }}
+
+      - name: 更新里程碑進度
+        run: |
+          python << 'EOF'
+          import re
+          import os
+          from datetime import datetime
+          
+          def update_milestone_progress():
+              """更新里程碑進度"""
+              try:
+                  # 讀取當前里程碑管理文檔
+                  with open('MILESTONE_MANAGEMENT.md', 'r', encoding='utf-8') as f:
+                      content = f.read()
+                  
+                  # 更新時間戳
+                  timestamp = datetime.now().strftime('%Y-%m-%d %H:%M:%S')
+                  
+                  # 在文檔末尾添加更新記錄
+                  update_record = f"""
+          
+          ---
+          
+          ## 📅 自動更新記錄
+          
+          **最後更新**: {timestamp}
+          **更新來源**: GitHub Actions 自動化工作流
+          **當前里程碑**: ${{ needs.prepare.outputs.current_milestone }}
+          **整體進度**: ${{ needs.prepare.outputs.milestone_progress }}%
+          **風險等級**: ${{ needs.prepare.outputs.risk_level }}
+          **質量門禁**: ${{ needs.quality_gate_check.outputs.overall_status }}
+          
+          ### 進度追蹤
+          - 自動化進度檢查已運行
+          - 質量門禁檢查已完成
+          - 里程碑狀態已同步
+          
+          """
+                  
+                  # 檢查是否已存在自動更新記錄部分
+                  if '## 📅 自動更新記錄' in content:
+                      # 替換現有記錄
+                      content = re.sub(
+                          r'---\s*## 📅 自動更新記錄.*$',
+                          update_record.strip(),
+                          content,
+                          flags=re.DOTALL
+                      )
+                  else:
+                      # 添加新記錄
+                      content += update_record
+                  
+                  # 寫回文件
+                  with open('MILESTONE_MANAGEMENT.md', 'w', encoding='utf-8') as f:
+                      f.write(content)
+                  
+                  print("✅ 里程碑進度已更新")
+                  
+              except Exception as e:
+                  print(f"❌ 更新里程碑進度失敗: {e}")
+                  return False
+              
+              return True
+          
+          success = update_milestone_progress()
+          exit(0 if success else 1)
+          
+          EOF
+
+      - name: 提交更新
+        run: |
+          git config --local user.email "action@github.com"
+          git config --local user.name "GitHub Action"
+          
+          if git diff --quiet; then
+            echo "沒有變更需要提交"
+          else
+            git add MILESTONE_MANAGEMENT.md
+            git commit -m "🤖 自動更新里程碑進度追蹤
+
+            - 更新時間: $(date '+%Y-%m-%d %H:%M:%S')
+            - 當前里程碑: ${{ needs.prepare.outputs.current_milestone }}
+            - 整體進度: ${{ needs.prepare.outputs.milestone_progress }}%
+            - 風險等級: ${{ needs.prepare.outputs.risk_level }}
+            - 質量門禁: ${{ needs.quality_gate_check.outputs.overall_status }}
+            
+            由 GitHub Actions 自動生成"
+            
+            git push
+            echo "✅ 里程碑更新已提交"
+          fi
+
+  notification:
+    name: 通知和報告
+    runs-on: ubuntu-latest
+    needs: [prepare, milestone_progress_check, quality_gate_check]
+    if: always()
+    
+    steps:
+      - name: 下載報告
+        uses: actions/download-artifact@v3
+        with:
+          name: milestone-progress-report
+          path: reports/
+        continue-on-error: true
+      
+      - name: 下載質量門禁報告  
+        uses: actions/download-artifact@v3
+        with:
+          name: quality-gate-report
+          path: reports/
+        continue-on-error: true
+
+      - name: 生成摘要報告
+        run: |
+          echo "## 🎯 里程碑追蹤摘要報告" >> $GITHUB_STEP_SUMMARY
+          echo "" >> $GITHUB_STEP_SUMMARY
+          echo "**執行時間**: $(date '+%Y-%m-%d %H:%M:%S UTC')" >> $GITHUB_STEP_SUMMARY
+          echo "**當前里程碑**: ${{ needs.prepare.outputs.current_milestone }}" >> $GITHUB_STEP_SUMMARY
+          echo "**整體進度**: ${{ needs.prepare.outputs.milestone_progress }}%" >> $GITHUB_STEP_SUMMARY
+          echo "**目標日期**: ${{ needs.prepare.outputs.target_date }}" >> $GITHUB_STEP_SUMMARY
+          echo "**風險等級**: ${{ needs.prepare.outputs.risk_level }}" >> $GITHUB_STEP_SUMMARY
+          echo "" >> $GITHUB_STEP_SUMMARY
+          
+          echo "### 📊 檢查結果" >> $GITHUB_STEP_SUMMARY
+          echo "" >> $GITHUB_STEP_SUMMARY
+          
+          if [ "${{ needs.milestone_progress_check.result }}" = "success" ]; then
+            echo "✅ 進度檢查: 通過" >> $GITHUB_STEP_SUMMARY
+          else
+            echo "❌ 進度檢查: 失敗" >> $GITHUB_STEP_SUMMARY
+          fi
+          
+          if [ "${{ needs.quality_gate_check.result }}" = "success" ]; then
+            echo "✅ 質量門禁: 通過" >> $GITHUB_STEP_SUMMARY
+          else
+            echo "❌ 質量門禁: 失敗" >> $GITHUB_STEP_SUMMARY
+          fi
+          
+          echo "" >> $GITHUB_STEP_SUMMARY
+          echo "### 📋 風險評估" >> $GITHUB_STEP_SUMMARY
+          echo "" >> $GITHUB_STEP_SUMMARY
+          
+          case "${{ needs.prepare.outputs.risk_level }}" in
+            "high")
+              echo "🚨 **高風險**: 進度嚴重滯後，需要立即採取行動" >> $GITHUB_STEP_SUMMARY
+              ;;
+            "medium") 
+              echo "⚠️ **中風險**: 進度輕微滯後，需要密切關注" >> $GITHUB_STEP_SUMMARY
+              ;;
+            "low")
+              echo "✅ **低風險**: 進度正常，繼續保持" >> $GITHUB_STEP_SUMMARY
+              ;;
+          esac
+          
+          echo "" >> $GITHUB_STEP_SUMMARY
+          echo "📄 詳細報告請查看工作流產物 (Artifacts)" >> $GITHUB_STEP_SUMMARY
+
+      - name: 創建Issue（高風險時）
+        if: ${{ needs.prepare.outputs.risk_level == 'high' }}
+        uses: actions/github-script@v6
+        with:
+          script: |
+            const title = `🚨 里程碑風險警告: ${{ needs.prepare.outputs.current_milestone }}`;
+            const body = `
+            ## 里程碑風險警告
+            
+            **里程碑**: ${{ needs.prepare.outputs.current_milestone }}
+            **當前進度**: ${{ needs.prepare.outputs.milestone_progress }}%
+            **目標日期**: ${{ needs.prepare.outputs.target_date }}
+            **風險等級**: 🚨 高風險
+            
+            ## 問題描述
+            當前里程碑進度嚴重滯後，存在無法按時完成的風險。
+            
+            ## 建議行動
+            - [ ] 重新評估里程碑範圍和目標
+            - [ ] 增加資源投入或調整人員配置  
+            - [ ] 識別和移除阻礙因素
+            - [ ] 考慮調整交付時間線
+            
+            ## 自動檢查結果
+            - 進度檢查: ${{ needs.milestone_progress_check.result }}
+            - 質量門禁: ${{ needs.quality_gate_check.result }}
+            
+            _此Issue由GitHub Actions自動創建於 $(date '+%Y-%m-%d %H:%M:%S UTC')_
+            `;
+            
+            // 檢查是否已存在類似Issue
+            const existingIssues = await github.rest.issues.listForRepo({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              state: 'open',
+              labels: 'milestone-risk'
+            });
+            
+            const duplicateIssue = existingIssues.data.find(issue => 
+              issue.title.includes('${{ needs.prepare.outputs.current_milestone }}')
+            );
+            
+            if (!duplicateIssue) {
+              await github.rest.issues.create({
+                owner: context.repo.owner,
+                repo: context.repo.repo,
+                title: title,
+                body: body,
+                labels: ['milestone-risk', 'priority-high', 'automated']
+              });
+              console.log('High risk issue created');
+            } else {
+              console.log('Similar high risk issue already exists');
+            }

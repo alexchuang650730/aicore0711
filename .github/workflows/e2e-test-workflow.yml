@@ -1,0 +1,713 @@
+name: PowerAutomation E2E Test Workflow
+description: Comprehensive end-to-end testing pipeline for PowerAutomation platform
+
+on:
+  push:
+    branches: [ main, develop ]
+    paths:
+      - 'src/**'
+      - 'core/**'
+      - 'tests/**'
+      - 'package.json'
+      - 'requirements.txt'
+  pull_request:
+    branches: [ main ]
+  schedule:
+    # 每日凌晨2點運行完整E2E測試
+    - cron: '0 2 * * *'
+  workflow_dispatch:
+    inputs:
+      test_environment:
+        description: 'Test environment to use'
+        required: false
+        default: 'docker'
+        type: choice
+        options:
+          - local
+          - docker
+          - staging
+      test_suite:
+        description: 'Test suite to run (leave empty for all)'
+        required: false
+        type: string
+      browser:
+        description: 'Browser for E2E tests'
+        required: false
+        default: 'chrome'
+        type: choice
+        options:
+          - chrome
+          - firefox
+      parallel_execution:
+        description: 'Enable parallel test execution'
+        required: false
+        default: true
+        type: boolean
+
+env:
+  NODE_VERSION: '18'
+  PYTHON_VERSION: '3.11'
+  TEST_TIMEOUT: 1800  # 30 minutes
+
+jobs:
+  # 環境準備和依賴安裝
+  setup:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    outputs:
+      cache-key: ${{ steps.cache-keys.outputs.cache-key }}
+      python-cache-key: ${{ steps.cache-keys.outputs.python-cache-key }}
+    steps:
+    - name: Checkout Repository
+      uses: actions/checkout@v4
+      with:
+        fetch-depth: 0
+
+    - name: Generate Cache Keys
+      id: cache-keys
+      run: |
+        echo "cache-key=node-${{ hashFiles('package*.json') }}" >> $GITHUB_OUTPUT
+        echo "python-cache-key=python-${{ hashFiles('requirements.txt', 'core/testing/requirements.txt') }}" >> $GITHUB_OUTPUT
+
+    - name: Set up Node.js
+      uses: actions/setup-node@v4
+      with:
+        node-version: ${{ env.NODE_VERSION }}
+        cache: 'npm'
+
+    - name: Set up Python
+      uses: actions/setup-python@v4
+      with:
+        python-version: ${{ env.PYTHON_VERSION }}
+        cache: 'pip'
+
+    - name: Install Node.js Dependencies
+      run: |
+        npm ci
+        npm run build
+
+    - name: Install Python Dependencies
+      run: |
+        python -m pip install --upgrade pip
+        pip install -r requirements.txt
+        pip install -r core/testing/requirements.txt
+
+    - name: Cache Dependencies
+      uses: actions/cache@v3
+      with:
+        path: |
+          node_modules
+          ~/.cache/pip
+        key: deps-${{ steps.cache-keys.outputs.cache-key }}-${{ steps.cache-keys.outputs.python-cache-key }}
+
+  # 單元測試
+  unit-tests:
+    runs-on: ubuntu-latest
+    needs: setup
+    timeout-minutes: 15
+    steps:
+    - name: Checkout Repository
+      uses: actions/checkout@v4
+
+    - name: Set up Node.js
+      uses: actions/setup-node@v4
+      with:
+        node-version: ${{ env.NODE_VERSION }}
+
+    - name: Set up Python
+      uses: actions/setup-python@v4
+      with:
+        python-version: ${{ env.PYTHON_VERSION }}
+
+    - name: Restore Dependencies
+      uses: actions/cache@v3
+      with:
+        path: |
+          node_modules
+          ~/.cache/pip
+        key: deps-${{ needs.setup.outputs.cache-key }}-${{ needs.setup.outputs.python-cache-key }}
+
+    - name: Run JavaScript Unit Tests
+      run: |
+        npm test -- --coverage --watchAll=false
+        npm run test:ci
+
+    - name: Run Python Unit Tests
+      run: |
+        cd core
+        python -m pytest tests/unit/ -v --cov=. --cov-report=xml --cov-report=html
+
+    - name: Upload Coverage Reports
+      uses: codecov/codecov-action@v3
+      with:
+        files: ./coverage/lcov.info,./core/coverage.xml
+        flags: unittests
+        name: codecov-umbrella
+
+  # 集成測試
+  integration-tests:
+    runs-on: ubuntu-latest
+    needs: setup
+    timeout-minutes: 25
+    services:
+      postgres:
+        image: postgres:15
+        env:
+          POSTGRES_PASSWORD: test_password
+          POSTGRES_USER: test_user
+          POSTGRES_DB: test_db
+        options: >-
+          --health-cmd pg_isready
+          --health-interval 10s
+          --health-timeout 5s
+          --health-retries 5
+
+      redis:
+        image: redis:7
+        options: >-
+          --health-cmd "redis-cli ping"
+          --health-interval 10s
+          --health-timeout 5s
+          --health-retries 5
+
+    steps:
+    - name: Checkout Repository
+      uses: actions/checkout@v4
+
+    - name: Set up Node.js
+      uses: actions/setup-node@v4
+      with:
+        node-version: ${{ env.NODE_VERSION }}
+
+    - name: Set up Python
+      uses: actions/setup-python@v4
+      with:
+        python-version: ${{ env.PYTHON_VERSION }}
+
+    - name: Restore Dependencies
+      uses: actions/cache@v3
+      with:
+        path: |
+          node_modules
+          ~/.cache/pip
+        key: deps-${{ needs.setup.outputs.cache-key }}-${{ needs.setup.outputs.python-cache-key }}
+
+    - name: Set up Test Database
+      run: |
+        export DATABASE_URL="postgresql://test_user:test_password@localhost:5432/test_db"
+        npm run db:migrate:test
+        
+    - name: Run Integration Tests
+      env:
+        DATABASE_URL: postgresql://test_user:test_password@localhost:5432/test_db
+        REDIS_URL: redis://localhost:6379
+        NODE_ENV: test
+      run: |
+        npm run test:integration
+        cd core
+        python -m pytest tests/integration/ -v --cov=. --cov-report=xml
+
+    - name: Upload Integration Test Results
+      uses: actions/upload-artifact@v4
+      if: always()
+      with:
+        name: integration-test-results
+        path: |
+          test-results/
+          core/htmlcov/
+        retention-days: 7
+
+  # Docker環境E2E測試
+  e2e-tests-docker:
+    runs-on: ubuntu-latest
+    needs: [setup, unit-tests]
+    timeout-minutes: 45
+    strategy:
+      matrix:
+        browser: [chrome, firefox]
+      fail-fast: false
+
+    steps:
+    - name: Checkout Repository
+      uses: actions/checkout@v4
+
+    - name: Set up Python
+      uses: actions/setup-python@v4
+      with:
+        python-version: ${{ env.PYTHON_VERSION }}
+
+    - name: Install E2E Test Dependencies
+      run: |
+        python -m pip install --upgrade pip
+        pip install -r core/testing/requirements.txt
+        
+        # 安裝瀏覽器驅動
+        if [ "${{ matrix.browser }}" == "chrome" ]; then
+          sudo apt-get update
+          sudo apt-get install -y google-chrome-stable
+          wget -O /tmp/chromedriver.zip https://chromedriver.storage.googleapis.com/114.0.5735.90/chromedriver_linux64.zip
+          unzip /tmp/chromedriver.zip -d /tmp
+          sudo mv /tmp/chromedriver /usr/local/bin/
+          sudo chmod +x /usr/local/bin/chromedriver
+        else
+          sudo apt-get update
+          sudo apt-get install -y firefox
+          wget -O /tmp/geckodriver.tar.gz https://github.com/mozilla/geckodriver/releases/download/v0.33.0/geckodriver-v0.33.0-linux64.tar.gz
+          tar -xzf /tmp/geckodriver.tar.gz -C /tmp
+          sudo mv /tmp/geckodriver /usr/local/bin/
+          sudo chmod +x /usr/local/bin/geckodriver
+        fi
+
+    - name: Build Docker Images
+      run: |
+        docker build -t powerautomation:test .
+        docker build -f Dockerfile.test -t powerautomation-test:latest .
+
+    - name: Create E2E Test Configuration
+      run: |
+        mkdir -p core/testing/config
+        cat > core/testing/config/e2e_config.yaml << EOF
+        environments:
+          docker:
+            compose_file: 'docker-compose.test.yml'
+            services:
+              - name: 'web'
+                image: 'powerautomation:test'
+                ports:
+                  '3000/tcp': 3000
+                environment:
+                  NODE_ENV: 'test'
+                  API_URL: 'http://api:8000'
+                  DATABASE_URL: 'postgresql://test:test@db:5432/testdb'
+              - name: 'api'
+                image: 'powerautomation-api:test'
+                ports:
+                  '8000/tcp': 8000
+                environment:
+                  NODE_ENV: 'test'
+                  DATABASE_URL: 'postgresql://test:test@db:5432/testdb'
+              - name: 'db'
+                image: 'postgres:15'
+                environment:
+                  POSTGRES_DB: 'testdb'
+                  POSTGRES_USER: 'test'
+                  POSTGRES_PASSWORD: 'test'
+        
+        test_data_dir: 'test_data'
+        results_dir: 'test_results'
+        parallel_execution: ${{ github.event.inputs.parallel_execution || 'true' }}
+        max_workers: 4
+        default_timeout: 300
+        
+        browser: '${{ matrix.browser }}'
+        headless: true
+        screenshot_on_failure: true
+        EOF
+
+    - name: Create Docker Compose Test Configuration
+      run: |
+        cat > docker-compose.test.yml << EOF
+        version: '3.8'
+        services:
+          web:
+            image: powerautomation:test
+            ports:
+              - "3000:3000"
+            environment:
+              - NODE_ENV=test
+              - API_URL=http://api:8000
+              - DATABASE_URL=postgresql://test:test@db:5432/testdb
+            depends_on:
+              - api
+              - db
+            healthcheck:
+              test: ["CMD", "curl", "-f", "http://localhost:3000/health"]
+              interval: 30s
+              timeout: 10s
+              retries: 3
+
+          api:
+            image: powerautomation-api:test
+            ports:
+              - "8000:8000"
+            environment:
+              - NODE_ENV=test
+              - DATABASE_URL=postgresql://test:test@db:5432/testdb
+            depends_on:
+              - db
+            healthcheck:
+              test: ["CMD", "curl", "-f", "http://localhost:8000/health"]
+              interval: 30s
+              timeout: 10s
+              retries: 3
+
+          db:
+            image: postgres:15
+            environment:
+              - POSTGRES_DB=testdb
+              - POSTGRES_USER=test
+              - POSTGRES_PASSWORD=test
+            healthcheck:
+              test: ["CMD-SHELL", "pg_isready -U test"]
+              interval: 10s
+              timeout: 5s
+              retries: 5
+        EOF
+
+    - name: Run E2E Tests
+      env:
+        BROWSER: ${{ matrix.browser }}
+        TEST_ENVIRONMENT: docker
+      run: |
+        cd core/testing
+        
+        # 設置顯示服務（用於headless瀏覽器）
+        export DISPLAY=:99
+        Xvfb :99 -screen 0 1920x1080x24 > /dev/null 2>&1 &
+        
+        # 運行E2E測試
+        python -m pytest -v \
+          --tb=short \
+          --maxfail=5 \
+          --timeout=300 \
+          --browser=${{ matrix.browser }} \
+          --environment=docker \
+          tests/e2e/
+        
+        # 如果指定了特定測試套件，只運行該套件
+        if [ -n "${{ github.event.inputs.test_suite }}" ]; then
+          python e2e_test_workflow.py --suite "${{ github.event.inputs.test_suite }}"
+        else
+          python e2e_test_workflow.py
+        fi
+
+    - name: Collect Test Artifacts
+      if: always()
+      run: |
+        mkdir -p artifacts/e2e-${{ matrix.browser }}
+        
+        # 收集測試結果
+        if [ -d "core/testing/test_results" ]; then
+          cp -r core/testing/test_results/* artifacts/e2e-${{ matrix.browser }}/
+        fi
+        
+        # 收集容器日誌
+        docker-compose -f docker-compose.test.yml logs > artifacts/e2e-${{ matrix.browser }}/docker-logs.txt || true
+        
+        # 收集截圖
+        if [ -d "core/testing/test_results/screenshots" ]; then
+          cp -r core/testing/test_results/screenshots artifacts/e2e-${{ matrix.browser }}/
+        fi
+
+    - name: Upload E2E Test Results
+      uses: actions/upload-artifact@v4
+      if: always()
+      with:
+        name: e2e-test-results-${{ matrix.browser }}
+        path: artifacts/e2e-${{ matrix.browser }}
+        retention-days: 7
+
+    - name: Cleanup Docker Resources
+      if: always()
+      run: |
+        docker-compose -f docker-compose.test.yml down -v || true
+        docker system prune -f || true
+
+  # 性能測試
+  performance-tests:
+    runs-on: ubuntu-latest
+    needs: [setup, unit-tests]
+    if: github.event_name == 'schedule' || github.event.inputs.test_suite == 'performance'
+    timeout-minutes: 30
+    
+    steps:
+    - name: Checkout Repository
+      uses: actions/checkout@v4
+
+    - name: Set up Node.js
+      uses: actions/setup-node@v4
+      with:
+        node-version: ${{ env.NODE_VERSION }}
+
+    - name: Install Dependencies
+      run: |
+        npm ci
+        npm install -g lighthouse
+        pip install locust
+
+    - name: Build Application
+      run: |
+        npm run build
+        npm run start:prod &
+        sleep 30
+
+    - name: Run Lighthouse Performance Audit
+      run: |
+        lighthouse http://localhost:3000 \
+          --output=json \
+          --output-path=./lighthouse-report.json \
+          --chrome-flags="--headless --no-sandbox"
+
+    - name: Run Load Tests with Locust
+      run: |
+        cd core/testing
+        locust -f performance/load_test.py \
+          --host=http://localhost:3000 \
+          --users 50 \
+          --spawn-rate 5 \
+          --run-time 5m \
+          --html performance-report.html
+
+    - name: Upload Performance Reports
+      uses: actions/upload-artifact@v4
+      if: always()
+      with:
+        name: performance-test-results
+        path: |
+          lighthouse-report.json
+          core/testing/performance-report.html
+        retention-days: 30
+
+  # 安全測試
+  security-tests:
+    runs-on: ubuntu-latest
+    needs: setup
+    if: github.ref == 'refs/heads/main' || github.event_name == 'schedule'
+    timeout-minutes: 20
+
+    steps:
+    - name: Checkout Repository
+      uses: actions/checkout@v4
+
+    - name: Run OWASP ZAP Security Scan
+      uses: zaproxy/action-full-scan@v0.4.0
+      with:
+        target: 'http://localhost:3000'
+        rules_file_name: '.zap/rules.tsv'
+        cmd_options: '-a'
+        fail_action: false
+
+    - name: Run Snyk Security Scan
+      uses: snyk/actions/node@master
+      env:
+        SNYK_TOKEN: ${{ secrets.SNYK_TOKEN }}
+      with:
+        args: --severity-threshold=high
+
+    - name: Upload Security Reports
+      uses: actions/upload-artifact@v4
+      if: always()
+      with:
+        name: security-test-results
+        path: |
+          report_html.html
+          snyk-results.json
+        retention-days: 30
+
+  # 測試結果匯總和報告
+  test-summary:
+    runs-on: ubuntu-latest
+    needs: [unit-tests, integration-tests, e2e-tests-docker]
+    if: always()
+    timeout-minutes: 10
+
+    steps:
+    - name: Checkout Repository
+      uses: actions/checkout@v4
+
+    - name: Download All Test Artifacts
+      uses: actions/download-artifact@v4
+      with:
+        path: test-artifacts
+
+    - name: Generate Test Summary Report
+      run: |
+        python << EOF
+        import json
+        import os
+        from pathlib import Path
+        import datetime
+
+        # 收集所有測試結果
+        artifacts_dir = Path('test-artifacts')
+        summary = {
+            'timestamp': datetime.datetime.now().isoformat(),
+            'workflow_run': '${{ github.run_number }}',
+            'commit': '${{ github.sha }}',
+            'branch': '${{ github.ref_name }}',
+            'results': {
+                'unit_tests': {'status': 'unknown', 'details': {}},
+                'integration_tests': {'status': 'unknown', 'details': {}},
+                'e2e_tests': {'status': 'unknown', 'details': {}},
+                'performance_tests': {'status': 'unknown', 'details': {}},
+                'security_tests': {'status': 'unknown', 'details': {}}
+            },
+            'overall_status': 'unknown',
+            'coverage': {},
+            'recommendations': []
+        }
+
+        # 分析E2E測試結果
+        e2e_results = []
+        for browser in ['chrome', 'firefox']:
+            e2e_dir = artifacts_dir / f'e2e-test-results-{browser}'
+            if e2e_dir.exists():
+                for result_file in e2e_dir.glob('test_results_*.json'):
+                    try:
+                        with open(result_file) as f:
+                            data = json.load(f)
+                            e2e_results.append({
+                                'browser': browser,
+                                'status': data.get('status', 'unknown'),
+                                'passed': data.get('passed_count', 0),
+                                'failed': data.get('failed_count', 0),
+                                'skipped': data.get('skipped_count', 0)
+                            })
+                    except Exception as e:
+                        print(f"Error reading {result_file}: {e}")
+
+        # 更新摘要
+        if e2e_results:
+            total_passed = sum(r['passed'] for r in e2e_results)
+            total_failed = sum(r['failed'] for r in e2e_results)
+            total_tests = total_passed + total_failed + sum(r['skipped'] for r in e2e_results)
+            
+            summary['results']['e2e_tests'] = {
+                'status': 'passed' if total_failed == 0 else 'failed',
+                'details': {
+                    'total_tests': total_tests,
+                    'passed': total_passed,
+                    'failed': total_failed,
+                    'browsers': e2e_results
+                }
+            }
+
+        # 生成總體狀態
+        failed_tests = []
+        for test_type, result in summary['results'].items():
+            if result['status'] == 'failed':
+                failed_tests.append(test_type)
+
+        if failed_tests:
+            summary['overall_status'] = 'failed'
+            summary['recommendations'].append(f"修復失敗的測試: {', '.join(failed_tests)}")
+        else:
+            summary['overall_status'] = 'passed'
+
+        # 保存摘要
+        with open('test-summary.json', 'w') as f:
+            json.dump(summary, f, indent=2, ensure_ascii=False)
+
+        # 生成Markdown報告
+        with open('test-summary.md', 'w') as f:
+            f.write(f"""# PowerAutomation 測試執行報告
+
+        **執行時間**: {summary['timestamp']}
+        **工作流運行**: #{summary['workflow_run']}
+        **提交**: {summary['commit'][:8]}
+        **分支**: {summary['branch']}
+
+        ## 📊 總體狀態: {summary['overall_status'].upper()}
+
+        ## 測試結果詳情
+
+        ### E2E 測試
+        """)
+            
+            if e2e_results:
+                f.write(f"- **總測試數**: {summary['results']['e2e_tests']['details']['total_tests']}\n")
+                f.write(f"- **通過**: {summary['results']['e2e_tests']['details']['passed']} ✅\n")
+                f.write(f"- **失敗**: {summary['results']['e2e_tests']['details']['failed']} ❌\n")
+                
+                for browser_result in e2e_results:
+                    status_emoji = "✅" if browser_result['status'] == 'passed' else "❌"
+                    f.write(f"  - {browser_result['browser']}: {status_emoji}\n")
+
+        print("測試摘要報告生成完成")
+        EOF
+
+    - name: Upload Test Summary
+      uses: actions/upload-artifact@v4
+      with:
+        name: test-summary
+        path: |
+          test-summary.json
+          test-summary.md
+        retention-days: 30
+
+    - name: Update Pull Request with Test Results
+      if: github.event_name == 'pull_request'
+      uses: actions/github-script@v7
+      with:
+        script: |
+          const fs = require('fs');
+          
+          try {
+            const summary = JSON.parse(fs.readFileSync('test-summary.json', 'utf8'));
+            
+            const statusEmoji = summary.overall_status === 'passed' ? '✅' : '❌';
+            const comment = `## ${statusEmoji} 測試執行結果
+            
+            **總體狀態**: ${summary.overall_status}
+            **工作流運行**: #${summary.workflow_run}
+            
+            ### E2E 測試結果
+            ${summary.results.e2e_tests.status === 'passed' ? '✅' : '❌'} **E2E 測試**: ${summary.results.e2e_tests.details?.passed || 0} 通過, ${summary.results.e2e_tests.details?.failed || 0} 失敗
+            
+            📊 [查看完整測試報告](https://github.com/${{ github.repository }}/actions/runs/${{ github.run_id }})
+            `;
+            
+            await github.rest.issues.createComment({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              issue_number: context.issue.number,
+              body: comment
+            });
+          } catch (error) {
+            console.log('Failed to create comment:', error);
+          }
+
+    - name: Fail Workflow if Tests Failed
+      if: always()
+      run: |
+        if [ -f test-summary.json ]; then
+          overall_status=$(python -c "import json; print(json.load(open('test-summary.json'))['overall_status'])")
+          if [ "$overall_status" = "failed" ]; then
+            echo "❌ 測試失敗，工作流退出"
+            exit 1
+          fi
+        fi
+        echo "✅ 所有測試通過"
+
+  # 清理資源
+  cleanup:
+    runs-on: ubuntu-latest
+    needs: [test-summary]
+    if: always()
+    timeout-minutes: 5
+
+    steps:
+    - name: Cleanup Old Artifacts
+      uses: actions/github-script@v7
+      with:
+        script: |
+          const cutoffDate = new Date();
+          cutoffDate.setDate(cutoffDate.getDate() - 7);
+          
+          const artifacts = await github.rest.actions.listArtifactsForRepo({
+            owner: context.repo.owner,
+            repo: context.repo.repo,
+            per_page: 100
+          });
+          
+          for (const artifact of artifacts.data.artifacts) {
+            const createdAt = new Date(artifact.created_at);
+            if (createdAt < cutoffDate) {
+              await github.rest.actions.deleteArtifact({
+                owner: context.repo.owner,
+                repo: context.repo.repo,
+                artifact_id: artifact.id
+              });
+              console.log(`Deleted artifact: ${artifact.name}`);
+            }
+          }

@@ -1,0 +1,868 @@
+{
+  "start_time": "2025-07-09T12:42:47.028697",
+  "code_quality": {
+    "total_files_checked": 57,
+    "issues_found": 111,
+    "files_with_issues": [
+      "adapters/ocr3b_flux_adapter/ocr_model.py",
+      "adapters/ocr3b_flux_adapter/ocrflux_integration.py",
+      "adapters/ocr3b_flux_adapter/ocr_adapter.py",
+      "adapters/local_adapter_mcp/__init__.py",
+      "adapters/local_adapter_mcp/terminal_connectors/base_connector.py",
+      "adapters/local_adapter_mcp/terminal_connectors/ec2_connector.py",
+      "adapters/local_adapter_mcp/terminal_connectors/mac_connector.py",
+      "adapters/local_adapter_mcp/terminal_connectors/terminal_manager.py",
+      "build/build_mac_app.py",
+      "core/powerautomation_core/automation_core.py",
+      "core/powerautomation_core/workflow_engine.py",
+      "core/powerautomation_core/mcp_coordinator.py",
+      "core/powerautomation_core/task_scheduler.py",
+      "core/powerautomation_core/resource_manager.py",
+      "core/powerautomation_core/monitoring_service.py",
+      "core/command_master/command_executor.py",
+      "core/command_master/commands/deploy_commands.py",
+      "core/mirror_code/__init__.py",
+      "core/mirror_code/engine/mirror_engine.py",
+      "core/mirror_code/engine/claude_cli_manager.py",
+      "core/components/release_trigger_engine.py",
+      "core/components/cli.py",
+      "scripts/release_verification.py",
+      "ui/quick_actions/repository_selector.py",
+      "ui/mirror_code/components/mirror_toggle.py",
+      "ui/mirror_code/components/mirror_status_indicator.py",
+      "ui/mirror_code/panels/mirror_settings_panel.py"
+    ],
+    "issue_details": [
+      {
+        "file": "adapters/ocr3b_flux_adapter/ocr_model.py",
+        "line": 47,
+        "category": "unimplemented",
+        "pattern": "pass\\s*$",
+        "content": "pass"
+      },
+      {
+        "file": "adapters/ocr3b_flux_adapter/ocr_model.py",
+        "line": 51,
+        "category": "unimplemented",
+        "pattern": "pass\\s*$",
+        "content": "pass"
+      },
+      {
+        "file": "adapters/ocr3b_flux_adapter/ocr_model.py",
+        "line": 125,
+        "category": "placeholders",
+        "pattern": "mock_.*",
+        "content": "mock_result = {"
+      },
+      {
+        "file": "adapters/ocr3b_flux_adapter/ocr_model.py",
+        "line": 132,
+        "category": "placeholders",
+        "pattern": "mock_.*",
+        "content": "return mock_result"
+      },
+      {
+        "file": "adapters/ocr3b_flux_adapter/ocrflux_integration.py",
+        "line": 268,
+        "category": "placeholders",
+        "pattern": "BUG",
+        "content": "self.logger.debug(f\"使用缓存结果: {pdf_path}\")"
+      },
+      {
+        "file": "adapters/ocr3b_flux_adapter/ocr_adapter.py",
+        "line": 179,
+        "category": "placeholders",
+        "pattern": "BUG",
+        "content": "logger.debug(f\"缓存结果: {file_hash}\")"
+      },
+      {
+        "file": "adapters/local_adapter_mcp/__init__.py",
+        "line": 61,
+        "category": "hardcoded_values",
+        "pattern": "example\\.com",
+        "content": "\"host\": \"dev.example.com\","
+      },
+      {
+        "file": "adapters/local_adapter_mcp/terminal_connectors/base_connector.py",
+        "line": 65,
+        "category": "unimplemented",
+        "pattern": "pass\\s*$",
+        "content": "pass"
+      },
+      {
+        "file": "adapters/local_adapter_mcp/terminal_connectors/base_connector.py",
+        "line": 70,
+        "category": "unimplemented",
+        "pattern": "pass\\s*$",
+        "content": "pass"
+      },
+      {
+        "file": "adapters/local_adapter_mcp/terminal_connectors/base_connector.py",
+        "line": 75,
+        "category": "unimplemented",
+        "pattern": "pass\\s*$",
+        "content": "pass"
+      },
+      {
+        "file": "adapters/local_adapter_mcp/terminal_connectors/base_connector.py",
+        "line": 80,
+        "category": "unimplemented",
+        "pattern": "pass\\s*$",
+        "content": "pass"
+      },
+      {
+        "file": "adapters/local_adapter_mcp/terminal_connectors/base_connector.py",
+        "line": 85,
+        "category": "unimplemented",
+        "pattern": "pass\\s*$",
+        "content": "pass"
+      },
+      {
+        "file": "adapters/local_adapter_mcp/terminal_connectors/base_connector.py",
+        "line": 90,
+        "category": "unimplemented",
+        "pattern": "pass\\s*$",
+        "content": "pass"
+      },
+      {
+        "file": "adapters/local_adapter_mcp/terminal_connectors/base_connector.py",
+        "line": 95,
+        "category": "unimplemented",
+        "pattern": "pass\\s*$",
+        "content": "pass"
+      },
+      {
+        "file": "adapters/local_adapter_mcp/terminal_connectors/ec2_connector.py",
+        "line": 401,
+        "category": "unimplemented",
+        "pattern": "raise NotImplementedError",
+        "content": "raise NotImplementedError(\"EC2连接器暂不支持交互式命令\")"
+      },
+      {
+        "file": "adapters/local_adapter_mcp/terminal_connectors/ec2_connector.py",
+        "line": 406,
+        "category": "unimplemented",
+        "pattern": "raise NotImplementedError",
+        "content": "raise NotImplementedError(\"文件上传仅支持SSH连接\")"
+      },
+      {
+        "file": "adapters/local_adapter_mcp/terminal_connectors/ec2_connector.py",
+        "line": 463,
+        "category": "unimplemented",
+        "pattern": "raise NotImplementedError",
+        "content": "raise NotImplementedError(\"文件下载仅支持SSH连接\")"
+      },
+      {
+        "file": "adapters/local_adapter_mcp/terminal_connectors/mac_connector.py",
+        "line": 159,
+        "category": "unimplemented",
+        "pattern": "pass\\s*$",
+        "content": "pass"
+      },
+      {
+        "file": "adapters/local_adapter_mcp/terminal_connectors/mac_connector.py",
+        "line": 325,
+        "category": "unimplemented",
+        "pattern": "raise NotImplementedError",
+        "content": "raise NotImplementedError(\"SSH交互式命令暂不支持\")"
+      },
+      {
+        "file": "adapters/local_adapter_mcp/terminal_connectors/mac_connector.py",
+        "line": 441,
+        "category": "unimplemented",
+        "pattern": "raise NotImplementedError",
+        "content": "raise NotImplementedError(f\"不支持的连接类型: {self.connection_type}\")"
+      },
+      {
+        "file": "adapters/local_adapter_mcp/terminal_connectors/mac_connector.py",
+        "line": 464,
+        "category": "unimplemented",
+        "pattern": "raise NotImplementedError",
+        "content": "raise NotImplementedError(f\"不支持的连接类型: {self.connection_type}\")"
+      },
+      {
+        "file": "adapters/local_adapter_mcp/terminal_connectors/terminal_manager.py",
+        "line": 345,
+        "category": "placeholders",
+        "pattern": "BUG",
+        "content": "self.logger.debug(f\"连接状态变更: {data}\")"
+      },
+      {
+        "file": "adapters/local_adapter_mcp/terminal_connectors/terminal_manager.py",
+        "line": 355,
+        "category": "placeholders",
+        "pattern": "BUG",
+        "content": "self.logger.debug(f\"命令执行: {data['command']} (退出码: {data['exit_code']})\")"
+      },
+      {
+        "file": "build/build_mac_app.py",
+        "line": 209,
+        "category": "placeholders",
+        "pattern": "BUG",
+        "content": "debug=False,"
+      },
+      {
+        "file": "build/build_mac_app.py",
+        "line": 265,
+        "category": "placeholders",
+        "pattern": "placeholder",
+        "content": "def create_ui_placeholder():"
+      },
+      {
+        "file": "build/build_mac_app.py",
+        "line": 290,
+        "category": "placeholders",
+        "pattern": "TODO",
+        "content": "# TODO: 实现实际的UI显示逻辑"
+      },
+      {
+        "file": "build/build_mac_app.py",
+        "line": 291,
+        "category": "unimplemented",
+        "pattern": "pass\\s*$",
+        "content": "pass"
+      },
+      {
+        "file": "build/build_mac_app.py",
+        "line": 296,
+        "category": "unimplemented",
+        "pattern": "pass\\s*$",
+        "content": "pass"
+      },
+      {
+        "file": "build/build_mac_app.py",
+        "line": 301,
+        "category": "unimplemented",
+        "pattern": "pass\\s*$",
+        "content": "pass"
+      },
+      {
+        "file": "build/build_mac_app.py",
+        "line": 428,
+        "category": "placeholders",
+        "pattern": "placeholder",
+        "content": "create_ui_placeholder()"
+      },
+      {
+        "file": "core/powerautomation_core/automation_core.py",
+        "line": 106,
+        "category": "placeholders",
+        "pattern": "BUG",
+        "content": "self.logger.debug(\"目录结构初始化完成\")"
+      },
+      {
+        "file": "core/powerautomation_core/automation_core.py",
+        "line": 201,
+        "category": "placeholders",
+        "pattern": "BUG",
+        "content": "self.logger.debug(\"核心组件初始化完成\")"
+      },
+      {
+        "file": "core/powerautomation_core/automation_core.py",
+        "line": 217,
+        "category": "placeholders",
+        "pattern": "BUG",
+        "content": "self.logger.debug(\"核心组件启动完成\")"
+      },
+      {
+        "file": "core/powerautomation_core/automation_core.py",
+        "line": 238,
+        "category": "placeholders",
+        "pattern": "BUG",
+        "content": "self.logger.debug(\"核心组件停止完成\")"
+      },
+      {
+        "file": "core/powerautomation_core/automation_core.py",
+        "line": 404,
+        "category": "placeholders",
+        "pattern": "TODO",
+        "content": "# TODO: 实现配置验证逻辑"
+      },
+      {
+        "file": "core/powerautomation_core/workflow_engine.py",
+        "line": 147,
+        "category": "unimplemented",
+        "pattern": "pass\\s*$",
+        "content": "pass"
+      },
+      {
+        "file": "core/powerautomation_core/workflow_engine.py",
+        "line": 463,
+        "category": "placeholders",
+        "pattern": "TODO",
+        "content": "# TODO: 实现循环逻辑"
+      },
+      {
+        "file": "core/powerautomation_core/workflow_engine.py",
+        "line": 468,
+        "category": "placeholders",
+        "pattern": "TODO",
+        "content": "# TODO: 实现并行执行逻辑"
+      },
+      {
+        "file": "core/powerautomation_core/workflow_engine.py",
+        "line": 483,
+        "category": "placeholders",
+        "pattern": "TODO",
+        "content": "# TODO: 实现脚本执行逻辑"
+      },
+      {
+        "file": "core/powerautomation_core/workflow_engine.py",
+        "line": 511,
+        "category": "placeholders",
+        "pattern": "TODO",
+        "content": "# TODO: 实现更复杂的条件评估逻辑"
+      },
+      {
+        "file": "core/powerautomation_core/workflow_engine.py",
+        "line": 535,
+        "category": "placeholders",
+        "pattern": "TODO",
+        "content": "# TODO: 实现循环依赖检测"
+      },
+      {
+        "file": "core/powerautomation_core/workflow_engine.py",
+        "line": 577,
+        "category": "placeholders",
+        "pattern": "TODO",
+        "content": "# TODO: 实现工作流加载逻辑"
+      },
+      {
+        "file": "core/powerautomation_core/workflow_engine.py",
+        "line": 578,
+        "category": "unimplemented",
+        "pattern": "pass\\s*$",
+        "content": "pass"
+      },
+      {
+        "file": "core/powerautomation_core/workflow_engine.py",
+        "line": 582,
+        "category": "placeholders",
+        "pattern": "TODO",
+        "content": "# TODO: 实现工作流保存逻辑"
+      },
+      {
+        "file": "core/powerautomation_core/workflow_engine.py",
+        "line": 583,
+        "category": "unimplemented",
+        "pattern": "pass\\s*$",
+        "content": "pass"
+      },
+      {
+        "file": "core/powerautomation_core/workflow_engine.py",
+        "line": 587,
+        "category": "placeholders",
+        "pattern": "TODO",
+        "content": "# TODO: 实现执行恢复逻辑"
+      },
+      {
+        "file": "core/powerautomation_core/workflow_engine.py",
+        "line": 588,
+        "category": "unimplemented",
+        "pattern": "pass\\s*$",
+        "content": "pass"
+      },
+      {
+        "file": "core/powerautomation_core/workflow_engine.py",
+        "line": 592,
+        "category": "placeholders",
+        "pattern": "TODO",
+        "content": "# TODO: 实现执行保存逻辑"
+      },
+      {
+        "file": "core/powerautomation_core/workflow_engine.py",
+        "line": 593,
+        "category": "unimplemented",
+        "pattern": "pass\\s*$",
+        "content": "pass"
+      },
+      {
+        "file": "core/powerautomation_core/workflow_engine.py",
+        "line": 597,
+        "category": "placeholders",
+        "pattern": "TODO",
+        "content": "# TODO: 实现批量保存逻辑"
+      },
+      {
+        "file": "core/powerautomation_core/workflow_engine.py",
+        "line": 598,
+        "category": "unimplemented",
+        "pattern": "pass\\s*$",
+        "content": "pass"
+      },
+      {
+        "file": "core/powerautomation_core/mcp_coordinator.py",
+        "line": 180,
+        "category": "unimplemented",
+        "pattern": "pass\\s*$",
+        "content": "pass"
+      },
+      {
+        "file": "core/powerautomation_core/mcp_coordinator.py",
+        "line": 452,
+        "category": "placeholders",
+        "pattern": "TODO",
+        "content": "# TODO: 实现HTTP调用逻辑"
+      },
+      {
+        "file": "core/powerautomation_core/mcp_coordinator.py",
+        "line": 453,
+        "category": "unimplemented",
+        "pattern": "raise NotImplementedError",
+        "content": "raise NotImplementedError(\"HTTP MCP调用尚未实现\")"
+      },
+      {
+        "file": "core/powerautomation_core/mcp_coordinator.py",
+        "line": 457,
+        "category": "placeholders",
+        "pattern": "TODO",
+        "content": "# TODO: 实现WebSocket调用逻辑"
+      },
+      {
+        "file": "core/powerautomation_core/mcp_coordinator.py",
+        "line": 458,
+        "category": "unimplemented",
+        "pattern": "raise NotImplementedError",
+        "content": "raise NotImplementedError(\"WebSocket MCP调用尚未实现\")"
+      },
+      {
+        "file": "core/powerautomation_core/mcp_coordinator.py",
+        "line": 479,
+        "category": "placeholders",
+        "pattern": "TODO",
+        "content": "# TODO: 实现外部连接逻辑"
+      },
+      {
+        "file": "core/powerautomation_core/mcp_coordinator.py",
+        "line": 501,
+        "category": "placeholders",
+        "pattern": "TODO",
+        "content": "# TODO: 实际断开连接逻辑"
+      },
+      {
+        "file": "core/powerautomation_core/mcp_coordinator.py",
+        "line": 547,
+        "category": "placeholders",
+        "pattern": "TODO",
+        "content": "# TODO: 实现外部心跳逻辑"
+      },
+      {
+        "file": "core/powerautomation_core/task_scheduler.py",
+        "line": 149,
+        "category": "unimplemented",
+        "pattern": "pass\\s*$",
+        "content": "pass"
+      },
+      {
+        "file": "core/powerautomation_core/task_scheduler.py",
+        "line": 157,
+        "category": "unimplemented",
+        "pattern": "pass\\s*$",
+        "content": "pass"
+      },
+      {
+        "file": "core/powerautomation_core/task_scheduler.py",
+        "line": 289,
+        "category": "placeholders",
+        "pattern": "BUG",
+        "content": "self.logger.debug(f\"任务执行已调度: {execution_id}\")"
+      },
+      {
+        "file": "core/powerautomation_core/task_scheduler.py",
+        "line": 412,
+        "category": "placeholders",
+        "pattern": "BUG",
+        "content": "self.logger.debug(f\"任务执行启动: {execution.id}\")"
+      },
+      {
+        "file": "core/powerautomation_core/task_scheduler.py",
+        "line": 501,
+        "category": "placeholders",
+        "pattern": "TODO",
+        "content": "# TODO: 通过MCP调用Command Master"
+      },
+      {
+        "file": "core/powerautomation_core/task_scheduler.py",
+        "line": 506,
+        "category": "placeholders",
+        "pattern": "TODO",
+        "content": "# TODO: 实现脚本执行逻辑"
+      },
+      {
+        "file": "core/powerautomation_core/task_scheduler.py",
+        "line": 511,
+        "category": "placeholders",
+        "pattern": "TODO",
+        "content": "# TODO: 实现通知逻辑"
+      },
+      {
+        "file": "core/powerautomation_core/task_scheduler.py",
+        "line": 684,
+        "category": "placeholders",
+        "pattern": "TODO",
+        "content": "# TODO: 实现任务加载逻辑"
+      },
+      {
+        "file": "core/powerautomation_core/task_scheduler.py",
+        "line": 685,
+        "category": "unimplemented",
+        "pattern": "pass\\s*$",
+        "content": "pass"
+      },
+      {
+        "file": "core/powerautomation_core/task_scheduler.py",
+        "line": 689,
+        "category": "placeholders",
+        "pattern": "TODO",
+        "content": "# TODO: 实现任务保存逻辑"
+      },
+      {
+        "file": "core/powerautomation_core/task_scheduler.py",
+        "line": 690,
+        "category": "unimplemented",
+        "pattern": "pass\\s*$",
+        "content": "pass"
+      },
+      {
+        "file": "core/powerautomation_core/task_scheduler.py",
+        "line": 694,
+        "category": "placeholders",
+        "pattern": "TODO",
+        "content": "# TODO: 实现执行恢复逻辑"
+      },
+      {
+        "file": "core/powerautomation_core/task_scheduler.py",
+        "line": 695,
+        "category": "unimplemented",
+        "pattern": "pass\\s*$",
+        "content": "pass"
+      },
+      {
+        "file": "core/powerautomation_core/task_scheduler.py",
+        "line": 699,
+        "category": "placeholders",
+        "pattern": "TODO",
+        "content": "# TODO: 实现执行保存逻辑"
+      },
+      {
+        "file": "core/powerautomation_core/task_scheduler.py",
+        "line": 700,
+        "category": "unimplemented",
+        "pattern": "pass\\s*$",
+        "content": "pass"
+      },
+      {
+        "file": "core/powerautomation_core/resource_manager.py",
+        "line": 112,
+        "category": "placeholders",
+        "pattern": "BUG",
+        "content": "self.logger.debug(\"资源配额初始化完成\")"
+      },
+      {
+        "file": "core/powerautomation_core/resource_manager.py",
+        "line": 154,
+        "category": "unimplemented",
+        "pattern": "pass\\s*$",
+        "content": "pass"
+      },
+      {
+        "file": "core/powerautomation_core/resource_manager.py",
+        "line": 377,
+        "category": "placeholders",
+        "pattern": "BUG",
+        "content": "self.logger.debug(f\"清理过期分配: {allocation_id}\")"
+      },
+      {
+        "file": "core/powerautomation_core/resource_manager.py",
+        "line": 474,
+        "category": "placeholders",
+        "pattern": "TODO",
+        "content": "# TODO: 实现分配加载逻辑"
+      },
+      {
+        "file": "core/powerautomation_core/resource_manager.py",
+        "line": 475,
+        "category": "unimplemented",
+        "pattern": "pass\\s*$",
+        "content": "pass"
+      },
+      {
+        "file": "core/powerautomation_core/resource_manager.py",
+        "line": 479,
+        "category": "placeholders",
+        "pattern": "TODO",
+        "content": "# TODO: 实现分配保存逻辑"
+      },
+      {
+        "file": "core/powerautomation_core/resource_manager.py",
+        "line": 480,
+        "category": "unimplemented",
+        "pattern": "pass\\s*$",
+        "content": "pass"
+      },
+      {
+        "file": "core/powerautomation_core/resource_manager.py",
+        "line": 484,
+        "category": "placeholders",
+        "pattern": "TODO",
+        "content": "# TODO: 实现批量保存逻辑"
+      },
+      {
+        "file": "core/powerautomation_core/resource_manager.py",
+        "line": 485,
+        "category": "unimplemented",
+        "pattern": "pass\\s*$",
+        "content": "pass"
+      },
+      {
+        "file": "core/powerautomation_core/resource_manager.py",
+        "line": 489,
+        "category": "placeholders",
+        "pattern": "TODO",
+        "content": "# TODO: 实现分配删除逻辑"
+      },
+      {
+        "file": "core/powerautomation_core/resource_manager.py",
+        "line": 490,
+        "category": "unimplemented",
+        "pattern": "pass\\s*$",
+        "content": "pass"
+      },
+      {
+        "file": "core/powerautomation_core/monitoring_service.py",
+        "line": 152,
+        "category": "unimplemented",
+        "pattern": "pass\\s*$",
+        "content": "pass"
+      },
+      {
+        "file": "core/powerautomation_core/monitoring_service.py",
+        "line": 548,
+        "category": "placeholders",
+        "pattern": "BUG",
+        "content": "self.logger.debug(f\"清理过期告警: {len(expired_alerts)} 个\")"
+      },
+      {
+        "file": "core/powerautomation_core/monitoring_service.py",
+        "line": 646,
+        "category": "placeholders",
+        "pattern": "TODO",
+        "content": "# TODO: 实现监控数据加载逻辑"
+      },
+      {
+        "file": "core/powerautomation_core/monitoring_service.py",
+        "line": 647,
+        "category": "unimplemented",
+        "pattern": "pass\\s*$",
+        "content": "pass"
+      },
+      {
+        "file": "core/powerautomation_core/monitoring_service.py",
+        "line": 651,
+        "category": "placeholders",
+        "pattern": "TODO",
+        "content": "# TODO: 实现监控数据保存逻辑"
+      },
+      {
+        "file": "core/powerautomation_core/monitoring_service.py",
+        "line": 652,
+        "category": "unimplemented",
+        "pattern": "pass\\s*$",
+        "content": "pass"
+      },
+      {
+        "file": "core/command_master/command_executor.py",
+        "line": 138,
+        "category": "placeholders",
+        "pattern": "BUG",
+        "content": "self.logger.debug(f\"执行命令函数: {command}\","
+      },
+      {
+        "file": "core/command_master/commands/deploy_commands.py",
+        "line": 25,
+        "category": "hardcoded_values",
+        "pattern": "example\\.com",
+        "content": "\"url\": f\"https://{target}.example.com\""
+      },
+      {
+        "file": "core/mirror_code/__init__.py",
+        "line": 29,
+        "category": "placeholders",
+        "pattern": "BUG",
+        "content": "\"debug_mode\": False"
+      },
+      {
+        "file": "core/mirror_code/engine/mirror_engine.py",
+        "line": 31,
+        "category": "placeholders",
+        "pattern": "BUG",
+        "content": "debug: bool = False"
+      },
+      {
+        "file": "core/mirror_code/engine/mirror_engine.py",
+        "line": 116,
+        "category": "unimplemented",
+        "pattern": "pass\\s*$",
+        "content": "pass"
+      },
+      {
+        "file": "core/mirror_code/engine/mirror_engine.py",
+        "line": 123,
+        "category": "unimplemented",
+        "pattern": "pass\\s*$",
+        "content": "pass"
+      },
+      {
+        "file": "core/mirror_code/engine/mirror_engine.py",
+        "line": 234,
+        "category": "unimplemented",
+        "pattern": "pass\\s*$",
+        "content": "pass"
+      },
+      {
+        "file": "core/mirror_code/engine/mirror_engine.py",
+        "line": 256,
+        "category": "placeholders",
+        "pattern": "BUG",
+        "content": "self.logger.debug(f\"引擎状态变更: {old_status.value} -> {status.value}\")"
+      },
+      {
+        "file": "core/mirror_code/engine/claude_cli_manager.py",
+        "line": 157,
+        "category": "placeholders",
+        "pattern": "BUG",
+        "content": "self.logger.debug(f\"执行命令: {command}\")"
+      },
+      {
+        "file": "core/mirror_code/engine/claude_cli_manager.py",
+        "line": 196,
+        "category": "placeholders",
+        "pattern": "BUG",
+        "content": "self.logger.debug(f\"命令结果: {result}\")"
+      },
+      {
+        "file": "core/components/release_trigger_engine.py",
+        "line": 443,
+        "category": "unimplemented",
+        "pattern": "pass\\s*$",
+        "content": "pass"
+      },
+      {
+        "file": "core/components/cli.py",
+        "line": 207,
+        "category": "placeholders",
+        "pattern": "TODO",
+        "content": "# TODO: 实现后台运行逻辑"
+      },
+      {
+        "file": "core/components/cli.py",
+        "line": 330,
+        "category": "placeholders",
+        "pattern": "TODO",
+        "content": "# TODO: 实现历史记录查询"
+      },
+      {
+        "file": "core/components/cli.py",
+        "line": 435,
+        "category": "placeholders",
+        "pattern": "BUG",
+        "content": "logging.getLogger().setLevel(logging.DEBUG)"
+      },
+      {
+        "file": "scripts/release_verification.py",
+        "line": 135,
+        "category": "placeholders",
+        "pattern": "BUG",
+        "content": "debug=True"
+      },
+      {
+        "file": "ui/quick_actions/repository_selector.py",
+        "line": 73,
+        "category": "placeholders",
+        "pattern": "placeholder",
+        "content": "\"filter_placeholder\": \"搜索仓库...\","
+      },
+      {
+        "file": "ui/mirror_code/components/mirror_toggle.py",
+        "line": 195,
+        "category": "placeholders",
+        "pattern": "BUG",
+        "content": "self.logger.debug(f\"Mirror状态变更: {old_status.value} -> {status.value}\")"
+      },
+      {
+        "file": "ui/mirror_code/components/mirror_status_indicator.py",
+        "line": 105,
+        "category": "placeholders",
+        "pattern": "BUG",
+        "content": "self.logger.debug(f\"添加同步事件: {event.event_type} - {event.message}\")"
+      },
+      {
+        "file": "ui/mirror_code/panels/mirror_settings_panel.py",
+        "line": 70,
+        "category": "placeholders",
+        "pattern": "BUG",
+        "content": "debug_mode: bool = False"
+      },
+      {
+        "file": "ui/mirror_code/panels/mirror_settings_panel.py",
+        "line": 150,
+        "category": "placeholders",
+        "pattern": "BUG",
+        "content": "self.logger.debug(f\"切换到标签页: {tab}\")"
+      }
+    ]
+  },
+  "integration_tests": {
+    "EdgeCloudRealTests": {
+      "tests_run": 5,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 3,
+      "success": true
+    },
+    "CICDRealTests": {
+      "tests_run": 5,
+      "failures": 2,
+      "errors": 0,
+      "skipped": 1,
+      "success": false
+    },
+    "MemoryOSRealTests": {
+      "tests_run": 5,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0,
+      "success": true
+    },
+    "DialogueCapabilityRealTests": {
+      "tests_run": 5,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0,
+      "success": true
+    },
+    "AnalysisCapabilityRealTests": {
+      "tests_run": 5,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0,
+      "success": true
+    }
+  },
+  "ui_tests": {
+    "placeholder": {
+      "message": "UI测试需要Selenium或Playwright等框架",
+      "tests_run": 0
+    }
+  },
+  "summary": {
+    "total_integration_tests": 25,
+    "passed_integration_tests": 20,
+    "failed_integration_tests": 2,
+    "total_ui_tests": 0,
+    "passed_ui_tests": 0,
+    "failed_ui_tests": 0,
+    "code_quality_issues": 111
+  },
+  "end_time": "2025-07-09T12:42:47.323872"
+}
