@@ -1,0 +1,256 @@
+INFO:__main__:生成了 200 個測試案例
+INFO:__main__:開始運行200個TDD測試案例...
+INFO:__main__:執行 windows 平台測試 (40 個案例)
+INFO:__main__:Test MCP: 創建測試會話 session_windows_1752227146 for windows
+INFO:__main__:Stagewise MCP: 開始UI錄製 ui_recording_windows
+INFO:__main__:Test MCP: 創建測試會話 session_windows_WIN_INT_001 for windows
+INFO:__main__:Test MCP: 創建測試會話 session_windows_WIN_INT_002 for windows
+INFO:__main__:Test MCP: 創建測試會話 session_windows_WIN_INT_003 for windows
+INFO:__main__:Test MCP: 創建測試會話 session_windows_WIN_INT_004 for windows
+INFO:__main__:Test MCP: 創建測試會話 session_windows_WIN_INT_005 for windows
+INFO:__main__:Test MCP: 創建測試會話 session_windows_WIN_INT_006 for windows
+INFO:__main__:Test MCP: 創建測試會話 session_windows_WIN_INT_007 for windows
+INFO:__main__:Test MCP: 創建測試會話 session_windows_WIN_INT_008 for windows
+INFO:__main__:Test MCP: 創建測試會話 session_windows_WIN_INT_009 for windows
+INFO:__main__:Test MCP: 創建測試會話 session_windows_WIN_INT_010 for windows
+INFO:__main__:Test MCP: 創建測試會話 session_windows_WIN_UI_001 for windows
+INFO:__main__:Test MCP: 創建測試會話 session_windows_WIN_UI_002 for windows
+INFO:__main__:Test MCP: 創建測試會話 session_windows_WIN_UI_003 for windows
+INFO:__main__:Test MCP: 創建測試會話 session_windows_WIN_UI_004 for windows
+INFO:__main__:Test MCP: 創建測試會話 session_windows_WIN_UI_005 for windows
+INFO:__main__:Test MCP: 創建測試會話 session_windows_WIN_UI_006 for windows
+INFO:__main__:Test MCP: 創建測試會話 session_windows_WIN_UI_007 for windows
+INFO:__main__:Test MCP: 創建測試會話 session_windows_WIN_UI_008 for windows
+INFO:__main__:Test MCP: 創建測試會話 session_windows_WIN_UI_009 for windows
+INFO:__main__:Test MCP: 創建測試會話 session_windows_WIN_UI_010 for windows
+INFO:__main__:Test MCP: 創建測試會話 session_windows_WIN_PERF_001 for windows
+INFO:__main__:Test MCP: 創建測試會話 session_windows_WIN_PERF_002 for windows
+INFO:__main__:Test MCP: 創建測試會話 session_windows_WIN_PERF_003 for windows
+INFO:__main__:Test MCP: 創建測試會話 session_windows_WIN_PERF_004 for windows
+INFO:__main__:Test MCP: 創建測試會話 session_windows_WIN_PERF_005 for windows
+INFO:__main__:Test MCP: 創建測試會話 session_windows_WIN_PERF_006 for windows
+INFO:__main__:Test MCP: 創建測試會話 session_windows_WIN_PERF_007 for windows
+INFO:__main__:Test MCP: 創建測試會話 session_windows_WIN_PERF_008 for windows
+INFO:__main__:Test MCP: 創建測試會話 session_windows_WIN_PERF_009 for windows
+INFO:__main__:Test MCP: 創建測試會話 session_windows_WIN_PERF_010 for windows
+INFO:__main__:Test MCP: 創建測試會話 session_windows_WIN_SEC_001 for windows
+INFO:__main__:Test MCP: 創建測試會話 session_windows_WIN_SEC_002 for windows
+INFO:__main__:Test MCP: 創建測試會話 session_windows_WIN_SEC_003 for windows
+INFO:__main__:Test MCP: 創建測試會話 session_windows_WIN_SEC_004 for windows
+INFO:__main__:Test MCP: 創建測試會話 session_windows_WIN_SEC_005 for windows
+INFO:__main__:Test MCP: 創建測試會話 session_windows_WIN_SEC_006 for windows
+INFO:__main__:Test MCP: 創建測試會話 session_windows_WIN_SEC_007 for windows
+INFO:__main__:Test MCP: 創建測試會話 session_windows_WIN_SEC_008 for windows
+INFO:__main__:Test MCP: 創建測試會話 session_windows_WIN_SEC_009 for windows
+INFO:__main__:Test MCP: 創建測試會話 session_windows_WIN_SEC_010 for windows
+INFO:__main__:執行 linux 平台測試 (35 個案例)
+INFO:__main__:Test MCP: 創建測試會話 session_linux_1752227146 for linux
+INFO:__main__:Test MCP: 創建測試會話 session_linux_LNX_SYS_001 for linux
+INFO:__main__:Test MCP: 創建測試會話 session_linux_LNX_SYS_002 for linux
+INFO:__main__:Test MCP: 創建測試會話 session_linux_LNX_SYS_003 for linux
+INFO:__main__:Test MCP: 創建測試會話 session_linux_LNX_SYS_004 for linux
+INFO:__main__:Test MCP: 創建測試會話 session_linux_LNX_SYS_005 for linux
+INFO:__main__:Test MCP: 創建測試會話 session_linux_LNX_SYS_006 for linux
+INFO:__main__:Test MCP: 創建測試會話 session_linux_LNX_SYS_007 for linux
+INFO:__main__:Test MCP: 創建測試會話 session_linux_LNX_SYS_008 for linux
+INFO:__main__:Test MCP: 創建測試會話 session_linux_LNX_SYS_009 for linux
+INFO:__main__:Test MCP: 創建測試會話 session_linux_LNX_SYS_010 for linux
+INFO:__main__:Test MCP: 創建測試會話 session_linux_LNX_PROC_001 for linux
+INFO:__main__:Test MCP: 創建測試會話 session_linux_LNX_PROC_002 for linux
+INFO:__main__:Test MCP: 創建測試會話 session_linux_LNX_PROC_003 for linux
+INFO:__main__:Test MCP: 創建測試會話 session_linux_LNX_PROC_004 for linux
+INFO:__main__:Test MCP: 創建測試會話 session_linux_LNX_PROC_005 for linux
+INFO:__main__:Test MCP: 創建測試會話 session_linux_LNX_PROC_006 for linux
+INFO:__main__:Test MCP: 創建測試會話 session_linux_LNX_PROC_007 for linux
+INFO:__main__:Test MCP: 創建測試會話 session_linux_LNX_PROC_008 for linux
+INFO:__main__:Test MCP: 創建測試會話 session_linux_LNX_PROC_009 for linux
+INFO:__main__:Test MCP: 創建測試會話 session_linux_LNX_PROC_010 for linux
+INFO:__main__:Test MCP: 創建測試會話 session_linux_LNX_NET_001 for linux
+INFO:__main__:Test MCP: 創建測試會話 session_linux_LNX_NET_002 for linux
+INFO:__main__:Test MCP: 創建測試會話 session_linux_LNX_NET_003 for linux
+INFO:__main__:Test MCP: 創建測試會話 session_linux_LNX_NET_004 for linux
+INFO:__main__:Test MCP: 創建測試會話 session_linux_LNX_NET_005 for linux
+INFO:__main__:Test MCP: 創建測試會話 session_linux_LNX_NET_006 for linux
+INFO:__main__:Test MCP: 創建測試會話 session_linux_LNX_NET_007 for linux
+INFO:__main__:Test MCP: 創建測試會話 session_linux_LNX_NET_008 for linux
+INFO:__main__:Test MCP: 創建測試會話 session_linux_LNX_NET_009 for linux
+INFO:__main__:Test MCP: 創建測試會話 session_linux_LNX_NET_010 for linux
+INFO:__main__:Test MCP: 創建測試會話 session_linux_LNX_NET_011 for linux
+INFO:__main__:Test MCP: 創建測試會話 session_linux_LNX_NET_012 for linux
+INFO:__main__:Test MCP: 創建測試會話 session_linux_LNX_NET_013 for linux
+INFO:__main__:Test MCP: 創建測試會話 session_linux_LNX_NET_014 for linux
+INFO:__main__:Test MCP: 創建測試會話 session_linux_LNX_NET_015 for linux
+INFO:__main__:執行 macos 平台測試 (35 個案例)
+INFO:__main__:Test MCP: 創建測試會話 session_macos_1752227146 for macos
+INFO:__main__:Stagewise MCP: 開始UI錄製 ui_recording_macos
+INFO:__main__:Test MCP: 創建測試會話 session_macos_MAC_APP_001 for macos
+INFO:__main__:Test MCP: 創建測試會話 session_macos_MAC_APP_002 for macos
+INFO:__main__:Test MCP: 創建測試會話 session_macos_MAC_APP_003 for macos
+INFO:__main__:Test MCP: 創建測試會話 session_macos_MAC_APP_004 for macos
+INFO:__main__:Test MCP: 創建測試會話 session_macos_MAC_APP_005 for macos
+INFO:__main__:Test MCP: 創建測試會話 session_macos_MAC_APP_006 for macos
+INFO:__main__:Test MCP: 創建測試會話 session_macos_MAC_APP_007 for macos
+INFO:__main__:Test MCP: 創建測試會話 session_macos_MAC_APP_008 for macos
+INFO:__main__:Test MCP: 創建測試會話 session_macos_MAC_APP_009 for macos
+INFO:__main__:Test MCP: 創建測試會話 session_macos_MAC_APP_010 for macos
+INFO:__main__:Test MCP: 創建測試會話 session_macos_MAC_APP_011 for macos
+INFO:__main__:Test MCP: 創建測試會話 session_macos_MAC_APP_012 for macos
+INFO:__main__:Test MCP: 創建測試會話 session_macos_MAC_APP_013 for macos
+INFO:__main__:Test MCP: 創建測試會話 session_macos_MAC_APP_014 for macos
+INFO:__main__:Test MCP: 創建測試會話 session_macos_MAC_APP_015 for macos
+INFO:__main__:Test MCP: 創建測試會話 session_macos_MAC_SVC_001 for macos
+INFO:__main__:Test MCP: 創建測試會話 session_macos_MAC_SVC_002 for macos
+INFO:__main__:Test MCP: 創建測試會話 session_macos_MAC_SVC_003 for macos
+INFO:__main__:Test MCP: 創建測試會話 session_macos_MAC_SVC_004 for macos
+INFO:__main__:Test MCP: 創建測試會話 session_macos_MAC_SVC_005 for macos
+INFO:__main__:Test MCP: 創建測試會話 session_macos_MAC_SVC_006 for macos
+INFO:__main__:Test MCP: 創建測試會話 session_macos_MAC_SVC_007 for macos
+INFO:__main__:Test MCP: 創建測試會話 session_macos_MAC_SVC_008 for macos
+INFO:__main__:Test MCP: 創建測試會話 session_macos_MAC_SVC_009 for macos
+INFO:__main__:Test MCP: 創建測試會話 session_macos_MAC_SVC_010 for macos
+INFO:__main__:Test MCP: 創建測試會話 session_macos_MAC_AUTO_001 for macos
+INFO:__main__:Test MCP: 創建測試會話 session_macos_MAC_AUTO_002 for macos
+INFO:__main__:Test MCP: 創建測試會話 session_macos_MAC_AUTO_003 for macos
+INFO:__main__:Test MCP: 創建測試會話 session_macos_MAC_AUTO_004 for macos
+INFO:__main__:Test MCP: 創建測試會話 session_macos_MAC_AUTO_005 for macos
+INFO:__main__:Test MCP: 創建測試會話 session_macos_MAC_AUTO_006 for macos
+INFO:__main__:Test MCP: 創建測試會話 session_macos_MAC_AUTO_007 for macos
+INFO:__main__:Test MCP: 創建測試會話 session_macos_MAC_AUTO_008 for macos
+INFO:__main__:Test MCP: 創建測試會話 session_macos_MAC_AUTO_009 for macos
+INFO:__main__:Test MCP: 創建測試會話 session_macos_MAC_AUTO_010 for macos
+INFO:__main__:執行 web 平台測試 (40 個案例)
+INFO:__main__:Test MCP: 創建測試會話 session_web_1752227148 for web
+INFO:__main__:Test MCP: 創建測試會話 session_web_WEB_FE_001 for web
+INFO:__main__:Test MCP: 創建測試會話 session_web_WEB_FE_002 for web
+INFO:__main__:Test MCP: 創建測試會話 session_web_WEB_FE_003 for web
+INFO:__main__:Test MCP: 創建測試會話 session_web_WEB_FE_004 for web
+INFO:__main__:Test MCP: 創建測試會話 session_web_WEB_FE_005 for web
+INFO:__main__:Test MCP: 創建測試會話 session_web_WEB_FE_006 for web
+INFO:__main__:Test MCP: 創建測試會話 session_web_WEB_FE_007 for web
+INFO:__main__:Test MCP: 創建測試會話 session_web_WEB_FE_008 for web
+INFO:__main__:Test MCP: 創建測試會話 session_web_WEB_FE_009 for web
+INFO:__main__:Test MCP: 創建測試會話 session_web_WEB_FE_010 for web
+INFO:__main__:Test MCP: 創建測試會話 session_web_WEB_FE_011 for web
+INFO:__main__:Test MCP: 創建測試會話 session_web_WEB_FE_012 for web
+INFO:__main__:Test MCP: 創建測試會話 session_web_WEB_FE_013 for web
+INFO:__main__:Test MCP: 創建測試會話 session_web_WEB_FE_014 for web
+INFO:__main__:Test MCP: 創建測試會話 session_web_WEB_FE_015 for web
+INFO:__main__:Test MCP: 創建測試會話 session_web_WEB_API_001 for web
+INFO:__main__:Test MCP: 創建測試會話 session_web_WEB_API_002 for web
+INFO:__main__:Test MCP: 創建測試會話 session_web_WEB_API_003 for web
+INFO:__main__:Test MCP: 創建測試會話 session_web_WEB_API_004 for web
+INFO:__main__:Test MCP: 創建測試會話 session_web_WEB_API_005 for web
+INFO:__main__:Test MCP: 創建測試會話 session_web_WEB_API_006 for web
+INFO:__main__:Test MCP: 創建測試會話 session_web_WEB_API_007 for web
+INFO:__main__:Test MCP: 創建測試會話 session_web_WEB_API_008 for web
+INFO:__main__:Test MCP: 創建測試會話 session_web_WEB_API_009 for web
+INFO:__main__:Test MCP: 創建測試會話 session_web_WEB_API_010 for web
+INFO:__main__:Test MCP: 創建測試會話 session_web_WEB_API_011 for web
+INFO:__main__:Test MCP: 創建測試會話 session_web_WEB_API_012 for web
+INFO:__main__:Test MCP: 創建測試會話 session_web_WEB_API_013 for web
+INFO:__main__:Test MCP: 創建測試會話 session_web_WEB_API_014 for web
+INFO:__main__:Test MCP: 創建測試會話 session_web_WEB_API_015 for web
+INFO:__main__:Test MCP: 創建測試會話 session_web_WEB_PERF_001 for web
+INFO:__main__:Test MCP: 創建測試會話 session_web_WEB_PERF_002 for web
+INFO:__main__:Test MCP: 創建測試會話 session_web_WEB_PERF_003 for web
+INFO:__main__:Test MCP: 創建測試會話 session_web_WEB_PERF_004 for web
+INFO:__main__:Test MCP: 創建測試會話 session_web_WEB_PERF_005 for web
+INFO:__main__:Test MCP: 創建測試會話 session_web_WEB_PERF_006 for web
+INFO:__main__:Test MCP: 創建測試會話 session_web_WEB_PERF_007 for web
+INFO:__main__:Test MCP: 創建測試會話 session_web_WEB_PERF_008 for web
+INFO:__main__:Test MCP: 創建測試會話 session_web_WEB_PERF_009 for web
+INFO:__main__:Test MCP: 創建測試會話 session_web_WEB_PERF_010 for web
+INFO:__main__:執行 mobile 平台測試 (25 個案例)
+INFO:__main__:Test MCP: 創建測試會話 session_mobile_1752227148 for mobile
+INFO:__main__:Test MCP: 創建測試會話 session_mobile_MOB_APP_001 for mobile
+INFO:__main__:Test MCP: 創建測試會話 session_mobile_MOB_APP_002 for mobile
+INFO:__main__:Test MCP: 創建測試會話 session_mobile_MOB_APP_003 for mobile
+INFO:__main__:Test MCP: 創建測試會話 session_mobile_MOB_APP_004 for mobile
+INFO:__main__:Test MCP: 創建測試會話 session_mobile_MOB_APP_005 for mobile
+INFO:__main__:Test MCP: 創建測試會話 session_mobile_MOB_APP_006 for mobile
+INFO:__main__:Test MCP: 創建測試會話 session_mobile_MOB_APP_007 for mobile
+INFO:__main__:Test MCP: 創建測試會話 session_mobile_MOB_APP_008 for mobile
+INFO:__main__:Test MCP: 創建測試會話 session_mobile_MOB_APP_009 for mobile
+INFO:__main__:Test MCP: 創建測試會話 session_mobile_MOB_APP_010 for mobile
+INFO:__main__:Test MCP: 創建測試會話 session_mobile_MOB_APP_011 for mobile
+INFO:__main__:Test MCP: 創建測試會話 session_mobile_MOB_APP_012 for mobile
+INFO:__main__:Test MCP: 創建測試會話 session_mobile_MOB_APP_013 for mobile
+INFO:__main__:Test MCP: 創建測試會話 session_mobile_MOB_APP_014 for mobile
+INFO:__main__:Test MCP: 創建測試會話 session_mobile_MOB_APP_015 for mobile
+INFO:__main__:Test MCP: 創建測試會話 session_mobile_MOB_DEV_001 for mobile
+INFO:__main__:Test MCP: 創建測試會話 session_mobile_MOB_DEV_002 for mobile
+INFO:__main__:Test MCP: 創建測試會話 session_mobile_MOB_DEV_003 for mobile
+INFO:__main__:Test MCP: 創建測試會話 session_mobile_MOB_DEV_004 for mobile
+INFO:__main__:Test MCP: 創建測試會話 session_mobile_MOB_DEV_005 for mobile
+INFO:__main__:Test MCP: 創建測試會話 session_mobile_MOB_DEV_006 for mobile
+INFO:__main__:Test MCP: 創建測試會話 session_mobile_MOB_DEV_007 for mobile
+INFO:__main__:Test MCP: 創建測試會話 session_mobile_MOB_DEV_008 for mobile
+INFO:__main__:Test MCP: 創建測試會話 session_mobile_MOB_DEV_009 for mobile
+INFO:__main__:Test MCP: 創建測試會話 session_mobile_MOB_DEV_010 for mobile
+INFO:__main__:執行 cloud 平台測試 (25 個案例)
+INFO:__main__:Test MCP: 創建測試會話 session_cloud_1752227148 for cloud
+INFO:__main__:Test MCP: 創建測試會話 session_cloud_CLD_DEP_001 for cloud
+INFO:__main__:Test MCP: 創建測試會話 session_cloud_CLD_DEP_002 for cloud
+INFO:__main__:Test MCP: 創建測試會話 session_cloud_CLD_DEP_003 for cloud
+INFO:__main__:Test MCP: 創建測試會話 session_cloud_CLD_DEP_004 for cloud
+INFO:__main__:Test MCP: 創建測試會話 session_cloud_CLD_DEP_005 for cloud
+INFO:__main__:Test MCP: 創建測試會話 session_cloud_CLD_DEP_006 for cloud
+INFO:__main__:Test MCP: 創建測試會話 session_cloud_CLD_DEP_007 for cloud
+INFO:__main__:Test MCP: 創建測試會話 session_cloud_CLD_DEP_008 for cloud
+INFO:__main__:Test MCP: 創建測試會話 session_cloud_CLD_DEP_009 for cloud
+INFO:__main__:Test MCP: 創建測試會話 session_cloud_CLD_DEP_010 for cloud
+INFO:__main__:Test MCP: 創建測試會話 session_cloud_CLD_DEP_011 for cloud
+INFO:__main__:Test MCP: 創建測試會話 session_cloud_CLD_DEP_012 for cloud
+INFO:__main__:Test MCP: 創建測試會話 session_cloud_CLD_DEP_013 for cloud
+INFO:__main__:Test MCP: 創建測試會話 session_cloud_CLD_DEP_014 for cloud
+INFO:__main__:Test MCP: 創建測試會話 session_cloud_CLD_DEP_015 for cloud
+INFO:__main__:Test MCP: 創建測試會話 session_cloud_CLD_SCALE_001 for cloud
+INFO:__main__:Test MCP: 創建測試會話 session_cloud_CLD_SCALE_002 for cloud
+INFO:__main__:Test MCP: 創建測試會話 session_cloud_CLD_SCALE_003 for cloud
+INFO:__main__:Test MCP: 創建測試會話 session_cloud_CLD_SCALE_004 for cloud
+INFO:__main__:Test MCP: 創建測試會話 session_cloud_CLD_SCALE_005 for cloud
+INFO:__main__:Test MCP: 創建測試會話 session_cloud_CLD_SCALE_006 for cloud
+INFO:__main__:Test MCP: 創建測試會話 session_cloud_CLD_SCALE_007 for cloud
+INFO:__main__:Test MCP: 創建測試會話 session_cloud_CLD_SCALE_008 for cloud
+INFO:__main__:Test MCP: 創建測試會話 session_cloud_CLD_SCALE_009 for cloud
+INFO:__main__:Test MCP: 創建測試會話 session_cloud_CLD_SCALE_010 for cloud
+🚀 PowerAutomation v4.6.1 跨平台TDD測試框架
+================================================================================
+🎯 生成並執行200個真實測試案例
+🧩 集成 Test MCP + Stagewise MCP + AG-UI MCP
+🌍 覆蓋六大平台: Windows, Linux, macOS, Web, Mobile, Cloud
+
+📝 生成200個TDD測試案例...
+✅ 已生成 200 個測試案例
+
+📊 測試案例分佈:
+平台分佈:
+  windows: 40 個案例
+  linux: 35 個案例
+  macos: 35 個案例
+  web: 40 個案例
+  mobile: 25 個案例
+  cloud: 25 個案例
+分類分佈:
+  integration: 75 個案例
+  ui: 20 個案例
+  performance: 30 個案例
+  security: 10 個案例
+  unit: 20 個案例
+  e2e: 45 個案例
+
+🧪 開始執行TDD測試...
+
+📊 生成測試報告...
+
+🏁 TDD測試完成!
+============================================================
+📈 總測試數: 200
+✅ 通過: 200
+❌ 失敗: 0
+⚠️ 錯誤: 0
+📊 成功率: 100.0%
+⏱️ 執行時間: 11.05秒
+📄 測試報告: tdd_test_report_20250711_174557.md
+
+🎉 TDD測試全面通過！PowerAutomation v4.6.1準備就緒！
