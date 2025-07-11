@@ -1,0 +1,150 @@
+{
+  "timestamp": "2025-07-11T18:15:40.166382",
+  "execution_time": 2.0052928924560547,
+  "total_tests": 6,
+  "passed_tests": 5,
+  "success_rate": 83.33333333333334,
+  "test_results": {
+    "訂閱版本訪問控制": true,
+    "六大工作流類型": true,
+    "UI布局渲染": true,
+    "階段執行": true,
+    "CodeFlow引擎集成": true,
+    "TDD框架集成": false
+  },
+  "detailed_results": {
+    "subscription_tier_access": {
+      "個人版": {
+        "expected_stages": 2,
+        "actual_stages": 2,
+        "tier_limit": 2,
+        "test_passed": true
+      },
+      "專業版": {
+        "expected_stages": 4,
+        "actual_stages": 4,
+        "tier_limit": 4,
+        "test_passed": true
+      },
+      "團隊版": {
+        "expected_stages": 5,
+        "actual_stages": 5,
+        "tier_limit": 5,
+        "test_passed": true
+      },
+      "企業版": {
+        "expected_stages": 7,
+        "actual_stages": 7,
+        "tier_limit": 7,
+        "test_passed": true
+      }
+    },
+    "workflow_types": {
+      "代碼生成工作流": {
+        "workflow_id": "990fb27f-7a63-4e7c-9b42-7140fbb3095e",
+        "available_stages": 7,
+        "status": "initialized",
+        "test_passed": true
+      },
+      "UI設計工作流": {
+        "workflow_id": "c5160d8c-01a9-425c-8438-acc3e9d4534b",
+        "available_stages": 7,
+        "status": "initialized",
+        "test_passed": true
+      },
+      "API開發工作流": {
+        "workflow_id": "d82c5169-7ba6-400e-8fc3-bd8d6b65a4fe",
+        "available_stages": 7,
+        "status": "initialized",
+        "test_passed": true
+      },
+      "數據庫設計工作流": {
+        "workflow_id": "d6c6ba96-71ff-4743-b774-8e4efa4d0d2c",
+        "available_stages": 7,
+        "status": "initialized",
+        "test_passed": true
+      },
+      "測試自動化工作流": {
+        "workflow_id": "06c09e58-a871-4bb7-9712-bab3eecbaa50",
+        "available_stages": 7,
+        "status": "initialized",
+        "test_passed": true
+      },
+      "部署流水線工作流": {
+        "workflow_id": "bb1cfb36-c527-4540-a396-9c2cb52f3453",
+        "available_stages": 7,
+        "status": "initialized",
+        "test_passed": true
+      }
+    },
+    "ui_layout_rendering": {
+      "code_generation": {
+        "panels_exist": true,
+        "workflow_info_exists": true,
+        "panel_count": 3,
+        "test_passed": true
+      },
+      "ui_design": {
+        "panels_exist": true,
+        "workflow_info_exists": true,
+        "panel_count": 3,
+        "test_passed": true
+      },
+      "api_development": {
+        "panels_exist": true,
+        "workflow_info_exists": true,
+        "panel_count": 3,
+        "test_passed": true
+      }
+    },
+    "stage_execution": {
+      "workflow_id": "5f9d81fe-9e8a-4dfb-83db-58901c30a131",
+      "executed_stages": 2,
+      "total_stages": 4,
+      "execution_results": [
+        {
+          "stage_id": "trigger",
+          "stage_name": "觸發器配置",
+          "success": true,
+          "execution_time": 0.00015997886657714844,
+          "result": {
+            "status": "completed",
+            "stage_id": "trigger",
+            "execution_time": 0.0001399517059326172,
+            "result": {
+              "codeflow_workflow_id": "3e349f35-9fa0-413b-b472-65ba10f584e9",
+              "stage_output": {},
+              "status": "completed"
+            },
+            "ui_state": {
+              "left_panel": {
+                "type": "workflow_navigation",
+                "components": [
+                  "workflow_tree",
+                  "stage_progress"
+                ],
+                "active_workflow": "code_generation",
+                "show_stage_progress": true
+              },
+              "center_editor": {
+                "type": "main_editor",
+                "components": [
+                  "code_viewer",
+                  "config_editor"
+                ],
+                "active_editor": "code_viewer",
+                "show_tabs": true
+              },
+              "right_panel": {
+                "type": "properties_and_tools",
+                "components": [
+                  "properties",
+                  "preview",
+                  "help"
+                ],
+                "collapsed": false,
+                "show_help": true
+              },
+              "active_workflow": "code_generation",
+              "current_stage": "trigger",
+              "subscription_tier": 
