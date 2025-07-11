@@ -291,7 +291,7 @@
 ## 📁 测试文件结构
 
 ```
-aicore0707/deployment/devices/mac/v4.5.0/tests/
+aicore0707/deployment/devices/mac/v4.6.0.0/tests/
 ├── real_functional_test_suite_200.py      # 200项真实测试套件
 ├── comprehensive_test_suite.py            # 综合测试套件
 ├── unit/                                  # 单元测试
@@ -313,7 +313,7 @@ aicore0707/deployment/devices/mac/v4.5.0/tests/
 
 ### 📋 运行所有测试
 ```bash
-cd aicore0707/deployment/devices/mac/v4.5.0
+cd aicore0707/deployment/devices/mac/v4.6.0.0
 python tests/real_functional_test_suite_200.py
 ```
 
@@ -390,6 +390,6 @@ python tests/real_functional_test_suite_200.py --report
 如有测试相关问题，请联系开发团队。
 
 **文档生成时间**: 2025-01-09
-**版本**: aicore0707 v4.5.0
+**版本**: aicore0707 v4.6.0.0
 **测试套件版本**: 200项真实测试 v1.0
 

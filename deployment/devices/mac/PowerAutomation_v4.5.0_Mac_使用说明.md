@@ -1,8 +1,8 @@
-# PowerAutomation v4.5 Mac版本使用說明
+# PowerAutomation v4.6.0 Mac版本使用說明
 
-## 🚀 ClaudEditor 4.5 - Manus競爭者版本
+## 🚀 ClaudEditor 4.6.0 - Manus競爭者版本
 
-**版本**: 4.5.0  
+**版本**: 4.6.0.0  
 **發布日期**: 2025-01-10  
 **平台**: macOS 10.15+  
 **代號**: "Manus Competitor"
@@ -12,7 +12,7 @@
 ## 📥 快速下載
 
 ### 官方下載連結
-- **GitHub Release**: https://github.com/alexchuang650730/aicore0711/releases/tag/v4.5.0
+- **GitHub Release**: https://github.com/alexchuang650730/aicore0711/releases/tag/v4.6.0.0
 - **直接下載**: https://github.com/alexchuang650730/aicore0711/archive/refs/heads/main.zip
 
 ### 系統要求
@@ -134,7 +134,7 @@ rm -rf venv
 
 ---
 
-## 🆕 v4.5 新功能使用指南
+## 🆕 v4.6.0 新功能使用指南
 
 ### 1. 自主任務執行
 ```javascript
@@ -214,7 +214,7 @@ python -m core.components.intelligent_error_handler_mcp.error_handler
 ## 🏆 與Manus對比
 
 ### 使用體驗對比
-| 功能 | ClaudEditor v4.5 | Manus | 優勢說明 |
+| 功能 | ClaudEditor v4.6.0 | Manus | 優勢說明 |
 |------|------------------|-------|----------|
 | **啟動速度** | ⚡ 10-15秒 | 🐌 30-60秒 | 本地啟動更快 |
 | **響應時間** | 🚀 50-200ms | 🐌 500-2000ms | 本地處理優勢 |
@@ -410,6 +410,6 @@ watch -n 1 'ps aux | grep python'
 
 ---
 
-**享受使用 PowerAutomation v4.5！讓我們一起重新定義AI編程的未來！** 🚀
+**享受使用 PowerAutomation v4.6.0！讓我們一起重新定義AI編程的未來！** 🚀
 
 *如有任何問題，歡迎透過GitHub Issues聯繫我們。*

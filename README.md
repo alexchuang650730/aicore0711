@@ -1,10 +1,10 @@
-# PowerAutomation v4.5.0 - 企業級AI自動化平台
+# PowerAutomation v4.6.0.0 - 企業級AI自動化平台
 
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 [![Python 3.8+](https://img.shields.io/badge/python-3.8+-blue.svg)](https://www.python.org/downloads/)
 [![Node.js 16+](https://img.shields.io/badge/node.js-16+-green.svg)](https://nodejs.org/)
 
-PowerAutomation v4.5.0 是一個革命性的企業級AI自動化平台，專為現代軟體開發團隊設計，提供零代碼測試、AI智能協作和完整的開發生態系統。
+PowerAutomation v4.6.0.0 是一個革命性的企業級AI自動化平台，專為現代軟體開發團隊設計，提供零代碼測試、AI智能協作和完整的開發生態系統。
 
 ## 🚀 核心特性
 
@@ -23,7 +23,7 @@ PowerAutomation v4.5.0 是一個革命性的企業級AI自動化平台，專為�
 - **可擴展生態**：豐富的第三方組件和插件系統
 - **企業級集成**：支援JIRA、Confluence、GitLab等企業工具
 
-### 🎨 ClaudEditor v4.5 集成
+### 🎨 ClaudEditor v4.6.0 集成
 - **視覺化編程**：拖拽式測試用例設計
 - **實時協作**：多人同時編輯和審查測試用例
 - **智能建議**：AI提供測試優化建議和覆蓋率分析
@@ -256,6 +256,6 @@ git push origin feature/your-feature-name
 ---
 
 <div align="center">
-<b>PowerAutomation v4.5.0 - 讓AI驅動您的測試自動化之旅</b><br>
+<b>PowerAutomation v4.6.0.0 - 讓AI驅動您的測試自動化之旅</b><br>
 🚀 零代碼 | 🧠 AI智能 | 🛠 企業級 | 🎯 高效率
 </div>

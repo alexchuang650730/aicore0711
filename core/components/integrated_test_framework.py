@@ -1,5 +1,5 @@
 """
-PowerAutomation v4.5.0 完整集成測試框架
+PowerAutomation v4.6.0.0 完整集成測試框架
 基於現有測試用例包和test mcp/stagewise mcp組件構建
 """
 
@@ -78,7 +78,7 @@ class TestMCPIntegration:
     async def initialize_test_environment(self) -> bool:
         """初始化測試環境"""
         try:
-            self.logger.info("🚀 初始化PowerAutomation v4.5.0測試環境")
+            self.logger.info("🚀 初始化PowerAutomation v4.6.0.0測試環境")
             
             # 初始化測試數據庫
             await self._setup_test_database()
@@ -490,7 +490,7 @@ class IntegratedTestSuite:
     
     async def run_comprehensive_tests(self) -> Dict[str, Any]:
         """運行綜合測試"""
-        self.logger.info("🚀 開始運行PowerAutomation v4.5.0綜合測試套件")
+        self.logger.info("🚀 開始運行PowerAutomation v4.6.0.0綜合測試套件")
         
         test_session = {
             "session_id": self.test_session_id,
@@ -532,7 +532,7 @@ class IntegratedTestSuite:
             ui_results = await self._run_ui_tests()
             test_session["tests"]["ui_tests"] = ui_results
             
-            # 4.5. 運行ClaudEditor v4.5專項測試
+            # 4.6.0. 運行ClaudEditor v4.6.0專項測試
             claudeditor_results = await self._run_claudeditor_tests()
             test_session["tests"]["claudeditor_tests"] = claudeditor_results
             
@@ -670,8 +670,8 @@ class IntegratedTestSuite:
         return results
     
     async def _run_claudeditor_tests(self) -> List[TestResult]:
-        """運行ClaudEditor v4.5專項測試"""
-        self.logger.info("🎯 運行ClaudEditor v4.5專項測試")
+        """運行ClaudEditor v4.6.0專項測試"""
+        self.logger.info("🎯 運行ClaudEditor v4.6.0專項測試")
         results = []
         
         try:
@@ -719,7 +719,7 @@ class IntegratedTestSuite:
             steps=self._convert_claudeditor_actions_to_steps(claudeditor_test_case.actions),
             expected_results=self._convert_claudeditor_expected_results(claudeditor_test_case.expected_results),
             priority=claudeditor_test_case.priority.value if hasattr(claudeditor_test_case.priority, 'value') else str(claudeditor_test_case.priority),
-            tags=claudeditor_test_case.tags + ["claudeditor", "v4.5"]
+            tags=claudeditor_test_case.tags + ["claudeditor", "v4.6.0"]
         )
     
     def _convert_claudeditor_actions_to_steps(self, actions: List[Dict[str, Any]]) -> List[Dict[str, Any]]:
@@ -799,7 +799,7 @@ class IntegratedTestSuite:
                 {
                     "action": "verify_text",
                     "selector": "h1",
-                    "expected": "ClaudEditor v4.5"
+                    "expected": "ClaudEditor v4.6.0"
                 }
             ],
             expected_results=[
@@ -962,7 +962,7 @@ class IntegratedTestSuite:
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>PowerAutomation v4.5.0 測試報告</title>
+    <title>PowerAutomation v4.6.0.0 測試報告</title>
     <style>
         body {{ font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; margin: 20px; background-color: #f5f5f5; }}
         .container {{ max-width: 1200px; margin: 0 auto; background: white; padding: 30px; border-radius: 10px; box-shadow: 0 2px 10px rgba(0,0,0,0.1); }}
@@ -985,7 +985,7 @@ class IntegratedTestSuite:
 <body>
     <div class="container">
         <div class="header">
-            <h1>🚀 PowerAutomation v4.5.0 測試報告</h1>
+            <h1>🚀 PowerAutomation v4.6.0.0 測試報告</h1>
             <p>測試會話ID: {test_session['session_id']}</p>
             <p>執行時間: {test_session.get('start_time', 'N/A')} - {test_session.get('end_time', 'N/A')}</p>
         </div>
@@ -1029,7 +1029,7 @@ class IntegratedTestSuite:
             "unit_tests": "🧪 單元測試",
             "integration_tests": "🔗 集成測試", 
             "ui_tests": "🖥️ UI測試",
-            "claudeditor_tests": "🎯 ClaudEditor v4.5測試",
+            "claudeditor_tests": "🎯 ClaudEditor v4.6.0測試",
             "e2e_tests": "🌍 端到端測試"
         }
         
@@ -1140,7 +1140,7 @@ async def main():
         # 打印測試結果
         summary = test_session["summary"]
         logger.info("="*80)
-        logger.info("📊 PowerAutomation v4.5.0 測試總結")
+        logger.info("📊 PowerAutomation v4.6.0.0 測試總結")
         logger.info("="*80)
         logger.info(f"總測試數: {summary['total']}")
         logger.info(f"通過: {summary['passed']}")

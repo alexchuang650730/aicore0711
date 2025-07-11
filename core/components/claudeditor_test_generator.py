@@ -1,6 +1,6 @@
 """
-PowerAutomation v4.5.0 ClaudEditor集成測試用例生成器
-基於ClaudEditor v4.5的測試模板，整合stagewise mcp和test mcp組件
+PowerAutomation v4.6.0 ClaudEditor集成測試用例生成器
+基於ClaudEditor v4.6的測試模板，整合stagewise mcp和test mcp組件
 """
 
 import asyncio
@@ -121,7 +121,7 @@ class ClaudEditorTestCaseGenerator:
                 'timeout': 30
             },
             'test_data': {
-                'sample_code': 'console.log("Hello ClaudEditor v4.5");',
+                'sample_code': 'console.log("Hello ClaudEditor v4.6.0");',
                 'test_project_name': 'ClaudEditor測試項目',
                 'test_user': 'TestUser'
             },
@@ -139,8 +139,8 @@ class ClaudEditorTestCaseGenerator:
         # 1. 應用啟動測試
         startup_test = ClaudEditorTestCase(
             id="CE_001",
-            name="ClaudEditor v4.5 應用啟動測試",
-            description="驗證ClaudEditor v4.5能夠正常啟動並加載所有核心功能",
+            name="ClaudEditor v4.6 應用啟動測試",
+            description="驗證ClaudEditor v4.6能夠正常啟動並加載所有核心功能",
             stage=TestStage.SETUP,
             priority=TestPriority.CRITICAL,
             actions=[
@@ -164,7 +164,7 @@ class ClaudEditorTestCaseGenerator:
                 {
                     "type": "verify_text",
                     "target": "h1",
-                    "value": "ClaudEditor v4.5",
+                    "value": "ClaudEditor v4.6",
                     "description": "驗證版本標題"
                 }
             ],
@@ -193,7 +193,7 @@ class ClaudEditorTestCaseGenerator:
         ai_interaction_test = ClaudEditorTestCase(
             id="CE_002", 
             name="AI助手自主任務執行測試",
-            description="測試ClaudEditor v4.5的自主任務執行功能，驗證超越Manus的核心優勢",
+            description="測試ClaudEditor v4.6的自主任務執行功能，驗證超越Manus的核心優勢",
             stage=TestStage.FUNCTIONAL,
             priority=TestPriority.HIGH,
             actions=[
@@ -265,7 +265,7 @@ class ClaudEditorTestCaseGenerator:
         project_analysis_test = ClaudEditorTestCase(
             id="CE_003",
             name="項目級代碼理解測試",
-            description="測試ClaudEditor v4.5的項目級分析能力，展示超越Manus片段理解的優勢",
+            description="測試ClaudEditor v4.6的項目級分析能力，展示超越Manus片段理解的優勢",
             stage=TestStage.FUNCTIONAL,
             priority=TestPriority.HIGH,
             actions=[
@@ -341,7 +341,7 @@ class ClaudEditorTestCaseGenerator:
         performance_test = ClaudEditorTestCase(
             id="CE_PERF_001",
             name="響應速度性能測試",
-            description="測試ClaudEditor v4.5的響應速度，驗證5-10倍於Manus的性能優勢",
+            description="測試ClaudEditor v4.6的響應速度，驗證5-10倍於Manus的性能優勢",
             stage=TestStage.PERFORMANCE,
             priority=TestPriority.HIGH,
             actions=[
@@ -412,7 +412,7 @@ class ClaudEditorTestCaseGenerator:
         offline_test = ClaudEditorTestCase(
             id="CE_OFFLINE_001",
             name="離線功能可用性測試",
-            description="測試ClaudEditor v4.5的離線工作能力，展示相對Manus的獨特優勢",
+            description="測試ClaudEditor v4.6的離線工作能力，展示相對Manus的獨特優勢",
             stage=TestStage.FUNCTIONAL,
             priority=TestPriority.MEDIUM,
             actions=[
@@ -486,7 +486,7 @@ class ClaudEditorTestCaseGenerator:
         collaboration_test = ClaudEditorTestCase(
             id="CE_COLLAB_001",
             name="會話分享和回放測試",
-            description="測試ClaudEditor v4.5的高級協作功能，展示超越Manus基礎分享的能力",
+            description="測試ClaudEditor v4.6的高級協作功能，展示超越Manus基礎分享的能力",
             stage=TestStage.FUNCTIONAL,
             priority=TestPriority.MEDIUM,
             actions=[
@@ -583,7 +583,7 @@ class ClaudEditorTestCaseGenerator:
         all_tests.extend(self.generate_competitive_advantage_tests())
         all_tests.extend(self.generate_collaboration_tests())
         
-        self.logger.info(f"生成了 {len(all_tests)} 個ClaudEditor v4.5測試用例")
+        self.logger.info(f"生成了 {len(all_tests)} 個ClaudEditor v4.6測試用例")
         
         return all_tests
     
@@ -599,10 +599,10 @@ class ClaudEditorTestCaseGenerator:
         with open(output_path, 'w', encoding='utf-8') as f:
             json.dump({
                 "metadata": {
-                    "version": "4.5.0",
+                    "version": "4.6.0",
                     "generated_at": datetime.now().isoformat(),
                     "total_tests": len(test_cases),
-                    "description": "ClaudEditor v4.5.0 自動生成測試用例"
+                    "description": "ClaudEditor v4.6.0 自動生成測試用例"
                 },
                 "test_cases": test_cases_dict
             }, f, indent=2, ensure_ascii=False)
@@ -756,7 +756,7 @@ async def main():
     output_path = "claudeditor_v45_test_cases.json"
     generator.export_test_cases_to_json(test_cases, output_path)
     
-    logger.info(f"✅ 成功生成 {len(test_cases)} 個ClaudEditor v4.5測試用例")
+    logger.info(f"✅ 成功生成 {len(test_cases)} 個ClaudEditor v4.6測試用例")
     
     # 打印測試用例概要
     for priority in TestPriority:

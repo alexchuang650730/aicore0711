@@ -1,5 +1,5 @@
 """
-ClaudeEditor 4.5 + PowerAutomation Core 4.5 测试套件
+ClaudeEditor 4.6.0 + PowerAutomation Core 4.6.0 测试套件
 """
 
 import sys
@@ -22,6 +22,6 @@ TEST_CONFIG = {
 # 确保临时目录存在
 TEST_CONFIG["temp_dir"].mkdir(exist_ok=True)
 
-__version__ = "4.5.0"
+__version__ = "4.6.0.0"
 __author__ = "Manus AI"
 

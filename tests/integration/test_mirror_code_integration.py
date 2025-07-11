@@ -13,7 +13,7 @@ from datetime import datetime
 
 # 导入Mirror Code组件
 import sys
-sys.path.append('/home/ubuntu/claudeditor-4.5')
+sys.path.append('/home/ubuntu/claudeditor-4.6.0')
 
 from core.mirror_code.engine.mirror_engine import MirrorEngine, MirrorConfig
 from core.mirror_code.engine.claude_cli_manager import ClaudeCLIManager
@@ -279,7 +279,7 @@ def run_integration_tests():
             "-v", 
             "--tb=short",
             "--asyncio-mode=auto"
-        ], capture_output=True, text=True, cwd="/home/ubuntu/claudeditor-4.5")
+        ], capture_output=True, text=True, cwd="/home/ubuntu/claudeditor-4.6.0")
         
         print("📊 测试结果:")
         print(result.stdout)

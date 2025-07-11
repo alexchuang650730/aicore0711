@@ -127,7 +127,7 @@ components/claudia_integration/
 - ✅ WebSocket连接稳定性>99.9%
 - 🔄 Monaco Editor响应时间<200ms (目标)
 - 📋 GitHub同步延迟<1秒 (目标)
-- 📋 用户界面满意度>4.5/5 (目标)
+- 📋 用户界面满意度>4.6.0/5 (目标)
 
 ---
 

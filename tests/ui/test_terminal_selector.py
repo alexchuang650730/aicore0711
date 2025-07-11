@@ -1,6 +1,6 @@
 """
 Terminal Selector UI Tests - 终端选择器UI测试
-测试ClaudeEditor 4.5快速区域的终端连接功能
+测试ClaudeEditor 4.6.0快速区域的终端连接功能
 """
 
 import pytest

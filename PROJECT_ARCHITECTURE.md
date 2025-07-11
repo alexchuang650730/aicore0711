@@ -1,4 +1,4 @@
-# PowerAutomation v4.5.0 項目架構文檔
+# PowerAutomation v4.6.0.0 項目架構文檔
 
 ## 🏗️ 完整項目結構
 
@@ -112,7 +112,7 @@ aicore0711/
 │       └── mac/                        # macOS部署
 │           ├── v4.3.0/                 # 版本4.3.0
 │           ├── v4.4.0/                 # 版本4.4.0
-│           └── v4.5.0/                 # 版本4.5.0（最新）
+│           └── v4.6.0.0/                 # 版本4.6.0.0（最新）
 ├── tests/                              # 測試套件
 │   ├── __init__.py
 │   ├── unit/                           # 單元測試
@@ -155,7 +155,7 @@ PowerAutomation Core
 └── Zen MCP (工具生態)
 ```
 
-### 2. ClaudEditor v4.5架構
+### 2. ClaudEditor v4.6.0架構
 ```
 ClaudEditor Frontend (React + Vite)
 ├── Monaco Editor (代碼編輯)
@@ -217,7 +217,7 @@ Mirror Code System
 - 完整的測試報告生成
 
 #### 2. **ClaudEditor Test Generator**
-- ClaudEditor v4.5專項測試生成
+- ClaudEditor v4.6.0專項測試生成
 - Manus AI競爭優勢測試
 - 自主任務執行測試
 - 性能基準測試
@@ -339,9 +339,9 @@ python scripts/deploy.py --target local
 
 ## 🎉 版本發布策略
 
-### v4.5.0 (當前版本)
+### v4.6.0.0 (當前版本)
 - ✅ 完整MCP生態系統
-- ✅ ClaudEditor v4.5集成
+- ✅ ClaudEditor v4.6.0集成
 - ✅ AG-UI測試界面
 - ✅ Mirror Code端雲同步
 
@@ -357,4 +357,4 @@ python scripts/deploy.py --target local
 
 ---
 
-**此架構文檔描述了PowerAutomation v4.5.0的完整技術架構，包含了所有核心組件、MCP生態系統、ClaudEditor集成、Mirror Code系統和AG-UI界面生成能力，為企業級AI自動化測試提供了完整的解決方案。**
+**此架構文檔描述了PowerAutomation v4.6.0.0的完整技術架構，包含了所有核心組件、MCP生態系統、ClaudEditor集成、Mirror Code系統和AG-UI界面生成能力，為企業級AI自動化測試提供了完整的解決方案。**

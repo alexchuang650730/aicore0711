@@ -945,7 +945,8 @@ class TestReportGenerator:
         
         <div class="footer">
             <p>🤖 PowerAutomation 測試報告系統 - 自動生成於 {{ generation_time }}</p>
-            <p>報告版本: v1.0.0 | 系統: PowerAutomation v4.8.0</p>
+            <p>報告版本: v1.0.0 | 系統: PowerAutomation v4.6.0</p>
+            <p>測試技術: Test MCP + Stagewise MCP + AG-UI MCP + Selenium + pytest</p>
         </div>
     </div>
 </body>
@@ -1093,7 +1094,7 @@ def main():
     report_path = generator.generate_comprehensive_report(
         sample_test_results,
         metadata={
-            "版本": "v4.8.0",
+            "版本": "v4.6.0",
             "分支": "main",
             "提交": "abc123ef",
             "執行者": "GitHub Actions",

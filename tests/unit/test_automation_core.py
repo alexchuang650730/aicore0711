@@ -300,8 +300,8 @@ class TestCoreConfig:
         """测试默认值"""
         config = CoreConfig()
         
-        assert config.app_name == "PowerAutomation Core 4.5"
-        assert config.version == "4.5.0"
+        assert config.app_name == "PowerAutomation Core 4.6.0"
+        assert config.version == "4.6.0.0"
         assert config.environment == "edge"
         assert config.max_concurrent_workflows == 10
         assert config.max_concurrent_tasks == 50

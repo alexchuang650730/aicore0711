@@ -1,6 +1,6 @@
-# PowerAutomation v4.5 - ClaudEditor 競爭Manus版本
+# PowerAutomation v4.6.0 - ClaudEditor 競爭Manus版本
 
-## 🎉 Release Notes v4.5.0
+## 🎉 Release Notes v4.6.0.0
 **發布日期**: 2025-01-10  
 **代號**: "Manus Competitor" - 專業開發者的AI代碼編輯器
 
@@ -8,11 +8,11 @@
 
 ## 🚀 重大更新：與Manus正面競爭
 
-PowerAutomation v4.5 + ClaudEditor 是專門為與Manus AI競爭而開發的版本，提供**更專業、更快速、更安全**的AI編程體驗。
+PowerAutomation v4.6.0 + ClaudEditor 是專門為與Manus AI競爭而開發的版本，提供**更專業、更快速、更安全**的AI編程體驗。
 
 ### 🎯 核心競爭優勢
 
-| 功能領域 | ClaudEditor v4.5 | Manus | 我們的優勢 |
+| 功能領域 | ClaudEditor v4.6.0 | Manus | 我們的優勢 |
 |---------|------------------|-------|-----------|
 | **隱私保護** | 🔒 完全本地處理 | ❌ 雲端依賴 | **代碼永不離開您的機器** |
 | **專業化程度** | 🛠️ 專為編程設計 | ❌ 通用商務工具 | **深度開發者體驗** |
@@ -72,7 +72,7 @@ PowerAutomation v4.5 + ClaudEditor 是專門為與Manus AI競爭而開發的版�
 
 ### 多服務架構
 ```
-ClaudEditor v4.5 服務架構：
+ClaudEditor v4.6.0 服務架構：
 ├── 主服務 (Port 8080) - 核心功能
 ├── AI助手後端 (Port 8082) - 自主任務執行  
 ├── 會話分享服務 (Port 8083) - 實時協作
@@ -184,7 +184,7 @@ git pull origin main
 
 ### 手動升級
 1. 備份重要配置和數據
-2. 下載v4.5安裝包
+2. 下載v4.6.0安裝包
 3. 覆蓋安裝
 4. 恢復配置文件
 5. 重新啟動服務
@@ -271,13 +271,13 @@ git pull origin main
 
 ## 🏆 致謝
 
-感謝所有為PowerAutomation v4.5做出貢獻的開發者和用戶！特別感謝：
+感謝所有為PowerAutomation v4.6.0做出貢獻的開發者和用戶！特別感謝：
 
 - Claude Code團隊提供的強大AI編程能力
 - 開源社群的寶貴反饋和建議
 - 早期測試用戶的耐心測試和報告
 
-**PowerAutomation v4.5 - 讓專業開發者重新掌控AI編程的未來！** 🚀
+**PowerAutomation v4.6.0 - 讓專業開發者重新掌控AI編程的未來！** 🚀
 
 ---
 

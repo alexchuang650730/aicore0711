@@ -30,7 +30,7 @@ def test_config():
     """测试配置"""
     return CoreConfig(
         app_name="ClaudeEditor Test",
-        version="4.5.0-test",
+        version="4.6.0.0-test",
         environment="test",
         max_concurrent_workflows=5,
         max_concurrent_tasks=10,

@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """
-ClaudeEditor 4.5 测试运行脚本
+ClaudeEditor 4.6.0 测试运行脚本
 提供便捷的测试执行和报告功能
 """
 
@@ -217,7 +217,7 @@ def check_test_environment():
 
 def main():
     """主函数"""
-    parser = argparse.ArgumentParser(description="ClaudeEditor 4.5 测试运行器")
+    parser = argparse.ArgumentParser(description="ClaudeEditor 4.6.0 测试运行器")
     
     parser.add_argument("--install-deps", action="store_true", help="安装测试依赖")
     parser.add_argument("--check-env", action="store_true", help="检查测试环境")

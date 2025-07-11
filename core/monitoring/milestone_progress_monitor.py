@@ -447,7 +447,7 @@ class MilestoneProgressMonitor:
         q3_milestone = MilestoneProgress(
             milestone_id="milestone_4_8_0",
             name="企業自動化平台",
-            version="4.8.0",
+            version="4.6.0",
             quarter="Q3 2025",
             status=MilestoneStatus.IN_PROGRESS,
             overall_progress=5.0,

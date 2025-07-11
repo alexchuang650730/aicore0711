@@ -1,6 +1,6 @@
-# PowerAutomation v4.5.0 Release Notes
+# PowerAutomation v4.6.0.0 Release Notes
 
-## 🎉 版本 4.5.0 - "AI生態系統深度集成" (2025-01-11)
+## 🎉 版本 4.6.0.0 - "AI生態系統深度集成" (2025-01-11)
 
 ### 🚀 重大更新
 
@@ -9,7 +9,7 @@
 - **AI驅動測試生成**：集成Claude 3.5 Sonnet和GPT-4的智能測試用例生成
 - **多維度測試支援**：單元測試、集成測試、UI測試、端到端測試的完整覆蓋
 
-#### 2. ClaudEditor v4.5深度集成
+#### 2. ClaudEditor v4.6.0深度集成
 - **競爭優勢測試**：針對Manus AI的性能對比測試套件
 - **自主任務執行**：一次性完成複雜任務，無需持續指導
 - **項目級理解**：全局架構感知和完整依賴分析
@@ -93,7 +93,7 @@ agui_interface = await test_suite._generate_agui_test_interface(test_session)
 
 ### 🔄 遷移指南
 
-從v4.4.0升級到v4.5.0：
+從v4.4.0升級到v4.6.0.0：
 
 1. **更新依賴**：
    ```bash
@@ -114,7 +114,7 @@ agui_interface = await test_suite._generate_agui_test_interface(test_session)
    - 舊的測試用例需要適配新的測試框架
    - 使用遷移工具自動轉換：
    ```bash
-   python tools/migrate_tests.py --from v4.4.0 --to v4.5.0
+   python tools/migrate_tests.py --from v4.4.0 --to v4.6.0.0
    ```
 
 ### 📈 性能基準
@@ -193,4 +193,4 @@ agui_interface = await test_suite._generate_agui_test_interface(test_session)
 2. 提交[Issues](https://github.com/alexchuang650730/aicore0707/issues)
 3. 聯繫郵箱：alexchuang650730@gmail.com
 
-**下載連結**：[PowerAutomation v4.5.0](https://github.com/alexchuang650730/aicore0707/releases/tag/v4.5.0)
+**下載連結**：[PowerAutomation v4.6.0.0](https://github.com/alexchuang650730/aicore0707/releases/tag/v4.6.0.0)

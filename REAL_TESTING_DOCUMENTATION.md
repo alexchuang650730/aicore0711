@@ -274,7 +274,7 @@ def test_011_context_length_capacity(self):
 pip install psutil websocket-client pyyaml
 
 # 进入测试目录
-cd aicore0707/deployment/devices/mac/v4.5.0
+cd aicore0707/deployment/devices/mac/v4.6.0.0
 ```
 
 ### 运行完整测试

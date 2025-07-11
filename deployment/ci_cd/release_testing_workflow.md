@@ -22,7 +22,7 @@ Release Trigger → test_mcp Testing → Quality Gate → Deployment
 ### 阶段1: Release触发 (Release Trigger)
 ```yaml
 触发条件:
-  - Git Tag推送 (格式: v4.4.x, v4.5.x等)
+  - Git Tag推送 (格式: v4.4.x, v4.6.0.x等)
   - Release分支合并到main
   - 手动触发 (紧急发布)
 

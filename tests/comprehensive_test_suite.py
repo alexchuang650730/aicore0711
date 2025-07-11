@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 """
-ClaudeEditor 4.5 + PowerAutomation Core 4.5 综合测试套件
-基于上传的4.5集成计划，实现完整的测试覆盖
+ClaudeEditor 4.6.0 + PowerAutomation Core 4.6.0 综合测试套件
+基于上传的4.6.0集成计划，实现完整的测试覆盖
 """
 
 import asyncio
@@ -24,12 +24,12 @@ logger = logging.getLogger(__name__)
 
 
 class ClaudeEditorTestSuite(unittest.TestCase):
-    """ClaudeEditor 4.5 组件测试套件"""
+    """ClaudeEditor 4.6.0 组件测试套件"""
     
     def setUp(self):
         """测试初始化"""
         self.config = {
-            "version": "4.5.0",
+            "version": "4.6.0.0",
             "features": {
                 "hitl_integration": True,
                 "cloud_sync": True,
@@ -45,14 +45,14 @@ class ClaudeEditorTestSuite(unittest.TestCase):
     
     def test_claudeditor_initialization(self):
         """测试ClaudeEditor初始化"""
-        logger.info("测试ClaudeEditor 4.5初始化")
+        logger.info("测试ClaudeEditor 4.6.0初始化")
         
         # 模拟ClaudeEditor初始化
         editor = Mock()
-        editor.version = "4.5.0"
+        editor.version = "4.6.0.0"
         editor.features = self.config["features"]
         
-        self.assertEqual(editor.version, "4.5.0")
+        self.assertEqual(editor.version, "4.6.0.0")
         self.assertTrue(editor.features["hitl_integration"])
         self.assertTrue(editor.features["cloud_sync"])
         self.assertTrue(editor.features["mac_native"])
@@ -110,12 +110,12 @@ class ClaudeEditorTestSuite(unittest.TestCase):
 
 
 class PowerAutomationCoreTestSuite(unittest.TestCase):
-    """PowerAutomation Core 4.5 测试套件"""
+    """PowerAutomation Core 4.6.0 测试套件"""
     
     def setUp(self):
         """测试初始化"""
         self.config = {
-            "version": "4.5.0",
+            "version": "4.6.0.0",
             "core_features": {
                 "mcp_coordinator": True,
                 "workflow_engine": True,
@@ -131,14 +131,14 @@ class PowerAutomationCoreTestSuite(unittest.TestCase):
     
     def test_powerautomation_core_initialization(self):
         """测试PowerAutomation Core初始化"""
-        logger.info("测试PowerAutomation Core 4.5初始化")
+        logger.info("测试PowerAutomation Core 4.6.0初始化")
         
         # 模拟Core初始化
         core = Mock()
-        core.version = "4.5.0"
+        core.version = "4.6.0.0"
         core.features = self.config["core_features"]
         
-        self.assertEqual(core.version, "4.5.0")
+        self.assertEqual(core.version, "4.6.0.0")
         self.assertTrue(core.features["mcp_coordinator"])
         self.assertTrue(core.features["workflow_engine"])
         self.assertTrue(core.features["cloud_deployment"])
@@ -206,7 +206,7 @@ class EdgeCloudDeploymentTestSuite(unittest.TestCase):
     def setUp(self):
         """测试初始化"""
         self.deployment_config = {
-            "version": "4.5.0",
+            "version": "4.6.0.0",
             "edge_config": {
                 "platform": "macos",
                 "runtime": "tauri",
@@ -481,7 +481,7 @@ class ComprehensiveTestRunner:
     
     def run_all_tests(self) -> Dict[str, Any]:
         """运行所有测试套件"""
-        logger.info("🚀 开始运行ClaudeEditor 4.5 + PowerAutomation Core 4.5综合测试")
+        logger.info("🚀 开始运行ClaudeEditor 4.6.0 + PowerAutomation Core 4.6.0综合测试")
         logger.info("="*80)
         
         overall_results = {
@@ -542,7 +542,7 @@ class ComprehensiveTestRunner:
     def print_summary(self, results: Dict[str, Any]):
         """打印测试总结"""
         logger.info("\n" + "="*80)
-        logger.info("📊 ClaudeEditor 4.5 + PowerAutomation Core 4.5 测试总结")
+        logger.info("📊 ClaudeEditor 4.6.0 + PowerAutomation Core 4.6.0 测试总结")
         logger.info("="*80)
         
         summary = results["summary"]
