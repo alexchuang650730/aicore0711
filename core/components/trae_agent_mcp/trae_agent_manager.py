@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 """
 Trae Agent MCP - 智能代理協作平台
-PowerAutomation v4.6.0 多代理協作和任務分發系統
+PowerAutomation v4.6.1 多代理協作和任務分發系統
 
 基於trae agent架構，提供：
 - 多智能代理協作
@@ -378,7 +378,7 @@ class TraeAgentMCPManager:
         """獲取Trae Agent MCP狀態"""
         return {
             "component": "Trae Agent MCP",
-            "version": "4.6.0",
+            "version": "4.6.1",
             "status": "running",
             "total_agents": len(self.agents),
             "active_agents": len([a for a in self.agents.values() if a.status != AgentStatus.OFFLINE]),

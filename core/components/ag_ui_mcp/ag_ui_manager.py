@@ -1,6 +1,6 @@
 """
 AG-UI MCP - 智能UI組件生成器
-PowerAutomation v4.6.0 自動生成UI組件管理平台
+PowerAutomation v4.6.1 自動生成UI組件管理平台
 
 基於aicore0707的AG-UI MCP實現，提供：
 - 智能UI組件生成
@@ -848,7 +848,7 @@ class AGUIMCPManager:
         """獲取AG-UI MCP狀態"""
         return {
             "component": "AG-UI MCP",
-            "version": "4.6.0",
+            "version": "4.6.1",
             "status": "running",
             "generated_interfaces": len(self.generated_interfaces),
             "registered_components": len(self.component_registry),

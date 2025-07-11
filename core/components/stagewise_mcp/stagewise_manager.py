@@ -1,6 +1,6 @@
 """
 Stagewise MCP - 階段式錄製回放系統
-PowerAutomation v4.6.0 智能UI測試錄製與回放平台
+PowerAutomation v4.6.1 智能UI測試錄製與回放平台
 
 基於aicore0707的Stagewise MCP實現，提供：
 - 智能UI操作錄製
@@ -577,7 +577,7 @@ class StagewiseMCPManager:
         """獲取Stagewise MCP狀態"""
         return {
             "component": "Stagewise MCP",
-            "version": "4.6.0",
+            "version": "4.6.1",
             "status": "running",
             "is_recording": self.is_recording,
             "current_session": self.current_session_id,

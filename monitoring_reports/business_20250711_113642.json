@@ -1,0 +1,130 @@
+{
+  "id": "39ab888d-b3b0-4458-a682-f45ec8450907",
+  "report_type": "business",
+  "scope": "MonitoringScope.BUSINESS",
+  "period_start": "2025-07-11T10:36:42.717923",
+  "period_end": "2025-07-11T11:36:42.717923",
+  "summary": {
+    "total_code_generated": 0,
+    "avg_test_coverage": 0,
+    "avg_deployment_success_rate": 0,
+    "productivity_trend": "穩定"
+  },
+  "metrics": [
+    {
+      "name": "system.cpu.usage_percent",
+      "value": 34.0,
+      "timestamp": "2025-07-11T11:36:32.714015",
+      "labels": {
+        "scope": "system"
+      },
+      "metric_type": "MetricType.GAUGE"
+    },
+    {
+      "name": "system.memory.usage_percent",
+      "value": 67.2,
+      "timestamp": "2025-07-11T11:36:32.714015",
+      "labels": {
+        "scope": "system"
+      },
+      "metric_type": "MetricType.GAUGE"
+    },
+    {
+      "name": "system.memory.available_bytes",
+      "value": 5632802816,
+      "timestamp": "2025-07-11T11:36:32.714015",
+      "labels": {
+        "scope": "system"
+      },
+      "metric_type": "MetricType.GAUGE"
+    },
+    {
+      "name": "system.disk.usage_percent",
+      "value": 6.534863339660362,
+      "timestamp": "2025-07-11T11:36:32.714015",
+      "labels": {
+        "scope": "system"
+      },
+      "metric_type": "MetricType.GAUGE"
+    },
+    {
+      "name": "system.network.bytes_sent",
+      "value": 7208795136,
+      "timestamp": "2025-07-11T11:36:32.714015",
+      "labels": {
+        "scope": "system"
+      },
+      "metric_type": "MetricType.COUNTER"
+    },
+    {
+      "name": "system.network.bytes_recv",
+      "value": 6480979968,
+      "timestamp": "2025-07-11T11:36:32.714015",
+      "labels": {
+        "scope": "system"
+      },
+      "metric_type": "MetricType.COUNTER"
+    },
+    {
+      "name": "system.cpu.usage_percent",
+      "value": 30.3,
+      "timestamp": "2025-07-11T11:36:38.723273",
+      "labels": {
+        "scope": "system"
+      },
+      "metric_type": "MetricType.GAUGE"
+    },
+    {
+      "name": "system.memory.usage_percent",
+      "value": 67.0,
+      "timestamp": "2025-07-11T11:36:38.723273",
+      "labels": {
+        "scope": "system"
+      },
+      "metric_type": "MetricType.GAUGE"
+    },
+    {
+      "name": "system.memory.available_bytes",
+      "value": 5672255488,
+      "timestamp": "2025-07-11T11:36:38.723273",
+      "labels": {
+        "scope": "system"
+      },
+      "metric_type": "MetricType.GAUGE"
+    },
+    {
+      "name": "system.disk.usage_percent",
+      "value": 6.534863339660362,
+      "timestamp": "2025-07-11T11:36:38.723273",
+      "labels": {
+        "scope": "system"
+      },
+      "metric_type": "MetricType.GAUGE"
+    },
+    {
+      "name": "system.network.bytes_sent",
+      "value": 7208823808,
+      "timestamp": "2025-07-11T11:36:38.723273",
+      "labels": {
+        "scope": "system"
+      },
+      "metric_type": "MetricType.COUNTER"
+    },
+    {
+      "name": "system.network.bytes_recv",
+      "value": 6481000448,
+      "timestamp": "2025-07-11T11:36:38.723273",
+      "labels": {
+        "scope": "system"
+      },
+      "metric_type": "MetricType.COUNTER"
+    }
+  ],
+  "alerts": [],
+  "insights": [
+    "測試覆蓋率偏低，建議增加測試用例",
+    "部署成功率較低，需要優化部署流程"
+  ],
+  "recommendations": [],
+  "generated_at": "2025-07-11T11:36:42.717949"
+}

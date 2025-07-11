@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 """
 Claude MCP - Claude SDK Integration Manager
-PowerAutomation v4.6.0 Claude API統一管理平台
+PowerAutomation v4.6.1 Claude API統一管理平台
 
 基於aicore0707的Claude MCP實現，提供：
 - Claude API統一接口
@@ -186,16 +186,16 @@ class ClaudeAPIManager:
         context_info = f"對話歷史: {len(conversation.messages)} 條消息"
         
         if "測試" in user_input or "test" in user_input.lower():
-            return f"我理解您想要進行測試。基於PowerAutomation v4.6.0的Test MCP框架，我可以幫助您：\n\n1. 生成自動化測試用例\n2. 設計測試策略\n3. 分析測試結果\n4. 優化測試流程\n\n請告訴我您具體需要什麼類型的測試支援？\n\n{context_info}"
+            return f"我理解您想要進行測試。基於PowerAutomation v4.6.1的Test MCP框架，我可以幫助您：\n\n1. 生成自動化測試用例\n2. 設計測試策略\n3. 分析測試結果\n4. 優化測試流程\n\n請告訴我您具體需要什麼類型的測試支援？\n\n{context_info}"
         
         elif "部署" in user_input or "deploy" in user_input.lower():
-            return f"關於PowerAutomation v4.6.0的部署，我可以協助您：\n\n1. 選擇最適合的部署策略\n2. 配置部署環境\n3. 設置監控和日誌\n4. 處理部署問題\n\n您目前想要部署到哪個環境？(開發/測試/生產)\n\n{context_info}"
+            return f"關於PowerAutomation v4.6.1的部署，我可以協助您：\n\n1. 選擇最適合的部署策略\n2. 配置部署環境\n3. 設置監控和日誌\n4. 處理部署問題\n\n您目前想要部署到哪個環境？(開發/測試/生產)\n\n{context_info}"
         
         elif "MCP" in user_input:
-            return f"PowerAutomation v4.6.0包含完整的MCP生態系統：\n\n🧪 Test MCP - 統一測試管理\n🎬 Stagewise MCP - 錄製回放系統\n🎨 AG-UI MCP - UI組件生成\n🤖 Claude MCP - AI對話管理\n🔧 其他20+專業MCP組件\n\n您想了解哪個MCP組件的詳細功能？\n\n{context_info}"
+            return f"PowerAutomation v4.6.1包含完整的MCP生態系統：\n\n🧪 Test MCP - 統一測試管理\n🎬 Stagewise MCP - 錄製回放系統\n🎨 AG-UI MCP - UI組件生成\n🤖 Claude MCP - AI對話管理\n🔧 其他20+專業MCP組件\n\n您想了解哪個MCP組件的詳細功能？\n\n{context_info}"
         
         else:
-            return f"我是PowerAutomation v4.6.0的AI助手，專門協助您進行企業自動化開發。我可以幫助您：\n\n• 代碼生成和優化\n• 測試策略設計\n• 部署和監控\n• 問題診斷和解決\n\n請告訴我您需要什麼協助？\n\n{context_info}"
+            return f"我是PowerAutomation v4.6.1的AI助手，專門協助您進行企業自動化開發。我可以幫助您：\n\n• 代碼生成和優化\n• 測試策略設計\n• 部署和監控\n• 問題診斷和解決\n\n請告訴我您需要什麼協助？\n\n{context_info}"
     
     async def get_conversation_history(self, conversation_id: str) -> Optional[ClaudeConversation]:
         """獲取對話歷史"""
@@ -281,7 +281,7 @@ class ClaudeAPIManager:
         """獲取Claude MCP狀態"""
         return {
             "component": "Claude MCP",
-            "version": "4.6.0",
+            "version": "4.6.1",
             "status": "running",
             "api_connected": True,
             "active_conversations": len(self.conversations),

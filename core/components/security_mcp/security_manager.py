@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 """
 Security MCP - 企業級安全管理平台
-PowerAutomation v4.6.0 安全控制和合規管理
+PowerAutomation v4.6.1 安全控制和合規管理
 
 基於aicore0707的Security MCP實現，提供：
 - 代碼安全掃描
@@ -457,7 +457,7 @@ class SecurityMCPManager:
         """獲取Security MCP狀態"""
         return {
             "component": "Security MCP",
-            "version": "4.6.0",
+            "version": "4.6.1",
             "status": "running",
             "total_scans": len(self.scan_results),
             "active_users": len(self.permission_manager.users),

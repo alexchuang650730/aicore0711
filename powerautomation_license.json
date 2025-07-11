@@ -1,0 +1,28 @@
+{
+  "license_key": "a8cd6cef-b521-4603-aa9f-8fca5168a8ed",
+  "edition": "EditionTier.PROFESSIONAL",
+  "user_count": 5,
+  "valid_until": "2026-07-11T10:42:20.461112",
+  "features_enabled": [
+    "mcp_test",
+    "mcp_stagewise",
+    "mcp_claude",
+    "mcp_security",
+    "mcp_collaboration",
+    "mcp_intelligent_error_handler",
+    "mcp_project_analyzer",
+    "claudeditor_basic",
+    "claudeditor_ai_assistant",
+    "claudeditor_collaboration",
+    "advanced_analytics"
+  ],
+  "restrictions": {
+    "concurrent_projects": 10,
+    "ai_requests_per_day": 1000,
+    "test_executions_per_day": 500,
+    "collaboration_users": 3,
+    "storage_limit_mb": 10240
+  },
+  "issued_date": "2025-07-11T10:42:20.461125",
+  "organization": "Test Company"
+}

@@ -1,6 +1,6 @@
 """
 Test MCP - Master Control Platform for Testing
-PowerAutomation v4.6.0 統一測試管理平台
+PowerAutomation v4.6.1 統一測試管理平台
 
 基於aicore0707的Test MCP實現，提供：
 - 統一測試管理
@@ -422,7 +422,7 @@ class TestMCPManager:
         """獲取Test MCP狀態"""
         return {
             "component": "Test MCP",
-            "version": "4.6.0",
+            "version": "4.6.1",
             "status": "running",
             "test_suites": len(self.test_suites),
             "active_sessions": len([s for s in self.test_sessions.values() if s["status"] == "running"]),

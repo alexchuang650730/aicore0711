@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 """
 Zen MCP - 智能工作流程編排和執行引擎
-PowerAutomation v4.6.0 - 禪式工作流管理平台
+PowerAutomation v4.6.1 - 禪式工作流管理平台
 
 基於aicore0707的Zen MCP實現，提供：
 - 智能工作流編排
@@ -582,7 +582,7 @@ class ZenWorkflowEngine:
         """獲取Zen MCP狀態"""
         return {
             "component": "Zen MCP",
-            "version": "4.6.0",
+            "version": "4.6.1",
             "status": "running",
             "registered_workflows": len(self.workflows),
             "active_executions": len(self.running_workflows),

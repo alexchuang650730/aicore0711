@@ -1,5 +1,5 @@
 """
-PowerAutomation v4.6.0 ClaudEditor集成測試用例生成器
+PowerAutomation v4.6.1 ClaudEditor集成測試用例生成器
 基於ClaudEditor v4.6的測試模板，整合stagewise mcp和test mcp組件
 """
 
@@ -121,7 +121,7 @@ class ClaudEditorTestCaseGenerator:
                 'timeout': 30
             },
             'test_data': {
-                'sample_code': 'console.log("Hello ClaudEditor v4.6.0");',
+                'sample_code': 'console.log("Hello ClaudEditor v4.6.1");',
                 'test_project_name': 'ClaudEditor測試項目',
                 'test_user': 'TestUser'
             },
@@ -599,10 +599,10 @@ class ClaudEditorTestCaseGenerator:
         with open(output_path, 'w', encoding='utf-8') as f:
             json.dump({
                 "metadata": {
-                    "version": "4.6.0",
+                    "version": "4.6.1",
                     "generated_at": datetime.now().isoformat(),
                     "total_tests": len(test_cases),
-                    "description": "ClaudEditor v4.6.0 自動生成測試用例"
+                    "description": "ClaudEditor v4.6.1 自動生成測試用例"
                 },
                 "test_cases": test_cases_dict
             }, f, indent=2, ensure_ascii=False)
