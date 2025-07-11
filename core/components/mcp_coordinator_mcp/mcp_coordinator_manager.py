@@ -43,11 +43,18 @@ class MCPCoordinatorManager:
         self.coordination_rules = {}
         self.health_monitor_active = False
         
+        # 集成mcp_tools_mcp的工具管理功能
+        self.available_tools = {}
+        
     async def initialize(self):
         self.logger.info("🎯 初始化MCP Coordinator - MCP組件協調中心")
         await self._register_known_components()
         await self._start_health_monitoring()
         await self._setup_coordination_rules()
+        
+        # 集成工具初始化
+        await self._load_mcp_tools()
+        
         self.logger.info("✅ MCP Coordinator初始化完成")
     
     async def _register_known_components(self):
@@ -98,6 +105,17 @@ class MCPCoordinatorManager:
             "health_threshold": 70.0
         }
         self.logger.info("設置MCP協調規則")
+    
+    async def _load_mcp_tools(self):
+        """加載MCP工具 (集成自mcp_tools_mcp)"""
+        self.available_tools = {
+            "mcp_generator": "MCP組件代碼生成器",
+            "mcp_tester": "MCP組件測試工具",
+            "mcp_deployer": "MCP組件部署工具",
+            "mcp_monitor": "MCP組件監控工具",
+            "mcp_analyzer": "MCP組件分析工具"
+        }
+        self.logger.info(f"加載 {len(self.available_tools)} 個MCP工具")
     
     async def start_component(self, component_id: str) -> bool:
         if component_id not in self.mcp_components:
@@ -151,12 +169,15 @@ class MCPCoordinatorManager:
             "managed_components": len(self.mcp_components),
             "health_monitoring": self.health_monitor_active,
             "coordination_rules": len(self.coordination_rules),
+            "available_tools": len(self.available_tools),  # 集成mcp_tools功能
+            "tools": list(self.available_tools.keys()),     # 集成mcp_tools功能
             "capabilities": [
                 "component_lifecycle_management",
                 "health_monitoring",
                 "dependency_coordination",
                 "auto_recovery",
-                "ecosystem_oversight"
+                "ecosystem_oversight",
+                "mcp_development_tools"  # 新增工具管理能力
             ]
         }
 

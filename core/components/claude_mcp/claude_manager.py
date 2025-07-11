@@ -32,6 +32,13 @@ class ClaudeModel(Enum):
     OPUS_3 = "claude-3-opus-20240229"
 
 
+class ClaudeModelTier(Enum):
+    """Claude模型層級 (集成自claude_unified_mcp)"""
+    HAIKU = "haiku"  # 快速響應
+    SONNET = "sonnet"  # 平衡性能
+    OPUS = "opus"  # 最高質量
+
+
 class ConversationRole(Enum):
     """對話角色枚舉"""
     USER = "user"
@@ -88,6 +95,11 @@ class ClaudeAPIManager:
             "model_usage": {model.value: 0 for model in ClaudeModel}
         }
         
+        # 集成claude_unified_mcp的路由功能
+        self.model_endpoints = {}
+        self.routing_rules = {}
+        self.context_cache = {}
+        
     async def initialize(self):
         """初始化Claude API管理器"""
         self.logger.info("🤖 初始化Claude MCP - Claude API統一管理平台")
@@ -95,7 +107,42 @@ class ClaudeAPIManager:
         # 模擬API連接檢查
         await self._check_api_connection()
         
+        # 集成claude_unified_mcp的初始化功能
+        await self._setup_model_endpoints()
+        await self._configure_routing_rules()
+        
         self.logger.info("✅ Claude MCP初始化完成")
+    
+    async def _setup_model_endpoints(self):
+        """設置模型端點 (集成自claude_unified_mcp)"""
+        self.model_endpoints = {
+            ClaudeModelTier.HAIKU: {
+                "model": "claude-3-5-haiku-20241022",
+                "max_tokens": 4096,
+                "response_time": "fast"
+            },
+            ClaudeModelTier.SONNET: {
+                "model": "claude-3-5-sonnet-20241022", 
+                "max_tokens": 8192,
+                "response_time": "medium"
+            },
+            ClaudeModelTier.OPUS: {
+                "model": "claude-3-opus-20240229",
+                "max_tokens": 16384,
+                "response_time": "slow"
+            }
+        }
+        self.logger.info("設置Claude模型端點")
+    
+    async def _configure_routing_rules(self):
+        """配置路由規則 (集成自claude_unified_mcp)"""
+        self.routing_rules = {
+            "simple_queries": ClaudeModelTier.HAIKU,
+            "code_generation": ClaudeModelTier.SONNET,
+            "complex_analysis": ClaudeModelTier.OPUS,
+            "default": ClaudeModelTier.SONNET
+        }
+        self.logger.info("配置智能路由規則")
     
     async def _check_api_connection(self):
         """檢查API連接"""
