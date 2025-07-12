@@ -1,0 +1,54 @@
+{
+  "personal": {
+    "basic_quota": {
+      "concurrent_projects": 3,
+      "daily_ai_requests": 100,
+      "collaboration_users": 1,
+      "storage_limit_mb": 1024
+    },
+    "mcp_components_count": 3,
+    "workflows_count": 2,
+    "deployment_platforms_count": 1,
+    "support_level": "社群支持",
+    "sla_uptime": 95.0
+  },
+  "professional": {
+    "basic_quota": {
+      "concurrent_projects": 10,
+      "daily_ai_requests": 1000,
+      "collaboration_users": 5,
+      "storage_limit_mb": 10240
+    },
+    "mcp_components_count": 4,
+    "workflows_count": 4,
+    "deployment_platforms_count": 2,
+    "support_level": "優先支持",
+    "sla_uptime": 99.0
+  },
+  "team": {
+    "basic_quota": {
+      "concurrent_projects": 50,
+      "daily_ai_requests": 5000,
+      "collaboration_users": 25,
+      "storage_limit_mb": 51200
+    },
+    "mcp_components_count": 6,
+    "workflows_count": 6,
+    "deployment_platforms_count": 6,
+    "support_level": "專屬支持",
+    "sla_uptime": 99.5
+  },
+  "enterprise": {
+    "basic_quota": {
+      "concurrent_projects": -1,
+      "daily_ai_requests": -1,
+      "collaboration_users": -1,
+      "storage_limit_mb": -1
+    },
+    "mcp_components_count": 14,
+    "workflows_count": 7,
+    "deployment_platforms_count": 7,
+    "support_level": "專屬企業支持",
+    "sla_uptime": 99.9
+  }
+}
