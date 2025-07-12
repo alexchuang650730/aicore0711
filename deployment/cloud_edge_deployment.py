@@ -25,6 +25,14 @@ from typing import Dict, List, Any, Optional
 from dataclasses import dataclass
 import requests
 
+# 導入設備發現模組
+try:
+    from .device_discovery import device_discovery_manager, DeviceInfo
+except ImportError:
+    # 如果無法導入，創建一個簡單的替代
+    device_discovery_manager = None
+    DeviceInfo = None
+
 # 設置日誌
 logging.basicConfig(
     level=logging.INFO,
@@ -106,25 +114,96 @@ class CloudToEdgeDeployer:
     
     async def _setup_deployment_targets(self):
         """設置部署目標"""
-        # 示例部署目標配置
-        self.deployment_targets = [
-            DeploymentTarget(
-                host="192.168.1.100",  # macOS開發機
-                username="developer",
-                ssh_key_path="~/.ssh/id_rsa",
-                platform="macos",
-                name="dev_mac_1"
-            ),
-            DeploymentTarget(
-                host="192.168.1.101",  # macOS測試機
-                username="tester",
-                ssh_key_path="~/.ssh/id_rsa",
-                platform="macos",
-                name="test_mac_1"
-            )
-        ]
+        self.logger.info("🎯 設置部署目標...")
         
-        self.logger.info(f"✅ 配置 {len(self.deployment_targets)} 個部署目標")
+        # 優先從手動配置文件加載
+        config_file = Path("deployment_targets_config.json")
+        if config_file.exists():
+            try:
+                with open(config_file, 'r', encoding='utf-8') as f:
+                    config = json.load(f)
+                
+                self.deployment_targets = []
+                for target_config in config.get('deployment_targets', []):
+                    self.deployment_targets.append(DeploymentTarget(
+                        host=target_config['host'],
+                        username=target_config['username'],
+                        ssh_key_path=target_config.get('ssh_key_path', '~/.ssh/id_rsa'),
+                        platform=target_config.get('platform', 'macos'),
+                        name=target_config['name']
+                    ))
+                
+                self.logger.info(f"✅ 從配置文件加載 {len(self.deployment_targets)} 個部署目標")
+                
+                # 顯示配置的目標
+                for target in self.deployment_targets:
+                    self.logger.info(f"  📱 {target.name}: {target.host} (用戶: {target.username})")
+                
+                return
+                
+            except Exception as e:
+                self.logger.warning(f"⚠️ 加載配置文件失敗: {e}")
+        
+        # 如果沒有配置文件，嘗試自動發現 (企業環境)
+        if device_discovery_manager:
+            try:
+                self.logger.info("🔍 嘗試自動發現部署目標...")
+                
+                # 初始化設備發現管理器
+                await device_discovery_manager.initialize()
+                
+                # 發現網絡內設備
+                discovered_devices = await device_discovery_manager.discover_devices_in_network()
+                
+                if discovered_devices:
+                    # 轉換為部署目標
+                    self.deployment_targets = []
+                    
+                    # 添加當前設備
+                    current_device = device_discovery_manager.current_device
+                    if current_device:
+                        self.deployment_targets.append(DeploymentTarget(
+                            host=current_device.ip_address,
+                            username=current_device.username,
+                            ssh_key_path="~/.ssh/id_rsa",
+                            platform="macos",
+                            name=f"current_{current_device.hostname}"
+                        ))
+                    
+                    # 添加發現的其他設備
+                    for i, device in enumerate(discovered_devices):
+                        if not device.is_current_device:
+                            self.deployment_targets.append(DeploymentTarget(
+                                host=device.ip_address,
+                                username="admin",  # 默認用戶名，可能需要配置
+                                ssh_key_path="~/.ssh/id_rsa",
+                                platform="macos",
+                                name=f"discovered_{device.hostname or f'device_{i+1}'}"
+                            ))
+                    
+                    self.logger.info(f"✅ 自動發現 {len(self.deployment_targets)} 個部署目標")
+                    
+                    # 保存發現的配置供後續使用
+                    config = device_discovery_manager.generate_deployment_targets_config(discovered_devices)
+                    auto_config_file = Path("deployment_targets_discovered.json")
+                    with open(auto_config_file, 'w', encoding='utf-8') as f:
+                        json.dump(config, f, indent=2, ensure_ascii=False)
+                    self.logger.info(f"💾 自動發現的配置已保存到: {auto_config_file}")
+                    
+                    return
+                else:
+                    self.logger.warning("⚠️ 未發現任何可用設備")
+                    
+            except Exception as e:
+                self.logger.warning(f"⚠️ 自動發現失敗: {e}")
+        
+        # 如果都失敗，提示用戶手動配置
+        self.logger.error("❌ 未找到部署目標配置")
+        self.logger.info("💡 請運行以下命令之一來配置部署目標:")
+        self.logger.info("  🔧 手動配置: python setup_manual_deployment.py")
+        self.logger.info("  🔍 自動發現: python setup_deployment_targets.py")
+        
+        raise RuntimeError("未配置部署目標，請先運行配置工具")
     
     async def build_dmg_on_ec2(self, ec2_instance_id: str = None) -> Dict[str, Any]:
         """在EC2上構建DMG包"""
