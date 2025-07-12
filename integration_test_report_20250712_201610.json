@@ -1,0 +1,29 @@
+{
+  "test_summary": {
+    "total_tests": 10,
+    "passed_tests": 10,
+    "failed_tests": 0,
+    "success_rate": 100.0,
+    "total_execution_time": 29.05
+  },
+  "test_type_breakdown": {
+    "integration": {
+      "total": 3,
+      "passed": 3,
+      "failed": 0
+    },
+    "e2e": {
+      "total": 4,
+      "passed": 4,
+      "failed": 0
+    },
+    "ui": {
+      "total": 3,
+      "passed": 3,
+      "failed": 0
+    }
+  },
+  "detailed_results": {
+    "IT_001": {
+      "test_id": "IT_001",
+      "status": 

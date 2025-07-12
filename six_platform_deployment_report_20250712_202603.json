@@ -1,0 +1,251 @@
+{
+  "deployment_summary": {
+    "total_platforms": 15,
+    "successful_deployments": 15,
+    "failed_deployments": 0,
+    "success_rate": 100.0,
+    "total_build_time": 589.06,
+    "total_package_size": 470369075,
+    "average_build_time": 39.27,
+    "average_package_size": 31357938
+  },
+  "category_breakdown": {
+    "desktop": {
+      "total": 3,
+      "successful": 3,
+      "failed": 0
+    },
+    "web": {
+      "total": 3,
+      "successful": 3,
+      "failed": 0
+    },
+    "community": {
+      "total": 3,
+      "successful": 3,
+      "failed": 0
+    },
+    "editor": {
+      "total": 2,
+      "successful": 2,
+      "failed": 0
+    },
+    "cloud": {
+      "total": 2,
+      "successful": 2,
+      "failed": 0
+    },
+    "mobile": {
+      "total": 2,
+      "successful": 2,
+      "failed": 0
+    }
+  },
+  "platform_results": {
+    "windows_desktop": {
+      "platform": "Windows Desktop",
+      "category": "desktop",
+      "success": true,
+      "status": "completed",
+      "message": "Windows Desktop 部署成功",
+      "build_time": 45.004488945007324,
+      "package_size": 26214400,
+      "deployment_url": "https://github.com/powerautomation/releases/windows",
+      "artifacts_count": 5,
+      "timestamp": "2025-07-12T20:25:23.529978"
+    },
+    "linux_desktop": {
+      "platform": "Linux Desktop",
+      "category": "desktop",
+      "success": true,
+      "status": "completed",
+      "message": "Linux Desktop 部署成功",
+      "build_time": 38.004047870635986,
+      "package_size": 23068672,
+      "deployment_url": "https://github.com/powerautomation/releases/linux",
+      "artifacts_count": 5,
+      "timestamp": "2025-07-12T20:25:16.529697"
+    },
+    "macos_desktop": {
+      "platform": "macOS Desktop",
+      "category": "desktop",
+      "success": true,
+      "status": "completed",
+      "message": "macOS Desktop 部署成功",
+      "build_time": 52.00451612472534,
+      "package_size": 30408704,
+      "deployment_url": "https://github.com/powerautomation/releases/macos",
+      "artifacts_count": 5,
+      "timestamp": "2025-07-12T20:25:30.530240"
+    },
+    "web_browser": {
+      "platform": "Web Browser",
+      "category": "web",
+      "success": true,
+      "status": "completed",
+      "message": "Web Browser 部署成功",
+      "build_time": 28.00342583656311,
+      "package_size": 5242880,
+      "deployment_url": "https://web.powerautomation.com",
+      "artifacts_count": 6,
+      "timestamp": "2025-07-12T20:25:06.529177"
+    },
+    "progressive_web_app": {
+      "platform": "Progressive Web App",
+      "category": "web",
+      "success": true,
+      "status": "completed",
+      "message": "Progressive Web App 部署成功",
+      "build_time": 32.003304958343506,
+      "package_size": 7340032,
+      "deployment_url": "https://app.powerautomation.com",
+      "artifacts_count": 6,
+      "timestamp": "2025-07-12T20:25:10.529092"
+    },
+    "webassembly": {
+      "platform": "WebAssembly",
+      "category": "web",
+      "success": true,
+      "status": "completed",
+      "message": "WebAssembly 部署成功",
+      "build_time": 41.004010915756226,
+      "package_size": 3670016,
+      "deployment_url": "https://wasm.powerautomation.com",
+      "artifacts_count": 8,
+      "timestamp": "2025-07-12T20:25:19.529821"
+    },
+    "github_pages": {
+      "platform": "GitHub Pages",
+      "category": "community",
+      "success": true,
+      "status": "completed",
+      "message": "GitHub Pages 部署成功",
+      "build_time": 15.004615068435669,
+      "package_size": 5242880,
+      "deployment_url": "https://powerautomation.github.io",
+      "artifacts_count": 3,
+      "timestamp": "2025-07-12T20:24:53.530440"
+    },
+    "vercel_deployment": {
+      "platform": "Vercel Deployment",
+      "category": "community",
+      "success": true,
+      "status": "completed",
+      "message": "Vercel Deployment 部署成功",
+      "build_time": 12.004716873168945,
+      "package_size": 5242880,
+      "deployment_url": "https://powerautomation.vercel.app",
+      "artifacts_count": 3,
+      "timestamp": "2025-07-12T20:24:50.530611"
+    },
+    "netlify_deployment": {
+      "platform": "Netlify Deployment",
+      "category": "community",
+      "success": true,
+      "status": "completed",
+      "message": "Netlify Deployment 部署成功",
+      "build_time": 14.004420042037964,
+      "package_size": 5242880,
+      "deployment_url": "https://powerautomation.netlify.app",
+      "artifacts_count": 3,
+      "timestamp": "2025-07-12T20:24:52.530306"
+    },
+    "vscode_extension": {
+      "platform": "VSCode Extension",
+      "category": "editor",
+      "success": true,
+      "status": "completed",
+      "message": "VSCode Extension 部署成功",
+      "build_time": 22.00464391708374,
+      "package_size": 921600,
+      "deployment_url": "https://marketplace.visualstudio.com/items?itemName=powerautomation.powerautomation",
+      "artifacts_count": 5,
+      "timestamp": "2025-07-12T20:25:00.530552"
+    },
+    "jetbrains_plugin": {
+      "platform": "JetBrains Plugin",
+      "category": "editor",
+      "success": true,
+      "status": "completed",
+      "message": "JetBrains Plugin 部署成功",
+      "build_time": 35.00295400619507,
+      "package_size": 1258291,
+      "deployment_url": "https://plugins.jetbrains.com/plugin/powerautomation",
+      "artifacts_count": 5,
+      "timestamp": "2025-07-12T20:25:13.528888"
+    },
+    "docker_container": {
+      "platform": "Docker Container",
+      "category": "cloud",
+      "success": true,
+      "status": "completed",
+      "message": "Docker Container 部署成功",
+      "build_time": 68.00343585014343,
+      "package_size": 152043520,
+      "deployment_url": "https://hub.docker.com/r/powerautomation/powerautomation",
+      "artifacts_count": 5,
+      "timestamp": "2025-07-12T20:25:46.529389"
+    },
+    "kubernetes_deployment": {
+      "platform": "Kubernetes Deployment",
+      "category": "cloud",
+      "success": true,
+      "status": "completed",
+      "message": "Kubernetes Deployment 部署成功",
+      "build_time": 42.00371718406677,
+      "package_size": 152043520,
+      "deployment_url": "https://k8s.powerautomation.com",
+      "artifacts_count": 5,
+      "timestamp": "2025-07-12T20:25:20.529691"
+    },
+    "react_native": {
+      "platform": "React Native",
+      "category": "mobile",
+      "success": true,
+      "status": "completed",
+      "message": "React Native 部署成功",
+      "build_time": 85.00434684753418,
+      "package_size": 20971520,
+      "deployment_url": "https://apps.powerautomation.com",
+      "artifacts_count": 3,
+      "timestamp": "2025-07-12T20:26:03.530353"
+    },
+    "electron_mobile": {
+      "platform": "Electron Mobile",
+      "category": "mobile",
+      "success": true,
+      "status": "completed",
+      "message": "Electron Mobile 部署成功",
+      "build_time": 60.00491905212402,
+      "package_size": 31457280,
+      "deployment_url": "https://mobile.powerautomation.com",
+      "artifacts_count": 5,
+      "timestamp": "2025-07-12T20:25:38.530931"
+    }
+  },
+  "deployment_urls": {
+    "windows_desktop": "https://github.com/powerautomation/releases/windows",
+    "linux_desktop": "https://github.com/powerautomation/releases/linux",
+    "macos_desktop": "https://github.com/powerautomation/releases/macos",
+    "web_browser": "https://web.powerautomation.com",
+    "progressive_web_app": "https://app.powerautomation.com",
+    "webassembly": "https://wasm.powerautomation.com",
+    "github_pages": "https://powerautomation.github.io",
+    "vercel_deployment": "https://powerautomation.vercel.app",
+    "netlify_deployment": "https://powerautomation.netlify.app",
+    "vscode_extension": "https://marketplace.visualstudio.com/items?itemName=powerautomation.powerautomation",
+    "jetbrains_plugin": "https://plugins.jetbrains.com/plugin/powerautomation",
+    "docker_container": "https://hub.docker.com/r/powerautomation/powerautomation",
+    "kubernetes_deployment": "https://k8s.powerautomation.com",
+    "react_native": "https://apps.powerautomation.com",
+    "electron_mobile": "https://mobile.powerautomation.com"
+  },
+  "recommendations": [
+    "🎉 六大平台部署成功率優秀，達到生產標準",
+    "📊 建立持續監控和自動化測試流程",
+    "🚀 考慮實施藍綠部署策略以降低風險",
+    "📦 優化包大小以提升用戶體驗",
+    "🔒 加強部署安全性和訪問控制",
+    "📈 定期更新和維護部署流水線"
+  ]
+}

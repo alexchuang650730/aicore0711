@@ -1,0 +1,33 @@
+{
+  "ui_test_summary": {
+    "total_tests": 5,
+    "passed_tests": 5,
+    "failed_tests": 0,
+    "warning_tests": 0,
+    "success_rate": 100.0,
+    "total_execution_time": 23.16,
+    "average_execution_time": 4.63,
+    "average_accessibility_score": 8.5
+  },
+  "mcp_component_performance": {
+    "smartui": {
+      "components_generated": 2,
+      "avg_generation_time": 1.0,
+      "quality_score": 8.5
+    },
+    "ag_ui": {
+      "interactions_performed": 12,
+      "screenshots_captured": 19,
+      "avg_response_time": 0.15
+    },
+    "stagewise": {
+      "scenarios_recorded": 1,
+      "scenarios_replayed": 1,
+      "journey_validations": 1,
+      "success_rate": 100.0
+    }
+  },
+  "detailed_results": {
+    "UI_COMP_001": {
+      "test_id": "UI_COMP_001",
+      "result": 
