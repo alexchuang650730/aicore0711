@@ -40,33 +40,62 @@ class ClaudeEditorLocalDeployer:
         self.logger.info("🚀 開始部署ClaudeEditor v4.6.7到本地...")
         
         try:
-            # 1. 創建安裝目錄
+            # 1. 初始化部署環境
+            await self._initialize_deployment_environment()
+            
+            # 2. 創建安裝目錄
             await self._create_installation_directories()
             
-            # 2. 複製核心文件
+            # 3. 複製核心文件
             await self._copy_core_files()
             
-            # 3. 創建命令列工具
+            # 4. 創建命令列工具
             await self._create_command_line_tools()
             
-            # 4. 設置環境
+            # 5. 設置環境
             await self._setup_environment()
             
-            # 5. 創建啟動腳本
+            # 6. 創建啟動腳本
             await self._create_launcher_scripts()
             
-            # 6. 創建Web界面
+            # 7. 創建Web界面
             await self._create_web_interface()
             
-            # 7. 測試部署
-            await self._test_deployment()
+            # 8. 啟動和驗證服務 (真實實現)
+            services_status = await self._start_and_verify_services()
             
-            self.logger.info("✅ ClaudeEditor v4.6.7 本地部署完成!")
-            return True
+            # 9. 執行健康檢查 (真實實現)
+            health_status = await self._perform_comprehensive_health_check()
+            
+            # 10. 驗證部署結果
+            deployment_verification = await self._verify_deployment_success()
+            
+            if health_status["all_healthy"] and deployment_verification["success"]:
+                self.logger.info("✅ ClaudeEditor v4.6.7 本地部署完成!")
+                self._display_deployment_summary(services_status, health_status)
+                return {
+                    "success": True,
+                    "services": services_status,
+                    "health": health_status,
+                    "verification": deployment_verification
+                }
+            else:
+                self.logger.error("❌ 部署驗證失敗")
+                await self._cleanup_failed_deployment()
+                return {
+                    "success": False,
+                    "error": "部署驗證失敗",
+                    "health": health_status,
+                    "verification": deployment_verification
+                }
             
         except Exception as e:
             self.logger.error(f"❌ 部署失敗: {e}")
-            return False
+            await self._cleanup_failed_deployment()
+            return {
+                "success": False,
+                "error": str(e)
+            }
     
     async def _create_installation_directories(self):
         """創建安裝目錄結構"""
