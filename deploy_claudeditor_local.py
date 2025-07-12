@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """
-ClaudeEditor v4.6.7 本地部署器
+ClaudeEditor v4.6.8 本地部署器
 Local ClaudeEditor Deployment System
 
 在本地部署完整的ClaudeEditor界面和命令列系統
@@ -32,12 +32,12 @@ class ClaudeEditorLocalDeployer:
     def __init__(self):
         self.logger = logging.getLogger(self.__class__.__name__)
         self.project_root = Path(__file__).parent
-        self.install_dir = Path.home() / ".claudeditor_v467"
+        self.install_dir = Path.home() / ".claudeditor_v468"
         self.bin_dir = Path.home() / ".local" / "bin"
         
     async def deploy_locally(self):
-        """本地部署ClaudeEditor"""
-        self.logger.info("🚀 開始部署ClaudeEditor v4.6.7到本地...")
+        """本地部署ClaudeEditor v4.6.8"""
+        self.logger.info("🚀 開始部署ClaudeEditor v4.6.8到本地...")
         
         try:
             # 1. 初始化部署環境
@@ -71,7 +71,7 @@ class ClaudeEditorLocalDeployer:
             deployment_verification = await self._verify_deployment_success()
             
             if health_status["all_healthy"] and deployment_verification["success"]:
-                self.logger.info("✅ ClaudeEditor v4.6.7 本地部署完成!")
+                self.logger.info("✅ ClaudeEditor v4.6.8 本地部署完成!")
                 self._display_deployment_summary(services_status, health_status)
                 return {
                     "success": True,
@@ -156,7 +156,7 @@ class ClaudeEditorLocalDeployer:
         with open(claudeditor_script, 'w') as f:
             f.write(f'''#!/usr/bin/env python3
 """
-ClaudeEditor v4.6.7 主命令工具
+ClaudeEditor v4.6.8 主命令工具
 """
 import sys
 import asyncio
@@ -234,7 +234,7 @@ if __name__ == "__main__":
         with open(cli_file, 'w') as f:
             f.write('''#!/usr/bin/env python3
 """
-ClaudeEditor v4.6.7 CLI實現
+ClaudeEditor v4.6.8 CLI實現
 """
 
 import asyncio
@@ -253,7 +253,7 @@ class ClaudeEditorCLI:
     async def run(self, args: List[str]):
         """運行CLI"""
         parser = argparse.ArgumentParser(
-            description='ClaudeEditor v4.6.7 - PowerAutomation MCP Integration'
+            description='ClaudeEditor v4.6.8 - PowerAutomation MCP Integration'
         )
         
         subparsers = parser.add_subparsers(dest='command', help='可用命令')
@@ -301,7 +301,7 @@ class ClaudeEditorCLI:
     
     async def _start_claudeditor(self, args):
         """啟動ClaudeEditor"""
-        print(f"🚀 啟動ClaudeEditor v4.6.7 ({args.mode}模式)")
+        print(f"🚀 啟動ClaudeEditor v4.6.8 ({args.mode}模式)")
         
         if args.mode == 'web':
             print(f"🌐 Web界面將在 http://localhost:{args.port} 啟動")
@@ -365,7 +365,7 @@ class ClaudeEditorCLI:
     
     async def _show_status(self):
         """顯示系統狀態"""
-        print("📊 ClaudeEditor v4.6.7 系統狀態")
+        print("📊 ClaudeEditor v4.6.8 系統狀態")
         print("=" * 50)
         print("🔧 CodeFlow MCP: ✅ 運行中")
         print("🧠 X-Masters MCP: ⚡ 待命")
@@ -396,7 +396,7 @@ class ClaudeEditorCLI:
     
     async def _interactive_mode(self):
         """交互模式"""
-        print("🎯 ClaudeEditor v4.6.7 交互模式")
+        print("🎯 ClaudeEditor v4.6.8 交互模式")
         print("輸入 'help' 查看可用命令，'exit' 退出")
         
         while True:
@@ -598,7 +598,7 @@ class WorkflowController:
         # 創建環境配置文件
         config_file = self.install_dir / "config" / "claudeditor.json"
         config = {
-            "version": "4.6.7",
+            "version": "4.6.8",
             "install_path": str(self.install_dir),
             "web_port": 8080,
             "mcp_components": {
@@ -625,9 +625,9 @@ class WorkflowController:
         
         # 創建shell環境設置
         shell_config = f'''
-# ClaudeEditor v4.6.7 環境設置
+# ClaudeEditor v4.6.8 環境設置
 export CLAUDEDITOR_HOME="{self.install_dir}"
-export CLAUDEDITOR_VERSION="4.6.7"
+export CLAUDEDITOR_VERSION="4.6.8"
 export PATH="{self.bin_dir}:$PATH"
 
 # 別名設置
@@ -655,11 +655,11 @@ alias mcpctl="mcp"
         self.logger.info("🚀 創建啟動腳本...")
         
         # 桌面啟動器
-        desktop_launcher = Path.home() / "Desktop" / "ClaudeEditor_v467.command"
+        desktop_launcher = Path.home() / "Desktop" / "ClaudeEditor_v468.command"
         with open(desktop_launcher, 'w') as f:
             f.write(f'''#!/bin/bash
 cd "{self.install_dir}"
-echo "🚀 啟動ClaudeEditor v4.6.7..."
+echo "🚀 啟動ClaudeEditor v4.6.8..."
 {self.bin_dir}/claudeditor start --mode=web
 ''')
         os.chmod(desktop_launcher, 0o755)
@@ -668,7 +668,7 @@ echo "🚀 啟動ClaudeEditor v4.6.7..."
         status_script = self.bin_dir / "ce-status"
         with open(status_script, 'w') as f:
             f.write(f'''#!/bin/bash
-echo "📊 ClaudeEditor v4.6.7 快速狀態"
+echo "📊 ClaudeEditor v4.6.8 快速狀態"
 echo "=============================="
 {self.bin_dir}/claudeditor status
 ''')
@@ -688,7 +688,7 @@ echo "=============================="
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>ClaudeEditor v4.6.7 - PowerAutomation MCP Integration</title>
+    <title>ClaudeEditor v4.6.8 - PowerAutomation MCP Integration</title>
     <style>
         body {
             font-family: 'SF Pro Display', system-ui, sans-serif;
@@ -792,7 +792,7 @@ echo "=============================="
 <body>
     <div class="container">
         <header>
-            <h1 class="title">ClaudeEditor v4.6.7</h1>
+            <h1 class="title">ClaudeEditor v4.6.8</h1>
             <p class="subtitle">PowerAutomation MCP Integration</p>
         </header>
         
@@ -965,7 +965,7 @@ echo "=============================="
     def print_deployment_summary(self):
         """打印部署摘要"""
         print("\n" + "="*70)
-        print("🎉 ClaudeEditor v4.6.7 本地部署完成!")
+        print("🎉 ClaudeEditor v4.6.8 本地部署完成!")
         print("="*70)
         print(f"📁 安裝目錄: {self.install_dir}")
         print(f"🔧 命令工具: {self.bin_dir}")
@@ -982,7 +982,7 @@ echo "=============================="
         print(f"  文件位置: {self.install_dir}/web_interface/index.html")
         print("  打開瀏覽器訪問該文件即可使用Web界面")
         print("\n💻 桌面啟動器:")
-        print(f"  雙擊運行: ~/Desktop/ClaudeEditor_v467.command")
+        print(f"  雙擊運行: ~/Desktop/ClaudeEditor_v468.command")
         print("="*70)
 
 async def main():

@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """
-Mirror Code Service for ClaudeEditor v4.6.7
+Mirror Code Service for ClaudeEditor v4.6.8
 Claude Code到本地ClaudeEditor的鏡像服務
 
 讓用戶可以在Claude Code中直接下指令控制本地ClaudeEditor
@@ -27,7 +27,7 @@ class MirrorCodeService:
     def __init__(self):
         self.logger = logging.getLogger(self.__class__.__name__)
         self.local_bin = Path.home() / ".local" / "bin"
-        self.claudeditor_home = Path.home() / ".claudeditor_v467"
+        self.claudeditor_home = Path.home() / ".claudeditor_v468"
         
     async def execute_command(self, command_type: str, args: List[str]) -> Dict[str, Any]:
         """執行ClaudeEditor命令並返回結果"""

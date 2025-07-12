@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """
-PowerAutomation v4.6.6 CodeFlow MCP 組件
+PowerAutomation v4.6.8 CodeFlow MCP 組件
 完整的代碼流程管理和規格定義MCP組件
 """
 
@@ -40,7 +40,7 @@ class MCPComponent:
     capabilities: List[str]
     dependencies: List[str]
     test_scenarios: List[str]
-    version: str = "4.6.6"
+    version: str = "4.6.8"
 
 @dataclass
 class Workflow:
@@ -70,8 +70,8 @@ class CodeFlowMCP:
     """CodeFlow MCP 主類"""
     
     def __init__(self):
-        self.version = "4.6.6"
-        self.edition = "X-Masters Enhanced Edition"
+        self.version = "4.6.8"
+        self.edition = "X-Masters Enhanced Edition v4.6.8"
         self.logger = logging.getLogger(self.__class__.__name__)
         
         # 初始化MCP組件
@@ -937,7 +937,7 @@ class CodeFlowMCP:
     
     def save_specifications(self) -> str:
         """保存完整規格到文件"""
-        spec_file = Path("POWERAUTOMATION_V466_CODEFLOW_SPECIFICATION.json")
+        spec_file = Path("POWERAUTOMATION_V468_CODEFLOW_SPECIFICATION.json")
         
         with open(spec_file, 'w', encoding='utf-8') as f:
             json.dump(self.specifications, f, indent=2, ensure_ascii=False)
@@ -969,7 +969,7 @@ codeflow_mcp = CodeFlowMCP()
 
 async def main():
     """CodeFlow MCP 主程序"""
-    print("🔧 PowerAutomation v4.6.6 CodeFlow MCP")
+    print("🔧 PowerAutomation v4.6.8 CodeFlow MCP")
     print("=" * 60)
     
     try:
