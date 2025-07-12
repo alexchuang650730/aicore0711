@@ -11,6 +11,7 @@ from pathlib import Path
 from datetime import datetime
 from typing import Dict, List, Any, Optional
 from dataclasses import dataclass, asdict
+import time
 from enum import Enum
 
 # 設置日誌
@@ -723,12 +724,27 @@ class CodeFlowMCP:
                     if comp.type == ComponentType.SUPPORTING
                 ],
                 "detailed_components": {
-                    name: asdict(comp) for name, comp in self.mcp_components.items()
+                    name: {
+                        "name": comp.name,
+                        "type": comp.type.value,
+                        "capabilities": comp.capabilities,
+                        "dependencies": comp.dependencies,
+                        "test_scenarios": comp.test_scenarios,
+                        "version": comp.version
+                    } for name, comp in self.mcp_components.items()
                 }
             },
             
             "six_major_workflows": {
-                name: asdict(workflow) for name, workflow in self.workflows.items()
+                name: {
+                    "name": workflow.name,
+                    "description": workflow.description,
+                    "stages": [stage.value for stage in workflow.stages],
+                    "mcp_components": workflow.mcp_components,
+                    "capabilities": workflow.capabilities,
+                    "test_scenarios": workflow.test_scenarios,
+                    "success_criteria": workflow.success_criteria
+                } for name, workflow in self.workflows.items()
             },
             
             "testing_framework": {
@@ -740,7 +756,17 @@ class CodeFlowMCP:
                     "e2e": len([tc for tc in self.test_cases.values() if tc.test_type == "e2e"])
                 },
                 "detailed_test_cases": {
-                    tc_id: asdict(test_case) for tc_id, test_case in self.test_cases.items()
+                    tc_id: {
+                        "id": test_case.id,
+                        "name": test_case.name,
+                        "description": test_case.description,
+                        "test_type": test_case.test_type,
+                        "workflow": test_case.workflow,
+                        "components": test_case.components,
+                        "test_steps": test_case.test_steps,
+                        "expected_results": test_case.expected_results,
+                        "priority": test_case.priority
+                    } for tc_id, test_case in self.test_cases.items()
                 }
             },
             
