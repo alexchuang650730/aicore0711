@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """
-PowerAutomation v4.6.6 六大平台全部署執行器
+PowerAutomation v4.6.9 六大平台全部署執行器
 Six Major Platform Complete Deployment Executor
 
 執行六大平台完整部署：
@@ -86,7 +86,7 @@ class SixPlatformDeploymentExecutor:
         
     async def initialize(self):
         """初始化六大平台部署"""
-        self.logger.info("🚀 初始化PowerAutomation v4.6.6六大平台部署...")
+        self.logger.info("🚀 初始化PowerAutomation v4.6.9六大平台部署...")
         
         # 定義六大平台目標
         self.platform_targets = {
@@ -310,7 +310,7 @@ class SixPlatformDeploymentExecutor:
     def _generate_artifacts(self, target: PlatformTarget) -> List[str]:
         """生成構建產物列表"""
         base_artifacts = [
-            f"PowerAutomation_v4.6.6_{target.category.value}",
+            f"PowerAutomation_v4.6.9_{target.category.value}",
             "config.json",
             "README.md"
         ]
@@ -531,7 +531,7 @@ six_platform_executor = SixPlatformDeploymentExecutor()
 
 async def main():
     """主函數"""
-    print("🌍 PowerAutomation v4.6.6 六大平台全部署")
+    print("🌍 PowerAutomation v4.6.9 六大平台全部署")
     print("=" * 70)
     
     try:
