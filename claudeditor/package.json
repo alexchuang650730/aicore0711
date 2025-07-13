@@ -1,8 +1,8 @@
 {
   "name": "claudeditor",
-  "productName": "ClaudEditor 4.3",
-  "version": "4.3.0",
-  "description": "ClaudEditor 4.3 - The Ultimate Claude Code Editor with PowerAutomation AI Ecosystem",
+  "productName": "ClaudEditor Mobile/Desktop",
+  "version": "4.6.9",
+  "description": "ClaudEditor - Cross-platform Mobile & Desktop AI Code Editor with PowerAutomation Ecosystem",
   "author": "PowerAutomation Team",
   "license": "AGPL-3.0",
   "homepage": "https://claudeditor.com",
@@ -17,13 +17,15 @@
     "claude",
     "editor",
     "ai",
-    "powerautomation",
+    "powerautomation", 
     "mcp",
-    "coding",
-    "collaboration",
+    "mobile",
+    "desktop",
+    "cross-platform",
     "tauri",
     "react",
-    "typescript"
+    "typescript",
+    "claude-code-integration"
   ],
   "main": "src/main.tsx",
   "scripts": {

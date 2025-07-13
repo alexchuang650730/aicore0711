@@ -1,179 +1,225 @@
-# PowerAutomation v4.6.2 - AI驅動自動化測試平台
+# PowerAutomation v4.6.9 X-Masters Enhanced Edition
 
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 [![Python 3.11+](https://img.shields.io/badge/python-3.11+-blue.svg)](https://www.python.org/downloads/)
-[![Node.js 16+](https://img.shields.io/badge/node.js-16+-green.svg)](https://nodejs.org/)
+[![Node.js 18+](https://img.shields.io/badge/node.js-18+-green.svg)](https://nodejs.org/)
+[![Mobile](https://img.shields.io/badge/platform-Mobile%2FDesktop-blue.svg)](https://claudeditor.com)
 
-PowerAutomation v4.6.2是業界首個完整集成AI+可視化的自動化測試開發平台，實現了SmartUI MCP智能UI生成、Mirror Code端雲同步、ClaudEditor增強等革命性功能。
+PowerAutomation v4.6.9 是業界首個完整集成飛書生態的跨平台 AI 開發平台，專注於 Mobile/Desktop 端 ClaudeEditor 與企業級 AI 模型整合。
 
-**最新版本**: v4.6.2 SmartUI Enhanced Edition  
-**發布日期**: 2025年7月11日  
-**核心突破**: SmartUI MCP集成、Mirror Code完善、ClaudEditor增強
+**最新版本**: v4.6.9 X-Masters Enhanced Edition  
+**發布日期**: 2024年12月13日  
+**核心突破**: 飛書生態集成、Mobile/Desktop ClaudeEditor、企業私有雲 AI 模型部署
+
+## 🎯 核心定位
+
+### 📱 Mobile/Desktop 優先
+- **跨平台 ClaudeEditor**: iOS, Android, Windows, macOS, Linux 統一體驗
+- **實時同步**: 移動端與桌面端項目和配置實時同步
+- **離線支持**: 完整的離線編輯和本地 AI 模型支持
+- **觸控優化**: 移動端專用的觸控界面和手勢操作
+
+### 🌐 Web/Community 展示推廣
+- **在線體驗**: Web 版本用於產品展示和社區推廣
+- **功能演示**: 完整功能展示和交互式教程
+- **社區平台**: 開發者交流和分享平台
+- **技術支持**: 在線文檔和支持中心
 
 ## 🚀 核心特性
 
-### 🤖 SmartUI MCP - AI驅動UI生成
-- **自然語言生成**: 用自然語言描述即可生成完整UI組件
-- **多框架支持**: React、Vue、Angular等主流框架
-- **智能優化**: AI自動優化性能、無障礙訪問和響應式設計
-- **與ag-ui互補**: 70%功能互補，形成1+1>2效應
+### 🔗 飛書生態深度集成
+- **購買流程**: 飛書小程序一站式購買和激活
+- **企業管理**: 企業管理員統一管理團隊許可證
+- **消息推送**: 重要通知通過飛書直接推送
+- **中國市場**: 針對中國企業市場的本地化優勢
 
-### 🔄 Mirror Code - 端雲代碼同步
-- **實時同步**: 本地與雲端代碼實時同步
-- **Claude Code集成**: 無縫集成Claude Code服務
-- **跨平台支援**: macOS、WSL、Linux全平台支援
-- **智能路由**: 端雲切換和負載均衡
+### 📱 ClaudeEditor Mobile/Desktop
+- **跨平台原生**: Tauri + React 技術棧，原生性能
+- **Claude Code 集成**: 深度集成 Claude Code CLI 功能
+- **實時協作**: 多人實時編輯和項目協作
+- **AI 輔助編程**: 內置 AI 助手，智能代碼生成和優化
 
-### 🎨 ClaudEditor增強
-- **三欄式界面**: 左側導航、中央編輯器、右側AI助手
-- **工作流管理**: 6大工作流類型支援
-- **企業版本控制**: 4級權限管理系統
-- **AI助手集成**: 原生AI程式設計體驗
+### 🤖 多 AI 模型支持
+- **Claude Enterprise**: 企業級私有部署
+- **Gemini Private**: Google Gemini 私有實例
+- **Kimi K2 Local**: 本地化 Kimi K2 模型
+- **Grok Private**: X.AI Grok 私有集成
+- **智能路由**: 根據任務類型自動選擇最佳模型
 
-### 🧪 TDD測試框架
-- **200測試案例**: 跨六大平台真實測試
-- **100%通過率**: 無模擬測試，全真實環境
-- **MCP集成**: Test MCP、Stagewise MCP、AG-UI MCP
-- **自動化報告**: 完整的測試執行報告
+### 🏢 企業私有雲部署
+- **完全私有化**: 所有數據和 AI 模型企業內部部署
+- **Kubernetes 集群**: 企業級容器編排和管理
+- **SSO 集成**: 與企業 LDAP/AD 系統集成
+- **審計日誌**: 完整的用戶行為和數據訪問審計
 
-## 📊 性能指標
+### 🔧 統一 CLI 工具集
+- **claude-code-cli**: Claude Code 命令行工具
+- **gemini-cli**: Google Gemini 命令行接口
+- **powerautomation-cli**: PowerAutomation 核心工具
+- **統一管理**: 一個工具管理所有 AI 模型和服務
 
-### 競爭優勢
-- **響應速度**: <150ms (比Manus AI快5-10倍)
-- **AI模型支援**: 3種 (Claude/GPT/Gemini) vs 競品1種
-- **跨平台支援**: 6平台 vs 競品2平台
-- **自動化程度**: 95% vs 競品60%
+## 📊 版本功能分級
 
-### 商業價值
-- **投資回報率**: 641%
-- **開發效率**: 提升300%
-- **測試成本**: 降低60%
-- **部署時間**: 減少60%
+### 🔰 個人版 (免費)
+- 3個基礎 MCP 組件
+- ClaudeEditor 基礎版 (單平台)
+- 1GB 存儲空間
+- 社群支持
+
+### 💼 專業版 ($39/月)
+- 4個進階 MCP 組件
+- ClaudeEditor 完整版 (跨平台)
+- Claude Code 深度集成
+- 10GB 存儲空間
+- 優先技術支持
+
+### 👥 團隊版 ($129/月)
+- 8個協作 MCP 組件
+- 實時協作功能
+- 多平台部署支持
+- 50GB 存儲空間
+- 團隊管理功能
+
+### 🏢 企業版 ($499/月起)
+- 14個完整 MCP 組件
+- 私有雲 AI 模型部署
+- 企業級安全和合規
+- 無限存儲空間
+- 24/7 企業支持
 
 ## 🛠️ 技術架構
 
-### 核心技術棧
-- **後端**: Python 3.11+, FastAPI, WebSocket
-- **前端**: React 18, Vite, Monaco Editor
-- **AI集成**: Claude 3.5 Sonnet, GPT-4, Gemini Pro
-- **測試框架**: Pytest, Selenium, Playwright
+### Mobile/Desktop 技術棧
+- **前端框架**: React 18 + TypeScript
+- **桌面應用**: Tauri (Rust + WebView)
+- **移動應用**: React Native + Expo
+- **狀態管理**: Zustand + React Query
+- **UI 組件**: Radix UI + Tailwind CSS
 
-### MCP生態系統
+### 後端架構
+- **核心服務**: Python 3.11+ FastAPI
+- **AI 模型服務**: 多模型統一接口
+- **數據庫**: PostgreSQL + Redis
+- **消息隊列**: RabbitMQ
+- **容器編排**: Docker + Kubernetes
+
+### NPM 生態系統
 ```
-PowerAutomation Core
-├── SmartUI MCP (AI驅動UI生成)
-├── Test MCP (測試執行和管理)
-├── Stagewise MCP (操作錄製和回放)
-├── AG-UI MCP (用戶界面生成)
-├── Mirror Code (端雲代碼同步)
-└── ClaudEditor (智能代碼編輯器)
+@powerautomation/
+├── core                    # 核心 PowerAutomation 包
+├── claude-editor-mobile    # 移動端編輯器
+├── claude-editor-desktop   # 桌面端編輯器
+├── collaboration          # 協作功能包 (團隊版+)
+└── enterprise-cli          # 企業版命令行工具
 ```
 
 ## 🚀 快速開始
 
-### 安裝要求
-- Python 3.11+
-- Node.js 16+
-- Git
-
-### 安裝步驟
+### 📱 移動端安裝
 ```bash
-# 1. 克隆倉庫
-git clone https://github.com/alexchuang650730/aicore0711.git
-cd aicore0711
+# iOS App Store
+https://apps.apple.com/app/claudeditor
 
-# 2. 設置Python環境
-python3 -m venv venv
-source venv/bin/activate
-pip install -r requirements.txt
+# Android Play Store  
+https://play.google.com/store/apps/claudeditor
 
-# 3. 設置Node.js環境
-cd claudeditor/ui
-npm install
-cd ../..
-
-# 4. 啟動服務
-python core/powerautomation_main.py
+# 或通過飛書購買後下載
+https://applink.feishu.cn/client/message/link/open?token=AmfoKtFagQATaHK7JJIAQAI%3D
 ```
 
-### macOS自動部署
+### 🖥️ 桌面端安裝
 ```bash
-# 一鍵安裝和部署
-python deploy_mac_auto.py
+# macOS
+brew install powerautomation/tap/claudeditor
+
+# Windows
+winget install PowerAutomation.ClaudEditor
+
+# Linux
+snap install claudeditor
+
+# 或 NPM 安裝
+npm install -g @powerautomation/claude-editor-desktop
 ```
 
-## 📚 文檔導航
+### 🌐 Web 版體驗
+訪問 https://demo.claudeditor.com 體驗完整功能
 
-詳細文檔請查看 [`docs/`](./docs/) 目錄：
+## 📚 展示中心
 
-### 核心文檔
-- [**V4.6.2產品開發里程碑**](./V4_6_2_PRODUCT_DEVELOPMENT_MILESTONE.md) - 版本詳細功能與成果
-- [項目架構文檔](./docs/PROJECT_ARCHITECTURE.md) - 完整技術架構
-- [SmartUI MCP最終發布](./docs/POWER_AUTOMATION_V462_SMARTUI_FINAL_RELEASE.md) - SmartUI詳細功能
+詳細產品展示請訪問: **[PowerAutomation Showcase](https://github.com/alexchuang19760730/showcase)**
 
-### 發布說明
-- [v4.6.0發布說明](./docs/RELEASE_NOTES_v4.6.0.md)
-- [v4.6.1發布說明](./docs/RELEASE_NOTES_v4.6.1.md)
-- [v4.6.2發布摘要](./docs/POWER_AUTOMATION_V462_RELEASE_SUMMARY.md)
+### 核心展示內容
+- [**商業模式分析**](https://github.com/alexchuang19760730/showcase/blob/main/business/business-model.md) - 完整定價策略和收入預測
+- [**企業估值分析**](https://github.com/alexchuang19760730/showcase/blob/main/business/valuation-analysis.md) - $6M ARR 估值報告
+- [**技術架構設計**](https://github.com/alexchuang19760730/showcase/blob/main/technical-docs/architecture.md) - 完整系統架構
+- [**本地部署指南**](https://github.com/alexchuang19760730/showcase/blob/main/deployment/local-deployment.md) - Docker/NPM/源碼部署
+- [**企業私有雲部署**](https://github.com/alexchuang19760730/showcase/blob/main/deployment/enterprise-deployment.md) - Kubernetes 企業部署
+- [**NPM 生態系統**](https://github.com/alexchuang19760730/showcase/blob/main/ecosystem/npm-ecosystem.md) - 完整包管理體系
+- [**快速集成指南**](https://github.com/alexchuang19760730/showcase/blob/main/integration-guide/quick-start.md) - 15分鐘上手指南
+- [**互動技術演示**](https://github.com/alexchuang19760730/showcase/blob/main/presentations/tech-architecture.html) - 在線架構展示
 
-### 集成指南
-- [ClaudEditor集成成功報告](./docs/CLAUDEDITOR_INTEGRATION_SUCCESS.md)
-- [ClaudEditor左側面板設計](./docs/CLAUDEDITOR_LEFT_PANEL_DESIGN.md)
-- [VSCode集成分析](./docs/PowerAutomation_VSCode_Integration_Analysis.md)
+## 🎯 五階段實施路線圖
 
-### 測試文檔
-- [TDD測試執行報告](./docs/TDD_TEST_EXECUTION_REPORT.md)
-- [真實測試文檔](./docs/REAL_TESTING_DOCUMENTATION.md)
-- [測試改進計劃](./docs/TESTING_IMPROVEMENT_PLAN.md)
+### Phase 0: 飛書生態集成 (v4.6.10) - 3週
+- 飛書小程序購買流程
+- NPM 包生態建立  
+- Mobile/Desktop ClaudeEditor 基礎版
 
-### 規劃文檔
-- [2025年路線圖](./docs/ROADMAP_2025.md)
-- [里程碑管理](./docs/MILESTONE_MANAGEMENT.md)
-- [推廣策略](./docs/PROMOTIONAL_STRATEGY_v4.6.1.md)
+### Phase 1: 核心配額系統 (v4.7.0) - 2週
+- 統一許可證管理
+- 跨設備配額同步
+- 實時使用監控
 
-## 🎯 使用場景
+### Phase 2: 工作流分級系統 (v4.7.5) - 3週
+- AI 模型智能路由
+- 分級工作流控制
+- 可視化編輯器
 
-### 企業開發團隊
-- 高效率、高質量的UI開發
-- 完整的企業級功能支援
-- 多人協作和版本管理
+### Phase 3: 部署平台控制 (v4.8.0) - 4週
+- 多平台部署支持
+- 企業級配置管理
+- 自動化 CI/CD
 
-### 初創公司
-- 快速原型和產品開發
-- AI驅動的開發效率提升
-- 成本控制和時間節省
+### Phase 4-5: 企業級功能 (v4.9.0) - 8週
+- 私有雲 AI 模型部署
+- 統一 CLI 工具集
+- 企業安全框架
 
-### 個人開發者
-- 專業級UI開發能力
-- AI助手編程體驗
-- 跨平台部署支援
+## 💰 商業價值
 
-## 🤝 貢獻指南
+### 投資回報分析
+- **首年收入預期**: $6M+ ARR
+- **投資回報率**: 476%
+- **目標用戶數**: 25,000+
+- **實施週期**: 21週
 
-我們歡迎社區貢獻！請查看：
-- [貢獻指南](./docs/CONTRIBUTING.md)
-- [開發者指南](./docs/DEVELOPER_GUIDE.md)
-- [代碼規範](./docs/CODE_STANDARDS.md)
+### 市場定位
+- **全球 AI 開發工具市場**: $156億 (2024)
+- **中國企業軟件市場**: $890億 (2024)
+- **預期年增長率**: 45%
+- **目標市場份額**: 5% (中國 AI 開發工具)
+
+## 🤝 社區與支持
+
+### 社區資源
+- **GitHub 主倉庫**: https://github.com/alexchuang650730/aicore0711
+- **展示中心**: https://github.com/alexchuang19760730/showcase
+- **技術文檔**: https://docs.claudeditor.com
+- **社區論壇**: https://community.powerautomation.dev
+
+### 商業支持
+- **飛書購買**: https://applink.feishu.cn/client/message/link/open?token=AmfoKtFagQATaHK7JJIAQAI%3D
+- **企業銷售**: enterprise@powerautomation.dev
+- **技術支持**: support@claudeditor.com
+- **合作洽談**: partnerships@powerautomation.dev
 
 ## 📄 許可證
 
-本項目採用 MIT 許可證 - 詳見 [LICENSE](./LICENSE) 文件
-
-## 🔗 相關鏈接
-
-- **GitHub倉庫**: https://github.com/alexchuang650730/aicore0711
-- **技術文檔**: https://powerautomation.docs.dev
-- **社區討論**: https://github.com/alexchuang650730/aicore0711/discussions
-- **問題報告**: https://github.com/alexchuang650730/aicore0711/issues
-
-## 📞 聯絡方式
-
-- **項目負責人**: Alex Chuang
-- **Email**: alex@powerautomation.dev
-- **GitHub**: [@alexchuang650730](https://github.com/alexchuang650730)
+本項目採用 AGPL-3.0 許可證 - 詳見 [LICENSE](./LICENSE) 文件
 
 ---
 
-**PowerAutomation v4.6.2 - 讓AI重新定義自動化開發！** 🚀
+**PowerAutomation v4.6.9 - 重新定義跨平台 AI 開發體驗！** 🚀📱🖥️
 
-*© 2025 PowerAutomation Project. 版權所有。*
+*© 2024 PowerAutomation Project. 版權所有。*
