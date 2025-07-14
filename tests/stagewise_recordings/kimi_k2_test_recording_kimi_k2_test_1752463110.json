@@ -1,0 +1,135 @@
+{
+  "session_id": "kimi_k2_test_1752463110",
+  "test_type": "kimi_k2_integration",
+  "recorded_at": "2025-07-14T11:18:30.847677",
+  "description": "ClaudEditor Kimi K2模型集成測試完整流程",
+  "total_stages": 7,
+  "stages": [
+    {
+      "stage_id": 1,
+      "stage_name": "環境檢查",
+      "action_type": "api_test",
+      "timestamp": "2025-07-14T11:18:30.847589",
+      "details": {
+        "endpoint": "/api/status",
+        "expected_status": 200,
+        "description": "檢查Demo服務器狀態"
+      },
+      "status": "executed"
+    },
+    {
+      "stage_id": 2,
+      "stage_name": "模型列表驗證",
+      "action_type": "api_test",
+      "timestamp": "2025-07-14T11:18:30.847604",
+      "details": {
+        "endpoint": "/api/models",
+        "expected_models": [
+          "kimi_k2",
+          "claude"
+        ],
+        "validation": "檢查Kimi K2和Claude模型是否都存在"
+      },
+      "status": "executed"
+    },
+    {
+      "stage_id": 3,
+      "stage_name": "Kimi K2聊天測試",
+      "action_type": "api_test",
+      "timestamp": "2025-07-14T11:18:30.847617",
+      "details": {
+        "endpoint": "/api/ai/chat",
+        "request_data": {
+          "model": "kimi_k2",
+          "message": "你好，請介紹一下Kimi K2模型",
+          "max_tokens": 500
+        },
+        "expected_response_contains": [
+          "🌙",
+          "Kimi K2",
+          "月之暗面"
+        ]
+      },
+      "status": "executed"
+    },
+    {
+      "stage_id": 4,
+      "stage_name": "Claude聊天測試",
+      "action_type": "api_test",
+      "timestamp": "2025-07-14T11:18:30.847633",
+      "details": {
+        "endpoint": "/api/ai/chat",
+        "request_data": {
+          "model": "claude",
+          "message": "請介紹一下Claude模型",
+          "max_tokens": 500
+        },
+        "expected_response_contains": [
+          "🔵",
+          "Claude",
+          "Anthropic"
+        ]
+      },
+      "status": "executed"
+    },
+    {
+      "stage_id": 5,
+      "stage_name": "模型對比測試",
+      "action_type": "api_test",
+      "timestamp": "2025-07-14T11:18:30.847642",
+      "details": {
+        "description": "同時測試兩個模型的不同回應",
+        "test_question": "什麼是人工智能？",
+        "validation": "確保兩個模型回應不同且都包含正確標識"
+      },
+      "status": "executed"
+    },
+    {
+      "stage_id": 6,
+      "stage_name": "UI交互測試",
+      "action_type": "ui_test",
+      "timestamp": "2025-07-14T11:18:30.847652",
+      "details": {
+        "url": "http://localhost:8001",
+        "actions": [
+          "檢查頁面標題包含Kimi K2",
+          "驗證模型選擇器存在",
+          "切換到Kimi K2模型",
+          "發送測試消息",
+          "驗證回應顯示",
+          "切換到Claude模型",
+          "發送測試消息",
+          "驗證回應顯示"
+        ]
+      },
+      "status": "executed"
+    },
+    {
+      "stage_id": 7,
+      "stage_name": "集成驗證",
+      "action_type": "integration_test",
+      "timestamp": "2025-07-14T11:18:30.847660",
+      "details": {
+        "description": "驗證Kimi K2完全集成到ClaudEditor",
+        "checks": [
+          "模型選擇功能正常",
+          "API響應正確",
+          "UI顯示正確",
+          "模型切換無誤",
+          "回應包含正確標識"
+        ]
+      },
+      "status": "executed"
+    }
+  ],
+  "metadata": {
+    "purpose": "驗證Kimi K2模型成功集成到ClaudEditor",
+    "test_coverage": [
+      "API端點測試",
+      "模型切換功能",
+      "UI交互測試",
+      "回應驗證",
+      "集成完整性"
+    ]
+  }
+}

@@ -56,6 +56,7 @@ pub struct MCPTool {
     pub schema: serde_json::Value,
 }
 
+#[derive(Debug, Clone)]
 pub struct MCPCoordinator {
     services: Arc<RwLock<HashMap<String, MCPService>>>,
     tools: Arc<RwLock<HashMap<String, MCPTool>>>,

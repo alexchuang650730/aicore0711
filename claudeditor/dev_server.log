@@ -1,0 +1,13 @@
+
+> claudeditor@4.6.9 dev
+> vite
+
+
+  VITE v4.5.14  ready in 356 ms
+
+  ➜  Local:   http://127.0.0.1:5175/
+23:36:06 [vite] changed tsconfig file detected: /Users/alexchuang/Desktop/alex/tests/package/aicore0711/claudeditor/tsconfig.json - Clearing cache and forcing full-reload to ensure TypeScript is compiled with updated config values.
+23:36:06 [vite] changed tsconfig file detected: /Users/alexchuang/Desktop/alex/tests/package/aicore0711/claudeditor/tsconfig.json - Clearing cache and forcing full-reload to ensure TypeScript is compiled with updated config values.
+00:12:52 [vite] hmr update /src/ai-assistant/AIAssistant.jsx
+00:14:11 [vite] hmr update /src/ai-assistant/AIAssistant.jsx
+00:14:23 [vite] hmr update /src/ai-assistant/AIAssistant.jsx

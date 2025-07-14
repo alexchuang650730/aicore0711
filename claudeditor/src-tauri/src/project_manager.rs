@@ -332,8 +332,11 @@ app.listen(port, () => {
         
         project.last_modified = Utc::now();
         
+        // Clone project data for metadata saving to avoid borrowing issues  
+        let project_clone = project.clone();
+        
         // Save updated metadata
-        self.save_project_metadata(project)?;
+        self.save_project_metadata(&project_clone)?;
         
         Ok(())
     }
@@ -396,10 +399,17 @@ app.listen(port, () => {
         project.files = files;
         project.last_modified = Utc::now();
         
-        // Save updated metadata
-        self.save_project_metadata(project)?;
+        // Clone project data for metadata saving to avoid borrowing issues  
+        let project_clone = project.clone();
         
-        log::info!("Scanned {} files for project '{}'", project.files.len(), project.name);
+        // Save updated metadata
+        self.save_project_metadata(&project_clone)?;
+        
+        // Get file count and project name for logging
+        let file_count = project_clone.files.len();
+        let project_name = project_clone.name.clone();
+        
+        log::info!("Scanned {} files for project '{}'", file_count, project_name);
         Ok(())
     }
     

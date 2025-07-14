@@ -9,7 +9,7 @@ webdriver-manager>=4.0.1
 
 # Performance Testing
 locust>=2.17.0
-lighthouse>=10.0.0
+lighthouse>=1.0.0
 
 # Test Reporting
 pytest-html>=3.2.0

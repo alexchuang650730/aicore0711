@@ -1,14 +1,13 @@
 {
   "build": {
-    "beforeDevCommand": "npm run dev",
-    "beforeBuildCommand": "npm run build",
-    "devPath": "http://localhost:1420",
-    "distDir": "../dist",
-    "withGlobalTauri": false
+    "beforeDevCommand": "",
+    "beforeBuildCommand": "",
+    "devPath": "http://localhost:5175",
+    "distDir": "../dist"
   },
   "package": {
-    "productName": "ClaudEditor 4.3",
-    "version": "4.3.0"
+    "productName": "ClaudeEditor",
+    "version": "4.6.9"
   },
   "tauri": {
     "allowlist": {
@@ -16,55 +15,6 @@
       "shell": {
         "all": false,
         "open": true
-      },
-      "window": {
-        "all": false,
-        "close": true,
-        "hide": true,
-        "show": true,
-        "maximize": true,
-        "minimize": true,
-        "unmaximize": true,
-        "unminimize": true,
-        "startDragging": true
-      },
-      "fs": {
-        "all": true,
-        "readFile": true,
-        "writeFile": true,
-        "readDir": true,
-        "copyFile": true,
-        "createDir": true,
-        "removeDir": true,
-        "removeFile": true,
-        "renameFile": true,
-        "exists": true
-      },
-      "path": {
-        "all": true
-      },
-      "os": {
-        "all": true
-      },
-      "dialog": {
-        "all": false,
-        "open": true,
-        "save": true,
-        "message": true,
-        "ask": true,
-        "confirm": true
-      },
-      "notification": {
-        "all": true
-      },
-      "http": {
-        "all": true,
-        "request": true
-      },
-      "clipboard": {
-        "all": true,
-        "readText": true,
-        "writeText": true
       }
     },
     "bundle": {
@@ -72,18 +22,8 @@
       "targets": "all",
       "identifier": "com.powerautomation.claudeditor",
       "icon": [
-        "icons/32x32.png",
-        "icons/128x128.png",
-        "icons/128x128@2x.png",
-        "icons/icon.icns",
-        "icons/icon.ico"
-      ],
-      "resources": [],
-      "externalBin": [],
-      "copyright": "Copyright © 2024 PowerAutomation Team",
-      "category": "DeveloperTool",
-      "shortDescription": "ClaudEditor 4.3 - The Ultimate Claude Code Editor",
-      "longDescription": "ClaudEditor 4.3 is a professional Claude code editor with integrated PowerAutomation AI ecosystem, supporting real-time collaboration, visual programming, and 2,797+ MCP tools."
+        "icons/icon.png"
+      ]
     },
     "security": {
       "csp": null
@@ -92,25 +32,11 @@
       {
         "fullscreen": false,
         "resizable": true,
-        "title": "ClaudEditor 4.3 - The Ultimate Claude Code Editor",
+        "title": "ClaudeEditor v4.6.9 - AI Code Editor with Kimi K2",
         "width": 1400,
         "height": 900,
-        "minWidth": 800,
-        "minHeight": 600,
-        "center": true,
-        "decorations": true,
-        "alwaysOnTop": false,
-        "skipTaskbar": false,
-        "theme": "Dark"
+        "center": true
       }
-    ],
-    "systemTray": {
-      "iconPath": "icons/icon.png",
-      "iconAsTemplate": true,
-      "menuOnLeftClick": false
-    },
-    "updater": {
-      "active": false
-    }
+    ]
   }
 }

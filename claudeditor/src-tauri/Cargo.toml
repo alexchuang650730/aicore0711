@@ -1,6 +1,6 @@
 [package]
 name = "claudeditor"
-version = "1.0.0"
+version = "4.6.9"
 description = "The Ultimate Claude Code Editor with PowerAutomation AI Ecosystem"
 authors = ["PowerAutomation Team"]
 license = "AGPL-3.0"
@@ -13,7 +13,7 @@ edition = "2021"
 tauri-build = { version = "1.5.0", features = [] }
 
 [dependencies]
-tauri = { version = "1.5.4", features = ["api-all", "system-tray", "updater"] }
+tauri = { version = "1.5.4", features = [ "shell-open"] }
 serde = { version = "1.0", features = ["derive"] }
 serde_json = "1.0"
 tokio = { version = "1.0", features = ["full"] }

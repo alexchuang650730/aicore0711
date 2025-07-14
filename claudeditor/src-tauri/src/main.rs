@@ -3,7 +3,7 @@
 
 use std::collections::HashMap;
 use std::sync::Mutex;
-use tauri::{Manager, State, SystemTray, SystemTrayEvent, SystemTrayMenu, SystemTrayMenuItem};
+use tauri::{Manager, State};
 use serde::{Deserialize, Serialize};
 use uuid::Uuid;
 use chrono::{DateTime, Utc};
@@ -62,15 +62,20 @@ pub struct AppState {
 async fn initialize_powerautomation(state: State<'_, AppState>) -> Result<String, String> {
     log::info!("Initializing PowerAutomation core...");
     
-    let mut core_guard = state.powerautomation_core.lock().unwrap();
-    let mut mcp_guard = state.mcp_coordinator.lock().unwrap();
-    
-    // Initialize PowerAutomation Core
+    // Initialize components first to avoid holding locks across awaits
     let core = PowerAutomationCore::new().await.map_err(|e| e.to_string())?;
     let coordinator = MCPCoordinator::new().await.map_err(|e| e.to_string())?;
     
-    *core_guard = Some(core);
-    *mcp_guard = Some(coordinator);
+    // Then update state
+    {
+        let mut core_guard = state.powerautomation_core.lock().unwrap();
+        *core_guard = Some(core);
+    }
+    
+    {
+        let mut mcp_guard = state.mcp_coordinator.lock().unwrap();
+        *mcp_guard = Some(coordinator);
+    }
     
     log::info!("PowerAutomation core initialized successfully");
     Ok("PowerAutomation initialized successfully".to_string())
@@ -124,9 +129,14 @@ async fn get_mcp_services(state: State<'_, AppState>) -> Result<Vec<MCPService>,
 async fn discover_mcp_tools(state: State<'_, AppState>) -> Result<Vec<String>, String> {
     log::info!("Discovering MCP tools...");
     
-    let mcp_guard = state.mcp_coordinator.lock().unwrap();
-    if let Some(coordinator) = mcp_guard.as_ref() {
-        coordinator.discover_tools().await.map_err(|e| e.to_string())
+    // Clone the coordinator to avoid holding the lock across await
+    let coordinator = {
+        let mcp_guard = state.mcp_coordinator.lock().unwrap();
+        mcp_guard.as_ref().cloned()
+    };
+    
+    if let Some(coord) = coordinator {
+        coord.discover_tools().await.map_err(|e| e.to_string())
     } else {
         Err("MCP Coordinator not initialized".to_string())
     }
@@ -185,60 +195,12 @@ async fn get_app_version() -> Result<String, String> {
     Ok(env!("CARGO_PKG_VERSION").to_string())
 }
 
-fn create_system_tray() -> SystemTray {
-    let quit = SystemTrayMenuItem::new("Quit", "quit");
-    let show = SystemTrayMenuItem::new("Show", "show");
-    let hide = SystemTrayMenuItem::new("Hide", "hide");
-    let separator = SystemTrayMenuItem::Separator;
-    
-    let tray_menu = SystemTrayMenu::new()
-        .add_item(show)
-        .add_item(hide)
-        .add_item(separator)
-        .add_item(quit);
-    
-    SystemTray::new().with_menu(tray_menu)
-}
-
-fn handle_system_tray_event(app: &tauri::AppHandle, event: SystemTrayEvent) {
-    match event {
-        SystemTrayEvent::LeftClick { .. } => {
-            if let Some(window) = app.get_window("main") {
-                let _ = window.show();
-                let _ = window.set_focus();
-            }
-        }
-        SystemTrayEvent::MenuItemClick { id, .. } => {
-            match id.as_str() {
-                "quit" => {
-                    app.exit(0);
-                }
-                "show" => {
-                    if let Some(window) = app.get_window("main") {
-                        let _ = window.show();
-                        let _ = window.set_focus();
-                    }
-                }
-                "hide" => {
-                    if let Some(window) = app.get_window("main") {
-                        let _ = window.hide();
-                    }
-                }
-                _ => {}
-            }
-        }
-        _ => {}
-    }
-}
-
 fn main() {
     env_logger::init();
     log::info!("Starting ClaudEditor...");
     
     tauri::Builder::default()
         .manage(AppState::default())
-        .system_tray(create_system_tray())
-        .on_system_tray_event(handle_system_tray_event)
         .invoke_handler(tauri::generate_handler![
             initialize_powerautomation,
             create_project,
