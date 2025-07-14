@@ -1,8 +1,0 @@
-{
-  "version": "1.0.0",
-  "enabled": true,
-  "component_library": "shadcn/ui",
-  "theme_support": true,
-  "responsive_design": true,
-  "auto_optimization": true
-}
