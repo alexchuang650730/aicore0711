@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 """
 PowerAutomation Core 數據收集和反饋系統
-v4.6.9.3 - 全面的數據收集、分析和反饋機制
+v4.6.9.4 - 全面的數據收集、分析和反饋機制
 """
 
 import asyncio

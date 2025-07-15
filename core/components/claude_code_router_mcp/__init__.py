@@ -1,6 +1,6 @@
 """
 Claude Code Router MCP - 多AI模型智能路由系統
-PowerAutomation v4.6.9.3 核心競爭優勢組件
+PowerAutomation v4.6.9.4 核心競爭優勢組件
 
 支持的AI模型:
 - Claude (Anthropic API)
@@ -30,4 +30,4 @@ __all__ = [
     'RouterUtils'
 ]
 
-__version__ = "4.6.9.3"
+__version__ = "4.6.9.4"

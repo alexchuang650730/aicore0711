@@ -1,0 +1,12 @@
+{
+  "compressions": [
+    {
+      "timestamp": "2025-07-15T00:17:39.727470",
+      "original_size": 51200,
+      "compressed_size": 15360,
+      "saved_bytes": 35840,
+      "method": "auto"
+    }
+  ],
+  "last_compression": "2025-07-15T00:17:39.727482"
+}

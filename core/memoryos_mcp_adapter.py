@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 """
 MemoryOS MCP 適配器
-v4.6.9.3 - 提供統一的 MemoryOS MCP 接口和集成
+v4.6.9.4 - 提供統一的 MemoryOS MCP 接口和集成
 """
 
 import asyncio

@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """
-PowerAutomation Core v4.6.9.3 性能優化和系統調優
+PowerAutomation Core v4.6.9.4 性能優化和系統調優
 全面優化 MemoryOS MCP 集成、學習系統、數據收集和上下文增強性能
 """
 

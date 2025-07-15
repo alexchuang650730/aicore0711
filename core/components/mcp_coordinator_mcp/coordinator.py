@@ -45,19 +45,19 @@ class MCPCoordinator:
     def _register_core_services(self):
         """註冊核心 MCP 服務"""
         core_services = [
-            MCPService("codeflow", "CodeFlow MCP", "4.6.9.3"),
-            MCPService("claude", "Claude MCP", "4.6.9.3"),
-            MCPService("collaboration", "Collaboration MCP", "4.6.9.3"),
-            MCPService("command", "Command MCP", "4.6.9.3"),
-            MCPService("local_adapter", "Local Adapter MCP", "4.6.9.3"),
-            MCPService("memoryos", "MemoryOS MCP", "4.6.9.3"),
-            MCPService("operations", "Operations MCP", "4.6.9.3"),
-            MCPService("security", "Security MCP", "4.6.9.3"),
-            MCPService("stagewise", "Stagewise MCP", "4.6.9.3"),
-            MCPService("test", "Test MCP", "4.6.9.3"),
-            MCPService("trae_agent", "Trae Agent MCP", "4.6.9.3"),
-            MCPService("xmasters", "X-Masters MCP", "4.6.9.3"),
-            MCPService("zen", "Zen Workflow MCP", "4.6.9.3")
+            MCPService("codeflow", "CodeFlow MCP", "4.6.9.4"),
+            MCPService("claude", "Claude MCP", "4.6.9.4"),
+            MCPService("collaboration", "Collaboration MCP", "4.6.9.4"),
+            MCPService("command", "Command MCP", "4.6.9.4"),
+            MCPService("local_adapter", "Local Adapter MCP", "4.6.9.4"),
+            MCPService("memoryos", "MemoryOS MCP", "4.6.9.4"),
+            MCPService("operations", "Operations MCP", "4.6.9.4"),
+            MCPService("security", "Security MCP", "4.6.9.4"),
+            MCPService("stagewise", "Stagewise MCP", "4.6.9.4"),
+            MCPService("test", "Test MCP", "4.6.9.4"),
+            MCPService("trae_agent", "Trae Agent MCP", "4.6.9.4"),
+            MCPService("xmasters", "X-Masters MCP", "4.6.9.4"),
+            MCPService("zen", "Zen Workflow MCP", "4.6.9.4")
         ]
         
         for service in core_services:

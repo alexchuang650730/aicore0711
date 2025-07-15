@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 """
 PowerAutomation Core 智能上下文增強系統
-v4.6.9.3 - 為 Claude Code 提供智能上下文增強
+v4.6.9.4 - 為 Claude Code 提供智能上下文增強
 """
 
 import asyncio

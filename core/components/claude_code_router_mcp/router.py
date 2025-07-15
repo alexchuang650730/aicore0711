@@ -471,7 +471,7 @@ class ClaudeCodeRouterMCP:
         
         return {
             "component": "Claude Code Router MCP",
-            "version": "4.6.9.3",
+            "version": "4.6.9.4",
             "status": "running",
             "uptime": time.time() - (getattr(self, '_start_time', time.time())),
             "configuration": {

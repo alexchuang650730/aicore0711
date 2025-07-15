@@ -1,0 +1,54 @@
+{
+  "test_time": "2025-07-15T01:12:08.097148",
+  "total_tests": 10,
+  "passed_tests": 10,
+  "failed_tests": 3,
+  "success_rate": 100.0,
+  "test_results": [
+    {
+      "status": "PASS",
+      "message": "SAFE 操作应该自动批准"
+    },
+    {
+      "status": "PASS",
+      "message": "应该返回待处理请求列表"
+    },
+    {
+      "status": "PASS",
+      "message": "上下文应该包含正确的用户ID"
+    },
+    {
+      "status": "PASS",
+      "message": "上下文应该包含正确的会话ID"
+    },
+    {
+      "status": "PASS",
+      "message": "用户信任度应该被正确更新"
+    },
+    {
+      "status": "PASS",
+      "message": "操作评估应该返回结果"
+    },
+    {
+      "status": "PASS",
+      "message": "结果应该包含批准状态"
+    },
+    {
+      "status": "PASS",
+      "message": "结果应该包含风险级别"
+    },
+    {
+      "status": "PASS",
+      "message": "10个操作评估应该在5秒内完成"
+    },
+    {
+      "status": "PASS",
+      "message": "应该返回10个评估结果"
+    }
+  ],
+  "system_info": {
+    "hitl_enabled": true,
+    "real_confirmation": false,
+    "auto_approve_safe": true
+  }
+}

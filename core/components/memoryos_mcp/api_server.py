@@ -71,7 +71,7 @@ async def lifespan(app: FastAPI):
 app = FastAPI(
     title="MemoryOS MCP API",
     description="PowerAutomation Core Memory Management API",
-    version="4.6.9.3",
+    version="4.6.9.4",
     lifespan=lifespan
 )
 

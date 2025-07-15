@@ -11,7 +11,7 @@ from .personalization_manager import PersonalizationManager
 from .memory_optimizer import MemoryOptimizer
 from .memoryos_coordinator import MemoryOSCoordinator
 
-__version__ = "4.6.9.3"
+__version__ = "4.6.9.4"
 __all__ = [
     "MemoryEngine",
     "MemoryType", 
