@@ -1,0 +1,91 @@
+2025-07-15 10:24:22,357 - __main__ - INFO - 🎯 Claude Code Router MCP - 啟動程序
+2025-07-15 10:24:22,357 - __main__ - INFO - ============================================================
+2025-07-15 10:24:22,357 - __main__ - INFO - 🔑 設置環境變量: MOONSHOT_API_KEY
+2025-07-15 10:24:22,357 - __main__ - INFO - 🔑 設置環境變量: INFINI_AI_API_KEY
+2025-07-15 10:24:22,357 - __main__ - INFO - 🔑 設置環境變量: ANTHROPIC_API_KEY
+2025-07-15 10:24:22,357 - __main__ - INFO - 🔑 設置環境變量: OPENAI_API_KEY
+2025-07-15 10:24:22,357 - __main__ - INFO - 🔑 設置環境變量: GOOGLE_AI_API_KEY
+2025-07-15 10:24:22,357 - __main__ - INFO - 🔑 設置環境變量: ROUTER_AUTH_TOKEN
+2025-07-15 10:24:22,357 - __main__ - INFO - 📝 Claude Code配置文件已創建: /Users/alexchuang/.claude-code/router-config.json
+2025-07-15 10:24:22,357 - __main__ - INFO - 🚀 啟動Claude Code Router MCP服務...
+2025-07-15 10:24:22,357 - __main__ - INFO - 📋 功能說明:
+2025-07-15 10:24:22,357 - __main__ - INFO -    - 將Claude Code請求自動路由到Kimi K2
+2025-07-15 10:24:22,357 - __main__ - INFO -    - 使用Infini-AI Cloud提供商 (成本節省60%)
+2025-07-15 10:24:22,357 - __main__ - INFO -    - 支持500 QPS高并發
+2025-07-15 10:24:22,357 - __main__ - INFO -    - 完全兼容OpenAI API格式
+2025-07-15 10:24:22,357 - __main__ - INFO -    - 智能負載均衡和故障轉移
+2025-07-15 10:24:22,357 - __main__ - INFO - 
+2025-07-15 10:24:22,357 - __main__ - INFO - 🔧 使用方法:
+2025-07-15 10:24:22,357 - __main__ - INFO -    1. 在Claude Code中設置baseUrl: http://localhost:8765/v1
+2025-07-15 10:24:22,358 - __main__ - INFO -    2. 所有請求會自動路由到最佳Provider
+2025-07-15 10:24:22,358 - __main__ - INFO -    3. 享受成本節省和高性能
+2025-07-15 10:24:22,358 - __main__ - INFO - 
+2025-07-15 10:24:22,358 - __main__ - INFO - 🌐 啟動服務器: http://localhost:8765
+2025-07-15 10:24:22,358 - __main__ - INFO - 📋 可用端點:
+2025-07-15 10:24:22,358 - __main__ - INFO -    - POST /v1/chat/completions (OpenAI兼容)
+2025-07-15 10:24:22,358 - __main__ - INFO -    - GET /v1/models (模型列表)
+2025-07-15 10:24:22,358 - __main__ - INFO -    - POST /v1/switch (模型切換)
+2025-07-15 10:24:22,358 - __main__ - INFO -    - GET /v1/stats (統計信息)
+2025-07-15 10:24:22,358 - __main__ - INFO -    - GET /v1/providers/compare (Provider比較)
+2025-07-15 10:24:22,358 - __main__ - INFO -    - GET /health (健康檢查)
+2025-07-15 10:24:22,359 - __main__ - INFO - 
+2025-07-15 10:24:22,698 - core.components.claude_code_router_mcp.cache - INFO - 📦 RouterCache 初始化完成 (TTL: 3600s, Max Size: 1000)
+2025-07-15 10:24:22,699 - core.components.claude_code_router_mcp.load_balancer - INFO - ⚖️ LoadBalancer 初始化完成 (策略: round_robin)
+2025-07-15 10:24:22,775 - core.components.claude_code_router_mcp.router - INFO - 🚀 Claude Code Router MCP 初始化完成
+INFO:     Started server process [99421]
+INFO:     Waiting for application startup.
+2025-07-15 10:24:23,121 - core.components.claude_code_router_mcp.router - INFO - 🔧 初始化Claude Code Router MCP...
+2025-07-15 10:24:23,121 - core.components.claude_code_router_mcp.load_balancer - INFO - ➕ 端點已添加: claude-3-opus-20240229 (權重: 1)
+2025-07-15 10:24:23,121 - core.components.claude_code_router_mcp.load_balancer - INFO - ➕ 端點已添加: claude-3-5-sonnet-20241022 (權重: 1)
+2025-07-15 10:24:23,121 - core.components.claude_code_router_mcp.load_balancer - INFO - ➕ 端點已添加: gpt-4o (權重: 2)
+2025-07-15 10:24:23,121 - core.components.claude_code_router_mcp.load_balancer - INFO - ➕ 端點已添加: gpt-4o-mini (權重: 1)
+2025-07-15 10:24:23,121 - core.components.claude_code_router_mcp.load_balancer - INFO - ➕ 端點已添加: gemini-1.5-pro (權重: 2)
+2025-07-15 10:24:23,121 - core.components.claude_code_router_mcp.load_balancer - INFO - ➕ 端點已添加: gemini-1.5-flash (權重: 1)
+2025-07-15 10:24:23,121 - core.components.claude_code_router_mcp.load_balancer - INFO - ➕ 端點已添加: moonshot-v1-8k (權重: 1)
+2025-07-15 10:24:23,123 - core.components.claude_code_router_mcp.load_balancer - INFO - ➕ 端點已添加: kimi-k2-instruct (權重: 1)
+2025-07-15 10:24:23,123 - core.components.claude_code_router_mcp.load_balancer - INFO - ➕ 端點已添加: moonshot-v1-32k (權重: 2)
+2025-07-15 10:24:23,123 - core.components.claude_code_router_mcp.load_balancer - INFO - ➕ 端點已添加: moonshot-v1-128k (權重: 3)
+2025-07-15 10:24:23,123 - core.components.claude_code_router_mcp.router - INFO - ✅ Claude Code Router MCP 初始化完成
+INFO:     Application startup complete.
+INFO:     Uvicorn running on http://0.0.0.0:8765 (Press CTRL+C to quit)
+2025-07-15 10:24:23,374 - httpx - INFO - HTTP Request: POST https://api.anthropic.com/v1/messages "HTTP/1.1 401 Unauthorized"
+2025-07-15 10:24:23,375 - core.components.claude_code_router_mcp.router - WARNING - 模型 claude-3-opus-20240229 健康檢查失敗，已暫時禁用
+2025-07-15 10:24:23,610 - httpx - INFO - HTTP Request: POST https://api.anthropic.com/v1/messages "HTTP/1.1 401 Unauthorized"
+2025-07-15 10:24:23,611 - core.components.claude_code_router_mcp.router - WARNING - 模型 claude-3-5-sonnet-20241022 健康檢查失敗，已暫時禁用
+2025-07-15 10:24:23,825 - httpx - INFO - HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 401 Unauthorized"
+2025-07-15 10:24:23,825 - core.components.claude_code_router_mcp.router - WARNING - 模型 gpt-4o 健康檢查失敗，已暫時禁用
+2025-07-15 10:24:24,017 - httpx - INFO - HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 401 Unauthorized"
+2025-07-15 10:24:24,018 - core.components.claude_code_router_mcp.router - WARNING - 模型 gpt-4o-mini 健康檢查失敗，已暫時禁用
+2025-07-15 10:24:24,231 - httpx - INFO - HTTP Request: POST https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-pro:generateContent?key=your-google-ai-api-key "HTTP/1.1 400 Bad Request"
+2025-07-15 10:24:24,233 - core.components.claude_code_router_mcp.router - WARNING - 模型 gemini-1.5-pro 健康檢查失敗，已暫時禁用
+2025-07-15 10:24:25,091 - httpx - INFO - HTTP Request: POST https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash:generateContent?key=your-google-ai-api-key "HTTP/1.1 400 Bad Request"
+2025-07-15 10:24:25,092 - core.components.claude_code_router_mcp.router - WARNING - 模型 gemini-1.5-flash 健康檢查失敗，已暫時禁用
+2025-07-15 10:24:25,759 - httpx - INFO - HTTP Request: POST https://api.moonshot.cn/v1/chat/completions "HTTP/1.1 401 Unauthorized"
+2025-07-15 10:24:25,760 - core.components.claude_code_router_mcp.router - WARNING - 模型 moonshot-v1-8k 健康檢查失敗，已暫時禁用
+2025-07-15 10:24:26,978 - httpx - INFO - HTTP Request: POST https://cloud.infini-ai.com/maas/v1/chat/completions "HTTP/1.1 200 OK"
+2025-07-15 10:24:27,137 - httpx - INFO - HTTP Request: POST https://api.moonshot.cn/v1/chat/completions "HTTP/1.1 401 Unauthorized"
+2025-07-15 10:24:27,138 - core.components.claude_code_router_mcp.router - WARNING - 模型 moonshot-v1-32k 健康檢查失敗，已暫時禁用
+2025-07-15 10:24:27,286 - httpx - INFO - HTTP Request: POST https://api.moonshot.cn/v1/chat/completions "HTTP/1.1 401 Unauthorized"
+2025-07-15 10:24:27,287 - core.components.claude_code_router_mcp.router - WARNING - 模型 moonshot-v1-128k 健康檢查失敗，已暫時禁用
+2025-07-15 10:24:30,607 - core.components.claude_code_router_mcp.api_server - INFO - 📡 GET /health - 127.0.0.1
+2025-07-15 10:24:30,608 - core.components.claude_code_router_mcp.api_server - INFO - ✅ GET /health - 200 (0.00s)
+Warning: Could not import intelligent_error_handler_mcp: cannot import name 'intelligent_error_handler' from 'core.components.intelligent_error_handler_mcp.error_handler' (/Users/alexchuang/Desktop/alex/tests/package/aicore0711/core/components/intelligent_error_handler_mcp/error_handler.py)
+Warning: Could not import project_analyzer_mcp: No module named 'networkx'
+INFO:     127.0.0.1:62907 - "GET /health HTTP/1.1" 200 OK
+2025-07-15 10:24:34,422 - core.components.claude_code_router_mcp.api_server - INFO - 📡 GET /v1/models - 127.0.0.1
+2025-07-15 10:24:34,423 - core.components.claude_code_router_mcp.api_server - INFO - ✅ GET /v1/models - 200 (0.00s)
+INFO:     127.0.0.1:62925 - "GET /v1/models HTTP/1.1" 200 OK
+2025-07-15 10:24:43,401 - core.components.claude_code_router_mcp.api_server - INFO - 📡 POST /v1/chat/completions - 127.0.0.1
+2025-07-15 10:24:43,410 - core.components.claude_code_router_mcp.router - ERROR - ❌ 路由失敗: claude-3-opus -> 速率限制: kimi-k2-instruct
+2025-07-15 10:24:43,410 - core.components.claude_code_router_mcp.api_server - ERROR - ❌ 聊天完成失敗: 速率限制: kimi-k2-instruct
+2025-07-15 10:24:43,411 - core.components.claude_code_router_mcp.api_server - INFO - ✅ POST /v1/chat/completions - 500 (0.01s)
+INFO:     127.0.0.1:62948 - "POST /v1/chat/completions HTTP/1.1" 500 Internal Server Error
+2025-07-15 10:24:47,602 - core.components.claude_code_router_mcp.api_server - INFO - 📡 GET /v1/stats - 127.0.0.1
+2025-07-15 10:24:47,604 - core.components.claude_code_router_mcp.api_server - INFO - ✅ GET /v1/stats - 200 (0.00s)
+INFO:     127.0.0.1:62961 - "GET /v1/stats HTTP/1.1" 200 OK
+2025-07-15 10:24:50,801 - core.components.claude_code_router_mcp.api_server - INFO - 📡 GET /v1/providers/compare - 127.0.0.1
+2025-07-15 10:24:50,802 - core.components.claude_code_router_mcp.api_server - INFO - ✅ GET /v1/providers/compare - 200 (0.00s)
+INFO:     127.0.0.1:62969 - "GET /v1/providers/compare HTTP/1.1" 200 OK
+2025-07-15 10:25:28,373 - httpx - INFO - HTTP Request: POST https://cloud.infini-ai.com/maas/v1/chat/completions "HTTP/1.1 200 OK"
+2025-07-15 10:26:30,188 - httpx - INFO - HTTP Request: POST https://cloud.infini-ai.com/maas/v1/chat/completions "HTTP/1.1 200 OK"
+2025-07-15 10:27:31,023 - httpx - INFO - HTTP Request: POST https://cloud.infini-ai.com/maas/v1/chat/completions "HTTP/1.1 200 OK"

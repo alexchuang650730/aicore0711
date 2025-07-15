@@ -26,7 +26,7 @@ from .utils import RouterUtils
 logger = logging.getLogger(__name__)
 
 # 安全認證
-security = HTTPBearer()
+security = HTTPBearer(auto_error=False)
 
 # 請求模型
 class ChatCompletionRequest(BaseModel):
@@ -83,6 +83,9 @@ app.add_middleware(
 # 認證依賴
 async def verify_token(credentials: HTTPAuthorizationCredentials = Depends(security)):
     """驗證API令牌"""
+    # 開發模式下跳過認證
+    if credentials is None:
+        return "dev-token"
     # 這裡可以添加更複雜的認證邏輯
     if credentials.credentials != "your-auth-token":
         raise HTTPException(status_code=401, detail="Invalid authentication token")
