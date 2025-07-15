@@ -1,0 +1,22 @@
+2025-07-15 11:00:29,854 - PowerAutomationMain - INFO - 🚀 啟動 PowerAutomation v4.6.0
+2025-07-15 11:00:29,854 - MCPComponentManager - INFO - 初始化 8 個MCP組件
+2025-07-15 11:00:29,854 - MCPComponentManager - INFO - 初始化Test MCP - 統一測試管理平台
+2025-07-15 11:00:29,854 - MCPComponentManager - INFO - ✅ test_mcp 初始化成功
+2025-07-15 11:00:29,854 - MCPComponentManager - INFO - 初始化Stagewise MCP - 階段式錄製回放系統
+2025-07-15 11:00:29,854 - MCPComponentManager - INFO - ✅ stagewise_mcp 初始化成功
+2025-07-15 11:00:29,854 - MCPComponentManager - INFO - 初始化AG-UI MCP - 智能UI組件生成器
+2025-07-15 11:00:29,855 - MCPComponentManager - INFO - ✅ ag_ui_mcp 初始化成功
+2025-07-15 11:00:29,855 - MCPComponentManager - INFO - ✅ claude_mcp 初始化成功
+2025-07-15 11:00:29,855 - MCPComponentManager - INFO - ✅ zen_mcp 初始化成功
+2025-07-15 11:00:29,855 - MCPComponentManager - INFO - ✅ local_adapter_mcp 初始化成功
+2025-07-15 11:00:29,855 - MCPComponentManager - INFO - ✅ security_mcp 初始化成功
+2025-07-15 11:00:29,855 - MCPComponentManager - INFO - ✅ collaboration_mcp 初始化成功
+2025-07-15 11:00:29,855 - PowerAutomationMain - INFO - ✅ PowerAutomation v4.6.0 啟動完成
+2025-07-15 11:00:29,855 - PowerAutomationMain - INFO - 📊 已載入 8 個MCP組件
+INFO:     Started server process [12063]
+INFO:     Waiting for application startup.
+INFO:     Application startup complete.
+INFO:     Uvicorn running on http://0.0.0.0:8080 (Press CTRL+C to quit)
+INFO:     127.0.0.1:51810 - "GET /health HTTP/1.1" 200 OK
+INFO:     127.0.0.1:51819 - "GET / HTTP/1.1" 200 OK
+INFO:     127.0.0.1:51830 - "POST /test/milestone HTTP/1.1" 200 OK

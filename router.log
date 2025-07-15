@@ -89,3 +89,56 @@ INFO:     127.0.0.1:62969 - "GET /v1/providers/compare HTTP/1.1" 200 OK
 2025-07-15 10:25:28,373 - httpx - INFO - HTTP Request: POST https://cloud.infini-ai.com/maas/v1/chat/completions "HTTP/1.1 200 OK"
 2025-07-15 10:26:30,188 - httpx - INFO - HTTP Request: POST https://cloud.infini-ai.com/maas/v1/chat/completions "HTTP/1.1 200 OK"
 2025-07-15 10:27:31,023 - httpx - INFO - HTTP Request: POST https://cloud.infini-ai.com/maas/v1/chat/completions "HTTP/1.1 200 OK"
+2025-07-15 10:28:31,942 - httpx - INFO - HTTP Request: POST https://cloud.infini-ai.com/maas/v1/chat/completions "HTTP/1.1 200 OK"
+2025-07-15 10:29:07,143 - core.components.claude_code_router_mcp.api_server - INFO - 📡 GET /v1/models - 127.0.0.1
+2025-07-15 10:29:07,148 - core.components.claude_code_router_mcp.api_server - INFO - ✅ GET /v1/models - 200 (0.00s)
+INFO:     127.0.0.1:63584 - "GET /v1/models HTTP/1.1" 200 OK
+2025-07-15 10:29:10,700 - core.components.claude_code_router_mcp.api_server - INFO - 📡 GET /v1/stats - 127.0.0.1
+2025-07-15 10:29:10,709 - core.components.claude_code_router_mcp.api_server - INFO - ✅ GET /v1/stats - 200 (0.01s)
+INFO:     127.0.0.1:63597 - "GET /v1/stats HTTP/1.1" 200 OK
+2025-07-15 10:29:32,907 - httpx - INFO - HTTP Request: POST https://cloud.infini-ai.com/maas/v1/chat/completions "HTTP/1.1 200 OK"
+2025-07-15 10:30:33,960 - httpx - INFO - HTTP Request: POST https://cloud.infini-ai.com/maas/v1/chat/completions "HTTP/1.1 200 OK"
+2025-07-15 10:31:35,379 - httpx - INFO - HTTP Request: POST https://cloud.infini-ai.com/maas/v1/chat/completions "HTTP/1.1 200 OK"
+2025-07-15 10:32:36,536 - httpx - INFO - HTTP Request: POST https://cloud.infini-ai.com/maas/v1/chat/completions "HTTP/1.1 200 OK"
+2025-07-15 10:33:37,485 - httpx - INFO - HTTP Request: POST https://cloud.infini-ai.com/maas/v1/chat/completions "HTTP/1.1 200 OK"
+2025-07-15 10:34:38,467 - httpx - INFO - HTTP Request: POST https://cloud.infini-ai.com/maas/v1/chat/completions "HTTP/1.1 200 OK"
+2025-07-15 10:35:39,604 - httpx - INFO - HTTP Request: POST https://cloud.infini-ai.com/maas/v1/chat/completions "HTTP/1.1 200 OK"
+2025-07-15 10:36:40,512 - httpx - INFO - HTTP Request: POST https://cloud.infini-ai.com/maas/v1/chat/completions "HTTP/1.1 200 OK"
+2025-07-15 10:37:41,366 - httpx - INFO - HTTP Request: POST https://cloud.infini-ai.com/maas/v1/chat/completions "HTTP/1.1 200 OK"
+2025-07-15 10:38:42,284 - httpx - INFO - HTTP Request: POST https://cloud.infini-ai.com/maas/v1/chat/completions "HTTP/1.1 200 OK"
+2025-07-15 10:39:43,488 - httpx - INFO - HTTP Request: POST https://cloud.infini-ai.com/maas/v1/chat/completions "HTTP/1.1 200 OK"
+2025-07-15 10:40:44,407 - httpx - INFO - HTTP Request: POST https://cloud.infini-ai.com/maas/v1/chat/completions "HTTP/1.1 200 OK"
+2025-07-15 10:41:45,381 - httpx - INFO - HTTP Request: POST https://cloud.infini-ai.com/maas/v1/chat/completions "HTTP/1.1 200 OK"
+2025-07-15 10:42:46,341 - httpx - INFO - HTTP Request: POST https://cloud.infini-ai.com/maas/v1/chat/completions "HTTP/1.1 200 OK"
+2025-07-15 10:43:47,419 - httpx - INFO - HTTP Request: POST https://cloud.infini-ai.com/maas/v1/chat/completions "HTTP/1.1 200 OK"
+2025-07-15 10:44:48,317 - httpx - INFO - HTTP Request: POST https://cloud.infini-ai.com/maas/v1/chat/completions "HTTP/1.1 200 OK"
+2025-07-15 10:45:49,338 - httpx - INFO - HTTP Request: POST https://cloud.infini-ai.com/maas/v1/chat/completions "HTTP/1.1 200 OK"
+2025-07-15 10:46:50,673 - httpx - INFO - HTTP Request: POST https://cloud.infini-ai.com/maas/v1/chat/completions "HTTP/1.1 200 OK"
+2025-07-15 10:47:51,682 - httpx - INFO - HTTP Request: POST https://cloud.infini-ai.com/maas/v1/chat/completions "HTTP/1.1 200 OK"
+2025-07-15 10:48:52,649 - httpx - INFO - HTTP Request: POST https://cloud.infini-ai.com/maas/v1/chat/completions "HTTP/1.1 200 OK"
+2025-07-15 10:49:53,625 - httpx - INFO - HTTP Request: POST https://cloud.infini-ai.com/maas/v1/chat/completions "HTTP/1.1 200 OK"
+2025-07-15 10:50:54,577 - httpx - INFO - HTTP Request: POST https://cloud.infini-ai.com/maas/v1/chat/completions "HTTP/1.1 200 OK"
+2025-07-15 10:51:55,690 - httpx - INFO - HTTP Request: POST https://cloud.infini-ai.com/maas/v1/chat/completions "HTTP/1.1 200 OK"
+2025-07-15 10:52:57,027 - httpx - INFO - HTTP Request: POST https://cloud.infini-ai.com/maas/v1/chat/completions "HTTP/1.1 200 OK"
+2025-07-15 10:53:58,022 - httpx - INFO - HTTP Request: POST https://cloud.infini-ai.com/maas/v1/chat/completions "HTTP/1.1 200 OK"
+2025-07-15 10:54:54,917 - core.components.claude_code_router_mcp.api_server - INFO - 📡 GET /health - 127.0.0.1
+2025-07-15 10:54:54,925 - core.components.claude_code_router_mcp.api_server - INFO - ✅ GET /health - 200 (0.01s)
+INFO:     127.0.0.1:50979 - "GET /health HTTP/1.1" 200 OK
+2025-07-15 10:54:55,043 - core.components.claude_code_router_mcp.api_server - INFO - 📡 GET /v1/models - 127.0.0.1
+2025-07-15 10:54:55,045 - core.components.claude_code_router_mcp.api_server - INFO - ✅ GET /v1/models - 200 (0.00s)
+INFO:     127.0.0.1:50983 - "GET /v1/models HTTP/1.1" 200 OK
+2025-07-15 10:54:58,949 - httpx - INFO - HTTP Request: POST https://cloud.infini-ai.com/maas/v1/chat/completions "HTTP/1.1 200 OK"
+2025-07-15 10:55:11,946 - core.components.claude_code_router_mcp.api_server - INFO - 📡 POST /v1/chat/completions - 127.0.0.1
+2025-07-15 10:55:11,974 - core.components.claude_code_router_mcp.router - ERROR - ❌ 路由失敗: claude-3-sonnet -> 速率限制: kimi-k2-instruct
+2025-07-15 10:55:11,974 - core.components.claude_code_router_mcp.api_server - ERROR - ❌ 聊天完成失敗: 速率限制: kimi-k2-instruct
+2025-07-15 10:55:11,974 - core.components.claude_code_router_mcp.api_server - INFO - ✅ POST /v1/chat/completions - 500 (0.03s)
+INFO:     127.0.0.1:51050 - "POST /v1/chat/completions HTTP/1.1" 500 Internal Server Error
+2025-07-15 10:55:15,377 - core.components.claude_code_router_mcp.api_server - INFO - 📡 GET /v1/stats - 127.0.0.1
+2025-07-15 10:55:15,378 - core.components.claude_code_router_mcp.api_server - INFO - ✅ GET /v1/stats - 200 (0.00s)
+INFO:     127.0.0.1:51070 - "GET /v1/stats HTTP/1.1" 200 OK
+2025-07-15 10:56:00,089 - httpx - INFO - HTTP Request: POST https://cloud.infini-ai.com/maas/v1/chat/completions "HTTP/1.1 200 OK"
+2025-07-15 10:57:01,190 - httpx - INFO - HTTP Request: POST https://cloud.infini-ai.com/maas/v1/chat/completions "HTTP/1.1 200 OK"
+2025-07-15 10:58:02,071 - httpx - INFO - HTTP Request: POST https://cloud.infini-ai.com/maas/v1/chat/completions "HTTP/1.1 200 OK"
+2025-07-15 10:59:03,105 - httpx - INFO - HTTP Request: POST https://cloud.infini-ai.com/maas/v1/chat/completions "HTTP/1.1 200 OK"
+2025-07-15 11:00:04,299 - httpx - INFO - HTTP Request: POST https://cloud.infini-ai.com/maas/v1/chat/completions "HTTP/1.1 200 OK"
+2025-07-15 11:01:05,381 - httpx - INFO - HTTP Request: POST https://cloud.infini-ai.com/maas/v1/chat/completions "HTTP/1.1 200 OK"
