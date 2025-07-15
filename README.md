@@ -1,15 +1,15 @@
-# PowerAutomation v4.6.9 X-Masters Enhanced Edition
+# PowerAutomation Core v4.6.9.3
 
+[![CI/CD](https://github.com/alexchuang650730/aicore0711/actions/workflows/ci.yml/badge.svg)](https://github.com/alexchuang650730/aicore0711/actions/workflows/ci.yml)
+[![codecov](https://codecov.io/gh/alexchuang650730/aicore0711/branch/main/graph/badge.svg)](https://codecov.io/gh/alexchuang650730/aicore0711)
+[![Python 3.8+](https://img.shields.io/badge/python-3.8+-blue.svg)](https://www.python.org/downloads/)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
-[![Python 3.11+](https://img.shields.io/badge/python-3.11+-blue.svg)](https://www.python.org/downloads/)
-[![Node.js 18+](https://img.shields.io/badge/node.js-18+-green.svg)](https://nodejs.org/)
-[![Mobile](https://img.shields.io/badge/platform-Mobile%2FDesktop-blue.svg)](https://claudeditor.com)
 
-PowerAutomation v4.6.9 是業界首個完整集成飛書生態的跨平台 AI 開發平台，專注於 Mobile/Desktop 端 ClaudeEditor 與企業級 AI 模型整合。
+PowerAutomation Core 是一個集成了 MemoryOS MCP、Claude Code 雙向學習和 RLLM/DeepSeek-R1 SWE 訓練的強大自動化平台。
 
-**最新版本**: v4.6.9 X-Masters Enhanced Edition  
-**發布日期**: 2024年12月13日  
-**核心突破**: 飛書生態集成、Mobile/Desktop ClaudeEditor、企業私有雲 AI 模型部署
+**最新版本**: v4.6.9.3 - MemoryOS MCP Integration  
+**發布日期**: 2025年1月15日  
+**核心突破**: MemoryOS MCP 第13個服務、Claude Code 真實 API 雙向學習、RLLM/DeepSeek-R1 SWE 訓練集成
 
 ## 🎯 核心定位
 
