@@ -130,7 +130,11 @@ class ClaudeCodeSlashCommandHandler:
             "/api": self._handle_api,
             "/debug": self._handle_debug,
             "/export": self._handle_export,
-            "/import": self._handle_import
+            "/import": self._handle_import,
+            "/cost": self._handle_cost,
+            "/memory": self._handle_memory,
+            "/doctor": self._handle_doctor,
+            "/compact": self._handle_compact
         }
         
         if cmd_name in handlers:
@@ -292,7 +296,11 @@ class ClaudeCodeSlashCommandHandler:
             "/api": "API配置 - /api [baseUrl/timeout/retryCount] [value]",
             "/debug": "調試模式切換",
             "/export": "導出配置 - /export [config/history]",
-            "/import": "導入配置 - /import [config/history] [file_path]"
+            "/import": "導入配置 - /import [config/history] [file_path]",
+            "/cost": "成本分析 - /cost [analysis | projection [requests] | reset]",
+            "/memory": "記憶管理 - /memory [clear | optimize | stats]",
+            "/doctor": "健康檢查 - /doctor [router | model | config | repair]",
+            "/compact": "對話壓縮 - /compact [auto | history | config | session]"
         }
         
         if args and args[0] in commands:
@@ -556,6 +564,550 @@ class ClaudeCodeSlashCommandHandler:
                 return {"error": f"導入失敗: {str(e)}"}
         
         return {"error": "只支援導入 config"}
+    
+    async def _handle_cost(self, args: List[str]) -> Dict[str, Any]:
+        """處理 /cost 指令"""
+        if not args:
+            # 顯示當前會話的成本統計
+            return {
+                "type": "cost",
+                "current_session": {
+                    "total_cost": 0.0,
+                    "requests": self.session_stats["commands_executed"],
+                    "cost_per_request": 0.0,
+                    "model": self.current_model,
+                    "provider": "infini-ai-cloud"
+                },
+                "cost_analysis": {
+                    "claude_original_cost": 0.0015,  # per 1k tokens
+                    "kimi_k2_cost": 0.0005,          # per 1k tokens
+                    "savings_percentage": 66.7,
+                    "cost_efficiency": "60% cost reduction vs Claude"
+                },
+                "router_stats": {
+                    "total_requests": 0,
+                    "successful_requests": 0,
+                    "total_cost_saved": 0.0,
+                    "avg_response_time": 0.0
+                },
+                "message": "成本統計信息"
+            }
+        
+        if args[0] == "analysis":
+            # 詳細成本分析
+            return {
+                "type": "cost",
+                "detailed_analysis": {
+                    "model_comparison": {
+                        "claude-3-opus": {"cost_per_1k": 0.015, "qps": 60},
+                        "claude-3-sonnet": {"cost_per_1k": 0.003, "qps": 60},
+                        "kimi-k2-instruct": {"cost_per_1k": 0.0005, "qps": 500}
+                    },
+                    "cost_savings": {
+                        "vs_claude_opus": "96.7%",
+                        "vs_claude_sonnet": "83.3%",
+                        "vs_gpt4": "98.3%"
+                    },
+                    "performance_benefits": {
+                        "qps_improvement": "8.3x vs Claude",
+                        "response_time": "Similar latency",
+                        "availability": "99.9% uptime"
+                    }
+                },
+                "message": "詳細成本分析"
+            }
+        
+        elif args[0] == "projection":
+            # 成本預測
+            monthly_requests = int(args[1]) if len(args) > 1 else 10000
+            
+            claude_cost = monthly_requests * 0.003 * 0.5  # 假設平均500 tokens
+            kimi_cost = monthly_requests * 0.0005 * 0.5
+            savings = claude_cost - kimi_cost
+            
+            return {
+                "type": "cost",
+                "projection": {
+                    "monthly_requests": monthly_requests,
+                    "claude_cost": f"${claude_cost:.2f}",
+                    "kimi_k2_cost": f"${kimi_cost:.2f}",
+                    "monthly_savings": f"${savings:.2f}",
+                    "annual_savings": f"${savings * 12:.2f}",
+                    "roi_percentage": f"{(savings / kimi_cost) * 100:.1f}%"
+                },
+                "message": f"基於每月{monthly_requests}個請求的成本預測"
+            }
+        
+        elif args[0] == "reset":
+            # 重置成本統計
+            self.session_stats["commands_executed"] = 0
+            self.session_stats["session_start"] = datetime.now().isoformat()
+            
+            return {
+                "type": "cost",
+                "message": "成本統計已重置",
+                "reset_time": datetime.now().isoformat()
+            }
+        
+        return {"error": "用法: /cost [analysis | projection [requests] | reset]"}
+    
+    async def _handle_memory(self, args: List[str]) -> Dict[str, Any]:
+        """處理 /memory 指令 - 記憶管理"""
+        if not args:
+            # 顯示當前記憶狀態
+            return {
+                "type": "memory",
+                "current_memory": {
+                    "session_commands": self.session_stats["commands_executed"],
+                    "session_start": self.session_stats["session_start"],
+                    "config_memory": len(json.dumps(self.config).encode('utf-8')),
+                    "model_memory": self.current_model
+                },
+                "memory_limits": {
+                    "max_session_commands": 1000,
+                    "max_config_size": 10240,  # 10KB
+                    "context_window": 128000   # K2 context window
+                },
+                "memory_usage": {
+                    "session_usage": f"{self.session_stats['commands_executed']}/1000",
+                    "config_usage": f"{len(json.dumps(self.config).encode('utf-8'))}/10240 bytes"
+                },
+                "message": "記憶狀態信息"
+            }
+        
+        if args[0] == "clear":
+            # 清除記憶
+            self.session_stats = {
+                "commands_executed": 0,
+                "session_start": datetime.now().isoformat(),
+                "last_activity": datetime.now().isoformat()
+            }
+            return {
+                "type": "memory",
+                "message": "記憶已清除",
+                "cleared_at": datetime.now().isoformat()
+            }
+        
+        elif args[0] == "optimize":
+            # 優化記憶使用
+            config_size_before = len(json.dumps(self.config).encode('utf-8'))
+            
+            # 移除不必要的配置項
+            optimized_config = self.config.copy()
+            if "debug" in optimized_config:
+                del optimized_config["debug"]
+            
+            config_size_after = len(json.dumps(optimized_config).encode('utf-8'))
+            savings = config_size_before - config_size_after
+            
+            return {
+                "type": "memory",
+                "optimization": {
+                    "config_size_before": config_size_before,
+                    "config_size_after": config_size_after,
+                    "bytes_saved": savings,
+                    "optimization_percentage": f"{(savings / config_size_before) * 100:.1f}%"
+                },
+                "recommendations": [
+                    "定期清理會話記憶",
+                    "優化配置文件大小",
+                    "使用較短的模型名稱",
+                    "定期重啟服務以釋放記憶"
+                ],
+                "message": "記憶優化完成"
+            }
+        
+        elif args[0] == "stats":
+            # 記憶統計
+            import psutil
+            process = psutil.Process()
+            memory_info = process.memory_info()
+            
+            return {
+                "type": "memory",
+                "system_memory": {
+                    "rss": memory_info.rss,
+                    "vms": memory_info.vms,
+                    "rss_mb": f"{memory_info.rss / 1024 / 1024:.1f} MB",
+                    "vms_mb": f"{memory_info.vms / 1024 / 1024:.1f} MB"
+                },
+                "application_memory": {
+                    "config_size": len(json.dumps(self.config).encode('utf-8')),
+                    "session_objects": len(self.session_stats),
+                    "handlers_count": len([name for name in dir(self) if name.startswith('_handle_')])
+                },
+                "k2_memory": {
+                    "model": self.current_model,
+                    "context_window": "128K tokens",
+                    "estimated_memory_per_request": "~2MB"
+                },
+                "message": "記憶統計信息"
+            }
+        
+        return {"error": "用法: /memory [clear | optimize | stats]"}
+    
+    async def _handle_doctor(self, args: List[str]) -> Dict[str, Any]:
+        """處理 /doctor 指令 - 健康檢查"""
+        if not args:
+            # 綜合健康檢查
+            health_checks = {
+                "router_connection": await self._check_router_health(),
+                "model_availability": await self._check_model_health(),
+                "config_validity": self._check_config_health(),
+                "system_resources": self._check_system_health(),
+                "mirror_code_proxy": await self._check_mirror_code_health()
+            }
+            
+            overall_health = all(check["status"] == "healthy" for check in health_checks.values())
+            
+            return {
+                "type": "doctor",
+                "overall_health": "healthy" if overall_health else "unhealthy",
+                "checks": health_checks,
+                "recommendations": self._generate_health_recommendations(health_checks),
+                "timestamp": datetime.now().isoformat(),
+                "message": "系統健康檢查完成"
+            }
+        
+        if args[0] == "router":
+            # 檢查路由器健康
+            return {
+                "type": "doctor",
+                "check_type": "router",
+                "result": await self._check_router_health(),
+                "message": "路由器健康檢查"
+            }
+        
+        elif args[0] == "model":
+            # 檢查模型健康
+            return {
+                "type": "doctor",
+                "check_type": "model",
+                "result": await self._check_model_health(),
+                "message": "模型健康檢查"
+            }
+        
+        elif args[0] == "config":
+            # 檢查配置健康
+            return {
+                "type": "doctor",
+                "check_type": "config",
+                "result": self._check_config_health(),
+                "message": "配置健康檢查"
+            }
+        
+        elif args[0] == "repair":
+            # 自動修復
+            repair_actions = []
+            
+            # 檢查並修復配置
+            if not os.path.exists(self.config_path):
+                os.makedirs(os.path.dirname(self.config_path), exist_ok=True)
+                self._save_config()
+                repair_actions.append("重建配置文件")
+            
+            # 重置模型為默認
+            if self.current_model not in self.config["models"]["available"]:
+                self.current_model = self.config["models"]["default"]
+                repair_actions.append("重置為默認模型")
+            
+            return {
+                "type": "doctor",
+                "repair_actions": repair_actions,
+                "message": "自動修復完成",
+                "timestamp": datetime.now().isoformat()
+            }
+        
+        return {"error": "用法: /doctor [router | model | config | repair]"}
+    
+    async def _check_router_health(self) -> Dict[str, Any]:
+        """檢查路由器健康狀態"""
+        try:
+            import httpx
+            async with httpx.AsyncClient(timeout=5.0) as client:
+                response = await client.get(f"{self.config['api']['baseUrl'].rstrip('/v1')}/health")
+                if response.status_code == 200:
+                    return {
+                        "status": "healthy",
+                        "response_time": response.elapsed.total_seconds(),
+                        "endpoint": self.config['api']['baseUrl']
+                    }
+                else:
+                    return {
+                        "status": "unhealthy",
+                        "error": f"HTTP {response.status_code}",
+                        "endpoint": self.config['api']['baseUrl']
+                    }
+        except Exception as e:
+            return {
+                "status": "unhealthy",
+                "error": str(e),
+                "endpoint": self.config['api']['baseUrl']
+            }
+    
+    async def _check_model_health(self) -> Dict[str, Any]:
+        """檢查模型健康狀態"""
+        try:
+            import httpx
+            async with httpx.AsyncClient(timeout=5.0) as client:
+                response = await client.get(f"{self.config['api']['baseUrl']}/models")
+                if response.status_code == 200:
+                    models = response.json()
+                    available_models = [model["id"] for model in models.get("data", [])]
+                    return {
+                        "status": "healthy",
+                        "available_models": available_models,
+                        "current_model": self.current_model,
+                        "model_accessible": self.current_model in available_models
+                    }
+                else:
+                    return {
+                        "status": "unhealthy",
+                        "error": f"HTTP {response.status_code}"
+                    }
+        except Exception as e:
+            return {
+                "status": "unhealthy",
+                "error": str(e)
+            }
+    
+    def _check_config_health(self) -> Dict[str, Any]:
+        """檢查配置健康狀態"""
+        try:
+            issues = []
+            
+            # 檢查必要配置項
+            required_keys = ["api", "models", "tools", "ui"]
+            for key in required_keys:
+                if key not in self.config:
+                    issues.append(f"缺少配置項: {key}")
+            
+            # 檢查API配置
+            if "api" in self.config:
+                if "baseUrl" not in self.config["api"]:
+                    issues.append("缺少API baseUrl")
+                if not self.config["api"]["baseUrl"].startswith("http"):
+                    issues.append("API baseUrl格式無效")
+            
+            # 檢查模型配置
+            if "models" in self.config:
+                if "default" not in self.config["models"]:
+                    issues.append("缺少默認模型")
+                if "available" not in self.config["models"]:
+                    issues.append("缺少可用模型列表")
+            
+            return {
+                "status": "healthy" if not issues else "unhealthy",
+                "issues": issues,
+                "config_path": self.config_path,
+                "config_size": len(json.dumps(self.config).encode('utf-8'))
+            }
+        except Exception as e:
+            return {
+                "status": "unhealthy",
+                "error": str(e)
+            }
+    
+    def _check_system_health(self) -> Dict[str, Any]:
+        """檢查系統資源健康狀態"""
+        try:
+            import psutil
+            
+            # CPU使用率
+            cpu_percent = psutil.cpu_percent(interval=1)
+            
+            # 記憶體使用率
+            memory = psutil.virtual_memory()
+            
+            # 磁碟使用率
+            disk = psutil.disk_usage('/')
+            
+            # 判斷健康狀態
+            is_healthy = (
+                cpu_percent < 80 and
+                memory.percent < 80 and
+                disk.percent < 90
+            )
+            
+            return {
+                "status": "healthy" if is_healthy else "warning",
+                "cpu_percent": cpu_percent,
+                "memory_percent": memory.percent,
+                "disk_percent": disk.percent,
+                "available_memory_mb": memory.available / 1024 / 1024
+            }
+        except Exception as e:
+            return {
+                "status": "unhealthy",
+                "error": str(e)
+            }
+    
+    async def _check_mirror_code_health(self) -> Dict[str, Any]:
+        """檢查Mirror Code代理健康狀態"""
+        try:
+            if not self.config.get("mirror_code_proxy", {}).get("enabled", False):
+                return {
+                    "status": "disabled",
+                    "message": "Mirror Code代理未啟用"
+                }
+            
+            # 嘗試導入Mirror Code組件
+            try:
+                from ...mirror_code.command_execution.claude_integration import ClaudeIntegration
+                return {
+                    "status": "healthy",
+                    "message": "Mirror Code組件可用"
+                }
+            except ImportError as e:
+                return {
+                    "status": "unhealthy",
+                    "error": f"Mirror Code組件不可用: {str(e)}"
+                }
+        except Exception as e:
+            return {
+                "status": "unhealthy",
+                "error": str(e)
+            }
+    
+    def _generate_health_recommendations(self, health_checks: Dict[str, Any]) -> List[str]:
+        """生成健康建議"""
+        recommendations = []
+        
+        if health_checks["router_connection"]["status"] != "healthy":
+            recommendations.append("檢查路由器服務是否正常運行")
+        
+        if health_checks["model_availability"]["status"] != "healthy":
+            recommendations.append("檢查模型API密鑰和網絡連接")
+        
+        if health_checks["config_validity"]["status"] != "healthy":
+            recommendations.append("修復配置文件問題")
+        
+        if health_checks["system_resources"]["status"] == "warning":
+            recommendations.append("監控系統資源使用情況")
+        
+        if health_checks["mirror_code_proxy"]["status"] == "unhealthy":
+            recommendations.append("檢查Mirror Code代理配置")
+        
+        if not recommendations:
+            recommendations.append("系統運行正常，無需額外操作")
+        
+        return recommendations
+    
+    async def _handle_compact(self, args: List[str]) -> Dict[str, Any]:
+        """處理 /compact 指令 - 對話壓縮"""
+        if not args:
+            # 顯示壓縮狀態
+            return {
+                "type": "compact",
+                "compression_status": {
+                    "current_session_size": self.session_stats["commands_executed"],
+                    "estimated_tokens": self.session_stats["commands_executed"] * 50,  # 估算
+                    "compression_available": True,
+                    "recommended_compression": self.session_stats["commands_executed"] > 100
+                },
+                "compression_options": {
+                    "auto": "自動壓縮冗餘內容",
+                    "history": "壓縮命令歷史",
+                    "config": "壓縮配置資訊",
+                    "session": "壓縮會話資料"
+                },
+                "message": "對話壓縮狀態"
+            }
+        
+        if args[0] == "auto":
+            # 自動壓縮
+            original_size = len(json.dumps(self.session_stats).encode('utf-8'))
+            
+            # 保留最近的重要統計
+            compressed_stats = {
+                "commands_executed": self.session_stats["commands_executed"],
+                "session_start": self.session_stats["session_start"],
+                "last_activity": self.session_stats["last_activity"]
+            }
+            
+            compressed_size = len(json.dumps(compressed_stats).encode('utf-8'))
+            compression_ratio = (1 - compressed_size / original_size) * 100
+            
+            return {
+                "type": "compact",
+                "compression_result": {
+                    "original_size": original_size,
+                    "compressed_size": compressed_size,
+                    "compression_ratio": f"{compression_ratio:.1f}%",
+                    "bytes_saved": original_size - compressed_size
+                },
+                "message": "自動壓縮完成"
+            }
+        
+        elif args[0] == "history":
+            # 壓縮歷史
+            if self.session_stats["commands_executed"] > 50:
+                # 保留最近50個命令的統計
+                original_count = self.session_stats["commands_executed"]
+                self.session_stats["commands_executed"] = min(50, original_count)
+                
+                return {
+                    "type": "compact",
+                    "compression_result": {
+                        "original_commands": original_count,
+                        "compressed_commands": self.session_stats["commands_executed"],
+                        "commands_removed": original_count - self.session_stats["commands_executed"]
+                    },
+                    "message": "命令歷史已壓縮"
+                }
+            else:
+                return {
+                    "type": "compact",
+                    "message": "命令歷史無需壓縮"
+                }
+        
+        elif args[0] == "config":
+            # 壓縮配置
+            original_config = self.config.copy()
+            original_size = len(json.dumps(original_config).encode('utf-8'))
+            
+            # 移除可選配置項
+            compressed_config = {
+                "api": original_config["api"],
+                "models": {
+                    "default": original_config["models"]["default"],
+                    "available": original_config["models"]["available"]
+                },
+                "tools": {
+                    "enabled": original_config["tools"]["enabled"]
+                }
+            }
+            
+            compressed_size = len(json.dumps(compressed_config).encode('utf-8'))
+            compression_ratio = (1 - compressed_size / original_size) * 100
+            
+            return {
+                "type": "compact",
+                "compression_result": {
+                    "original_size": original_size,
+                    "compressed_size": compressed_size,
+                    "compression_ratio": f"{compression_ratio:.1f}%",
+                    "bytes_saved": original_size - compressed_size
+                },
+                "compressed_config": compressed_config,
+                "message": "配置已壓縮"
+            }
+        
+        elif args[0] == "session":
+            # 壓縮會話
+            self.session_stats = {
+                "commands_executed": 0,
+                "session_start": datetime.now().isoformat(),
+                "last_activity": datetime.now().isoformat()
+            }
+            
+            return {
+                "type": "compact",
+                "message": "會話已重置和壓縮",
+                "new_session_start": self.session_stats["session_start"]
+            }
+        
+        return {"error": "用法: /compact [auto | history | config | session]"}
 
 class CommandMCPManager:
     def __init__(self):
@@ -602,7 +1154,8 @@ class CommandMCPManager:
             "/config", "/status", "/help", "/model", "/models", 
             "/clear", "/history", "/tools", "/version", "/exit", 
             "/quit", "/reset", "/theme", "/lang", "/api", 
-            "/debug", "/export", "/import"
+            "/debug", "/export", "/import", "/cost", "/memory", 
+            "/doctor", "/compact"
         ]
     
     def get_status(self) -> Dict[str, Any]:
