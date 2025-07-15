@@ -69,3 +69,187 @@ INFO:     127.0.0.1:55268 - "GET /v1/stats HTTP/1.1" 200 OK
 INFO:__main__:📡 GET /v1/stats - 127.0.0.1
 INFO:__main__:✅ GET /v1/stats - 200 (0.00s)
 INFO:     127.0.0.1:55300 - "GET /v1/stats HTTP/1.1" 200 OK
+INFO:__main__:📡 GET /health - 127.0.0.1
+INFO:httpx:HTTP Request: POST https://cloud.infini-ai.com/maas/v1/chat/completions "HTTP/1.1 200 OK"
+INFO:__main__:✅ GET /health - 200 (0.90s)
+INFO:     127.0.0.1:55596 - "GET /health HTTP/1.1" 200 OK
+INFO:__main__:📡 GET /v1/stats - 127.0.0.1
+INFO:__main__:✅ GET /v1/stats - 200 (0.00s)
+INFO:     127.0.0.1:55727 - "GET /v1/stats HTTP/1.1" 200 OK
+INFO:__main__:📡 POST /v1/chat/completions - 127.0.0.1
+INFO:httpx:HTTP Request: POST https://cloud.infini-ai.com/maas/v1/chat/completions "HTTP/1.1 200 OK"
+INFO:__main__:✅ POST /v1/chat/completions - 200 (7.85s)
+INFO:     127.0.0.1:55770 - "POST /v1/chat/completions HTTP/1.1" 200 OK
+INFO:httpx:HTTP Request: POST https://cloud.infini-ai.com/maas/v1/chat/completions "HTTP/1.1 200 OK"
+INFO:__main__:📡 POST /v1/chat/completions - 127.0.0.1
+INFO:httpx:HTTP Request: POST https://cloud.infini-ai.com/maas/v1/chat/completions "HTTP/1.1 200 OK"
+INFO:__main__:✅ POST /v1/chat/completions - 200 (11.10s)
+INFO:     127.0.0.1:55943 - "POST /v1/chat/completions HTTP/1.1" 200 OK
+INFO:httpx:HTTP Request: POST https://cloud.infini-ai.com/maas/v1/chat/completions "HTTP/1.1 200 OK"
+INFO:__main__:📡 GET /v1/stats - 127.0.0.1
+INFO:__main__:✅ GET /v1/stats - 200 (0.00s)
+INFO:     127.0.0.1:55976 - "GET /v1/stats HTTP/1.1" 200 OK
+INFO:__main__:📡 GET /health - 127.0.0.1
+INFO:httpx:HTTP Request: POST https://cloud.infini-ai.com/maas/v1/chat/completions "HTTP/1.1 200 OK"
+INFO:__main__:✅ GET /health - 200 (0.90s)
+INFO:     127.0.0.1:57553 - "GET /health HTTP/1.1" 200 OK
+INFO:__main__:📡 GET /v1/models - 127.0.0.1
+INFO:__main__:✅ GET /v1/models - 200 (0.00s)
+INFO:     127.0.0.1:57559 - "GET /v1/models HTTP/1.1" 200 OK
+INFO:__main__:📡 POST /v1/chat/completions - 127.0.0.1
+INFO:httpx:HTTP Request: POST https://cloud.infini-ai.com/maas/v1/chat/completions "HTTP/1.1 200 OK"
+INFO:__main__:✅ POST /v1/chat/completions - 200 (0.68s)
+INFO:     127.0.0.1:57561 - "POST /v1/chat/completions HTTP/1.1" 200 OK
+INFO:__main__:📡 POST /v1/chat/completions - 127.0.0.1
+INFO:httpx:HTTP Request: POST https://cloud.infini-ai.com/maas/v1/chat/completions "HTTP/1.1 200 OK"
+INFO:httpx:HTTP Request: POST https://cloud.infini-ai.com/maas/v1/chat/completions "HTTP/1.1 200 OK"
+INFO:__main__:✅ POST /v1/chat/completions - 200 (7.88s)
+INFO:     127.0.0.1:57564 - "POST /v1/chat/completions HTTP/1.1" 200 OK
+INFO:__main__:📡 POST /v1/chat/completions - 127.0.0.1
+INFO:httpx:HTTP Request: POST https://cloud.infini-ai.com/maas/v1/chat/completions "HTTP/1.1 200 OK"
+INFO:httpx:HTTP Request: POST https://cloud.infini-ai.com/maas/v1/chat/completions "HTTP/1.1 200 OK"
+INFO:__main__:✅ POST /v1/chat/completions - 200 (7.60s)
+INFO:     127.0.0.1:57574 - "POST /v1/chat/completions HTTP/1.1" 200 OK
+INFO:__main__:📡 POST /v1/chat/completions - 127.0.0.1
+INFO:httpx:HTTP Request: POST https://cloud.infini-ai.com/maas/v1/chat/completions "HTTP/1.1 200 OK"
+INFO:httpx:HTTP Request: POST https://cloud.infini-ai.com/maas/v1/chat/completions "HTTP/1.1 200 OK"
+INFO:__main__:✅ POST /v1/chat/completions - 200 (8.63s)
+INFO:     127.0.0.1:57583 - "POST /v1/chat/completions HTTP/1.1" 200 OK
+INFO:__main__:📡 POST /v1/chat/completions - 127.0.0.1
+INFO:httpx:HTTP Request: POST https://cloud.infini-ai.com/maas/v1/chat/completions "HTTP/1.1 200 OK"
+INFO:httpx:HTTP Request: POST https://cloud.infini-ai.com/maas/v1/chat/completions "HTTP/1.1 200 OK"
+INFO:__main__:✅ POST /v1/chat/completions - 200 (7.55s)
+INFO:     127.0.0.1:57590 - "POST /v1/chat/completions HTTP/1.1" 200 OK
+INFO:__main__:📡 GET /v1/stats - 127.0.0.1
+INFO:__main__:✅ GET /v1/stats - 200 (0.00s)
+INFO:     127.0.0.1:57598 - "GET /v1/stats HTTP/1.1" 200 OK
+INFO:__main__:📡 GET /v1/providers/compare - 127.0.0.1
+INFO:__main__:✅ GET /v1/providers/compare - 200 (0.00s)
+INFO:     127.0.0.1:57601 - "GET /v1/providers/compare HTTP/1.1" 200 OK
+INFO:__main__:📡 POST /v1/chat/completions - 127.0.0.1
+INFO:__main__:📡 POST /v1/chat/completions - 127.0.0.1
+INFO:__main__:📡 POST /v1/chat/completions - 127.0.0.1
+INFO:__main__:📡 POST /v1/chat/completions - 127.0.0.1
+INFO:__main__:📡 POST /v1/chat/completions - 127.0.0.1
+INFO:httpx:HTTP Request: POST https://cloud.infini-ai.com/maas/v1/chat/completions "HTTP/1.1 200 OK"
+INFO:httpx:HTTP Request: POST https://cloud.infini-ai.com/maas/v1/chat/completions "HTTP/1.1 200 OK"
+INFO:__main__:✅ POST /v1/chat/completions - 200 (0.97s)
+INFO:     127.0.0.1:57621 - "POST /v1/chat/completions HTTP/1.1" 200 OK
+INFO:httpx:HTTP Request: POST https://cloud.infini-ai.com/maas/v1/chat/completions "HTTP/1.1 200 OK"
+INFO:httpx:HTTP Request: POST https://cloud.infini-ai.com/maas/v1/chat/completions "HTTP/1.1 200 OK"
+INFO:__main__:✅ POST /v1/chat/completions - 200 (2.13s)
+INFO:     127.0.0.1:57620 - "POST /v1/chat/completions HTTP/1.1" 200 OK
+INFO:httpx:HTTP Request: POST https://cloud.infini-ai.com/maas/v1/chat/completions "HTTP/1.1 200 OK"
+INFO:httpx:HTTP Request: POST https://cloud.infini-ai.com/maas/v1/chat/completions "HTTP/1.1 200 OK"
+INFO:__main__:✅ POST /v1/chat/completions - 200 (3.04s)
+INFO:     127.0.0.1:57624 - "POST /v1/chat/completions HTTP/1.1" 200 OK
+INFO:httpx:HTTP Request: POST https://cloud.infini-ai.com/maas/v1/chat/completions "HTTP/1.1 200 OK"
+INFO:__main__:✅ POST /v1/chat/completions - 200 (3.08s)
+INFO:     127.0.0.1:57623 - "POST /v1/chat/completions HTTP/1.1" 200 OK
+INFO:httpx:HTTP Request: POST https://cloud.infini-ai.com/maas/v1/chat/completions "HTTP/1.1 200 OK"
+INFO:__main__:✅ POST /v1/chat/completions - 200 (3.10s)
+INFO:     127.0.0.1:57622 - "POST /v1/chat/completions HTTP/1.1" 200 OK
+INFO:__main__:📡 POST /v1/chat/completions - 127.0.0.1
+INFO:httpx:HTTP Request: POST https://cloud.infini-ai.com/maas/v1/chat/completions "HTTP/1.1 200 OK"
+INFO:httpx:HTTP Request: POST https://cloud.infini-ai.com/maas/v1/chat/completions "HTTP/1.1 200 OK"
+INFO:httpx:HTTP Request: POST https://cloud.infini-ai.com/maas/v1/chat/completions "HTTP/1.1 429 Too Many Requests"
+INFO:httpx:HTTP Request: POST https://cloud.infini-ai.com/maas/v1/chat/completions "HTTP/1.1 200 OK"
+INFO:__main__:✅ POST /v1/chat/completions - 200 (0.98s)
+INFO:     127.0.0.1:57636 - "POST /v1/chat/completions HTTP/1.1" 200 OK
+INFO:__main__:📡 POST /v1/chat/completions - 127.0.0.1
+INFO:httpx:HTTP Request: POST https://cloud.infini-ai.com/maas/v1/chat/completions "HTTP/1.1 429 Too Many Requests"
+INFO:__main__:✅ POST /v1/chat/completions - 500 (0.25s)
+INFO:     127.0.0.1:57643 - "POST /v1/chat/completions HTTP/1.1" 500 Internal Server Error
+INFO:__main__:📡 POST /v1/chat/completions - 127.0.0.1
+INFO:httpx:HTTP Request: POST https://cloud.infini-ai.com/maas/v1/chat/completions "HTTP/1.1 429 Too Many Requests"
+INFO:httpx:HTTP Request: POST https://cloud.infini-ai.com/maas/v1/chat/completions "HTTP/1.1 429 Too Many Requests"
+INFO:__main__:✅ POST /v1/chat/completions - 500 (0.27s)
+INFO:     127.0.0.1:57647 - "POST /v1/chat/completions HTTP/1.1" 500 Internal Server Error
+INFO:__main__:📡 POST /v1/chat/completions - 127.0.0.1
+INFO:httpx:HTTP Request: POST https://cloud.infini-ai.com/maas/v1/chat/completions "HTTP/1.1 429 Too Many Requests"
+INFO:__main__:✅ POST /v1/chat/completions - 500 (0.26s)
+INFO:     127.0.0.1:57651 - "POST /v1/chat/completions HTTP/1.1" 500 Internal Server Error
+INFO:__main__:📡 POST /v1/chat/completions - 127.0.0.1
+INFO:httpx:HTTP Request: POST https://cloud.infini-ai.com/maas/v1/chat/completions "HTTP/1.1 429 Too Many Requests"
+INFO:__main__:✅ POST /v1/chat/completions - 500 (0.31s)
+INFO:     127.0.0.1:57654 - "POST /v1/chat/completions HTTP/1.1" 500 Internal Server Error
+INFO:__main__:📡 POST /v1/chat/completions - 127.0.0.1
+INFO:httpx:HTTP Request: POST https://cloud.infini-ai.com/maas/v1/chat/completions "HTTP/1.1 429 Too Many Requests"
+INFO:__main__:✅ POST /v1/chat/completions - 500 (0.56s)
+INFO:     127.0.0.1:57661 - "POST /v1/chat/completions HTTP/1.1" 500 Internal Server Error
+INFO:__main__:📡 POST /v1/chat/completions - 127.0.0.1
+INFO:httpx:HTTP Request: POST https://cloud.infini-ai.com/maas/v1/chat/completions "HTTP/1.1 429 Too Many Requests"
+INFO:__main__:✅ POST /v1/chat/completions - 500 (0.26s)
+INFO:     127.0.0.1:57666 - "POST /v1/chat/completions HTTP/1.1" 500 Internal Server Error
+INFO:__main__:📡 POST /v1/chat/completions - 127.0.0.1
+INFO:httpx:HTTP Request: POST https://cloud.infini-ai.com/maas/v1/chat/completions "HTTP/1.1 429 Too Many Requests"
+INFO:__main__:✅ POST /v1/chat/completions - 500 (0.29s)
+INFO:     127.0.0.1:57672 - "POST /v1/chat/completions HTTP/1.1" 500 Internal Server Error
+INFO:__main__:📡 POST /v1/chat/completions - 127.0.0.1
+INFO:httpx:HTTP Request: POST https://cloud.infini-ai.com/maas/v1/chat/completions "HTTP/1.1 200 OK"
+INFO:__main__:✅ POST /v1/chat/completions - 200 (1.40s)
+INFO:     127.0.0.1:57677 - "POST /v1/chat/completions HTTP/1.1" 200 OK
+INFO:httpx:HTTP Request: POST https://cloud.infini-ai.com/maas/v1/chat/completions "HTTP/1.1 429 Too Many Requests"
+INFO:__main__:📡 POST /v1/chat/completions - 127.0.0.1
+INFO:httpx:HTTP Request: POST https://cloud.infini-ai.com/maas/v1/chat/completions "HTTP/1.1 429 Too Many Requests"
+INFO:__main__:✅ POST /v1/chat/completions - 500 (0.30s)
+INFO:     127.0.0.1:57682 - "POST /v1/chat/completions HTTP/1.1" 500 Internal Server Error
+INFO:__main__:📡 POST /v1/chat/completions - 127.0.0.1
+INFO:httpx:HTTP Request: POST https://cloud.infini-ai.com/maas/v1/chat/completions "HTTP/1.1 200 OK"
+INFO:__main__:✅ POST /v1/chat/completions - 200 (1.58s)
+INFO:     127.0.0.1:57689 - "POST /v1/chat/completions HTTP/1.1" 200 OK
+INFO:httpx:HTTP Request: POST https://cloud.infini-ai.com/maas/v1/chat/completions "HTTP/1.1 429 Too Many Requests"
+INFO:__main__:📡 POST /v1/chat/completions - 127.0.0.1
+INFO:httpx:HTTP Request: POST https://cloud.infini-ai.com/maas/v1/chat/completions "HTTP/1.1 429 Too Many Requests"
+INFO:__main__:✅ POST /v1/chat/completions - 500 (0.27s)
+INFO:     127.0.0.1:57700 - "POST /v1/chat/completions HTTP/1.1" 500 Internal Server Error
+INFO:__main__:📡 GET /health - 127.0.0.1
+INFO:httpx:HTTP Request: POST https://cloud.infini-ai.com/maas/v1/chat/completions "HTTP/1.1 200 OK"
+INFO:__main__:✅ GET /health - 200 (0.79s)
+INFO:     127.0.0.1:57723 - "GET /health HTTP/1.1" 200 OK
+INFO:__main__:📡 GET /health - 127.0.0.1
+INFO:httpx:HTTP Request: POST https://cloud.infini-ai.com/maas/v1/chat/completions "HTTP/1.1 200 OK"
+INFO:__main__:✅ GET /health - 200 (0.77s)
+INFO:     127.0.0.1:57938 - "GET /health HTTP/1.1" 200 OK
+INFO:__main__:📡 GET /v1/models - 127.0.0.1
+INFO:__main__:✅ GET /v1/models - 200 (0.00s)
+INFO:     127.0.0.1:57942 - "GET /v1/models HTTP/1.1" 200 OK
+INFO:__main__:📡 POST /v1/chat/completions - 127.0.0.1
+INFO:httpx:HTTP Request: POST https://cloud.infini-ai.com/maas/v1/chat/completions "HTTP/1.1 200 OK"
+INFO:__main__:✅ POST /v1/chat/completions - 200 (1.71s)
+INFO:     127.0.0.1:57944 - "POST /v1/chat/completions HTTP/1.1" 200 OK
+INFO:__main__:📡 GET /v1/stats - 127.0.0.1
+INFO:__main__:✅ GET /v1/stats - 200 (0.00s)
+INFO:     127.0.0.1:57948 - "GET /v1/stats HTTP/1.1" 200 OK
+INFO:__main__:📡 POST /v1/chat/completions - 127.0.0.1
+INFO:httpx:HTTP Request: POST https://cloud.infini-ai.com/maas/v1/chat/completions "HTTP/1.1 200 OK"
+INFO:httpx:HTTP Request: POST https://cloud.infini-ai.com/maas/v1/chat/completions "HTTP/1.1 200 OK"
+INFO:__main__:✅ POST /v1/chat/completions - 200 (5.19s)
+INFO:     127.0.0.1:57953 - "POST /v1/chat/completions HTTP/1.1" 200 OK
+INFO:__main__:📡 GET /v1/providers/compare - 127.0.0.1
+INFO:__main__:✅ GET /v1/providers/compare - 200 (0.00s)
+INFO:     127.0.0.1:57961 - "GET /v1/providers/compare HTTP/1.1" 200 OK
+INFO:httpx:HTTP Request: POST https://cloud.infini-ai.com/maas/v1/chat/completions "HTTP/1.1 200 OK"
+INFO:__main__:📡 GET /health - 127.0.0.1
+INFO:httpx:HTTP Request: POST https://cloud.infini-ai.com/maas/v1/chat/completions "HTTP/1.1 200 OK"
+INFO:__main__:✅ GET /health - 200 (0.84s)
+INFO:     127.0.0.1:58665 - "GET /health HTTP/1.1" 200 OK
+INFO:__main__:📡 GET /v1/models - 127.0.0.1
+INFO:__main__:✅ GET /v1/models - 200 (0.00s)
+INFO:     127.0.0.1:58668 - "GET /v1/models HTTP/1.1" 200 OK
+INFO:__main__:📡 POST /v1/chat/completions - 127.0.0.1
+INFO:httpx:HTTP Request: POST https://cloud.infini-ai.com/maas/v1/chat/completions "HTTP/1.1 200 OK"
+INFO:__main__:✅ POST /v1/chat/completions - 200 (0.75s)
+INFO:     127.0.0.1:58670 - "POST /v1/chat/completions HTTP/1.1" 200 OK
+INFO:__main__:📡 GET /v1/stats - 127.0.0.1
+INFO:__main__:✅ GET /v1/stats - 200 (0.00s)
+INFO:     127.0.0.1:58675 - "GET /v1/stats HTTP/1.1" 200 OK
+INFO:__main__:📡 POST /v1/chat/completions - 127.0.0.1
+INFO:httpx:HTTP Request: POST https://cloud.infini-ai.com/maas/v1/chat/completions "HTTP/1.1 200 OK"
+INFO:httpx:HTTP Request: POST https://cloud.infini-ai.com/maas/v1/chat/completions "HTTP/1.1 200 OK"
+INFO:__main__:✅ POST /v1/chat/completions - 200 (4.38s)
+INFO:     127.0.0.1:58680 - "POST /v1/chat/completions HTTP/1.1" 200 OK
+INFO:__main__:📡 GET /v1/providers/compare - 127.0.0.1
+INFO:__main__:✅ GET /v1/providers/compare - 200 (0.00s)
+INFO:     127.0.0.1:58684 - "GET /v1/providers/compare HTTP/1.1" 200 OK
+INFO:httpx:HTTP Request: POST https://cloud.infini-ai.com/maas/v1/chat/completions "HTTP/1.1 200 OK"

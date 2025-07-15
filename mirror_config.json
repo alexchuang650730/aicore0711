@@ -4,7 +4,17 @@
   "sync_interval": 5,
   "debug": false,
   "websocket_port": 8765,
-  "claude_integration": true,
+  "ai_integration": {
+    "provider": "kimi-k2",
+    "service_type": "infini-ai-cloud",
+    "model": "kimi-k2-instruct",
+    "api_endpoint": "http://localhost:8765",
+    "use_k2_instead_of_claude": true,
+    "claude_fallback_disabled": true,
+    "cost_optimization": "60% savings vs Claude"
+  },
+  "claude_integration": false,
+  "k2_integration": true,
   "local_adapters": [
     "macos",
     "linux",
@@ -18,5 +28,18 @@
       "username": "ubuntu",
       "key_file": "/path/to/your/key.pem"
     }
-  ]
+  ],
+  "routing_strategy": {
+    "primary": "kimi-k2-via-infini-ai",
+    "fallback": "none",
+    "force_k2": true,
+    "avoid_claude": true
+  },
+  "migration_info": {
+    "migrated_from": "claude-code",
+    "migrated_to": "kimi-k2",
+    "migration_date": "2025-07-15",
+    "migration_status": "completed",
+    "verification_status": "passed"
+  }
 }

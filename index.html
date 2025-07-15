@@ -1,0 +1,1265 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PowerAutomation v4.6.9.7 - 企業級AI自動化平台</title>
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>⚡</text></svg>">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            color: #333;
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* 導航欄 */
+        .navbar {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            position: fixed;
+            top: 0;
+            width: 100%;
+            z-index: 1000;
+            box-shadow: 0 2px 20px rgba(0, 0, 0, 0.1);
+        }
+
+        .nav-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1rem 2rem;
+        }
+
+        .logo {
+            font-size: 1.8rem;
+            font-weight: bold;
+            color: #667eea;
+            text-decoration: none;
+        }
+
+        .nav-links {
+            display: flex;
+            list-style: none;
+            gap: 2rem;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: #333;
+            font-weight: 500;
+            transition: color 0.3s;
+        }
+
+        .nav-links a:hover {
+            color: #667eea;
+        }
+
+        .cta-button {
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            color: white;
+            padding: 0.8rem 2rem;
+            border: none;
+            border-radius: 25px;
+            font-weight: bold;
+            cursor: pointer;
+            text-decoration: none;
+            transition: all 0.3s;
+            box-shadow: 0 4px 15px rgba(102, 126, 234, 0.3);
+        }
+
+        .cta-button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(102, 126, 234, 0.4);
+        }
+
+        /* 主要內容 */
+        .main-content {
+            margin-top: 80px;
+            padding: 4rem 0;
+        }
+
+        /* 英雄區域 */
+        .hero-section {
+            text-align: center;
+            color: white;
+            padding: 4rem 0;
+            margin-bottom: 4rem;
+        }
+
+        .hero-title {
+            font-size: 4rem;
+            margin-bottom: 1rem;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+            background: linear-gradient(135deg, #fff, #f0f8ff);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .hero-subtitle {
+            font-size: 1.5rem;
+            margin-bottom: 2rem;
+            opacity: 0.9;
+        }
+
+        .hero-description {
+            font-size: 1.2rem;
+            max-width: 800px;
+            margin: 0 auto 3rem;
+            opacity: 0.8;
+        }
+
+        .hero-buttons {
+            display: flex;
+            gap: 1rem;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        .hero-button {
+            background: rgba(255, 255, 255, 0.2);
+            backdrop-filter: blur(10px);
+            color: white;
+            padding: 1rem 2rem;
+            border: 2px solid rgba(255, 255, 255, 0.3);
+            border-radius: 30px;
+            font-size: 1.1rem;
+            font-weight: bold;
+            cursor: pointer;
+            text-decoration: none;
+            transition: all 0.3s;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero-button:hover {
+            background: rgba(255, 255, 255, 0.3);
+            transform: translateY(-3px);
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.2);
+        }
+
+        .hero-button.primary {
+            background: linear-gradient(135deg, #ff6b6b, #ffa726);
+            border-color: transparent;
+        }
+
+        /* 核心特性區域 */
+        .features-section {
+            background: white;
+            border-radius: 30px;
+            padding: 4rem 2rem;
+            margin-bottom: 4rem;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.1);
+        }
+
+        .section-title {
+            text-align: center;
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+            color: #333;
+        }
+
+        .section-subtitle {
+            text-align: center;
+            font-size: 1.2rem;
+            color: #666;
+            margin-bottom: 4rem;
+        }
+
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+            gap: 3rem;
+            margin-bottom: 3rem;
+        }
+
+        .feature-card {
+            background: linear-gradient(135deg, #f8f9ff, #fff);
+            border: 2px solid #e8f0fe;
+            border-radius: 20px;
+            padding: 2.5rem;
+            text-align: center;
+            transition: all 0.3s;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .feature-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 15px 40px rgba(102, 126, 234, 0.15);
+            border-color: #667eea;
+        }
+
+        .feature-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: linear-gradient(90deg, #667eea, #764ba2);
+        }
+
+        .feature-icon {
+            font-size: 4rem;
+            margin-bottom: 1.5rem;
+            display: block;
+        }
+
+        .feature-title {
+            font-size: 1.8rem;
+            margin-bottom: 1rem;
+            color: #333;
+            font-weight: bold;
+        }
+
+        .feature-description {
+            color: #666;
+            margin-bottom: 1.5rem;
+            line-height: 1.7;
+        }
+
+        .feature-highlights {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+            justify-content: center;
+            margin-bottom: 1.5rem;
+        }
+
+        .highlight-tag {
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            color: white;
+            padding: 0.3rem 0.8rem;
+            border-radius: 15px;
+            font-size: 0.9rem;
+            font-weight: 500;
+        }
+
+        .feature-details {
+            text-align: left;
+            background: rgba(102, 126, 234, 0.05);
+            padding: 1.5rem;
+            border-radius: 15px;
+            margin-top: 1.5rem;
+        }
+
+        .feature-details h4 {
+            color: #667eea;
+            margin-bottom: 1rem;
+            font-size: 1.1rem;
+        }
+
+        .feature-details ul {
+            list-style: none;
+            padding: 0;
+        }
+
+        .feature-details li {
+            padding: 0.5rem 0;
+            position: relative;
+            padding-left: 2rem;
+        }
+
+        .feature-details li::before {
+            content: "✨";
+            position: absolute;
+            left: 0;
+            color: #667eea;
+        }
+
+        /* 工作流展示 */
+        .workflow-section {
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            color: white;
+            padding: 4rem 2rem;
+            border-radius: 30px;
+            margin-bottom: 4rem;
+        }
+
+        .workflow-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+
+        .workflow-item {
+            background: rgba(255, 255, 255, 0.15);
+            backdrop-filter: blur(10px);
+            padding: 2rem;
+            border-radius: 20px;
+            text-align: center;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+
+        .workflow-number {
+            background: rgba(255, 255, 255, 0.3);
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            font-weight: bold;
+            margin: 0 auto 1rem;
+        }
+
+        .workflow-title {
+            font-size: 1.2rem;
+            margin-bottom: 0.5rem;
+            font-weight: bold;
+        }
+
+        .workflow-description {
+            opacity: 0.9;
+            font-size: 0.95rem;
+        }
+
+        /* 管道展示 */
+        .pipeline-section {
+            background: white;
+            border-radius: 30px;
+            padding: 4rem 2rem;
+            margin-bottom: 4rem;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.1);
+        }
+
+        .pipeline-flow {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+
+        .pipeline-item {
+            background: linear-gradient(135deg, #f8f9ff, #fff);
+            border: 2px solid #e8f0fe;
+            border-radius: 20px;
+            padding: 1.5rem;
+            text-align: center;
+            min-width: 150px;
+            position: relative;
+            transition: all 0.3s;
+        }
+
+        .pipeline-item:hover {
+            transform: scale(1.05);
+            border-color: #667eea;
+        }
+
+        .pipeline-item::after {
+            content: "→";
+            position: absolute;
+            right: -1.5rem;
+            top: 50%;
+            transform: translateY(-50%);
+            color: #667eea;
+            font-size: 1.5rem;
+            font-weight: bold;
+        }
+
+        .pipeline-item:last-child::after {
+            display: none;
+        }
+
+        .pipeline-icon {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .pipeline-name {
+            font-weight: bold;
+            color: #333;
+        }
+
+        /* 技術棧展示 */
+        .tech-section {
+            background: #1a1a1a;
+            color: white;
+            padding: 4rem 2rem;
+            border-radius: 30px;
+            margin-bottom: 4rem;
+        }
+
+        .tech-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+
+        .tech-item {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            padding: 2rem;
+            border-radius: 15px;
+            text-align: center;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+
+        .tech-logo {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+        }
+
+        .tech-name {
+            font-size: 1.2rem;
+            font-weight: bold;
+            margin-bottom: 0.5rem;
+        }
+
+        .tech-description {
+            opacity: 0.8;
+            font-size: 0.9rem;
+        }
+
+        /* 安裝區域 */
+        .install-section {
+            background: white;
+            border-radius: 30px;
+            padding: 4rem 2rem;
+            margin-bottom: 4rem;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.1);
+            text-align: center;
+        }
+
+        .install-command {
+            background: #1a1a1a;
+            color: #00ff00;
+            padding: 2rem;
+            border-radius: 15px;
+            font-family: 'Monaco', 'Consolas', monospace;
+            font-size: 1.2rem;
+            margin: 2rem 0;
+            position: relative;
+            overflow-x: auto;
+        }
+
+        .copy-button {
+            position: absolute;
+            top: 15px;
+            right: 15px;
+            background: #667eea;
+            color: white;
+            border: none;
+            padding: 0.5rem 1rem;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 0.9rem;
+            transition: all 0.3s;
+        }
+
+        .copy-button:hover {
+            background: #5a67d8;
+            transform: scale(1.05);
+        }
+
+        /* K2 Provider選擇器樣式 */
+        .k2-provider-section {
+            margin-top: 1.5rem;
+            padding-top: 1.5rem;
+            border-top: 1px solid #e0e0e0;
+        }
+
+        .k2-provider-section h4 {
+            margin-bottom: 1rem;
+            color: #333;
+            font-weight: 600;
+        }
+
+        .provider-selector {
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+        }
+
+        .provider-option {
+            position: relative;
+        }
+
+        .provider-option input[type="radio"] {
+            position: absolute;
+            opacity: 0;
+            width: 0;
+            height: 0;
+        }
+
+        .provider-option label {
+            display: block;
+            padding: 1rem;
+            border: 2px solid #e0e0e0;
+            border-radius: 10px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            background: linear-gradient(135deg, #f8f9fa 0%, #ffffff 100%);
+        }
+
+        .provider-option input[type="radio"]:checked + label {
+            border-color: #667eea;
+            background: linear-gradient(135deg, #667eea10 0%, #764ba210 100%);
+            transform: translateY(-2px);
+            box-shadow: 0 4px 15px rgba(102, 126, 234, 0.2);
+        }
+
+        .provider-option label:hover {
+            border-color: #667eea;
+            transform: translateY(-1px);
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .provider-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 0.5rem;
+        }
+
+        .provider-name {
+            font-weight: 600;
+            font-size: 1.1rem;
+            color: #333;
+        }
+
+        .provider-badge {
+            padding: 0.2rem 0.5rem;
+            border-radius: 15px;
+            font-size: 0.8rem;
+            font-weight: 500;
+            text-transform: uppercase;
+        }
+
+        .provider-badge.recommended {
+            background: #10b981;
+            color: white;
+        }
+
+        .provider-badge.official {
+            background: #3b82f6;
+            color: white;
+        }
+
+        .provider-details {
+            margin-top: 0.5rem;
+        }
+
+        .provider-stats {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .provider-stats span {
+            background: rgba(102, 126, 234, 0.1);
+            padding: 0.2rem 0.5rem;
+            border-radius: 12px;
+            font-size: 0.8rem;
+            font-weight: 500;
+            color: #667eea;
+        }
+
+        .provider-description {
+            font-size: 0.9rem;
+            color: #666;
+            font-style: italic;
+        }
+
+        /* 響應式設計 */
+        @media (max-width: 768px) {
+            .nav-container {
+                flex-direction: column;
+                gap: 1rem;
+            }
+
+            .nav-links {
+                flex-direction: column;
+                gap: 1rem;
+            }
+
+            .hero-title {
+                font-size: 2.5rem;
+            }
+
+            .hero-subtitle {
+                font-size: 1.2rem;
+            }
+
+            .features-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .provider-stats {
+                flex-direction: column;
+                gap: 0.3rem;
+            }
+
+            .provider-header {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 0.5rem;
+            }
+
+            .workflow-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .pipeline-flow {
+                flex-direction: column;
+            }
+
+            .pipeline-item::after {
+                content: "↓";
+                right: 50%;
+                top: 100%;
+                transform: translateX(50%);
+            }
+
+            .pipeline-item:last-child::after {
+                display: none;
+            }
+
+            .tech-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        /* 動畫效果 */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .animate-fade-in {
+            animation: fadeInUp 0.6s ease-out;
+        }
+
+        /* 粒子背景效果 */
+        .particles {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: -1;
+        }
+
+        .particle {
+            position: absolute;
+            width: 4px;
+            height: 4px;
+            background: rgba(255, 255, 255, 0.3);
+            border-radius: 50%;
+            animation: float 6s ease-in-out infinite;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(-20px); }
+        }
+    </style>
+</head>
+<body>
+    <!-- 粒子背景 -->
+    <div class="particles" id="particles"></div>
+
+    <!-- 導航欄 -->
+    <nav class="navbar">
+        <div class="nav-container">
+            <a href="#" class="logo">⚡ PowerAutomation</a>
+            <ul class="nav-links">
+                <li><a href="#features">核心特性</a></li>
+                <li><a href="#workflow">工作流</a></li>
+                <li><a href="#pipeline">管道</a></li>
+                <li><a href="#tech">技術棧</a></li>
+                <li><a href="#install">安裝</a></li>
+            </ul>
+            <a href="#install" class="cta-button">立即體驗</a>
+        </div>
+    </nav>
+
+    <!-- 主要內容 -->
+    <main class="main-content">
+        <!-- 英雄區域 -->
+        <section class="hero-section animate-fade-in">
+            <div class="container">
+                <h1 class="hero-title">PowerAutomation</h1>
+                <p class="hero-subtitle">企業級AI自動化平台 v4.6.9.7</p>
+                <p class="hero-description">
+                    集成六大工作流與七個管道，本地Manus配合Kimi K2，ClaudeEditor搭配SmartUI，
+                    打造最先進的AI驅動自動化解決方案
+                </p>
+                <div class="hero-buttons">
+                    <a href="#install" class="hero-button primary">🚀 立即安裝</a>
+                    <a href="#features" class="hero-button">✨ 探索特性</a>
+                    <a href="https://powerauto.aiweb.com" class="hero-button">🌐 官方網站</a>
+                </div>
+            </div>
+        </section>
+
+        <!-- 核心特性區域 -->
+        <section id="features" class="features-section animate-fade-in">
+            <div class="container">
+                <h2 class="section-title">🎯 三大核心特性</h2>
+                <p class="section-subtitle">PowerAutomation的核心競爭力，為企業提供全方位自動化解決方案</p>
+                
+                <div class="features-grid">
+                    <!-- 特性1: 六大工作流與七個管道 -->
+                    <div class="feature-card">
+                        <span class="feature-icon">🔄</span>
+                        <h3 class="feature-title">六大工作流 + 七個管道</h3>
+                        <p class="feature-description">
+                            完整的企業級工作流體系，涵蓋從需求分析到部署監控的全生命週期，
+                            配合七個智能管道實現端到端自動化
+                        </p>
+                        <div class="feature-highlights">
+                            <span class="highlight-tag">需求分析</span>
+                            <span class="highlight-tag">架構設計</span>
+                            <span class="highlight-tag">開發實現</span>
+                            <span class="highlight-tag">測試驗證</span>
+                            <span class="highlight-tag">部署發布</span>
+                            <span class="highlight-tag">監控運維</span>
+                        </div>
+                        <div class="feature-details">
+                            <h4>六大工作流:</h4>
+                            <ul>
+                                <li>需求分析工作流 - 智能需求收集與分析</li>
+                                <li>架構設計工作流 - 自動化架構建議與優化</li>
+                                <li>開發實現工作流 - AI輔助編程與代碼生成</li>
+                                <li>測試驗證工作流 - 自動化測試與質量保證</li>
+                                <li>部署發布工作流 - 一鍵部署與回滾機制</li>
+                                <li>監控運維工作流 - 實時監控與智能告警</li>
+                            </ul>
+                            <h4>七個管道:</h4>
+                            <ul>
+                                <li>數據採集管道 - 多源數據整合</li>
+                                <li>預處理管道 - 數據清洗與轉換</li>
+                                <li>AI分析管道 - 智能分析與預測</li>
+                                <li>決策管道 - 自動化決策引擎</li>
+                                <li>執行管道 - 任務調度與執行</li>
+                                <li>反饋管道 - 結果收集與分析</li>
+                                <li>優化管道 - 持續改進機制</li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <!-- 特性2: 本地Manus with Kimi K2 -->
+                    <div class="feature-card">
+                        <span class="feature-icon">🤖</span>
+                        <h3 class="feature-title">本地Manus + Kimi K2</h3>
+                        <p class="feature-description">
+                            創新的本地Manus系統與Kimi K2深度集成，提供60%成本節省、500 QPS高性能處理能力，
+                            確保數據安全與響應速度
+                        </p>
+                        <div class="feature-highlights">
+                            <span class="highlight-tag">本地部署</span>
+                            <span class="highlight-tag">K2加速</span>
+                            <span class="highlight-tag">成本優化</span>
+                            <span class="highlight-tag">數據安全</span>
+                            <span class="highlight-tag">高性能</span>
+                            <span class="highlight-tag">智能路由</span>
+                        </div>
+                        <div class="k2-provider-section">
+                            <h4>🔧 K2 Provider選擇:</h4>
+                            <div class="provider-selector">
+                                <div class="provider-option" data-provider="infini-ai-cloud">
+                                    <input type="radio" id="infini-provider" name="k2-provider" value="infini-ai-cloud" checked>
+                                    <label for="infini-provider">
+                                        <div class="provider-header">
+                                            <span class="provider-name">Infini-AI Cloud</span>
+                                            <span class="provider-badge recommended">推薦</span>
+                                        </div>
+                                        <div class="provider-details">
+                                            <div class="provider-stats">
+                                                <span>💰 成本節省: 60%</span>
+                                                <span>⚡ QPS: 500/分鐘</span>
+                                                <span>🚀 響應速度: 極快</span>
+                                            </div>
+                                            <div class="provider-description">高QPS代理，成本優化，CDN加速</div>
+                                        </div>
+                                    </label>
+                                </div>
+                                <div class="provider-option" data-provider="moonshot-official">
+                                    <input type="radio" id="moonshot-provider" name="k2-provider" value="moonshot-official">
+                                    <label for="moonshot-provider">
+                                        <div class="provider-header">
+                                            <span class="provider-name">Moonshot Official</span>
+                                            <span class="provider-badge official">官方</span>
+                                        </div>
+                                        <div class="provider-details">
+                                            <div class="provider-stats">
+                                                <span>🛡️ 穩定性: 98%</span>
+                                                <span>⚡ QPS: 60/分鐘</span>
+                                                <span>📞 支持: 官方SLA</span>
+                                            </div>
+                                            <div class="provider-description">官方API，穩定性最高，完整SLA保障</div>
+                                        </div>
+                                    </label>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="feature-details">
+                            <h4>本地Manus系統:</h4>
+                            <ul>
+                                <li>本地化部署 - 數據不出企業內網</li>
+                                <li>高可用架構 - 99.9%可用性保證</li>
+                                <li>彈性擴展 - 支持水平和垂直擴展</li>
+                                <li>安全防護 - 企業級安全防護機制</li>
+                                <li>監控告警 - 實時監控與智能告警</li>
+                            </ul>
+                            <h4>Kimi K2集成:</h4>
+                            <ul>
+                                <li>成本優化 - 相比Claude節省60%成本</li>
+                                <li>高性能 - 500 QPS並發處理能力</li>
+                                <li>智能路由 - 自動選擇最佳模型</li>
+                                <li>無縫遷移 - 從Claude平滑遷移</li>
+                                <li>API兼容 - 完全兼容OpenAI API</li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <!-- 特性3: ClaudeEditor with SmartUI -->
+                    <div class="feature-card">
+                        <span class="feature-icon">🎨</span>
+                        <h3 class="feature-title">ClaudeEditor + SmartUI</h3>
+                        <p class="feature-description">
+                            下一代智能編輯器，結合SmartUI自適應界面技術，提供個性化開發體驗，
+                            支持多人協作與AI輔助編程
+                        </p>
+                        <div class="feature-highlights">
+                            <span class="highlight-tag">智能編輯</span>
+                            <span class="highlight-tag">自適應UI</span>
+                            <span class="highlight-tag">協作編程</span>
+                            <span class="highlight-tag">AI輔助</span>
+                            <span class="highlight-tag">多平台</span>
+                            <span class="highlight-tag">插件系統</span>
+                        </div>
+                        <div class="feature-details">
+                            <h4>ClaudeEditor特性:</h4>
+                            <ul>
+                                <li>語法高亮 - 支持100+編程語言</li>
+                                <li>智能補全 - AI驅動的代碼補全</li>
+                                <li>錯誤檢測 - 實時錯誤檢測與修復建議</li>
+                                <li>重構工具 - 智能代碼重構與優化</li>
+                                <li>版本控制 - 集成Git工作流</li>
+                            </ul>
+                            <h4>SmartUI系統:</h4>
+                            <ul>
+                                <li>自適應界面 - 根據用戶習慣調整UI</li>
+                                <li>角色定制 - 基於角色的界面配置</li>
+                                <li>智能布局 - 動態調整最佳布局</li>
+                                <li>主題系統 - 豐富的主題選擇</li>
+                                <li>響應式設計 - 完美支持移動端</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 工作流展示 -->
+        <section id="workflow" class="workflow-section animate-fade-in">
+            <div class="container">
+                <h2 class="section-title">🔄 六大工作流體系</h2>
+                <p class="section-subtitle">端到端的企業級工作流，實現全生命週期自動化</p>
+                
+                <div class="workflow-grid">
+                    <div class="workflow-item">
+                        <div class="workflow-number">1</div>
+                        <h3 class="workflow-title">需求分析工作流</h3>
+                        <p class="workflow-description">智能需求收集、分析與驗證，自動生成需求文檔</p>
+                    </div>
+                    <div class="workflow-item">
+                        <div class="workflow-number">2</div>
+                        <h3 class="workflow-title">架構設計工作流</h3>
+                        <p class="workflow-description">AI輔助架構設計，自動生成架構圖與技術選型</p>
+                    </div>
+                    <div class="workflow-item">
+                        <div class="workflow-number">3</div>
+                        <h3 class="workflow-title">開發實現工作流</h3>
+                        <p class="workflow-description">智能代碼生成、重構與優化，提升開發效率</p>
+                    </div>
+                    <div class="workflow-item">
+                        <div class="workflow-number">4</div>
+                        <h3 class="workflow-title">測試驗證工作流</h3>
+                        <p class="workflow-description">自動化測試生成、執行與報告，確保代碼質量</p>
+                    </div>
+                    <div class="workflow-item">
+                        <div class="workflow-number">5</div>
+                        <h3 class="workflow-title">部署發布工作流</h3>
+                        <p class="workflow-description">一鍵部署、回滾與版本管理，支持多環境部署</p>
+                    </div>
+                    <div class="workflow-item">
+                        <div class="workflow-number">6</div>
+                        <h3 class="workflow-title">監控運維工作流</h3>
+                        <p class="workflow-description">實時監控、智能告警與自動化運維</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 管道展示 -->
+        <section id="pipeline" class="pipeline-section animate-fade-in">
+            <div class="container">
+                <h2 class="section-title">🚀 七個智能管道</h2>
+                <p class="section-subtitle">高效數據處理管道，實現智能決策與自動執行</p>
+                
+                <div class="pipeline-flow">
+                    <div class="pipeline-item">
+                        <div class="pipeline-icon">📊</div>
+                        <div class="pipeline-name">數據採集</div>
+                    </div>
+                    <div class="pipeline-item">
+                        <div class="pipeline-icon">🔄</div>
+                        <div class="pipeline-name">預處理</div>
+                    </div>
+                    <div class="pipeline-item">
+                        <div class="pipeline-icon">🤖</div>
+                        <div class="pipeline-name">AI分析</div>
+                    </div>
+                    <div class="pipeline-item">
+                        <div class="pipeline-icon">🎯</div>
+                        <div class="pipeline-name">智能決策</div>
+                    </div>
+                    <div class="pipeline-item">
+                        <div class="pipeline-icon">⚡</div>
+                        <div class="pipeline-name">自動執行</div>
+                    </div>
+                    <div class="pipeline-item">
+                        <div class="pipeline-icon">📈</div>
+                        <div class="pipeline-name">結果反饋</div>
+                    </div>
+                    <div class="pipeline-item">
+                        <div class="pipeline-icon">🔧</div>
+                        <div class="pipeline-name">持續優化</div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 技術棧展示 -->
+        <section id="tech" class="tech-section animate-fade-in">
+            <div class="container">
+                <h2 class="section-title">🛠️ 技術棧</h2>
+                <p class="section-subtitle">基於最新技術構建的企業級平台</p>
+                
+                <div class="tech-grid">
+                    <div class="tech-item">
+                        <div class="tech-logo">🤖</div>
+                        <div class="tech-name">Kimi K2</div>
+                        <div class="tech-description">新一代AI大模型，60%成本節省</div>
+                    </div>
+                    <div class="tech-item">
+                        <div class="tech-logo">🪞</div>
+                        <div class="tech-name">Mirror Code</div>
+                        <div class="tech-description">實時代碼同步與協作平台</div>
+                    </div>
+                    <div class="tech-item">
+                        <div class="tech-logo">🎨</div>
+                        <div class="tech-name">SmartUI</div>
+                        <div class="tech-description">自適應用戶界面系統</div>
+                    </div>
+                    <div class="tech-item">
+                        <div class="tech-logo">⚡</div>
+                        <div class="tech-name">FastAPI</div>
+                        <div class="tech-description">高性能API框架</div>
+                    </div>
+                    <div class="tech-item">
+                        <div class="tech-logo">⚛️</div>
+                        <div class="tech-name">React</div>
+                        <div class="tech-description">現代化前端框架</div>
+                    </div>
+                    <div class="tech-item">
+                        <div class="tech-logo">🐍</div>
+                        <div class="tech-name">Python</div>
+                        <div class="tech-description">AI與後端開發語言</div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 安裝區域 -->
+        <section id="install" class="install-section animate-fade-in">
+            <div class="container">
+                <h2 class="section-title">🚀 立即開始</h2>
+                <p class="section-subtitle">一行命令，快速體驗PowerAutomation的強大功能</p>
+                
+                <div class="install-command">
+                    <button class="copy-button" onclick="copyInstallCommand()">復制命令</button>
+                    <code id="install-cmd">curl -fsSL https://raw.githubusercontent.com/alexchuang650730/aicore0711/main/install-script-macos-v4.6.9.7.sh | bash</code>
+                </div>
+                
+                <div class="hero-buttons">
+                    <a href="https://powerauto.aiweb.com/install" class="hero-button primary">📱 移動端安裝</a>
+                    <a href="https://powerauto.aiweb.com/docs" class="hero-button">📚 查看文檔</a>
+                    <a href="https://powerauto.aiweb.com/demo" class="hero-button">🎮 在線演示</a>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <script>
+        // 復制安裝命令
+        function copyInstallCommand() {
+            const command = document.getElementById('install-cmd').textContent;
+            navigator.clipboard.writeText(command).then(() => {
+                const button = document.querySelector('.copy-button');
+                const originalText = button.textContent;
+                button.textContent = '已復制!';
+                button.style.background = '#48bb78';
+                setTimeout(() => {
+                    button.textContent = originalText;
+                    button.style.background = '#667eea';
+                }, 2000);
+            });
+        }
+
+        // 創建粒子效果
+        function createParticles() {
+            const particlesContainer = document.getElementById('particles');
+            const particleCount = 50;
+            
+            for (let i = 0; i < particleCount; i++) {
+                const particle = document.createElement('div');
+                particle.className = 'particle';
+                particle.style.left = Math.random() * 100 + '%';
+                particle.style.top = Math.random() * 100 + '%';
+                particle.style.animationDelay = Math.random() * 6 + 's';
+                particle.style.animationDuration = (Math.random() * 3 + 3) + 's';
+                particlesContainer.appendChild(particle);
+            }
+        }
+
+        // 平滑滾動
+        function smoothScroll() {
+            const links = document.querySelectorAll('a[href^="#"]');
+            links.forEach(link => {
+                link.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    const target = document.querySelector(this.getAttribute('href'));
+                    if (target) {
+                        target.scrollIntoView({
+                            behavior: 'smooth',
+                            block: 'start'
+                        });
+                    }
+                });
+            });
+        }
+
+        // 滾動動畫
+        function handleScrollAnimation() {
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.style.opacity = '1';
+                        entry.target.style.transform = 'translateY(0)';
+                    }
+                });
+            });
+
+            const animateElements = document.querySelectorAll('.animate-fade-in');
+            animateElements.forEach(element => {
+                element.style.opacity = '0';
+                element.style.transform = 'translateY(30px)';
+                element.style.transition = 'all 0.6s ease-out';
+                observer.observe(element);
+            });
+        }
+
+        // 導航欄滾動效果
+        function handleNavbarScroll() {
+            const navbar = document.querySelector('.navbar');
+            window.addEventListener('scroll', () => {
+                if (window.scrollY > 50) {
+                    navbar.style.background = 'rgba(255, 255, 255, 0.98)';
+                } else {
+                    navbar.style.background = 'rgba(255, 255, 255, 0.95)';
+                }
+            });
+        }
+
+        // 移動端菜單
+        function initMobileMenu() {
+            const mobileBreakpoint = 768;
+            
+            if (window.innerWidth <= mobileBreakpoint) {
+                const navLinks = document.querySelector('.nav-links');
+                const navContainer = document.querySelector('.nav-container');
+                
+                navLinks.style.display = 'none';
+                
+                const menuButton = document.createElement('button');
+                menuButton.innerHTML = '☰';
+                menuButton.style.cssText = `
+                    background: none;
+                    border: none;
+                    font-size: 1.5rem;
+                    cursor: pointer;
+                    color: #667eea;
+                `;
+                
+                menuButton.addEventListener('click', () => {
+                    navLinks.style.display = navLinks.style.display === 'none' ? 'flex' : 'none';
+                });
+                
+                navContainer.insertBefore(menuButton, navContainer.children[1]);
+            }
+        }
+
+        // K2 Provider選擇處理
+        function initK2ProviderSelector() {
+            const providerOptions = document.querySelectorAll('input[name="k2-provider"]');
+            let selectedProvider = 'infini-ai-cloud'; // 默認選擇
+            
+            providerOptions.forEach(option => {
+                option.addEventListener('change', function() {
+                    if (this.checked) {
+                        selectedProvider = this.value;
+                        updateProviderSelection(selectedProvider);
+                    }
+                });
+            });
+            
+            // 初始化選擇狀態
+            updateProviderSelection(selectedProvider);
+        }
+        
+        function updateProviderSelection(provider) {
+            const providerInfo = {
+                'infini-ai-cloud': {
+                    name: 'Infini-AI Cloud',
+                    cost: '$0.0005/1K tokens',
+                    qps: '500/分鐘',
+                    features: ['高QPS', '成本優化', 'CDN加速'],
+                    description: '推薦用於高並發場景和成本敏感項目'
+                },
+                'moonshot-official': {
+                    name: 'Moonshot Official',
+                    cost: '$0.0012/1K tokens',
+                    qps: '60/分鐘',
+                    features: ['官方支持', '穩定性高', 'SLA保障'],
+                    description: '推薦用於企業級應用和穩定性要求高的場景'
+                }
+            };
+            
+            // 更新選擇狀態的視覺反饋
+            document.querySelectorAll('.provider-option').forEach(option => {
+                option.classList.remove('selected');
+            });
+            
+            const selectedOption = document.querySelector(`[data-provider="${provider}"]`);
+            if (selectedOption) {
+                selectedOption.classList.add('selected');
+            }
+            
+            // 儲存選擇到localStorage
+            localStorage.setItem('k2-provider-selection', provider);
+            
+            // 在控制台輸出選擇信息（用於調試）
+            console.log('K2 Provider選擇:', providerInfo[provider]);
+            
+            // 如果有狀態顯示區域，更新它
+            updateProviderStatus(provider, providerInfo[provider]);
+        }
+        
+        function updateProviderStatus(provider, info) {
+            // 查找或創建狀態顯示區域
+            let statusDiv = document.getElementById('k2-provider-status');
+            if (!statusDiv) {
+                statusDiv = document.createElement('div');
+                statusDiv.id = 'k2-provider-status';
+                statusDiv.style.cssText = `
+                    position: fixed;
+                    bottom: 20px;
+                    right: 20px;
+                    background: rgba(102, 126, 234, 0.9);
+                    color: white;
+                    padding: 10px 15px;
+                    border-radius: 10px;
+                    font-size: 0.9rem;
+                    max-width: 300px;
+                    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+                    z-index: 1000;
+                    transform: translateY(100px);
+                    transition: all 0.3s ease;
+                `;
+                document.body.appendChild(statusDiv);
+            }
+            
+            statusDiv.innerHTML = `
+                <div style="font-weight: bold; margin-bottom: 5px;">
+                    🤖 當前K2 Provider: ${info.name}
+                </div>
+                <div style="font-size: 0.8rem; opacity: 0.9;">
+                    💰 成本: ${info.cost} | ⚡ QPS: ${info.qps}
+                </div>
+                <div style="font-size: 0.8rem; opacity: 0.9; margin-top: 3px;">
+                    ${info.description}
+                </div>
+            `;
+            
+            // 顯示狀態
+            setTimeout(() => {
+                statusDiv.style.transform = 'translateY(0)';
+            }, 100);
+            
+            // 3秒後自動隱藏
+            setTimeout(() => {
+                statusDiv.style.transform = 'translateY(100px)';
+            }, 3000);
+        }
+        
+        // 從localStorage恢復選擇
+        function restoreProviderSelection() {
+            const savedProvider = localStorage.getItem('k2-provider-selection');
+            if (savedProvider) {
+                const providerInput = document.querySelector(`input[value="${savedProvider}"]`);
+                if (providerInput) {
+                    providerInput.checked = true;
+                    updateProviderSelection(savedProvider);
+                }
+            }
+        }
+
+        // 初始化
+        document.addEventListener('DOMContentLoaded', function() {
+            createParticles();
+            smoothScroll();
+            handleScrollAnimation();
+            handleNavbarScroll();
+            initMobileMenu();
+            initK2ProviderSelector();
+            restoreProviderSelection();
+        });
+
+        // 窗口大小改變時重新初始化移動端菜單
+        window.addEventListener('resize', initMobileMenu);
+    </script>
+</body>
+</html>

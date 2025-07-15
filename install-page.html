@@ -1,0 +1,740 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PowerAutomation v4.6.9.7 - macOS 一鍵安裝</title>
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🚀</text></svg>">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            color: #333;
+            line-height: 1.6;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        .header {
+            text-align: center;
+            color: white;
+            padding: 2rem 0;
+            margin-bottom: 2rem;
+        }
+
+        .header h1 {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+        }
+
+        .header p {
+            font-size: 1.2rem;
+            opacity: 0.9;
+        }
+
+        .install-section {
+            background: white;
+            border-radius: 20px;
+            padding: 2rem;
+            margin-bottom: 2rem;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+        }
+
+        .install-tabs {
+            display: flex;
+            margin-bottom: 2rem;
+            border-bottom: 2px solid #f0f0f0;
+        }
+
+        .tab-button {
+            flex: 1;
+            padding: 1rem;
+            background: none;
+            border: none;
+            font-size: 1.1rem;
+            cursor: pointer;
+            transition: all 0.3s;
+            border-bottom: 3px solid transparent;
+        }
+
+        .tab-button.active {
+            color: #667eea;
+            border-bottom-color: #667eea;
+            font-weight: bold;
+        }
+
+        .tab-content {
+            display: none;
+        }
+
+        .tab-content.active {
+            display: block;
+        }
+
+        .install-command {
+            background: #1a1a1a;
+            color: #00ff00;
+            padding: 1.5rem;
+            border-radius: 10px;
+            font-family: 'Monaco', 'Menlo', 'Consolas', monospace;
+            font-size: 1.1rem;
+            margin: 1rem 0;
+            position: relative;
+            overflow-x: auto;
+        }
+
+        .copy-button {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            background: #667eea;
+            color: white;
+            border: none;
+            padding: 0.5rem 1rem;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 0.9rem;
+            transition: background 0.3s;
+        }
+
+        .copy-button:hover {
+            background: #5a67d8;
+        }
+
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin: 2rem 0;
+        }
+
+        .feature-card {
+            background: white;
+            padding: 2rem;
+            border-radius: 15px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            transition: transform 0.3s;
+        }
+
+        .feature-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .feature-icon {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+        }
+
+        .feature-title {
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+            color: #667eea;
+        }
+
+        .version-pricing {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 2rem;
+            margin: 2rem 0;
+        }
+
+        .version-card {
+            background: white;
+            padding: 2rem;
+            border-radius: 15px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .version-card.recommended {
+            border: 3px solid #667eea;
+        }
+
+        .version-card.recommended::before {
+            content: "推薦";
+            position: absolute;
+            top: 10px;
+            right: -30px;
+            background: #667eea;
+            color: white;
+            padding: 5px 40px;
+            transform: rotate(45deg);
+            font-size: 0.8rem;
+        }
+
+        .version-title {
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+            color: #333;
+        }
+
+        .version-price {
+            font-size: 2rem;
+            font-weight: bold;
+            color: #667eea;
+            margin-bottom: 1rem;
+        }
+
+        .version-features {
+            text-align: left;
+            margin-bottom: 2rem;
+        }
+
+        .version-features li {
+            margin-bottom: 0.5rem;
+            list-style: none;
+            position: relative;
+            padding-left: 1.5rem;
+        }
+
+        .version-features li::before {
+            content: "✅";
+            position: absolute;
+            left: 0;
+        }
+
+        .install-button {
+            background: #667eea;
+            color: white;
+            padding: 1rem 2rem;
+            border: none;
+            border-radius: 10px;
+            font-size: 1.1rem;
+            cursor: pointer;
+            transition: all 0.3s;
+            width: 100%;
+            margin-top: 1rem;
+        }
+
+        .install-button:hover {
+            background: #5a67d8;
+            transform: translateY(-2px);
+        }
+
+        .mobile-support {
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            color: white;
+            padding: 3rem 2rem;
+            border-radius: 20px;
+            margin: 2rem 0;
+            text-align: center;
+        }
+
+        .mobile-devices {
+            display: flex;
+            justify-content: center;
+            gap: 2rem;
+            margin: 2rem 0;
+            flex-wrap: wrap;
+        }
+
+        .device {
+            background: rgba(255,255,255,0.1);
+            padding: 1.5rem;
+            border-radius: 15px;
+            backdrop-filter: blur(10px);
+            min-width: 150px;
+        }
+
+        .device-icon {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+        }
+
+        .qr-code {
+            background: white;
+            padding: 1rem;
+            border-radius: 10px;
+            display: inline-block;
+            margin: 1rem;
+        }
+
+        .footer {
+            text-align: center;
+            color: white;
+            padding: 2rem 0;
+            margin-top: 3rem;
+        }
+
+        .footer a {
+            color: #ffd700;
+            text-decoration: none;
+        }
+
+        .footer a:hover {
+            text-decoration: underline;
+        }
+
+        /* 響應式設計 */
+        @media (max-width: 768px) {
+            .header h1 {
+                font-size: 2rem;
+            }
+            
+            .install-tabs {
+                flex-direction: column;
+            }
+            
+            .tab-button {
+                border-bottom: 1px solid #f0f0f0;
+            }
+            
+            .install-command {
+                font-size: 0.9rem;
+            }
+            
+            .features-grid,
+            .version-pricing {
+                grid-template-columns: 1fr;
+            }
+            
+            .mobile-devices {
+                flex-direction: column;
+                align-items: center;
+            }
+        }
+
+        /* 動畫效果 */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .animate-fade-in {
+            animation: fadeInUp 0.6s ease-out;
+        }
+
+        /* 進度條 */
+        .progress-bar {
+            width: 100%;
+            height: 20px;
+            background: #f0f0f0;
+            border-radius: 10px;
+            overflow: hidden;
+            margin: 1rem 0;
+        }
+
+        .progress-fill {
+            height: 100%;
+            background: linear-gradient(90deg, #667eea, #764ba2);
+            width: 0%;
+            transition: width 0.3s ease;
+        }
+
+        .installation-status {
+            display: none;
+            background: #f8f9fa;
+            padding: 1.5rem;
+            border-radius: 10px;
+            margin: 1rem 0;
+        }
+
+        .status-item {
+            display: flex;
+            align-items: center;
+            margin-bottom: 0.5rem;
+        }
+
+        .status-icon {
+            margin-right: 0.5rem;
+            font-size: 1.2rem;
+        }
+
+        .loading {
+            display: inline-block;
+            width: 20px;
+            height: 20px;
+            border: 3px solid #f3f3f3;
+            border-top: 3px solid #667eea;
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+        }
+
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header class="header animate-fade-in">
+            <h1>🚀 PowerAutomation v4.6.9.7</h1>
+            <p>使用自動化腳本快速完成 Claude Code 在 macOS 系統中的安裝</p>
+        </header>
+
+        <section class="install-section animate-fade-in">
+            <div class="install-tabs">
+                <button class="tab-button active" onclick="showTab('curl')">curl 命令</button>
+                <button class="tab-button" onclick="showTab('npm')">npm 安裝</button>
+                <button class="tab-button" onclick="showTab('manual')">手動安裝</button>
+            </div>
+
+            <div id="curl-tab" class="tab-content active">
+                <h3>🔥 一行命令安裝</h3>
+                <p>在終端中執行以下命令即可完成安裝：</p>
+                <div class="install-command">
+                    <button class="copy-button" onclick="copyCommand('curl-command')">復制</button>
+                    <code id="curl-command">curl -fsSL https://raw.githubusercontent.com/alexchuang650730/aicore0711/main/install-script-macos-v4.6.9.7.sh | bash</code>
+                </div>
+                <p><strong>系統要求：</strong></p>
+                <ul>
+                    <li>macOS 10.15+ 系統，建議配置網絡代理以確保安裝順利</li>
+                    <li>已安裝 Node.js 16+、Python 3.8+、Git</li>
+                    <li>穩定的網絡連接</li>
+                </ul>
+                <button class="install-button" onclick="startInstallation('curl')">開始安裝</button>
+            </div>
+
+            <div id="npm-tab" class="tab-content">
+                <h3>📦 npm 全局安裝</h3>
+                <p>使用 npm 安裝 PowerAutomation 安裝工具：</p>
+                <div class="install-command">
+                    <button class="copy-button" onclick="copyCommand('npm-install')">復制</button>
+                    <code id="npm-install">npm install -g powerautomation-installer</code>
+                </div>
+                <p>然後運行安裝程序：</p>
+                <div class="install-command">
+                    <button class="copy-button" onclick="copyCommand('npm-run')">復制</button>
+                    <code id="npm-run">powerautomation install</code>
+                </div>
+                <p><strong>優勢：</strong></p>
+                <ul>
+                    <li>交互式安裝界面</li>
+                    <li>自動版本檢查</li>
+                    <li>積分系統集成</li>
+                    <li>錯誤處理和恢復</li>
+                </ul>
+                <button class="install-button" onclick="startInstallation('npm')">開始安裝</button>
+            </div>
+
+            <div id="manual-tab" class="tab-content">
+                <h3>📥 手動下載安裝</h3>
+                <p>手動下載安裝腳本並執行：</p>
+                <div class="install-command">
+                    <button class="copy-button" onclick="copyCommand('manual-download')">復制</button>
+                    <code id="manual-download">wget https://raw.githubusercontent.com/alexchuang650730/aicore0711/main/install-script-macos-v4.6.9.7.sh
+chmod +x install-script-macos-v4.6.9.7.sh
+./install-script-macos-v4.6.9.7.sh</code>
+                </div>
+                <p><strong>適用場景：</strong></p>
+                <ul>
+                    <li>網絡環境限制</li>
+                    <li>需要離線安裝</li>
+                    <li>企業環境部署</li>
+                    <li>自定義安裝參數</li>
+                </ul>
+                <button class="install-button" onclick="startInstallation('manual')">開始安裝</button>
+            </div>
+
+            <div id="installation-status" class="installation-status">
+                <h3>📊 安裝進度</h3>
+                <div class="progress-bar">
+                    <div class="progress-fill" id="progress-fill"></div>
+                </div>
+                <div id="status-list">
+                    <div class="status-item">
+                        <span class="status-icon">⏳</span>
+                        <span>檢查系統要求...</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="features-grid animate-fade-in">
+            <div class="feature-card">
+                <div class="feature-icon">🤖</div>
+                <h3 class="feature-title">K2 AI模型集成</h3>
+                <p>集成Kimi K2模型，提供60%成本節省，500 QPS高性能處理能力，智能路由選擇最佳模型。</p>
+            </div>
+
+            <div class="feature-card">
+                <div class="feature-icon">💰</div>
+                <h3 class="feature-title">支付儲值積分系統</h3>
+                <p>完整的積分管理系統，支持多種支付方式，靈活的版本選擇，企業級批量授權。</p>
+            </div>
+
+            <div class="feature-card">
+                <div class="feature-icon">📱</div>
+                <h3 class="feature-title">PC/Mobile響應式</h3>
+                <p>智能UI適配，觸控優化，離線功能支持，手勢操作，完美支持桌面和移動設備。</p>
+            </div>
+
+            <div class="feature-card">
+                <div class="feature-icon">🪞</div>
+                <h3 class="feature-title">Mirror Code實時同步</h3>
+                <p>實時代碼同步，多端協作，版本控制，衝突解決，提供無縫的開發體驗。</p>
+            </div>
+
+            <div class="feature-card">
+                <div class="feature-icon">🎨</div>
+                <h3 class="feature-title">ClaudeEditor桌面版</h3>
+                <p>專業級代碼編輯器，語法高亮，AI輔助編程，插件系統，多人協作編輯。</p>
+            </div>
+
+            <div class="feature-card">
+                <div class="feature-icon">🔧</div>
+                <h3 class="feature-title">企業級工作流</h3>
+                <p>完整的工作流管理，任務調度，監控告警，權限管理，滿足企業級需求。</p>
+            </div>
+        </section>
+
+        <section class="version-pricing animate-fade-in">
+            <div class="version-card">
+                <h3 class="version-title">Community版</h3>
+                <div class="version-price">免費</div>
+                <ul class="version-features">
+                    <li>基礎AI功能</li>
+                    <li>基本編輯器</li>
+                    <li>有限的K2調用</li>
+                    <li>社區支持</li>
+                    <li>開源許可</li>
+                </ul>
+                <button class="install-button" onclick="selectVersion('community')">立即安裝</button>
+            </div>
+
+            <div class="version-card recommended">
+                <h3 class="version-title">Personal版</h3>
+                <div class="version-price">100積分</div>
+                <ul class="version-features">
+                    <li>完整AI功能</li>
+                    <li>高級編輯器</li>
+                    <li>無限K2調用</li>
+                    <li>優先支持</li>
+                    <li>移動端優化</li>
+                    <li>離線功能</li>
+                </ul>
+                <button class="install-button" onclick="selectVersion('personal')">立即購買</button>
+            </div>
+
+            <div class="version-card">
+                <h3 class="version-title">Enterprise版</h3>
+                <div class="version-price">500積分</div>
+                <ul class="version-features">
+                    <li>全部功能</li>
+                    <li>企業級支持</li>
+                    <li>自定義集成</li>
+                    <li>專屬服務器</li>
+                    <li>SLA保障</li>
+                    <li>技術培訓</li>
+                </ul>
+                <button class="install-button" onclick="selectVersion('enterprise')">聯系銷售</button>
+            </div>
+        </section>
+
+        <section class="mobile-support animate-fade-in">
+            <h2>📱 移動端支持</h2>
+            <p>PowerAutomation 完美支持PC和移動設備，提供一致的用戶體驗</p>
+            
+            <div class="mobile-devices">
+                <div class="device">
+                    <div class="device-icon">💻</div>
+                    <h4>桌面端</h4>
+                    <p>macOS, Windows, Linux</p>
+                </div>
+                <div class="device">
+                    <div class="device-icon">📱</div>
+                    <h4>手機端</h4>
+                    <p>iOS, Android</p>
+                </div>
+                <div class="device">
+                    <div class="device-icon">📟</div>
+                    <h4>平板端</h4>
+                    <p>iPad, Android Tablet</p>
+                </div>
+            </div>
+
+            <div class="qr-code">
+                <img src="data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMTAwIiBoZWlnaHQ9IjEwMCIgdmlld0JveD0iMCAwIDEwMCAxMDAiIGZpbGw9Im5vbmUiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+CjxyZWN0IHdpZHRoPSIxMDAiIGhlaWdodD0iMTAwIiBmaWxsPSJ3aGl0ZSIvPgo8dGV4dCB4PSI1MCIgeT0iNTAiIHRleHQtYW5jaG9yPSJtaWRkbGUiIGZvbnQtZmFtaWx5PSJBcmlhbCIgZm9udC1zaXplPSIxNCIgZmlsbD0iYmxhY2siPipSICBDb2RlPC90ZXh0Pgo8L3N2Zz4K" alt="QR Code">
+                <p>掃描二維碼<br>移動端訪問</p>
+            </div>
+        </section>
+
+        <footer class="footer">
+            <p>&copy; 2025 PowerAutomation Team. All rights reserved.</p>
+            <p>
+                <a href="https://powerauto.aiweb.com">官方網站</a> | 
+                <a href="https://powerauto.aiweb.com/docs">文檔</a> | 
+                <a href="https://github.com/alexchuang650730/aicore0711">GitHub</a> | 
+                <a href="https://powerauto.aiweb.com/support">技術支持</a>
+            </p>
+        </footer>
+    </div>
+
+    <script>
+        // 標籤切換
+        function showTab(tabName) {
+            // 隱藏所有標籤內容
+            const tabContents = document.querySelectorAll('.tab-content');
+            tabContents.forEach(content => content.classList.remove('active'));
+            
+            // 移除所有按鈕的active類
+            const tabButtons = document.querySelectorAll('.tab-button');
+            tabButtons.forEach(button => button.classList.remove('active'));
+            
+            // 顯示選中的標籤內容
+            document.getElementById(tabName + '-tab').classList.add('active');
+            
+            // 激活對應的按鈕
+            event.target.classList.add('active');
+        }
+
+        // 復制命令
+        function copyCommand(commandId) {
+            const command = document.getElementById(commandId).textContent;
+            navigator.clipboard.writeText(command).then(() => {
+                const button = event.target;
+                const originalText = button.textContent;
+                button.textContent = '已復制!';
+                button.style.background = '#48bb78';
+                setTimeout(() => {
+                    button.textContent = originalText;
+                    button.style.background = '#667eea';
+                }, 2000);
+            });
+        }
+
+        // 開始安裝
+        function startInstallation(method) {
+            const statusDiv = document.getElementById('installation-status');
+            statusDiv.style.display = 'block';
+            
+            // 模擬安裝進度
+            const steps = [
+                '檢查系統要求...',
+                '下載安裝腳本...',
+                '檢查積分系統...',
+                '選擇安裝版本...',
+                '下載核心文件...',
+                '安裝依賴包...',
+                '配置服務...',
+                '啟動服務...',
+                '運行測試...',
+                '安裝完成!'
+            ];
+            
+            let currentStep = 0;
+            const progressFill = document.getElementById('progress-fill');
+            const statusList = document.getElementById('status-list');
+            
+            function updateProgress() {
+                if (currentStep < steps.length) {
+                    const progress = ((currentStep + 1) / steps.length) * 100;
+                    progressFill.style.width = progress + '%';
+                    
+                    // 更新狀態列表
+                    statusList.innerHTML = '';
+                    for (let i = 0; i <= currentStep; i++) {
+                        const item = document.createElement('div');
+                        item.className = 'status-item';
+                        
+                        const icon = document.createElement('span');
+                        icon.className = 'status-icon';
+                        if (i < currentStep) {
+                            icon.textContent = '✅';
+                        } else if (i === currentStep) {
+                            icon.innerHTML = '<div class="loading"></div>';
+                        } else {
+                            icon.textContent = '⏳';
+                        }
+                        
+                        const text = document.createElement('span');
+                        text.textContent = steps[i];
+                        
+                        item.appendChild(icon);
+                        item.appendChild(text);
+                        statusList.appendChild(item);
+                    }
+                    
+                    currentStep++;
+                    setTimeout(updateProgress, 1000 + Math.random() * 1000);
+                } else {
+                    // 安裝完成
+                    setTimeout(() => {
+                        alert('🎉 PowerAutomation 安裝完成！\n\n請檢查桌面的 PowerAutomation.command 文件，雙擊即可啟動。');
+                        statusDiv.style.display = 'none';
+                    }, 1000);
+                }
+            }
+            
+            updateProgress();
+        }
+
+        // 選擇版本
+        function selectVersion(version) {
+            if (version === 'community') {
+                startInstallation('community');
+            } else if (version === 'personal') {
+                window.open('https://powerauto.aiweb.com/recharge', '_blank');
+            } else if (version === 'enterprise') {
+                window.open('https://powerauto.aiweb.com/enterprise', '_blank');
+            }
+        }
+
+        // 頁面加載動畫
+        window.addEventListener('load', function() {
+            const elements = document.querySelectorAll('.animate-fade-in');
+            elements.forEach((element, index) => {
+                setTimeout(() => {
+                    element.style.opacity = '1';
+                    element.style.transform = 'translateY(0)';
+                }, index * 200);
+            });
+        });
+
+        // 移動端適配
+        function detectMobile() {
+            const userAgent = navigator.userAgent;
+            const isMobile = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(userAgent);
+            
+            if (isMobile) {
+                document.body.classList.add('mobile');
+                
+                // 移動端特定處理
+                const installButtons = document.querySelectorAll('.install-button');
+                installButtons.forEach(button => {
+                    button.addEventListener('touchstart', function() {
+                        this.style.transform = 'scale(0.95)';
+                    });
+                    button.addEventListener('touchend', function() {
+                        this.style.transform = 'scale(1)';
+                    });
+                });
+            }
+        }
+
+        // 初始化
+        document.addEventListener('DOMContentLoaded', function() {
+            detectMobile();
+            
+            // 設置初始透明度
+            const elements = document.querySelectorAll('.animate-fade-in');
+            elements.forEach(element => {
+                element.style.opacity = '0';
+                element.style.transform = 'translateY(30px)';
+                element.style.transition = 'all 0.6s ease-out';
+            });
+        });
+    </script>
+</body>
+</html>

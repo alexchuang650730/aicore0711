@@ -1,0 +1,90 @@
+{
+  "timestamp": "2025-07-15T15:16:42.294357",
+  "summary": {
+    "total_tests": 8,
+    "passed_tests": 8,
+    "failed_tests": 0,
+    "success_rate": 1.0,
+    "k2_migration_successful": true,
+    "k2_critical_success_count": 5,
+    "k2_critical_total": 5
+  },
+  "detailed_results": {
+    "k2_service": {
+      "health_check": {
+        "success": true,
+        "provider": "infini-ai-cloud",
+        "model": "kimi-k2-instruct",
+        "status": "healthy"
+      },
+      "models_list": {
+        "success": true,
+        "models_count": 1,
+        "has_k2_model": true
+      },
+      "chat_completion": {
+        "success": true,
+        "response_time": 0.7550148963928223,
+        "model_used": "kimi-k2-instruct",
+        "has_content": true,
+        "content_length": 6
+      },
+      "statistics": {
+        "success": true,
+        "provider": "infini-ai-cloud",
+        "model": "kimi-k2-instruct",
+        "is_k2_service": true
+      }
+    },
+    "mirror_service": {
+      "health_check": {
+        "success": true,
+        "status": "healthy",
+        "components": {
+          "total_components": 8,
+          "healthy_components": 8,
+          "failed_components": 0,
+          "components": {
+            "test_mcp": "healthy",
+            "stagewise_mcp": "healthy",
+            "ag_ui_mcp": "healthy",
+            "claude_mcp": "healthy",
+            "zen_mcp": "healthy",
+            "local_adapter_mcp": "healthy",
+            "security_mcp": "healthy",
+            "collaboration_mcp": "healthy"
+          }
+        }
+      },
+      "configuration": {
+        "success": true,
+        "config_exists": true,
+        "uses_k2": true
+      }
+    },
+    "k2_routing": {
+      "k2_direct_test": {
+        "success": true,
+        "response_time": 4.383777141571045,
+        "model_used": "kimi-k2-instruct",
+        "is_k2_response": true,
+        "content_length": 288,
+        "has_code": true
+      }
+    },
+    "claude_verification": {
+      "provider_comparison": {
+        "success": true,
+        "primary_provider": "infini-ai-cloud",
+        "fallback_provider": "None",
+        "avoids_claude": true
+      }
+    }
+  },
+  "k2_verification": {
+    "uses_k2_model": true,
+    "uses_k2_provider": true,
+    "avoids_claude": true,
+    "response_quality": true
+  }
+}

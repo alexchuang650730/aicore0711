@@ -1,0 +1,979 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PowerAutomation NPM包生態系統 - 企業級AI自動化平台</title>
+    <meta name="description" content="PowerAutomation v4.6.9.7 - 完整的NPM包生態系統，支持飛書集成、多渠道支付、K2 AI模型、移動端編輯器等企業級功能">
+    <meta name="keywords" content="PowerAutomation, NPM, 飛書, K2, AI, 自動化, 企業級, 移動端, 支付系統">
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>📦</text></svg>">
+    
+    <!-- Open Graph -->
+    <meta property="og:title" content="PowerAutomation NPM包生態系統">
+    <meta property="og:description" content="企業級AI自動化平台 - 完整的NPM包生態系統">
+    <meta property="og:image" content="https://powerauto.aiweb.com/og-image.png">
+    <meta property="og:url" content="https://powerauto.aiweb.com/npm">
+    
+    <!-- Twitter Card -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="PowerAutomation NPM包生態系統">
+    <meta name="twitter:description" content="企業級AI自動化平台 - 完整的NPM包生態系統">
+    
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            color: #333;
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* 導航欄 */
+        .navbar {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            position: fixed;
+            top: 0;
+            width: 100%;
+            z-index: 1000;
+            box-shadow: 0 2px 20px rgba(0, 0, 0, 0.1);
+        }
+
+        .nav-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1rem 2rem;
+        }
+
+        .logo {
+            font-size: 1.8rem;
+            font-weight: bold;
+            color: #667eea;
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .nav-links {
+            display: flex;
+            list-style: none;
+            gap: 2rem;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: #333;
+            font-weight: 500;
+            transition: color 0.3s;
+        }
+
+        .nav-links a:hover {
+            color: #667eea;
+        }
+
+        .cta-button {
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            color: white;
+            padding: 0.8rem 2rem;
+            border: none;
+            border-radius: 25px;
+            font-weight: bold;
+            cursor: pointer;
+            text-decoration: none;
+            transition: all 0.3s;
+            box-shadow: 0 4px 15px rgba(102, 126, 234, 0.3);
+        }
+
+        .cta-button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(102, 126, 234, 0.4);
+        }
+
+        /* 主要內容 */
+        .main-content {
+            margin-top: 80px;
+            padding: 4rem 0;
+        }
+
+        /* 英雄區域 */
+        .hero-section {
+            text-align: center;
+            color: white;
+            padding: 4rem 0;
+            position: relative;
+        }
+
+        .hero-title {
+            font-size: 4rem;
+            font-weight: bold;
+            margin-bottom: 1rem;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+            background: linear-gradient(45deg, #fff, #e0e7ff);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .hero-subtitle {
+            font-size: 1.5rem;
+            margin-bottom: 2rem;
+            opacity: 0.9;
+        }
+
+        .hero-badges {
+            display: flex;
+            justify-content: center;
+            gap: 1rem;
+            margin-bottom: 3rem;
+            flex-wrap: wrap;
+        }
+
+        .badge {
+            background: rgba(255, 255, 255, 0.2);
+            padding: 0.5rem 1rem;
+            border-radius: 20px;
+            font-size: 0.9rem;
+            backdrop-filter: blur(5px);
+        }
+
+        .install-commands {
+            display: flex;
+            justify-content: center;
+            gap: 2rem;
+            margin-top: 3rem;
+            flex-wrap: wrap;
+        }
+
+        .install-command {
+            background: rgba(0, 0, 0, 0.7);
+            padding: 1rem 2rem;
+            border-radius: 10px;
+            font-family: 'Monaco', 'Menlo', 'Consolas', monospace;
+            font-size: 1rem;
+            color: #00ff00;
+            position: relative;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .install-command:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+        }
+
+        .copy-button {
+            position: absolute;
+            top: 5px;
+            right: 10px;
+            background: #667eea;
+            color: white;
+            border: none;
+            padding: 0.3rem 0.6rem;
+            border-radius: 4px;
+            font-size: 0.8rem;
+            cursor: pointer;
+            transition: background 0.3s;
+        }
+
+        .copy-button:hover {
+            background: #5a67d8;
+        }
+
+        /* NPM包展示區域 */
+        .packages-section {
+            padding: 6rem 0;
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+        }
+
+        .section-title {
+            font-size: 3rem;
+            font-weight: bold;
+            text-align: center;
+            margin-bottom: 1rem;
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .section-subtitle {
+            font-size: 1.2rem;
+            text-align: center;
+            color: #666;
+            margin-bottom: 4rem;
+        }
+
+        .packages-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 2rem;
+            margin-bottom: 4rem;
+        }
+
+        .package-card {
+            background: white;
+            border-radius: 15px;
+            padding: 2rem;
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.1);
+            transition: all 0.3s;
+            border: 1px solid rgba(102, 126, 234, 0.1);
+        }
+
+        .package-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
+        }
+
+        .package-header {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .package-icon {
+            font-size: 2rem;
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .package-name {
+            font-size: 1.3rem;
+            font-weight: bold;
+            color: #333;
+        }
+
+        .package-version {
+            background: #667eea;
+            color: white;
+            padding: 0.2rem 0.6rem;
+            border-radius: 12px;
+            font-size: 0.8rem;
+            font-weight: 500;
+        }
+
+        .package-description {
+            color: #666;
+            margin-bottom: 1.5rem;
+            line-height: 1.6;
+        }
+
+        .package-features {
+            list-style: none;
+            margin-bottom: 1.5rem;
+        }
+
+        .package-features li {
+            padding: 0.3rem 0;
+            color: #555;
+            position: relative;
+            padding-left: 1.5rem;
+        }
+
+        .package-features li::before {
+            content: "✓";
+            position: absolute;
+            left: 0;
+            color: #667eea;
+            font-weight: bold;
+        }
+
+        .package-install {
+            background: #f8f9fa;
+            padding: 1rem;
+            border-radius: 8px;
+            font-family: 'Monaco', 'Menlo', 'Consolas', monospace;
+            font-size: 0.9rem;
+            color: #333;
+            position: relative;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .package-install:hover {
+            background: #e9ecef;
+        }
+
+        /* 飛書集成區域 */
+        .feishu-section {
+            padding: 6rem 0;
+            background: linear-gradient(135deg, #4f46e5, #7c3aed);
+            color: white;
+        }
+
+        .feishu-content {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 4rem;
+            align-items: center;
+        }
+
+        .feishu-text {
+            padding-right: 2rem;
+        }
+
+        .feishu-title {
+            font-size: 2.5rem;
+            font-weight: bold;
+            margin-bottom: 1.5rem;
+        }
+
+        .feishu-description {
+            font-size: 1.1rem;
+            margin-bottom: 2rem;
+            opacity: 0.9;
+        }
+
+        .feishu-features {
+            list-style: none;
+            margin-bottom: 2rem;
+        }
+
+        .feishu-features li {
+            padding: 0.5rem 0;
+            padding-left: 1.5rem;
+            position: relative;
+        }
+
+        .feishu-features li::before {
+            content: "🚀";
+            position: absolute;
+            left: 0;
+        }
+
+        .feishu-demo {
+            background: rgba(255, 255, 255, 0.1);
+            padding: 2rem;
+            border-radius: 15px;
+            backdrop-filter: blur(10px);
+        }
+
+        .feishu-link {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            background: rgba(255, 255, 255, 0.2);
+            padding: 1rem 2rem;
+            border-radius: 25px;
+            text-decoration: none;
+            color: white;
+            font-weight: bold;
+            transition: all 0.3s;
+            backdrop-filter: blur(10px);
+        }
+
+        .feishu-link:hover {
+            background: rgba(255, 255, 255, 0.3);
+            transform: translateY(-2px);
+        }
+
+        /* 支付系統區域 */
+        .payment-section {
+            padding: 6rem 0;
+            background: rgba(255, 255, 255, 0.95);
+        }
+
+        .payment-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 2rem;
+            margin-bottom: 4rem;
+        }
+
+        .payment-method {
+            background: white;
+            padding: 2rem;
+            border-radius: 15px;
+            text-align: center;
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.1);
+            transition: all 0.3s;
+        }
+
+        .payment-method:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
+        }
+
+        .payment-icon {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+        }
+
+        .payment-name {
+            font-size: 1.1rem;
+            font-weight: bold;
+            color: #333;
+            margin-bottom: 0.5rem;
+        }
+
+        .payment-region {
+            color: #666;
+            font-size: 0.9rem;
+        }
+
+        /* 版本對比區域 */
+        .versions-section {
+            padding: 6rem 0;
+            background: linear-gradient(135deg, #f8f9fa, #e9ecef);
+        }
+
+        .versions-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 2rem;
+        }
+
+        .version-card {
+            background: white;
+            padding: 2rem;
+            border-radius: 15px;
+            text-align: center;
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.1);
+            transition: all 0.3s;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .version-card.popular {
+            border: 3px solid #667eea;
+            transform: scale(1.05);
+        }
+
+        .version-card.popular::before {
+            content: "最受歡迎";
+            position: absolute;
+            top: 20px;
+            right: -30px;
+            background: #667eea;
+            color: white;
+            padding: 5px 40px;
+            transform: rotate(45deg);
+            font-size: 0.8rem;
+            font-weight: bold;
+        }
+
+        .version-name {
+            font-size: 1.5rem;
+            font-weight: bold;
+            color: #333;
+            margin-bottom: 1rem;
+        }
+
+        .version-price {
+            font-size: 2rem;
+            font-weight: bold;
+            color: #667eea;
+            margin-bottom: 1rem;
+        }
+
+        .version-features {
+            list-style: none;
+            margin-bottom: 2rem;
+            text-align: left;
+        }
+
+        .version-features li {
+            padding: 0.3rem 0;
+            color: #555;
+            position: relative;
+            padding-left: 1.5rem;
+        }
+
+        .version-features li::before {
+            content: "✓";
+            position: absolute;
+            left: 0;
+            color: #667eea;
+            font-weight: bold;
+        }
+
+        .version-button {
+            background: #667eea;
+            color: white;
+            padding: 0.8rem 2rem;
+            border: none;
+            border-radius: 25px;
+            font-weight: bold;
+            cursor: pointer;
+            text-decoration: none;
+            transition: all 0.3s;
+            display: inline-block;
+            width: 100%;
+        }
+
+        .version-button:hover {
+            background: #5a67d8;
+            transform: translateY(-2px);
+        }
+
+        /* 移動端適配 */
+        @media (max-width: 768px) {
+            .hero-title {
+                font-size: 2.5rem;
+            }
+
+            .hero-subtitle {
+                font-size: 1.2rem;
+            }
+
+            .packages-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .feishu-content {
+                grid-template-columns: 1fr;
+                text-align: center;
+            }
+
+            .payment-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .versions-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .version-card.popular {
+                transform: none;
+            }
+
+            .nav-links {
+                display: none;
+            }
+        }
+
+        /* 動畫效果 */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .animate-on-scroll {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: all 0.6s ease;
+        }
+
+        .animate-on-scroll.animated {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    </style>
+</head>
+<body>
+    <!-- 導航欄 -->
+    <nav class="navbar">
+        <div class="nav-container">
+            <a href="#" class="logo">
+                📦 PowerAutomation NPM
+            </a>
+            <ul class="nav-links">
+                <li><a href="#packages">包列表</a></li>
+                <li><a href="#feishu">飛書集成</a></li>
+                <li><a href="#payment">支付系統</a></li>
+                <li><a href="#versions">版本對比</a></li>
+            </ul>
+            <a href="#install" class="cta-button">立即安裝</a>
+        </div>
+    </nav>
+
+    <!-- 主要內容 -->
+    <main class="main-content">
+        <!-- 英雄區域 -->
+        <section class="hero-section">
+            <div class="container">
+                <h1 class="hero-title">PowerAutomation NPM 包生態系統</h1>
+                <p class="hero-subtitle">企業級AI自動化平台 · 完整的NPM包生態系統 · v4.6.9.7</p>
+                
+                <div class="hero-badges">
+                    <span class="badge">🚀 飛書深度集成</span>
+                    <span class="badge">💳 多渠道支付</span>
+                    <span class="badge">🤖 K2 AI模型</span>
+                    <span class="badge">📱 移動端優化</span>
+                    <span class="badge">🏢 企業級支持</span>
+                </div>
+
+                <div class="install-commands" id="install">
+                    <div class="install-command" onclick="copyCommand('curl-cmd')">
+                        <button class="copy-button">复制</button>
+                        <code id="curl-cmd">curl -fsSL https://raw.githubusercontent.com/alexchuang650730/aicore0711/main/install-script-macos-v4.6.9.7.sh | bash</code>
+                    </div>
+                    <div class="install-command" onclick="copyCommand('npm-cmd')">
+                        <button class="copy-button">复制</button>
+                        <code id="npm-cmd">npm install -g @powerautomation/installer</code>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- NPM包展示區域 -->
+        <section class="packages-section animate-on-scroll" id="packages">
+            <div class="container">
+                <h2 class="section-title">📦 完整的NPM包生態系統</h2>
+                <p class="section-subtitle">模塊化設計 · 按需使用 · 企業級品質</p>
+                
+                <div class="packages-grid">
+                    <div class="package-card">
+                        <div class="package-header">
+                            <div class="package-icon">🎯</div>
+                            <div>
+                                <div class="package-name">@powerautomation/core</div>
+                                <div class="package-version">v4.6.9.7</div>
+                            </div>
+                        </div>
+                        <p class="package-description">
+                            PowerAutomation 核心功能包，提供基礎的AI自動化功能、K2模型集成和企業級API接口。
+                        </p>
+                        <ul class="package-features">
+                            <li>K2 AI模型集成</li>
+                            <li>企業級API接口</li>
+                            <li>實時事件系統</li>
+                            <li>數據加密和安全</li>
+                            <li>TypeScript支持</li>
+                        </ul>
+                        <div class="package-install" onclick="copyCommand('core-install')">
+                            <code id="core-install">npm install @powerautomation/core</code>
+                        </div>
+                    </div>
+
+                    <div class="package-card">
+                        <div class="package-header">
+                            <div class="package-icon">🚀</div>
+                            <div>
+                                <div class="package-name">@powerautomation/feishu-integration</div>
+                                <div class="package-version">v4.6.9.7</div>
+                            </div>
+                        </div>
+                        <p class="package-description">
+                            飛書深度集成包，提供完整的飛書生態系統集成，包括SSO、群組管理、審批流程等。
+                        </p>
+                        <ul class="package-features">
+                            <li>飛書單點登錄</li>
+                            <li>群組智能管理</li>
+                            <li>審批流程自動化</li>
+                            <li>日曆和會議集成</li>
+                            <li>小程序支持</li>
+                        </ul>
+                        <div class="package-install" onclick="copyCommand('feishu-install')">
+                            <code id="feishu-install">npm install @powerautomation/feishu-integration</code>
+                        </div>
+                    </div>
+
+                    <div class="package-card">
+                        <div class="package-header">
+                            <div class="package-icon">📱</div>
+                            <div>
+                                <div class="package-name">@powerautomation/claude-editor-mobile</div>
+                                <div class="package-version">v4.6.9.7</div>
+                            </div>
+                        </div>
+                        <p class="package-description">
+                            移動端編輯器，提供完整的移動端開發體驗，支持觸控優化、手勢操作和離線功能。
+                        </p>
+                        <ul class="package-features">
+                            <li>觸控優化界面</li>
+                            <li>手勢操作支持</li>
+                            <li>離線功能</li>
+                            <li>響應式設計</li>
+                            <li>PWA支持</li>
+                        </ul>
+                        <div class="package-install" onclick="copyCommand('mobile-install')">
+                            <code id="mobile-install">npm install @powerautomation/claude-editor-mobile</code>
+                        </div>
+                    </div>
+
+                    <div class="package-card">
+                        <div class="package-header">
+                            <div class="package-icon">🖥️</div>
+                            <div>
+                                <div class="package-name">@powerautomation/claude-editor-desktop</div>
+                                <div class="package-version">v4.6.9.7</div>
+                            </div>
+                        </div>
+                        <p class="package-description">
+                            桌面端編輯器，提供完整的桌面應用開發體驗，支持多窗口、文件系統和原生菜單。
+                        </p>
+                        <ul class="package-features">
+                            <li>多窗口支持</li>
+                            <li>文件系統集成</li>
+                            <li>原生菜單</li>
+                            <li>系統通知</li>
+                            <li>自動更新</li>
+                        </ul>
+                        <div class="package-install" onclick="copyCommand('desktop-install')">
+                            <code id="desktop-install">npm install @powerautomation/claude-editor-desktop</code>
+                        </div>
+                    </div>
+
+                    <div class="package-card">
+                        <div class="package-header">
+                            <div class="package-icon">💳</div>
+                            <div>
+                                <div class="package-name">@powerautomation/payment-system</div>
+                                <div class="package-version">v4.6.9.7</div>
+                            </div>
+                        </div>
+                        <p class="package-description">
+                            統一支付系統，支持微信、支付寶、PayPal、Stripe等多種支付方式和企業對公轉賬。
+                        </p>
+                        <ul class="package-features">
+                            <li>多渠道支付</li>
+                            <li>企業對公轉賬</li>
+                            <li>積分系統</li>
+                            <li>訂單管理</li>
+                            <li>財務報表</li>
+                        </ul>
+                        <div class="package-install" onclick="copyCommand('payment-install')">
+                            <code id="payment-install">npm install @powerautomation/payment-system</code>
+                        </div>
+                    </div>
+
+                    <div class="package-card">
+                        <div class="package-header">
+                            <div class="package-icon">🏢</div>
+                            <div>
+                                <div class="package-name">@powerautomation/enterprise-cli</div>
+                                <div class="package-version">v4.6.9.7</div>
+                            </div>
+                        </div>
+                        <p class="package-description">
+                            企業版CLI工具，提供完整的企業級管理功能，支持私有部署、用戶管理和許可證管理。
+                        </p>
+                        <ul class="package-features">
+                            <li>私有部署</li>
+                            <li>用戶管理</li>
+                            <li>許可證管理</li>
+                            <li>監控和日誌</li>
+                            <li>自動化部署</li>
+                        </ul>
+                        <div class="package-install" onclick="copyCommand('enterprise-install')">
+                            <code id="enterprise-install">npm install -g @powerautomation/enterprise-cli</code>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 飛書集成區域 -->
+        <section class="feishu-section animate-on-scroll" id="feishu">
+            <div class="container">
+                <div class="feishu-content">
+                    <div class="feishu-text">
+                        <h2 class="feishu-title">🚀 飛書深度集成</h2>
+                        <p class="feishu-description">
+                            專為飛書用戶打造的深度集成解決方案，提供完整的企業級協作功能和一鍵購買體驗。
+                        </p>
+                        <ul class="feishu-features">
+                            <li>飛書單點登錄 (SSO)</li>
+                            <li>群組智能管理</li>
+                            <li>審批流程自動化</li>
+                            <li>日曆和會議集成</li>
+                            <li>文檔協作同步</li>
+                            <li>小程序內購買</li>
+                        </ul>
+                        <a href="https://applink.feishu.cn/client/message/link/open?token=AmfoKtFagQATaHK7JJIAQAI%3D" 
+                           class="feishu-link" target="_blank">
+                            📱 打開飛書購買鏈接
+                        </a>
+                    </div>
+                    <div class="feishu-demo">
+                        <h3 style="margin-bottom: 1rem;">飛書集成示例</h3>
+                        <div style="background: rgba(0,0,0,0.7); padding: 1rem; border-radius: 8px; font-family: monospace; color: #00ff00;">
+                            <div>const feishu = new FeishuIntegration({</div>
+                            <div style="margin-left: 1rem;">appId: 'your-app-id',</div>
+                            <div style="margin-left: 1rem;">features: ['sso', 'groups', 'approval']</div>
+                            <div>});</div>
+                            <div style="margin-top: 0.5rem;">await feishu.initialize();</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 支付系統區域 -->
+        <section class="payment-section animate-on-scroll" id="payment">
+            <div class="container">
+                <h2 class="section-title">💳 多渠道支付系統</h2>
+                <p class="section-subtitle">支持全球主流支付方式 · 企業級安全保障</p>
+                
+                <div class="payment-grid">
+                    <div class="payment-method">
+                        <div class="payment-icon">💚</div>
+                        <div class="payment-name">微信支付</div>
+                        <div class="payment-region">中國大陸</div>
+                    </div>
+                    <div class="payment-method">
+                        <div class="payment-icon">💙</div>
+                        <div class="payment-name">支付寶</div>
+                        <div class="payment-region">中國大陸</div>
+                    </div>
+                    <div class="payment-method">
+                        <div class="payment-icon">💛</div>
+                        <div class="payment-name">PayPal</div>
+                        <div class="payment-region">全球</div>
+                    </div>
+                    <div class="payment-method">
+                        <div class="payment-icon">💜</div>
+                        <div class="payment-name">Stripe</div>
+                        <div class="payment-region">國際信用卡</div>
+                    </div>
+                    <div class="payment-method">
+                        <div class="payment-icon">🏦</div>
+                        <div class="payment-name">企業轉賬</div>
+                        <div class="payment-region">對公賬戶</div>
+                    </div>
+                    <div class="payment-method">
+                        <div class="payment-icon">🚀</div>
+                        <div class="payment-name">飛書內購</div>
+                        <div class="payment-region">飛書用戶</div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 版本對比區域 -->
+        <section class="versions-section animate-on-scroll" id="versions">
+            <div class="container">
+                <h2 class="section-title">📊 版本對比</h2>
+                <p class="section-subtitle">選擇適合您的版本 · 靈活的定價方案</p>
+                
+                <div class="versions-grid">
+                    <div class="version-card">
+                        <h3 class="version-name">Community</h3>
+                        <div class="version-price">免費</div>
+                        <ul class="version-features">
+                            <li>基礎AI功能</li>
+                            <li>有限K2調用</li>
+                            <li>社區支持</li>
+                            <li>開源許可</li>
+                        </ul>
+                        <a href="#install" class="version-button">立即使用</a>
+                    </div>
+                    
+                    <div class="version-card popular">
+                        <h3 class="version-name">Personal</h3>
+                        <div class="version-price">100積分/月</div>
+                        <ul class="version-features">
+                            <li>完整AI功能</li>
+                            <li>無限K2調用</li>
+                            <li>移動端支持</li>
+                            <li>飛書基礎集成</li>
+                            <li>優先支持</li>
+                        </ul>
+                        <a href="#install" class="version-button">立即購買</a>
+                    </div>
+                    
+                    <div class="version-card">
+                        <h3 class="version-name">Team</h3>
+                        <div class="version-price">300積分/月</div>
+                        <ul class="version-features">
+                            <li>Personal全部功能</li>
+                            <li>團隊協作</li>
+                            <li>飛書完整集成</li>
+                            <li>團隊管理</li>
+                            <li>最多10人</li>
+                        </ul>
+                        <a href="#install" class="version-button">立即購買</a>
+                    </div>
+                    
+                    <div class="version-card">
+                        <h3 class="version-name">Enterprise</h3>
+                        <div class="version-price">800積分/月</div>
+                        <ul class="version-features">
+                            <li>Team全部功能</li>
+                            <li>私有部署</li>
+                            <li>企業SSO</li>
+                            <li>無限用戶</li>
+                            <li>專屬支持</li>
+                        </ul>
+                        <a href="#install" class="version-button">聯系銷售</a>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <script>
+        // 複製命令功能
+        function copyCommand(elementId) {
+            const element = document.getElementById(elementId);
+            const text = element.textContent;
+            
+            navigator.clipboard.writeText(text).then(() => {
+                const button = element.parentElement.querySelector('.copy-button');
+                const originalText = button.textContent;
+                button.textContent = '已複製!';
+                button.style.background = '#48bb78';
+                
+                setTimeout(() => {
+                    button.textContent = originalText;
+                    button.style.background = '#667eea';
+                }, 2000);
+            });
+        }
+
+        // 滾動動畫
+        function animateOnScroll() {
+            const elements = document.querySelectorAll('.animate-on-scroll');
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('animated');
+                    }
+                });
+            });
+
+            elements.forEach(element => {
+                observer.observe(element);
+            });
+        }
+
+        // 平滑滾動
+        function smoothScroll() {
+            const links = document.querySelectorAll('a[href^="#"]');
+            links.forEach(link => {
+                link.addEventListener('click', (e) => {
+                    e.preventDefault();
+                    const target = document.querySelector(link.getAttribute('href'));
+                    if (target) {
+                        target.scrollIntoView({
+                            behavior: 'smooth',
+                            block: 'start'
+                        });
+                    }
+                });
+            });
+        }
+
+        // 初始化
+        document.addEventListener('DOMContentLoaded', () => {
+            animateOnScroll();
+            smoothScroll();
+        });
+    </script>
+</body>
+</html>

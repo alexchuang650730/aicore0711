@@ -1,0 +1,73 @@
+{
+  "name": "powerautomation-installer",
+  "version": "4.6.9.7",
+  "description": "PowerAutomation v4.6.9.7 一鍵安裝工具 - 集成K2 AI、支付儲值積分系統和PC/Mobile支持",
+  "main": "installer.js",
+  "bin": {
+    "powerautomation": "./installer.js",
+    "powerauto": "./installer.js"
+  },
+  "scripts": {
+    "install-macos": "bash install-script-macos-v4.6.9.7.sh",
+    "install-linux": "bash install-script-linux-v4.6.9.7.sh",
+    "install-windows": "powershell -ExecutionPolicy Bypass -File install-script-windows-v4.6.9.7.ps1",
+    "start": "node installer.js",
+    "test": "node test/test-installer.js"
+  },
+  "keywords": [
+    "powerautomation",
+    "ai",
+    "k2",
+    "claude",
+    "automation",
+    "payment",
+    "credits",
+    "mobile",
+    "responsive",
+    "installer"
+  ],
+  "author": "PowerAutomation Team <support@powerauto.aiweb.com>",
+  "license": "MIT",
+  "homepage": "https://powerauto.aiweb.com",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/alexchuang650730/aicore0711.git"
+  },
+  "bugs": {
+    "url": "https://github.com/alexchuang650730/aicore0711/issues"
+  },
+  "engines": {
+    "node": ">=16.0.0",
+    "npm": ">=8.0.0"
+  },
+  "dependencies": {
+    "axios": "^1.6.0",
+    "chalk": "^5.3.0",
+    "commander": "^11.1.0",
+    "inquirer": "^9.2.0",
+    "ora": "^7.0.1",
+    "semver": "^7.5.0"
+  },
+  "devDependencies": {
+    "jest": "^29.7.0",
+    "nodemon": "^3.0.0"
+  },
+  "files": [
+    "installer.js",
+    "install-script-macos-v4.6.9.7.sh",
+    "install-script-linux-v4.6.9.7.sh",
+    "install-script-windows-v4.6.9.7.ps1",
+    "README.md",
+    "LICENSE"
+  ],
+  "os": [
+    "darwin",
+    "linux",
+    "win32"
+  ],
+  "preferGlobal": true,
+  "funding": {
+    "type": "credits",
+    "url": "https://powerauto.aiweb.com/recharge"
+  }
+}

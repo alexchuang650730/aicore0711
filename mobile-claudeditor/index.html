@@ -1,0 +1,1107 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+    <title>ClaudeEditor Mobile - 移動端AI編程助手</title>
+    <meta name="description" content="ClaudeEditor Mobile - 專為移動設備優化的AI編程助手，支持觸控操作、手勢交互、離線編程，隨時隨地享受AI編程體驗">
+    <meta name="keywords" content="ClaudeEditor, Mobile, AI編程, 移動端, 觸控, 手勢, 離線編程, K2, SmartUI">
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>📱</text></svg>">
+    
+    <!-- PWA支持 -->
+    <link rel="manifest" href="manifest.json">
+    <meta name="theme-color" content="#667eea">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="apple-mobile-web-app-title" content="ClaudeEditor Mobile">
+    
+    <!-- Open Graph -->
+    <meta property="og:title" content="ClaudeEditor Mobile - 移動端AI編程助手">
+    <meta property="og:description" content="專為移動設備優化的AI編程助手，支持觸控操作、手勢交互、離線編程">
+    <meta property="og:image" content="https://powerauto.aiweb.com/mobile-og-image.png">
+    <meta property="og:url" content="https://powerauto.aiweb.com/mobile">
+    
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            -webkit-tap-highlight-color: transparent;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            color: #333;
+            line-height: 1.6;
+            overflow-x: hidden;
+            touch-action: manipulation;
+        }
+
+        .container {
+            max-width: 100%;
+            margin: 0 auto;
+            padding: 0 1rem;
+        }
+
+        /* 移動端導航 */
+        .mobile-nav {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            z-index: 1000;
+            padding: 1rem;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .nav-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 1.2rem;
+            font-weight: bold;
+            color: #667eea;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .menu-toggle {
+            background: none;
+            border: none;
+            font-size: 1.5rem;
+            color: #667eea;
+            cursor: pointer;
+            padding: 0.5rem;
+            border-radius: 8px;
+            transition: all 0.3s;
+        }
+
+        .menu-toggle:active {
+            transform: scale(0.95);
+            background: rgba(102, 126, 234, 0.1);
+        }
+
+        /* 主要內容 */
+        .main-content {
+            margin-top: 80px;
+            padding: 2rem 0;
+        }
+
+        /* 英雄區域 */
+        .hero-section {
+            text-align: center;
+            color: white;
+            padding: 3rem 0;
+            position: relative;
+        }
+
+        .hero-title {
+            font-size: 2.5rem;
+            font-weight: bold;
+            margin-bottom: 1rem;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+            background: linear-gradient(45deg, #fff, #e0e7ff);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .hero-subtitle {
+            font-size: 1.1rem;
+            margin-bottom: 2rem;
+            opacity: 0.9;
+            line-height: 1.5;
+        }
+
+        .hero-features {
+            display: flex;
+            justify-content: center;
+            gap: 1rem;
+            margin-bottom: 2rem;
+            flex-wrap: wrap;
+        }
+
+        .hero-feature {
+            background: rgba(255, 255, 255, 0.2);
+            padding: 0.5rem 1rem;
+            border-radius: 20px;
+            font-size: 0.9rem;
+            backdrop-filter: blur(5px);
+        }
+
+        .download-buttons {
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+            margin-top: 2rem;
+        }
+
+        .download-btn {
+            background: rgba(255, 255, 255, 0.2);
+            color: white;
+            padding: 1rem 2rem;
+            border: none;
+            border-radius: 25px;
+            font-weight: bold;
+            cursor: pointer;
+            text-decoration: none;
+            transition: all 0.3s;
+            backdrop-filter: blur(10px);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.5rem;
+            font-size: 1rem;
+        }
+
+        .download-btn:active {
+            transform: scale(0.95);
+        }
+
+        .download-btn.primary {
+            background: rgba(255, 255, 255, 0.3);
+        }
+
+        /* 手機演示區域 */
+        .demo-section {
+            padding: 4rem 0;
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+        }
+
+        .phone-mockup {
+            max-width: 300px;
+            margin: 0 auto;
+            position: relative;
+            background: #000;
+            border-radius: 25px;
+            padding: 20px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+        }
+
+        .phone-screen {
+            width: 100%;
+            height: 500px;
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            border-radius: 15px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .demo-interface {
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(to bottom, #1a1a1a, #2d2d2d);
+            color: white;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .demo-header {
+            background: rgba(102, 126, 234, 0.9);
+            padding: 1rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .demo-code {
+            flex: 1;
+            padding: 1rem;
+            font-family: 'Monaco', 'Menlo', 'Consolas', monospace;
+            font-size: 0.8rem;
+            line-height: 1.4;
+            overflow-y: auto;
+        }
+
+        .demo-toolbar {
+            background: rgba(0, 0, 0, 0.3);
+            padding: 0.5rem;
+            display: flex;
+            justify-content: space-around;
+        }
+
+        .demo-toolbar button {
+            background: none;
+            border: none;
+            color: white;
+            padding: 0.5rem;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 0.9rem;
+        }
+
+        .demo-toolbar button:active {
+            background: rgba(255, 255, 255, 0.1);
+        }
+
+        /* 特性區域 */
+        .features-section {
+            padding: 4rem 0;
+            background: linear-gradient(135deg, #f8f9fa, #e9ecef);
+        }
+
+        .section-title {
+            font-size: 2rem;
+            font-weight: bold;
+            text-align: center;
+            margin-bottom: 1rem;
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .section-subtitle {
+            text-align: center;
+            color: #666;
+            margin-bottom: 3rem;
+            font-size: 1rem;
+        }
+
+        .features-grid {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 2rem;
+        }
+
+        .feature-card {
+            background: white;
+            border-radius: 15px;
+            padding: 2rem;
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.1);
+            transition: all 0.3s;
+            border: 1px solid rgba(102, 126, 234, 0.1);
+        }
+
+        .feature-card:active {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
+        }
+
+        .feature-header {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            margin-bottom: 1rem;
+        }
+
+        .feature-icon {
+            font-size: 2rem;
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .feature-title {
+            font-size: 1.2rem;
+            font-weight: bold;
+            color: #333;
+        }
+
+        .feature-description {
+            color: #666;
+            line-height: 1.6;
+            margin-bottom: 1rem;
+        }
+
+        .feature-benefits {
+            list-style: none;
+        }
+
+        .feature-benefits li {
+            padding: 0.3rem 0;
+            color: #555;
+            position: relative;
+            padding-left: 1.5rem;
+        }
+
+        .feature-benefits li::before {
+            content: "✓";
+            position: absolute;
+            left: 0;
+            color: #667eea;
+            font-weight: bold;
+        }
+
+        /* 技術規格區域 */
+        .specs-section {
+            padding: 4rem 0;
+            background: rgba(255, 255, 255, 0.95);
+        }
+
+        .specs-grid {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 2rem;
+        }
+
+        .spec-card {
+            background: white;
+            border-radius: 15px;
+            padding: 2rem;
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.1);
+            border-left: 4px solid #667eea;
+        }
+
+        .spec-title {
+            font-size: 1.1rem;
+            font-weight: bold;
+            color: #333;
+            margin-bottom: 1rem;
+        }
+
+        .spec-items {
+            list-style: none;
+        }
+
+        .spec-items li {
+            padding: 0.5rem 0;
+            color: #555;
+            border-bottom: 1px solid #f0f0f0;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .spec-items li:last-child {
+            border-bottom: none;
+        }
+
+        .spec-value {
+            font-weight: 500;
+            color: #667eea;
+        }
+
+        /* 下載區域 */
+        .download-section {
+            padding: 4rem 0;
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            color: white;
+            text-align: center;
+        }
+
+        .download-options {
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+            margin-top: 2rem;
+        }
+
+        .download-option {
+            background: rgba(255, 255, 255, 0.2);
+            padding: 1.5rem;
+            border-radius: 15px;
+            backdrop-filter: blur(10px);
+            transition: all 0.3s;
+        }
+
+        .download-option:active {
+            transform: scale(0.98);
+        }
+
+        .download-option h3 {
+            margin-bottom: 0.5rem;
+            font-size: 1.2rem;
+        }
+
+        .download-option p {
+            margin-bottom: 1rem;
+            opacity: 0.9;
+            font-size: 0.9rem;
+        }
+
+        .qr-code {
+            background: white;
+            padding: 1rem;
+            border-radius: 10px;
+            display: inline-block;
+            margin-top: 1rem;
+        }
+
+        /* 手勢動畫 */
+        @keyframes swipe {
+            0% { transform: translateX(-20px); opacity: 0.5; }
+            50% { transform: translateX(20px); opacity: 1; }
+            100% { transform: translateX(-20px); opacity: 0.5; }
+        }
+
+        .gesture-demo {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            color: rgba(255, 255, 255, 0.3);
+            font-size: 3rem;
+            animation: swipe 3s ease-in-out infinite;
+        }
+
+        /* 響應式設計 */
+        @media (max-width: 480px) {
+            .hero-title {
+                font-size: 2rem;
+            }
+
+            .hero-subtitle {
+                font-size: 1rem;
+            }
+
+            .phone-mockup {
+                max-width: 250px;
+            }
+
+            .phone-screen {
+                height: 400px;
+            }
+
+            .demo-code {
+                font-size: 0.7rem;
+            }
+        }
+
+        /* 觸控優化 */
+        .touch-target {
+            min-height: 44px;
+            min-width: 44px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        /* 滑動指示器 */
+        .swipe-indicator {
+            position: fixed;
+            bottom: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: rgba(0, 0, 0, 0.7);
+            color: white;
+            padding: 0.5rem 1rem;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            z-index: 1000;
+            backdrop-filter: blur(10px);
+        }
+
+        /* 載入動畫 */
+        .loading-spinner {
+            width: 40px;
+            height: 40px;
+            border: 4px solid rgba(255, 255, 255, 0.3);
+            border-top: 4px solid white;
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+            margin: 0 auto;
+        }
+
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        /* 成功提示 */
+        .success-message {
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background: rgba(72, 187, 120, 0.9);
+            color: white;
+            padding: 1rem 2rem;
+            border-radius: 10px;
+            font-weight: bold;
+            z-index: 2000;
+            backdrop-filter: blur(10px);
+        }
+
+        /* 動畫效果 */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .animate-on-scroll {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: all 0.6s ease;
+        }
+
+        .animate-on-scroll.animated {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* 暗色模式支持 */
+        @media (prefers-color-scheme: dark) {
+            .demo-interface {
+                background: linear-gradient(to bottom, #000, #1a1a1a);
+            }
+            
+            .feature-card,
+            .spec-card {
+                background: #2d2d2d;
+                color: #e0e0e0;
+            }
+            
+            .feature-title,
+            .spec-title {
+                color: #e0e0e0;
+            }
+            
+            .feature-description,
+            .spec-items li {
+                color: #b0b0b0;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- 移動端導航 -->
+    <nav class="mobile-nav">
+        <div class="nav-content">
+            <div class="logo">
+                📱 ClaudeEditor Mobile
+            </div>
+            <button class="menu-toggle" onclick="toggleMenu()">☰</button>
+        </div>
+    </nav>
+
+    <!-- 主要內容 -->
+    <main class="main-content">
+        <!-- 英雄區域 -->
+        <section class="hero-section">
+            <div class="container">
+                <h1 class="hero-title">ClaudeEditor Mobile</h1>
+                <p class="hero-subtitle">
+                    專為移動設備優化的AI編程助手<br>
+                    隨時隨地享受智能編程體驗
+                </p>
+                
+                <div class="hero-features">
+                    <span class="hero-feature">🎯 觸控優化</span>
+                    <span class="hero-feature">👆 手勢交互</span>
+                    <span class="hero-feature">📱 響應式設計</span>
+                    <span class="hero-feature">🔄 離線支持</span>
+                </div>
+
+                <div class="download-buttons">
+                    <a href="#" class="download-btn primary touch-target" onclick="startDownload('pwa')">
+                        🌐 立即體驗 (PWA)
+                    </a>
+                    <a href="#" class="download-btn touch-target" onclick="startDownload('ios')">
+                        📱 iOS版本 (即將推出)
+                    </a>
+                    <a href="#" class="download-btn touch-target" onclick="startDownload('android')">
+                        🤖 Android版本 (即將推出)
+                    </a>
+                </div>
+            </div>
+        </section>
+
+        <!-- 手機演示區域 -->
+        <section class="demo-section animate-on-scroll">
+            <div class="container">
+                <h2 class="section-title">📱 移動端體驗</h2>
+                <p class="section-subtitle">專為觸控設備設計的編程界面</p>
+                
+                <div class="phone-mockup">
+                    <div class="phone-screen">
+                        <div class="demo-interface">
+                            <div class="demo-header">
+                                <span>🤖</span>
+                                <span>ClaudeEditor Mobile</span>
+                            </div>
+                            <div class="demo-code">
+                                <div style="color: #67d9ef;">// 歡迎使用 ClaudeEditor Mobile</div>
+                                <div style="color: #a6e22e;">const</div> <div style="color: #f8f8f0;">editor</div> = <div style="color: #a6e22e;">new</div> <div style="color: #66d9ef;">MobileEditor</div>({
+                                <div style="margin-left: 1rem;">
+                                    <div style="color: #f8f8f0;">container: </div><div style="color: #e6db74;">'#editor'</div>,
+                                </div>
+                                <div style="margin-left: 1rem;">
+                                    <div style="color: #f8f8f0;">theme: </div><div style="color: #e6db74;">'dark'</div>,
+                                </div>
+                                <div style="margin-left: 1rem;">
+                                    <div style="color: #f8f8f0;">features: {</div>
+                                </div>
+                                <div style="margin-left: 2rem;">
+                                    <div style="color: #f8f8f0;">touch: </div><div style="color: #ae81ff;">true</div>,
+                                </div>
+                                <div style="margin-left: 2rem;">
+                                    <div style="color: #f8f8f0;">gestures: </div><div style="color: #ae81ff;">true</div>,
+                                </div>
+                                <div style="margin-left: 2rem;">
+                                    <div style="color: #f8f8f0;">ai: </div><div style="color: #ae81ff;">true</div>
+                                </div>
+                                <div style="margin-left: 1rem;">}</div>
+                                <div>});</div>
+                                <div style="margin-top: 1rem;"></div>
+                                <div style="color: #67d9ef;">// 啟動AI助手</div>
+                                <div style="color: #f8f8f0;">editor</div>.<div style="color: #a6e22e;">startAI</div>();
+                            </div>
+                            <div class="demo-toolbar">
+                                <button class="touch-target">🎨</button>
+                                <button class="touch-target">🔍</button>
+                                <button class="touch-target">⚡</button>
+                                <button class="touch-target">🤖</button>
+                            </div>
+                        </div>
+                        <div class="gesture-demo">👆</div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 特性區域 -->
+        <section class="features-section animate-on-scroll">
+            <div class="container">
+                <h2 class="section-title">🌟 移動端特性</h2>
+                <p class="section-subtitle">專為移動設備打造的編程體驗</p>
+                
+                <div class="features-grid">
+                    <div class="feature-card">
+                        <div class="feature-header">
+                            <div class="feature-icon">🎯</div>
+                            <div class="feature-title">觸控優化</div>
+                        </div>
+                        <p class="feature-description">
+                            專為觸控設備設計的界面，所有操作都針對手指觸控進行優化，提供流暢的觸控體驗。
+                        </p>
+                        <ul class="feature-benefits">
+                            <li>44px最小觸控目標</li>
+                            <li>觸控反饋優化</li>
+                            <li>防誤觸設計</li>
+                            <li>多點觸控支持</li>
+                        </ul>
+                    </div>
+
+                    <div class="feature-card">
+                        <div class="feature-header">
+                            <div class="feature-icon">👆</div>
+                            <div class="feature-title">手勢交互</div>
+                        </div>
+                        <p class="feature-description">
+                            豐富的手勢操作支持，通過簡單的手勢就能完成複雜的編程操作，提高移動端編程效率。
+                        </p>
+                        <ul class="feature-benefits">
+                            <li>滑動翻頁</li>
+                            <li>縮放代碼</li>
+                            <li>雙指旋轉</li>
+                            <li>長按快捷菜單</li>
+                        </ul>
+                    </div>
+
+                    <div class="feature-card">
+                        <div class="feature-header">
+                            <div class="feature-icon">📱</div>
+                            <div class="feature-title">響應式設計</div>
+                        </div>
+                        <p class="feature-description">
+                            完美適配各種移動設備，從手機到平板電腦，提供一致的用戶體驗。
+                        </p>
+                        <ul class="feature-benefits">
+                            <li>自適應布局</li>
+                            <li>橫豎屏切換</li>
+                            <li>設備特性檢測</li>
+                            <li>性能優化</li>
+                        </ul>
+                    </div>
+
+                    <div class="feature-card">
+                        <div class="feature-header">
+                            <div class="feature-icon">🔄</div>
+                            <div class="feature-title">離線支持</div>
+                        </div>
+                        <p class="feature-description">
+                            即使在網絡不穩定的環境下，也能繼續使用核心編程功能，確保編程不中斷。
+                        </p>
+                        <ul class="feature-benefits">
+                            <li>離線代碼編輯</li>
+                            <li>本地文件存儲</li>
+                            <li>離線語法檢查</li>
+                            <li>同步恢復</li>
+                        </ul>
+                    </div>
+
+                    <div class="feature-card">
+                        <div class="feature-header">
+                            <div class="feature-icon">🤖</div>
+                            <div class="feature-title">AI智能助手</div>
+                        </div>
+                        <p class="feature-description">
+                            集成K2 AI模型，提供智能代碼補全、錯誤檢測、代碼優化等AI功能。
+                        </p>
+                        <ul class="feature-benefits">
+                            <li>智能代碼補全</li>
+                            <li>實時錯誤檢測</li>
+                            <li>代碼優化建議</li>
+                            <li>自然語言編程</li>
+                        </ul>
+                    </div>
+
+                    <div class="feature-card">
+                        <div class="feature-header">
+                            <div class="feature-icon">⚡</div>
+                            <div class="feature-title">高性能</div>
+                        </div>
+                        <p class="feature-description">
+                            針對移動設備進行性能優化，確保流暢的編程體驗，節省電池消耗。
+                        </p>
+                        <ul class="feature-benefits">
+                            <li>虛擬滾動</li>
+                            <li>代碼懶加載</li>
+                            <li>電池優化</li>
+                            <li>內存管理</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 技術規格區域 -->
+        <section class="specs-section animate-on-scroll">
+            <div class="container">
+                <h2 class="section-title">🔧 技術規格</h2>
+                <p class="section-subtitle">詳細的技術參數和系統要求</p>
+                
+                <div class="specs-grid">
+                    <div class="spec-card">
+                        <h3 class="spec-title">系統要求</h3>
+                        <ul class="spec-items">
+                            <li>
+                                <span>iOS版本</span>
+                                <span class="spec-value">iOS 12.0+</span>
+                            </li>
+                            <li>
+                                <span>Android版本</span>
+                                <span class="spec-value">Android 7.0+</span>
+                            </li>
+                            <li>
+                                <span>RAM要求</span>
+                                <span class="spec-value">2GB+</span>
+                            </li>
+                            <li>
+                                <span>存儲空間</span>
+                                <span class="spec-value">100MB+</span>
+                            </li>
+                        </ul>
+                    </div>
+
+                    <div class="spec-card">
+                        <h3 class="spec-title">支持的語言</h3>
+                        <ul class="spec-items">
+                            <li>
+                                <span>JavaScript/TypeScript</span>
+                                <span class="spec-value">✓</span>
+                            </li>
+                            <li>
+                                <span>Python</span>
+                                <span class="spec-value">✓</span>
+                            </li>
+                            <li>
+                                <span>Java</span>
+                                <span class="spec-value">✓</span>
+                            </li>
+                            <li>
+                                <span>HTML/CSS</span>
+                                <span class="spec-value">✓</span>
+                            </li>
+                        </ul>
+                    </div>
+
+                    <div class="spec-card">
+                        <h3 class="spec-title">AI功能</h3>
+                        <ul class="spec-items">
+                            <li>
+                                <span>K2模型集成</span>
+                                <span class="spec-value">✓</span>
+                            </li>
+                            <li>
+                                <span>代碼補全</span>
+                                <span class="spec-value">✓</span>
+                            </li>
+                            <li>
+                                <span>錯誤檢測</span>
+                                <span class="spec-value">✓</span>
+                            </li>
+                            <li>
+                                <span>代碼優化</span>
+                                <span class="spec-value">✓</span>
+                            </li>
+                        </ul>
+                    </div>
+
+                    <div class="spec-card">
+                        <h3 class="spec-title">集成功能</h3>
+                        <ul class="spec-items">
+                            <li>
+                                <span>飛書集成</span>
+                                <span class="spec-value">✓</span>
+                            </li>
+                            <li>
+                                <span>Git支持</span>
+                                <span class="spec-value">✓</span>
+                            </li>
+                            <li>
+                                <span>雲端同步</span>
+                                <span class="spec-value">✓</span>
+                            </li>
+                            <li>
+                                <span>團隊協作</span>
+                                <span class="spec-value">✓</span>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 下載區域 -->
+        <section class="download-section">
+            <div class="container">
+                <h2 class="section-title" style="color: white;">📥 立即下載</h2>
+                <p class="section-subtitle" style="color: rgba(255,255,255,0.9);">選擇適合您設備的版本</p>
+                
+                <div class="download-options">
+                    <div class="download-option" onclick="downloadPWA()">
+                        <h3>🌐 PWA版本</h3>
+                        <p>無需安裝，直接在瀏覽器中使用</p>
+                        <div class="loading-spinner" id="pwa-spinner" style="display: none;"></div>
+                    </div>
+
+                    <div class="download-option" onclick="downloadiOS()">
+                        <h3>📱 iOS版本</h3>
+                        <p>即將在App Store上架</p>
+                        <div class="qr-code">
+                            <img src="data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMTAwIiBoZWlnaHQ9IjEwMCIgdmlld0JveD0iMCAwIDEwMCAxMDAiIGZpbGw9Im5vbmUiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+CjxyZWN0IHdpZHRoPSIxMDAiIGhlaWdodD0iMTAwIiBmaWxsPSJ3aGl0ZSIvPgo8dGV4dCB4PSI1MCIgeT0iNTAiIHRleHQtYW5jaG9yPSJtaWRkbGUiIGZvbnQtZmFtaWx5PSJBcmlhbCIgZm9udC1zaXplPSIxMiIgZmlsbD0iYmxhY2siPmlPUyBRUjwvdGV4dD4KPC9zdmc+Cg==" alt="iOS QR Code">
+                        </div>
+                    </div>
+
+                    <div class="download-option" onclick="downloadAndroid()">
+                        <h3>🤖 Android版本</h3>
+                        <p>即將在Google Play上架</p>
+                        <div class="qr-code">
+                            <img src="data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMTAwIiBoZWlnaHQ9IjEwMCIgdmlld0JveD0iMCAwIDEwMCAxMDAiIGZpbGw9Im5vbmUiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+CjxyZWN0IHdpZHRoPSIxMDAiIGhlaWdodD0iMTAwIiBmaWxsPSJ3aGl0ZSIvPgo8dGV4dCB4PSI1MCIgeT0iNTAiIHRleHQtYW5jaG9yPSJtaWRkbGUiIGZvbnQtZmFtaWx5PSJBcmlhbCIgZm9udC1zaXplPSIxMCIgZmlsbD0iYmxhY2siPkFuZHJvaWQgUVI8L3RleHQ+Cjwvc3ZnPgo=" alt="Android QR Code">
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- 滑動指示器 -->
+    <div class="swipe-indicator">
+        👆 向上滑動查看更多
+    </div>
+
+    <script>
+        // 菜單切換
+        function toggleMenu() {
+            // 實現菜單切換邏輯
+            alert('菜單功能即將推出');
+        }
+
+        // 下載功能
+        function startDownload(type) {
+            const button = event.target;
+            const originalText = button.textContent;
+            
+            button.innerHTML = '<div class="loading-spinner" style="width: 20px; height: 20px; border-width: 2px; margin: 0 auto;"></div>';
+            
+            setTimeout(() => {
+                button.textContent = originalText;
+                
+                switch(type) {
+                    case 'pwa':
+                        downloadPWA();
+                        break;
+                    case 'ios':
+                        downloadiOS();
+                        break;
+                    case 'android':
+                        downloadAndroid();
+                        break;
+                }
+            }, 2000);
+        }
+
+        function downloadPWA() {
+            // 檢查是否支持PWA
+            if ('serviceWorker' in navigator) {
+                // 註冊Service Worker
+                navigator.serviceWorker.register('/sw.js').then(() => {
+                    showSuccessMessage('PWA已準備就緒！');
+                });
+            } else {
+                showSuccessMessage('正在跳轉到Web版本...');
+                setTimeout(() => {
+                    window.location.href = '/editor';
+                }, 1000);
+            }
+        }
+
+        function downloadiOS() {
+            showSuccessMessage('iOS版本即將推出，敬請期待！');
+        }
+
+        function downloadAndroid() {
+            showSuccessMessage('Android版本即將推出，敬請期待！');
+        }
+
+        // 顯示成功消息
+        function showSuccessMessage(message) {
+            const messageDiv = document.createElement('div');
+            messageDiv.className = 'success-message';
+            messageDiv.textContent = message;
+            document.body.appendChild(messageDiv);
+            
+            setTimeout(() => {
+                document.body.removeChild(messageDiv);
+            }, 3000);
+        }
+
+        // 滾動動畫
+        function animateOnScroll() {
+            const elements = document.querySelectorAll('.animate-on-scroll');
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('animated');
+                    }
+                });
+            });
+
+            elements.forEach(element => {
+                observer.observe(element);
+            });
+        }
+
+        // 觸控優化
+        function optimizeTouch() {
+            // 禁用雙擊縮放
+            document.addEventListener('touchstart', function(e) {
+                if (e.touches.length > 1) {
+                    e.preventDefault();
+                }
+            });
+
+            // 防止意外的滾動
+            document.addEventListener('touchmove', function(e) {
+                if (e.touches.length > 1) {
+                    e.preventDefault();
+                }
+            }, { passive: false });
+        }
+
+        // 手勢支持
+        function initGestures() {
+            let startX, startY, startTime;
+
+            document.addEventListener('touchstart', function(e) {
+                const touch = e.touches[0];
+                startX = touch.clientX;
+                startY = touch.clientY;
+                startTime = Date.now();
+            });
+
+            document.addEventListener('touchend', function(e) {
+                const touch = e.changedTouches[0];
+                const endX = touch.clientX;
+                const endY = touch.clientY;
+                const endTime = Date.now();
+
+                const distanceX = endX - startX;
+                const distanceY = endY - startY;
+                const duration = endTime - startTime;
+
+                // 檢測滑動手勢
+                if (Math.abs(distanceX) > 50 && duration < 300) {
+                    if (distanceX > 0) {
+                        // 右滑
+                        console.log('右滑');
+                    } else {
+                        // 左滑
+                        console.log('左滑');
+                    }
+                }
+
+                if (Math.abs(distanceY) > 50 && duration < 300) {
+                    if (distanceY > 0) {
+                        // 下滑
+                        console.log('下滑');
+                    } else {
+                        // 上滑
+                        console.log('上滑');
+                    }
+                }
+            });
+        }
+
+        // 隱藏滑動指示器
+        function hideSwipeIndicator() {
+            const indicator = document.querySelector('.swipe-indicator');
+            setTimeout(() => {
+                indicator.style.opacity = '0';
+                setTimeout(() => {
+                    indicator.style.display = 'none';
+                }, 300);
+            }, 3000);
+        }
+
+        // 初始化
+        document.addEventListener('DOMContentLoaded', function() {
+            animateOnScroll();
+            optimizeTouch();
+            initGestures();
+            hideSwipeIndicator();
+        });
+
+        // PWA安裝提示
+        let deferredPrompt;
+
+        window.addEventListener('beforeinstallprompt', (e) => {
+            e.preventDefault();
+            deferredPrompt = e;
+            
+            // 顯示安裝提示
+            const installButton = document.createElement('button');
+            installButton.textContent = '📱 安裝到主屏幕';
+            installButton.className = 'download-btn primary';
+            installButton.style.position = 'fixed';
+            installButton.style.bottom = '20px';
+            installButton.style.right = '20px';
+            installButton.style.zIndex = '2000';
+            
+            installButton.addEventListener('click', () => {
+                deferredPrompt.prompt();
+                deferredPrompt.userChoice.then((choiceResult) => {
+                    if (choiceResult.outcome === 'accepted') {
+                        showSuccessMessage('正在安裝到主屏幕...');
+                    }
+                    deferredPrompt = null;
+                    document.body.removeChild(installButton);
+                });
+            });
+            
+            document.body.appendChild(installButton);
+        });
+    </script>
+</body>
+</html>

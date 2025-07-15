@@ -30,9 +30,14 @@ class MirrorConfig:
     sync_interval: int = 5
     debug: bool = False
     websocket_port: int = 8765
-    claude_integration: bool = True
+    claude_integration: bool = False  # 已禁用Claude
+    k2_integration: bool = True  # 啟用K2
     local_adapters: List[str] = None
     remote_endpoints: List[Dict[str, Any]] = None
+    # K2特定配置
+    ai_integration: Dict[str, Any] = None
+    routing_strategy: Dict[str, Any] = None
+    migration_info: Dict[str, Any] = None
 
 class MirrorEngine:
     """Mirror Engine核心引擎"""
@@ -59,7 +64,48 @@ class MirrorEngine:
         # 事件回調
         self.event_handlers = {}
         
+        # 加載K2配置
+        self._load_k2_config()
+        
         print(f"🪞 Mirror Engine 已創建: {self.session_id}")
+        print(f"🤖 AI集成模式: {'K2' if self.config.k2_integration else 'Claude' if self.config.claude_integration else 'None'}")
+    
+    def _load_k2_config(self):
+        """加載K2配置"""
+        try:
+            import json
+            import os
+            
+            config_path = "mirror_config.json"
+            if os.path.exists(config_path):
+                with open(config_path, 'r') as f:
+                    config_data = json.load(f)
+                
+                # 更新配置
+                if 'ai_integration' in config_data:
+                    self.config.ai_integration = config_data['ai_integration']
+                
+                if 'routing_strategy' in config_data:
+                    self.config.routing_strategy = config_data['routing_strategy']
+                
+                if 'migration_info' in config_data:
+                    self.config.migration_info = config_data['migration_info']
+                
+                # 確保K2集成啟用，Claude集成禁用
+                self.config.k2_integration = config_data.get('k2_integration', True)
+                self.config.claude_integration = config_data.get('claude_integration', False)
+                
+                print(f"✅ K2配置已加載: {self.config.ai_integration.get('provider', 'unknown') if self.config.ai_integration else 'none'}")
+                
+        except Exception as e:
+            logger.warning(f"加載K2配置失敗: {e}")
+            # 使用默認K2配置
+            self.config.ai_integration = {
+                "provider": "kimi-k2",
+                "service_type": "infini-ai-cloud",
+                "model": "kimi-k2-instruct",
+                "api_endpoint": "http://localhost:8765"
+            }
     
     async def start(self) -> bool:
         """啟動Mirror Engine"""
@@ -77,8 +123,8 @@ class MirrorEngine:
             # 2. 初始化結果捕獲
             await self._initialize_result_capture()
             
-            # 3. 初始化Claude集成
-            await self._initialize_claude_integration()
+            # 3. 初始化AI集成（K2或Claude）
+            await self._initialize_ai_integration()
             
             # 4. 初始化同步管理
             await self._initialize_sync_manager()
@@ -153,12 +199,78 @@ class MirrorEngine:
         # 註冊結果捕獲回調
         self.result_capture.add_callback(self._on_result_captured)
     
-    async def _initialize_claude_integration(self):
-        """初始化Claude集成"""
-        if not self.config.claude_integration:
-            return
+    async def _initialize_ai_integration(self):
+        """初始化AI集成（優先K2）"""
+        if self.config.k2_integration:
+            print("  🤖 初始化K2集成...")
+            await self._initialize_k2_integration()
+        elif self.config.claude_integration:
+            print("  🤖 初始化Claude集成（已棄用）...")
+            await self._initialize_claude_integration()
+        else:
+            print("  ⚠️ 未啟用AI集成")
+    
+    async def _initialize_k2_integration(self):
+        """初始化K2集成"""
+        try:
+            from ..command_execution.claude_integration import ClaudeIntegration
             
-        print("  🤖 初始化Claude集成...")
+            # 重用ClaudeIntegration類但配置為使用K2
+            self.k2_integration = ClaudeIntegration()
+            
+            # 確保使用K2配置
+            if hasattr(self.k2_integration, 'config'):
+                self.k2_integration.config = {
+                    "provider": "kimi-k2",
+                    "api_endpoint": self.config.ai_integration.get('api_endpoint', 'http://localhost:8765'),
+                    "model": self.config.ai_integration.get('model', 'kimi-k2-instruct'),
+                    "use_k2": True
+                }
+            
+            await self.k2_integration.initialize()
+            print(f"✅ K2集成初始化完成: {self.config.ai_integration.get('provider', 'kimi-k2')}")
+            
+        except Exception as e:
+            logger.error(f"K2集成初始化失敗: {e}")
+            # 創建基本K2集成
+            self.k2_integration = type('K2Integration', (), {
+                'execute_command': self._basic_k2_execute,
+                'get_status': lambda: {"initialized": True, "provider": "kimi-k2"}
+            })()
+    
+    async def _basic_k2_execute(self, prompt: str):
+        """基本K2執行方法"""
+        # 直接調用K2服務
+        import aiohttp
+        
+        try:
+            payload = {
+                "model": "kimi-k2-instruct",
+                "messages": [{"role": "user", "content": prompt}],
+                "max_tokens": 500
+            }
+            
+            async with aiohttp.ClientSession() as session:
+                async with session.post(
+                    "http://localhost:8765/v1/chat/completions",
+                    json=payload
+                ) as response:
+                    if response.status == 200:
+                        data = await response.json()
+                        content = data.get("choices", [{}])[0].get("message", {}).get("content", "")
+                        return {
+                            "success": True,
+                            "output": content,
+                            "provider": "kimi-k2-via-mirror"
+                        }
+                    else:
+                        return {"success": False, "error": f"K2服務錯誤: {response.status}"}
+        except Exception as e:
+            return {"success": False, "error": str(e)}
+    
+    async def _initialize_claude_integration(self):
+        """初始化Claude集成（已棄用）"""
+        print("  ⚠️ Claude集成已棄用，請使用K2集成")
         
         from ..command_execution.claude_integration import ClaudeIntegration
         
@@ -299,18 +411,39 @@ class MirrorEngine:
             logger.error(f"命令執行失敗: {e}")
             return {"error": str(e)}
     
-    async def execute_claude_command(self, prompt: str) -> Dict[str, Any]:
-        """執行Claude命令"""
-        if not self.claude_integration:
-            return {"error": "Claude集成未啟用"}
+    async def execute_ai_command(self, prompt: str) -> Dict[str, Any]:
+        """執行AI命令（優先K2）"""
+        if self.config.k2_integration and hasattr(self, 'k2_integration'):
+            try:
+                result = await self.k2_integration.execute_command(prompt)
+                # 添加K2標識
+                if isinstance(result, dict):
+                    result["ai_provider"] = "kimi-k2"
+                    result["via_mirror"] = True
+                return result
+            except Exception as e:
+                logger.error(f"K2命令執行失敗: {e}")
+                return {"error": str(e), "ai_provider": "kimi-k2", "failed": True}
         
-        try:
-            result = await self.claude_integration.execute_command(prompt)
-            return result
-            
-        except Exception as e:
-            logger.error(f"Claude命令執行失敗: {e}")
-            return {"error": str(e)}
+        elif self.config.claude_integration and hasattr(self, 'claude_integration'):
+            logger.warning("⚠️ 使用已棄用的Claude集成")
+            try:
+                result = await self.claude_integration.execute_command(prompt)
+                if isinstance(result, dict):
+                    result["ai_provider"] = "claude"
+                    result["deprecated_warning"] = True
+                return result
+            except Exception as e:
+                logger.error(f"Claude命令執行失敗: {e}")
+                return {"error": str(e), "ai_provider": "claude", "failed": True}
+        
+        else:
+            return {"error": "AI集成未啟用或未初始化"}
+    
+    async def execute_claude_command(self, prompt: str) -> Dict[str, Any]:
+        """執行Claude命令（已棄用，重定向到K2）"""
+        logger.warning("⚠️ execute_claude_command已棄用，請使用execute_ai_command")
+        return await self.execute_ai_command(prompt)
     
     def get_status(self) -> Dict[str, Any]:
         """獲取Mirror Engine狀態"""
@@ -325,15 +458,25 @@ class MirrorEngine:
                 "enabled": self.config.enabled,
                 "auto_sync": self.config.auto_sync,
                 "sync_interval": self.config.sync_interval,
-                "claude_integration": self.config.claude_integration
+                "claude_integration": self.config.claude_integration,
+                "k2_integration": self.config.k2_integration,
+                "ai_provider": self.config.ai_integration.get('provider', 'none') if self.config.ai_integration else 'none'
             },
             "components": {
                 "local_adapter_integration": bool(self.local_adapter_integration),
                 "result_capture": bool(self.result_capture),
-                "claude_integration": bool(self.claude_integration),
+                "claude_integration": bool(getattr(self, 'claude_integration', None)),
+                "k2_integration": bool(getattr(self, 'k2_integration', None)),
                 "sync_manager": bool(self.sync_manager),
                 "communication_manager": bool(self.communication_manager),
                 "websocket_server": bool(self.websocket_server)
+            },
+            "ai_integration_status": {
+                "primary_provider": "kimi-k2" if self.config.k2_integration else "claude" if self.config.claude_integration else "none",
+                "migration_status": self.config.migration_info.get('migration_status', 'unknown') if self.config.migration_info else 'unknown',
+                "k2_enabled": self.config.k2_integration,
+                "claude_enabled": self.config.claude_integration,
+                "routing_strategy": self.config.routing_strategy.get('primary', 'unknown') if self.config.routing_strategy else 'unknown'
             }
         }
     
