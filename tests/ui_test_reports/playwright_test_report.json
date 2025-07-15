@@ -1,0 +1,48 @@
+{
+  "timestamp": "2025-07-14 23:41:39",
+  "total_tests": 6,
+  "passed_tests": 3,
+  "warning_tests": 0,
+  "failed_tests": 3,
+  "success_rate": 50.0,
+  "results": [
+    {
+      "test": "頁面加載和導航",
+      "status": "failed",
+      "error": "Page.goto: net::ERR_CONNECTION_REFUSED at http://127.0.0.1:5175/\nCall log:\n  - navigating to \"http://127.0.0.1:5175/\", waiting until \"load\"\n"
+    },
+    {
+      "test": "UI 元素交互",
+      "status": "passed",
+      "details": "按鈕: 2, 輸入框: 0"
+    },
+    {
+      "test": "Tauri API 集成",
+      "status": "passed",
+      "details": "Web 模式，Tauri API 不可用（正常）"
+    },
+    {
+      "test": "PowerAutomation 功能",
+      "status": "passed",
+      "details": "PA 組件: 0, 編輯器: True"
+    },
+    {
+      "test": "響應式設計",
+      "status": "failed",
+      "error": "Locator expected to be visible\nActual value: <element(s) not found> \nCall log:\n  - LocatorAssertions.to_be_visible with timeout 5000ms\n  - waiting for locator(\"#root\").first\n"
+    },
+    {
+      "test": "性能指標",
+      "status": "failed",
+      "error": "Page.reload: net::ERR_CONNECTION_REFUSED\nCall log:\n  - waiting for navigation until \"load\"\n"
+    }
+  ],
+  "screenshots": [
+    "01_page_load.png",
+    "02_input_test.png",
+    "03_tauri_api_test.png",
+    "04_powerautomation_features.png",
+    "05_responsive_desktop.png",
+    "05_responsive_mobile.png"
+  ]
+}

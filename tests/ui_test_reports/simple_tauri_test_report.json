@@ -1,0 +1,33 @@
+{
+  "timestamp": "2025-07-14 23:40:43",
+  "total_tests": 5,
+  "passed_tests": 4,
+  "success_rate": 80.0,
+  "results": [
+    {
+      "test": "前端可用性",
+      "status": "failed",
+      "error": "HTTPConnectionPool(host='127.0.0.1', port=5175): Max retries exceeded with url: / (Caused by NewConnectionError('<urllib3.connection.HTTPConnection object at 0x104306140>: Failed to establish a new connection: [Errno 61] Connection refused'))"
+    },
+    {
+      "test": "Tauri 構建可用性",
+      "status": "passed",
+      "details": "版本: 4.6.9, 產品: ClaudeEditor"
+    },
+    {
+      "test": "PowerAutomation Core 結構",
+      "status": "passed",
+      "details": "核心文件: 3/4, MCP 組件: 19"
+    },
+    {
+      "test": "CodeFlow MCP 集成",
+      "status": "passed",
+      "details": "功能: 2/4"
+    },
+    {
+      "test": "Demo 功能",
+      "status": "passed",
+      "details": "功能: 4/5, 大小: 14373B"
+    }
+  ]
+}
