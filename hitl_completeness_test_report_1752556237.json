@@ -1,0 +1,30 @@
+{
+  "test_time": "2025-07-15T01:10:37.272224",
+  "total_tests": 4,
+  "passed_tests": 4,
+  "failed_tests": 6,
+  "success_rate": 100.0,
+  "test_results": [
+    {
+      "status": "PASS",
+      "message": "SAFE 操作应该自动批准"
+    },
+    {
+      "status": "PASS",
+      "message": "应该返回待处理请求列表"
+    },
+    {
+      "status": "PASS",
+      "message": "上下文应该包含正确的用户ID"
+    },
+    {
+      "status": "PASS",
+      "message": "上下文应该包含正确的会话ID"
+    }
+  ],
+  "system_info": {
+    "hitl_enabled": true,
+    "real_confirmation": true,
+    "auto_approve_safe": true
+  }
+}

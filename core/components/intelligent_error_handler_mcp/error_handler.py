@@ -840,3 +840,8 @@ class IntelligentErrorHandlerMCP:
 
 # 單例實例
 intelligent_error_handler_mcp = IntelligentErrorHandlerMCP()
+
+# 導出函數 - 解決導入問題
+def intelligent_error_handler():
+    """返回智能錯誤處理器實例"""
+    return intelligent_error_handler_mcp

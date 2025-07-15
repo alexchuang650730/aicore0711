@@ -194,3 +194,30 @@ INFO:     127.0.0.1:51229 - "GET /v1/health HTTP/1.1" 404 Not Found
 2025-07-15 13:39:48,654 - core.components.claude_code_router_mcp.api_server - INFO - 📡 GET /v1/v1/models - 127.0.0.1
 2025-07-15 13:39:48,656 - core.components.claude_code_router_mcp.api_server - INFO - ✅ GET /v1/v1/models - 404 (0.00s)
 INFO:     127.0.0.1:51231 - "GET /v1/v1/models HTTP/1.1" 404 Not Found
+2025-07-15 13:43:51,713 - core.components.claude_code_router_mcp.api_server - INFO - 📡 GET /health - 127.0.0.1
+2025-07-15 13:43:51,729 - core.components.claude_code_router_mcp.api_server - INFO - ✅ GET /health - 200 (0.02s)
+INFO:     127.0.0.1:51573 - "GET /health HTTP/1.1" 200 OK
+2025-07-15 13:43:55,361 - core.components.claude_code_router_mcp.api_server - INFO - 📡 GET /v1/models - 127.0.0.1
+2025-07-15 13:43:55,366 - core.components.claude_code_router_mcp.api_server - INFO - ✅ GET /v1/models - 200 (0.01s)
+INFO:     127.0.0.1:51583 - "GET /v1/models HTTP/1.1" 200 OK
+2025-07-15 13:45:43,208 - core.components.claude_code_router_mcp.api_server - INFO - 📡 GET /health - 127.0.0.1
+2025-07-15 13:45:43,211 - core.components.claude_code_router_mcp.api_server - INFO - ✅ GET /health - 200 (0.00s)
+INFO:     127.0.0.1:51676 - "GET /health HTTP/1.1" 200 OK
+2025-07-15 13:45:43,226 - core.components.claude_code_router_mcp.api_server - INFO - 📡 GET /v1/models - 127.0.0.1
+2025-07-15 13:45:43,227 - core.components.claude_code_router_mcp.api_server - INFO - ✅ GET /v1/models - 200 (0.00s)
+INFO:     127.0.0.1:51678 - "GET /v1/models HTTP/1.1" 200 OK
+2025-07-15 13:45:43,252 - core.components.claude_code_router_mcp.api_server - INFO - 📡 POST /v1/chat/completions - 127.0.0.1
+2025-07-15 13:45:43,274 - core.components.claude_code_router_mcp.router - ERROR - ❌ 路由失敗: kimi-k2-instruct -> 無法找到可用的模型: kimi-k2-instruct
+2025-07-15 13:45:43,275 - core.components.claude_code_router_mcp.api_server - ERROR - ❌ 聊天完成失敗: 無法找到可用的模型: kimi-k2-instruct
+2025-07-15 13:45:43,275 - core.components.claude_code_router_mcp.api_server - INFO - ✅ POST /v1/chat/completions - 500 (0.02s)
+INFO:     127.0.0.1:51680 - "POST /v1/chat/completions HTTP/1.1" 500 Internal Server Error
+2025-07-15 13:45:43,289 - core.components.claude_code_router_mcp.api_server - INFO - 📡 GET /v1/stats - 127.0.0.1
+2025-07-15 13:45:43,291 - core.components.claude_code_router_mcp.api_server - INFO - ✅ GET /v1/stats - 200 (0.00s)
+INFO:     127.0.0.1:51682 - "GET /v1/stats HTTP/1.1" 200 OK
+INFO:     Shutting down
+INFO:     Waiting for application shutdown.
+2025-07-15 13:45:51,196 - core.components.claude_code_router_mcp.cache - INFO - 🧹 緩存已清空
+2025-07-15 13:45:51,196 - core.components.claude_code_router_mcp.cache - INFO - 🔒 RouterCache 已關閉
+2025-07-15 13:45:51,196 - core.components.claude_code_router_mcp.router - INFO - 🧹 Claude Code Router MCP 清理完成
+INFO:     Application shutdown complete.
+INFO:     Finished server process [99421]

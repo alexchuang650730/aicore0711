@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """
-PowerAutomation Core v4.6.9.3 全方位測試套件
+PowerAutomation Core v4.6.9.4 全方位測試套件
 全面測試 MemoryOS MCP 集成、Claude Code 雙向學習、RLLM/DeepSeek-R1 SWE 訓練集成
 """
 
@@ -775,7 +775,7 @@ class ComprehensiveTestSuite:
     def generate_test_report(self, results: Dict[str, Any]) -> str:
         """生成測試報告"""
         report = f"""
-# PowerAutomation Core v4.6.9.3 全方位測試報告
+# PowerAutomation Core v4.6.9.4 全方位測試報告
 
 ## 測試概覽
 - 總體成功: {'✅' if results['overall_success'] else '❌'}
@@ -817,12 +817,12 @@ async def run_comprehensive_tests():
     
     # 保存報告
     timestamp = int(time.time())
-    report_path = Path(f"test_report_v4.6.9.3_{timestamp}.md")
+    report_path = Path(f"test_report_v4.6.9.4_{timestamp}.md")
     with open(report_path, "w", encoding="utf-8") as f:
         f.write(report)
     
     # 保存 JSON 結果
-    json_path = Path(f"test_results_v4.6.9.3_{timestamp}.json")
+    json_path = Path(f"test_results_v4.6.9.4_{timestamp}.json")
     with open(json_path, "w", encoding="utf-8") as f:
         json.dump(results, f, indent=2, ensure_ascii=False)
     
@@ -842,7 +842,7 @@ if __name__ == "__main__":
         format='%(asctime)s - %(name)s - %(levelname)s - %(message)s'
     )
     
-    print("🚀 PowerAutomation Core v4.6.9.3 全方位測試套件")
+    print("🚀 PowerAutomation Core v4.6.9.4 全方位測試套件")
     print("=" * 60)
     
     # 運行測試

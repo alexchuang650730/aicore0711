@@ -1,4 +1,4 @@
-# PowerAutomation Core v4.6.9.3
+# PowerAutomation Core v4.6.9.4
 
 [![CI/CD](https://github.com/alexchuang650730/aicore0711/actions/workflows/ci.yml/badge.svg)](https://github.com/alexchuang650730/aicore0711/actions/workflows/ci.yml)
 [![codecov](https://codecov.io/gh/alexchuang650730/aicore0711/branch/main/graph/badge.svg)](https://codecov.io/gh/alexchuang650730/aicore0711)
@@ -7,8 +7,8 @@
 
 PowerAutomation Core 是一個集成了 MemoryOS MCP、Claude Code 雙向學習和 RLLM/DeepSeek-R1 SWE 訓練的強大自動化平台。
 
-**最新版本**: v4.6.9.3 - MemoryOS MCP Integration  
-**發布日期**: 2025年1月15日  
+**最新版本**: v4.6.9.4 - 修复增强版本
+**發布日期**: 2025年07月15日  
 **核心突破**: MemoryOS MCP 第13個服務、Claude Code 真實 API 雙向學習、RLLM/DeepSeek-R1 SWE 訓練集成
 
 ## 🎯 核心定位

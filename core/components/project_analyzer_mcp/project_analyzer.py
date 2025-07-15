@@ -29,6 +29,34 @@ from collections import defaultdict
 logger = logging.getLogger(__name__)
 
 
+class ProjectAnalyzerMCP:
+    """項目分析器MCP"""
+    
+    def __init__(self):
+        self.logger = logging.getLogger(self.__class__.__name__)
+    
+    async def initialize(self):
+        """初始化項目分析器"""
+        self.logger.info("🔍 初始化Project Analyzer MCP")
+        
+    def get_status(self):
+        """獲取狀態"""
+        return {
+            "component": "Project Analyzer MCP",
+            "status": "running",
+            "version": "4.6.1"
+        }
+
+
+# 單例實例
+project_analyzer_mcp = ProjectAnalyzerMCP()
+
+# 導出函數 - 解決導入問題
+def project_analyzer():
+    """返回項目分析器實例"""
+    return project_analyzer_mcp
+
+
 class ProjectType(Enum):
     """項目類型"""
     WEB_APPLICATION = "web_application"

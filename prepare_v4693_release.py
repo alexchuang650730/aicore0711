@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """
-PowerAutomation Core v4.6.9.3 發布包準備系統
+PowerAutomation Core v4.6.9.4 發布包準備系統
 全面整合所有組件，創建完整的發布包
 """
 
@@ -50,7 +50,7 @@ class ReleasePreparationSystem:
     """發布準備系統"""
     
     def __init__(self):
-        self.version = "4.6.9.3"
+        self.version = "4.6.9.4"
         self.release_date = datetime.now().strftime("%Y-%m-%d")
         self.build_timestamp = datetime.now().strftime("%Y%m%d_%H%M%S")
         
@@ -1714,7 +1714,7 @@ rm -rf ~/.powerautomation
 # 主要執行函數
 async def main():
     """主要執行函數"""
-    print("🚀 PowerAutomation Core v4.6.9.3 發布包準備系統")
+    print("🚀 PowerAutomation Core v4.6.9.4 發布包準備系統")
     print("=" * 60)
     
     # 創建發布準備系統

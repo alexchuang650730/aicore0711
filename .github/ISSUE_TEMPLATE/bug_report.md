@@ -26,7 +26,7 @@ If applicable, add screenshots to help explain your problem.
 ## 🖥️ Environment
 - OS: [e.g. macOS, Windows, Linux]
 - Python Version: [e.g. 3.9.0]
-- PowerAutomation Core Version: [e.g. v4.6.9.3]
+- PowerAutomation Core Version: [e.g. v4.6.9.4]
 - Browser (if applicable): [e.g. Chrome, Safari]
 
 ## 📋 Additional Context

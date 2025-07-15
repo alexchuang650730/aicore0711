@@ -67,7 +67,7 @@ async def lifespan(app: FastAPI):
 app = FastAPI(
     title="Claude Code Router MCP API",
     description="多AI模型智能路由系統API服務",
-    version="4.6.9.3",
+    version="4.6.9.4",
     lifespan=lifespan
 )
 
@@ -114,7 +114,7 @@ async def root():
     """根路徑"""
     return {
         "service": "Claude Code Router MCP API",
-        "version": "4.6.9.3",
+        "version": "4.6.9.4",
         "status": "running",
         "timestamp": datetime.now().isoformat(),
         "endpoints": {
@@ -134,7 +134,7 @@ async def health_check():
     return HealthResponse(
         status="healthy",
         timestamp=datetime.now().isoformat(),
-        version="4.6.9.3",
+        version="4.6.9.4",
         uptime=status.get("uptime", 0)
     )
 

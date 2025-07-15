@@ -52,6 +52,11 @@ class Memory:
         return cls(**data)
 
 class MemoryEngine:
+    """記憶引擎基類"""
+    pass
+
+
+class MemoryOSEngine(MemoryEngine):
     """記憶引擎核心類"""
     
     def __init__(self, db_path: str = "memoryos.db", max_memories: int = 10000):

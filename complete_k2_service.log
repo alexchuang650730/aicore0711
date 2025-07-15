@@ -1,0 +1,48 @@
+INFO:     Started server process [68361]
+INFO:     Waiting for application startup.
+INFO:     Application startup complete.
+INFO:     Uvicorn running on http://0.0.0.0:8765 (Press CTRL+C to quit)
+INFO:__main__:📡 GET / - 127.0.0.1
+INFO:__main__:✅ GET / - 200 (0.00s)
+🚀 啟動完整的K2 Claude Code服務...
+📋 模型: kimi-k2-instruct
+🔗 提供者: infini-ai-cloud
+💰 成本節省: 60% vs Claude
+⚡ 性能: 500 QPS
+🔧 功能: 完整Claude Code兼容
+🌐 端點: http://localhost:8765
+📊 支持的功能:
+   - 多模型路由
+   - 成本優化
+   - 高性能處理
+   - 函數調用
+   - 流式響應
+   - 健康監控
+INFO:     127.0.0.1:51855 - "GET / HTTP/1.1" 200 OK
+INFO:__main__:📡 GET /health - 127.0.0.1
+INFO:httpx:HTTP Request: POST https://cloud.infini-ai.com/maas/v1/chat/completions "HTTP/1.1 200 OK"
+INFO:__main__:✅ GET /health - 200 (0.83s)
+INFO:     127.0.0.1:51965 - "GET /health HTTP/1.1" 200 OK
+INFO:__main__:📡 GET /v1/models - 127.0.0.1
+INFO:__main__:✅ GET /v1/models - 200 (0.00s)
+INFO:     127.0.0.1:51970 - "GET /v1/models HTTP/1.1" 200 OK
+INFO:__main__:📡 GET /v1/stats - 127.0.0.1
+INFO:__main__:✅ GET /v1/stats - 200 (0.00s)
+INFO:     127.0.0.1:51997 - "GET /v1/stats HTTP/1.1" 200 OK
+INFO:__main__:📡 GET /v1/stats - 127.0.0.1
+INFO:__main__:✅ GET /v1/stats - 200 (0.00s)
+INFO:     127.0.0.1:52820 - "GET /v1/stats HTTP/1.1" 200 OK
+INFO:__main__:📡 GET /v1/providers/compare - 127.0.0.1
+INFO:__main__:✅ GET /v1/providers/compare - 200 (0.00s)
+INFO:     127.0.0.1:52830 - "GET /v1/providers/compare HTTP/1.1" 200 OK
+INFO:__main__:📡 GET /v1/models - 127.0.0.1
+INFO:__main__:✅ GET /v1/models - 200 (0.01s)
+INFO:     127.0.0.1:52857 - "GET /v1/models HTTP/1.1" 200 OK
+INFO:__main__:📡 GET /health - 127.0.0.1
+INFO:httpx:HTTP Request: POST https://cloud.infini-ai.com/maas/v1/chat/completions "HTTP/1.1 200 OK"
+INFO:__main__:✅ GET /health - 200 (0.82s)
+INFO:     127.0.0.1:52931 - "GET /health HTTP/1.1" 200 OK
+INFO:     Shutting down
+INFO:     Waiting for application shutdown.
+INFO:     Application shutdown complete.
+INFO:     Finished server process [68361]
