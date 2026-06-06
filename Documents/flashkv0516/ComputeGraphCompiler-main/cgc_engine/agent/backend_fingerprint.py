@@ -202,6 +202,24 @@ def validate_backend_fingerprint(
         if str(backend) in {"vllm"}:
             errors.append("STRICT GATE FAIL: require MLX but backend is vllm (CUDA-only backend)")
 
+    # === NEW: DFlash / FlashKV Gate ===
+    # Validate DFlash configuration if requested via environment variable.
+    require_dflash = os.environ.get("CGC_REQUIRE_DFLASH", "0") == "1"
+    dflash_enabled = os.environ.get("CGC_DFLASH_ENABLED", "0") == "1"
+    dflash_draft_model = os.environ.get("CGC_DFLASH_DRAFT_MODEL", "")
+    
+    if require_dflash:
+        if not dflash_enabled:
+            errors.append(
+                "STRICT GATE FAIL: DFlash (FlashKV) is required but CGC_DFLASH_ENABLED is not set to 1. "
+                "You must enable DFlash for this pipeline execution."
+            )
+        if not dflash_draft_model:
+            errors.append(
+                "STRICT GATE FAIL: DFlash (FlashKV) is enabled but no draft model is specified. "
+                "You must set CGC_DFLASH_DRAFT_MODEL (e.g., z-lab/Qwen3.5-4B-DFlash)."
+            )
+
     if require_cuda:
         if str(backend) == "vllm":
             torch_info = ((fp.get("packages") or {}).get("torch") or {}) if isinstance(fp.get("packages"), dict) else {}
