@@ -98,8 +98,8 @@ docker exec -it my-magi-compiler /bin/bash
 
 # Option B — Local source installation
 # Step 1 — Clone the repo
-git clone https://github.com/SandAI-org/MagiCompiler.git
-cd MagiCompiler
+git clone https://github.com/alexchuang650730/aicore0711.git
+cd aicore0711
 
 # Step 2 — System dependencies (optional, for FX graph visualization; Debian/Ubuntu)
 sudo apt update && sudo apt install -y graphviz
@@ -114,46 +114,30 @@ pip install .   # End users (recommended)
 
 ---
 
-## 🚀 Quick Start
+## 🚀 Quick Start (CGC Universe Ecosystem)
 
-### 🧹 1. One Decorator to Rule Them All (`@magi_compile`)
-Remove scattered `torch.compile` or `torch.compiler.disable` calls. Decorate your core Transformer block once for automatic full-graph capture and dynamic shape support (defaulting to dim 0).
+### 🧹 1. One-Click Exclusive Runtime Build
+Select your hardware template to automatically build an optimized runtime.
 
-```python
-import torch
-from torch import nn
-# Decorate your core module once. No more scattered compile tweaks!
-@magi_compile
-class TransformerBlock(nn.Module):
-    def __init__(self, hidden_dim):
-        super().__init__()
-        self.attn = Attention(hidden_dim)
-        self.mlp = MLP(hidden_dim)
+```bash
+# 适配XPS/ThinkPad 主流机型（默认 E4B 性价比版） 
+python build.py --device xps-thinkpad --backend llama.cpp --model gemma4-e4b 
 
-    def forward(self, x: torch.Tensor, mask: torch.Tensor | None) -> torch.Tensor:
-        x = x + self.attn(x, mask)
-        x = x + self.mlp(x)
-        return x
+# 适配XPS/ThinkPad 32GB旗舰机型（可选 7B 高阶版） 
+python build.py --device xps-thinkpad --backend llama.cpp --model gemma4-7b 
 
-model = TransformerBlock(hidden_dim=1024).cuda()
-
-# Execute normally - whole-graph compilation handles dynamic batches automatically!
-out = model(torch.randn(4, 128, 1024, device="cuda"), None)
-out = model(torch.randn(8, 128, 1024, device="cuda"), None)
+# 适配Apple Mac设备 
+python build.py --device apple-silicon --backend mlx --model gemma4-e4b
 ```
 
-### 🛠️ 2. Bridge Custom Kernels (`@magi_register_custom_op`)
-Using custom kernels (FlashAttention, MoE routers) that break FX tracing? Don't disable compilation. Wrap them to teach the compiler how to handle them during graph partitioning and recomputation.
+### 🛠️ 2. Auto PD Smart Scheduling
+Launch the Cloud-Device collaborative inference.
 
-```python
-@magi_register_custom_op(
-    name="athena::flash_attn",
-    infer_output_meta_fn=["q"],       # Output shape matches parameter 'q'
-    is_subgraph_boundary=True,        # Split graph here for subgraph compilation
-    is_compute_sensitive=True,        # Retain this output during recomputation
-)
-def flash_attn(q: torch.Tensor, k: torch.Tensor, v: torch.Tensor) -> torch.Tensor:
-    ... # Your custom kernel or C++ extension
+```bash
+# 一键启动 Auto PD 智能调度 
+# 自动识别设备模型、网络状态、硬件配置 
+# 自动切换：纯本地推理 / 云端P+端侧D协同推理 
+python run_cgc_engine.py --auto-pd
 ```
 
 ### 🔧 3. Advanced Configurations
