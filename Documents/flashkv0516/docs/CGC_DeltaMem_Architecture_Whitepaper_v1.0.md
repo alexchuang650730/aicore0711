@@ -18,8 +18,9 @@ DeltaMem (矩陣mem) 是 CGC Engine 實現極速端雲協同的核心物理基�
 
 為了滿足 M7.2 Gate 的嚴苛驗收標準 (Soft-RT 10ms deadline) 以及 M7.4 的真實跨機分離，端雲協議 (Edge-Cloud Protocol) 針對 Apple Silicon (M2/M4) 進行了深度特化。
 
-### 2.1 傳輸管線 (Socket Protocol)
-我們在 `cloud_socket_server.py` 與 `edge_socket_client.py` 中實作了專屬的 TCP 端雲協議：
+### 2.1 傳輸管線 (Socket Protocol) 與雲端主導建立
+我們在 `cloud_socket_server.py` 與 `edge_socket_client.py` 中實作了專屬的 TCP 端雲協議。為了貫徹「極輕量端側」的原則，**端雲協議的建立與交握 (Handshake) 完全由雲端主導**：
+*   **雲端主導建立 (Cloud-Driven Initialization)**：雲端在完成「模型裁切」後，會根據端側的硬體特徵，主動生成通訊密鑰 (AES-256-GCM)、壓縮字典與路由配置，並將這些極輕量的「交握設定檔」下發給端側。端側只需被動載入並啟動 Client，無需耗費算力與邏輯進行複雜的協議協商。
 *   **CGC KV Header**：在資料封包頭部附加 4 Bytes 的 Length，以及 JSON Metadata (包含 `mode`, `shape`, `dtype`, `payload_size`)。
 *   **Payload 傳輸**：緊接著 Header，傳輸經過狀態壓縮器 (`KVStateCompressor`) 處理過的 RAW Tensor Bytes。
 
@@ -74,10 +75,11 @@ CGC Engine 拒絕將雲端與端側推理引擎視為「黑盒子」並僅依賴
 
 為解決傳統端雲分離架構中，雲端必須接收明文 Prompt 的隱私風險，以及端側 VRAM 無法載入巨型模型的問題，CGC Engine 引入了**隱私優先端雲分離 (Privacy-First PD Separation)** 機制。此機制的核心在於**「模型權重非對稱切割」**：
 
-### 5.1 模型權重非對稱切割與硬體極限利用 (Hardware-Maximized Partitioning)
-在 70B 甚至更大參數的模型場景下，CGC Engine 拒絕一刀切。這正是**全計算圖算子八步流水線**結合 **4D 感知矩陣 (環境 / 硬件 / 模型 / 任務)** 的核心威力展現：
+### 5.1 模型權重非對稱切割與雲端裁切 (Cloud-Side Slicing)
+在 70B 甚至更大參數的模型場景下，CGC Engine 拒絕一刀切，更拒絕讓端側下載龐大的原始模型。這正是**全計算圖算子八步流水線**結合 **4D 感知矩陣 (環境 / 硬件 / 模型 / 任務)** 的核心威力展現：
 
-*   **硬件與環境感知 (Hardware Maximization)**：八步流水線會偵測端側 (Dell XPS / Mac) 的 VRAM 容量與散熱環境，將 VRAM 塞滿到安全水位。以 16GB VRAM 為例，端側可能被動態分配載入 Embedding、前 10 層 Attention 以及 LM_Head，極大化發揮端側硬體的算力投資，避免資源閒置。
+*   **雲端裁切 (Cloud-Side Slicing)**：這是一個至關重要的架構設計。40GB 的完整巨型模型 (如 70B) **只會存放在雲端 (如 gs01)**。當八步流水線的 `step4_hardware_perception` 偵測到端側的硬體規格時，**「切蛋糕的刀」會直接在雲端執行**。雲端根據端側硬體極限，萃取出 Embedding、前 N 層與 LM_Head，並封裝成專屬的端側微型權重 (僅 1-2GB)。端側只需下載這 1-2GB 的切片，徹底免除下載 40GB 原檔的網路與儲存負擔。
+*   **硬件與環境感知 (Hardware Maximization)**：八步流水線會偵測端側 (Dell XPS / Mac) 的 VRAM 容量與散熱環境，將 VRAM 塞滿到安全水位。以 16GB VRAM 為例，端側可能被動態分配載入雲端裁切好的前 10 層 Attention，極大化發揮端側硬體的算力投資，避免資源閒置。
 *   **任務與模型感知 (Dynamic Token Routing)**：八步流水線會根據輸入任務的上下文長度，動態決定端雲路由策略：
     *   **短上下文任務 (如 < 1000 Tokens)**：完全在端側利用已載入的前 N 層與極限混合量化完成運算，實現 **0 網路延遲** 的純本地推理。
     *   **長上下文任務 (如 > 1000 Tokens)**：當 Prompt 超過端側算力與 VRAM 的處理極限時，CGC Engine 會自動觸發端雲分離。端側負責計算前 N 層並提取無語義特徵。
@@ -91,8 +93,8 @@ CGC Engine 拒絕將雲端與端側推理引擎視為「黑盒子」並僅依賴
 
 **終極效益**：
 *   **隱私 = 純端側級別**（雲端永遠接觸不到明文）。
-*   **效能 = 端雲分離級別**（雲端扛下重算力）。
-*   **硬體要求 = 破底線級別**（端側只需 1-2GB 空間與極少 VRAM 即可驅動 70B 模型）。
+*   **效能 = 端雲分離級別**（雲端扛下長文本的 Heavy Prefill）。
+*   **端側算力 = 極限滿載級別 (Hardware Maximization)**：端側在「協議與調度邏輯」上是零負擔的被動接收者；但在「張量運算」上，4D 感知矩陣會嚴格根據端側的環境 (Environment)、硬體 (Hardware)、模型 (Model) 與任務 (Task) 特徵，將端側算力與 VRAM 壓榨到物理極限（例如精準吃滿 16GB VRAM），絕不浪費任何一滴端側算力投資。
 
 *   **端側接收延遲 (VRAM 直寫)**：1024 Token 的 KV 矩陣極簡解壓與寫入 VRAM 耗時必須 **< 0.05s**。
 *   **端側接手 TTFT**：在完成 VRAM 直寫後，產出第一個字的耗時必須 **< 0.1s**。
